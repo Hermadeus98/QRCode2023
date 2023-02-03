@@ -1,0 +1,14 @@
+{
+    "name": "QRCode.Gameplay",
+    "rootNamespace": "QRCode.Gameplay",
+    "references": ["GUID:186862afe89a22947bc7398c01f6cbdf"],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
