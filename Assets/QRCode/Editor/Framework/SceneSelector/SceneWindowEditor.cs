@@ -14,7 +14,7 @@ namespace QRCode.Editor.SceneSelector
 
     public class SceneWindowEditor : EditorWindow
     {
-        private static SceneDatabase SceneDatabase = null;
+        private static SceneDatabase m_sceneDatabase = null;
         private static Dictionary<string, SceneDatabase.SceneReferenceGroup> SceneReferenceGroups = null;
 
         
@@ -25,27 +25,27 @@ namespace QRCode.Editor.SceneSelector
             window.titleContent = new GUIContent("Scene Selector");
             window.Show();
 
-            DB.Instance.TryGetDatabase<SceneDatabase>("Database_Scenes", out SceneDatabase);
+            DB.Instance.TryGetDatabase<SceneDatabase>("Database_Scenes", out m_sceneDatabase);
 
-            if (SceneDatabase == null)
+            if (m_sceneDatabase == null)
             {
-                QRDebug.DebugMessage(LogType.Error, "Editor", $"Impossible to load {nameof(SceneDatabase)}.");
+                QRDebug.DebugMessage(LogType.Error, "Editor", $"Impossible to load {nameof(m_sceneDatabase)}.");
                 return;
             }
             
-            SceneReferenceGroups = new Dictionary<string, SceneDatabase.SceneReferenceGroup>(SceneDatabase.GetDatabase);
+            SceneReferenceGroups = new Dictionary<string, SceneDatabase.SceneReferenceGroup>(m_sceneDatabase.GetDatabase);
         }
         
         void OnGUI()
         {
-            if (SceneDatabase == null)
+            if (m_sceneDatabase == null)
             {
                 return;
             }
 
             if (SceneReferenceGroups == null)
             {
-                SceneReferenceGroups = SceneDatabase.GetDatabase;
+                SceneReferenceGroups = m_sceneDatabase.GetDatabase;
                 return;
             }
 

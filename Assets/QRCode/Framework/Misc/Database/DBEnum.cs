@@ -5,7 +5,7 @@ namespace QRCode.Framework
     public enum DBEnum
     {
         Undefined = 0,
-        Database_LoadingScreen = 1,
-        Database_Scenes = 2,
+        DB_LoadingScreen = 1,
+        DB_Scene = 2,
     }
 }

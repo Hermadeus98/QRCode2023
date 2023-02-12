@@ -1,19 +1,20 @@
 namespace QRCode.Framework
 {
+    using System;
     using System.Collections.Generic;
-    using System.Linq;
     using Debugging;
-    using Sirenix.OdinInspector;
     using UnityEngine;
-    using TextGenerator = Utils.TextGenerator;
 
-    public abstract class DatabaseBase : SerializedScriptableObject{}
+    public abstract class DatabaseBase
+    {
+        
+    }
     
-    public abstract class Database<T> : DatabaseBase
+    [Serializable]
+    public class Database<T> : DatabaseBase
     {
         [SerializeField] protected Dictionary<string, T> m_database = new Dictionary<string, T>();
-        [SerializeField] protected string m_generatedEnumPath;
-
+        
         public Dictionary<string, T> GetDatabase
         {
             get
@@ -30,30 +31,52 @@ namespace QRCode.Framework
             }
             else
             {
-                QRDebug.DebugError($"Scene Manager", $"Cannot find {key} in database.", this);
+                QRDebug.DebugError($"Scene Manager", $"Cannot find {key} in database.");
                 return false;
             }
         }
-        
-#if UNITY_EDITOR
-        [Button]
-        private void GenerateDatabaseEnum()
-        {
-            if (string.IsNullOrEmpty(m_generatedEnumPath))
-            {
-                QRDebug.DebugError("Editor", $"{nameof(m_generatedEnumPath)} shouldn't be empty.");
-                return;
-            }
-            
-            var fields = new List<string>();
+    }
 
-            for (int i = 0; i <m_database.Count; i++)
+    [Serializable]
+    public class Database<T, U> : DatabaseBase
+    {
+        [SerializeField] protected Dictionary<T, U> m_database = new Dictionary<T, U>();
+        
+        public Dictionary<T, U> GetDatabase
+        {
+            get
             {
-                fields.Add(m_database.Keys.ElementAt(i));
+                return m_database;
             }
-            
-            TextGenerator.GenerateCSEnum(m_generatedEnumPath, name, "QRCode.Framework", fields);
         }
-#endif
+        
+        public bool TryGetInDatabase(T key, out U foundedObject)
+        {
+            if (m_database.TryGetValue(key, out foundedObject))
+            {
+                return true;
+            }
+            else
+            {
+                QRDebug.DebugError($"Scene Manager", $"Cannot find {key} in database.");
+                return false;
+            }
+        }
+
+        public void AddToDatabase(T key, U element)
+        {
+            if (!m_database.ContainsKey(key))
+            {
+                m_database.Add(key, element);
+            }
+        }
+
+        public void RemoveOfDatabase(T key)
+        {
+            if (m_database.ContainsKey(key))
+            {
+                m_database.Remove(key);
+            }
+        }
     }
 }

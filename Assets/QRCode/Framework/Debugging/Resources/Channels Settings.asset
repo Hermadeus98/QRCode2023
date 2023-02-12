@@ -26,3 +26,11 @@ MonoBehaviour:
     isActive: 1
   - channelName: LIFE CYCLE
     isActive: 1
+  - channelName: DATABASE
+    isActive: 1
+  - channelName: TESTS
+    isActive: 1
+  - channelName: ERROR
+    isActive: 1
+  - channelName: GAME
+    isActive: 1

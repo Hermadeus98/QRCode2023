@@ -5,19 +5,13 @@ namespace QRCode.Framework.SceneManagement
     using UnityEngine;
     using UnityEngine.AddressableAssets;
 
-    [CreateAssetMenu(menuName = K.DatabasePath.BasePath + "Scene Database", fileName = "New SceneDatabase")]
-    public class SceneDatabase : Database<SceneDatabase.SceneReferenceGroup>
+    [CreateAssetMenu(menuName = K.DatabasePath.BasePath + "Scene Database", fileName = "DB_SceneDatabase")]
+    public class SceneDatabase : ScriptableObjectDatabase<SceneDatabase.SceneReferenceGroup>
     {
         [Serializable][DrawWithUnity]
         public struct SceneReferenceGroup
         {
             public AssetReference[] Scenes;
-            [HideInInspector] public string SceneReferenceGroupName;
-        }
-
-        public bool TryGetSceneReferenceGroup(SceneReferenceGroupEnum sceneGroupName, out SceneReferenceGroup sceneReferenceGroup)
-        {
-            return TryGetDatabase(sceneGroupName.ToString(), out sceneReferenceGroup);
         }
     }
 }

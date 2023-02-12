@@ -11,15 +11,15 @@ namespace QRCode.Framework
     [CreateAssetMenu(menuName = K.DatabasePath.BasePath + "DB", fileName = "DB")]
     public class DB : SingletonScriptableObject<DB>
     {
-        [SerializeField] private Dictionary<string, DatabaseBase> m_allDatabase = new Dictionary<string, DatabaseBase>();
+        [SerializeField] private Dictionary<string, ScriptableDatabaseBase> m_allDatabase = new Dictionary<string, ScriptableDatabaseBase>();
         [SerializeField] private string m_generatedEnumPath;
 
-        public static bool TryGetDatabase<T>(DBEnum key, out T foundedDatabase) where T : DatabaseBase
+        public bool TryGetDatabase<T>(DBEnum key, out T foundedDatabase) where T : ScriptableDatabaseBase
         {
             return Instance.TryGetDatabase(key.ToString(), out foundedDatabase);
         }
         
-        public bool TryGetDatabase<T>(string key, out T foundedDatabase) where T : DatabaseBase
+        public bool TryGetDatabase<T>(string key, out T foundedDatabase) where T : ScriptableDatabaseBase
         {
             if (m_allDatabase.TryGetValue(key, out var outFoundedDatabase))
             {
@@ -28,7 +28,7 @@ namespace QRCode.Framework
             }
             else
             {
-                QRDebug.DebugError(K.DebugChannels.Database, $"Cannot find {key} in database.", this);
+                QRDebug.DebugError(K.DebuggingChannels.Database, $"Cannot find {key} in database.", this);
                 foundedDatabase = null;
                 return false;
             }

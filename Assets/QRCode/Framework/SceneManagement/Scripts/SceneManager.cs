@@ -25,13 +25,13 @@ namespace QRCode.Framework.SceneManagement
             {
                 if (m_sceneDatabase == null)
                 {
-                    if (DB.Instance.TryGetDatabase<SceneDatabase>("Database_Scenes", out var sceneDatabase))
+                    if (DB.Instance.TryGetDatabase<SceneDatabase>(DBEnum.DB_Scene, out var sceneDatabase))
                     {
                         m_sceneDatabase = sceneDatabase;
                     }
                     else
                     {
-                        QRDebug.DebugError(K.DebugChannels.SceneManager, $"Cannot load SceneDatabase, verify DB.", Instance);
+                        QRDebug.DebugError(K.DebuggingChannels.SceneManager, $"Cannot load SceneDatabase, verify DB.", Instance);
                     }
                 }
 
@@ -127,16 +127,33 @@ namespace QRCode.Framework.SceneManagement
             m_cancellationTokenSource = new CancellationTokenSource();
         }
 
-        public async Task<SceneLoadingInfo> LoadSceneGroup(SceneReferenceGroupEnum sceneReferenceGroupToLoad,
+        public async Task<SceneLoadingInfo> LoadSceneGroup(DB_SceneEnum sceneReferenceGroupToLoad, DB_LoadingScreenEnum loadingScreenEnum, bool activateOnLoad = true, int priority = 100)
+        {
+            if (SceneDatabase.TryGetInDatabase(sceneReferenceGroupToLoad.ToString(), out var sceneReferenceGroup))
+            {
+                var loadingScreen = UI.GetLoadingScreen(loadingScreenEnum);
+                await loadingScreen.Show();
+                var sceneLoadingInfo = await LoadSceneGroup(sceneReferenceGroup, activateOnLoad, priority);
+                await loadingScreen.Hide();
+                return sceneLoadingInfo;
+            }
+            else
+            {
+                QRDebug.DebugError(K.DebuggingChannels.SceneManager, $"Cannot load {sceneReferenceGroupToLoad.ToString()}, verify SceneDatabase.", SceneDatabase);
+                return m_sceneLoadingInfo;
+            }
+        }
+        
+        public async Task<SceneLoadingInfo> LoadSceneGroup(DB_SceneEnum sceneReferenceGroupToLoad,
             bool activateOnLoad = true, int priority = 100)
         {
-            if (SceneDatabase.TryGetSceneReferenceGroup(sceneReferenceGroupToLoad, out var sceneReferenceGroup))
+            if (SceneDatabase.TryGetInDatabase(sceneReferenceGroupToLoad.ToString(), out var sceneReferenceGroup))
             {
                 return await LoadSceneGroup(sceneReferenceGroup, activateOnLoad, priority);
             }
             else
             {
-                QRDebug.DebugError(K.DebugChannels.SceneManager, $"Cannot load {sceneReferenceGroupToLoad.ToString()}, verify SceneDatabase.", SceneDatabase);
+                QRDebug.DebugError(K.DebuggingChannels.SceneManager, $"Cannot load {sceneReferenceGroupToLoad.ToString()}, verify SceneDatabase.", SceneDatabase);
                 return m_sceneLoadingInfo;
             }
         }
@@ -145,7 +162,7 @@ namespace QRCode.Framework.SceneManagement
         {
             if (m_loadedSceneGroup.Contains(sceneReferenceGroupToLoad))
             {
-                QRDebug.DebugError(K.DebugChannels.SceneManager, $"{nameof(m_loadedSceneGroup)} already contain {sceneReferenceGroupToLoad.SceneReferenceGroupName}.");
+                QRDebug.DebugError(K.DebuggingChannels.SceneManager, $"{nameof(m_loadedSceneGroup)} already contain {sceneReferenceGroupToLoad.ToString()}.");
                 return m_sceneLoadingInfo;
             }
 
@@ -186,13 +203,13 @@ namespace QRCode.Framework.SceneManagement
             {
                 await m_onFinishToLoadAsync.Invoke();
             }
-            QRDebug.DebugInfo(K.DebugChannels.SceneManager, $"{sceneReferenceGroupToLoad.SceneReferenceGroupName} is loaded.");
+            QRDebug.DebugInfo(K.DebuggingChannels.SceneManager, $"{sceneReferenceGroupToLoad.ToString()} is loaded.");
             return m_sceneLoadingInfo;
         }
 
-        public async Task UnloadSceneGroup(SceneReferenceGroupEnum sceneReferenceGroupToUnload)
+        public async Task UnloadSceneGroup(DB_SceneEnum sceneReferenceGroupToUnload)
         {
-            if (SceneDatabase.TryGetSceneReferenceGroup(sceneReferenceGroupToUnload, out var sceneReferenceGroup))
+            if (SceneDatabase.TryGetInDatabase(sceneReferenceGroupToUnload.ToString(), out var sceneReferenceGroup))
             {
                 if (sceneReferenceGroup.Scenes.IsNotNullOrEmpty())
                 {
@@ -208,11 +225,11 @@ namespace QRCode.Framework.SceneManagement
                 }
 
                 m_loadedSceneGroup.Remove(sceneReferenceGroup);
-                QRDebug.DebugInfo(K.DebugChannels.SceneManager, $"{sceneReferenceGroupToUnload.ToString()} is unloaded.");
+                QRDebug.DebugInfo(K.DebuggingChannels.SceneManager, $"{sceneReferenceGroupToUnload.ToString()} is unloaded.");
             }
             else
             {
-                QRDebug.DebugError(K.DebugChannels.SceneManager, $"{nameof(m_loadedSceneGroup)} don't contain {sceneReferenceGroupToUnload.ToString()}.");
+                QRDebug.DebugError(K.DebuggingChannels.SceneManager, $"{nameof(m_loadedSceneGroup)} don't contain {sceneReferenceGroupToUnload.ToString()}.");
             }
         }
 
