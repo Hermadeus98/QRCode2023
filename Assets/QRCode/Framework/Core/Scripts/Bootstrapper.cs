@@ -8,7 +8,7 @@ namespace QRCode.Framework.Core
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void Initialize()
         {
-            QRDebug.Debug(K.DebugChannels.LifeCycle, $"Bootstrapper has been initialized.");
+            QRDebug.Debug(K.DebuggingChannels.LifeCycle, $"Bootstrapper has been initialized.");
         }
     }
 }

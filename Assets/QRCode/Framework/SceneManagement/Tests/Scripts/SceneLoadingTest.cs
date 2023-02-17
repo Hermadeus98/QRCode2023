@@ -6,28 +6,30 @@ namespace QRCode.Framework.SceneManagement.Tests
 
     public class SceneLoadingTest : SerializedMonoBehaviour
     {
-        [SerializeField] private SceneReferenceGroupEnum m_groupToLoad;
-        [SerializeField] private BlackScreen m_blackScreen;
+        [SerializeField] private DB_SceneEnum m_groupToLoad;
+        [SerializeField] private DB_LoadingScreenEnum m_loadingScreenEnum;
 
         private Task<SceneLoadingInfo> task;
 
         [Button]
         private async void Load()
         {
-            SceneManager.OnStartToLoadAsync += m_blackScreen.Show;
-            SceneManager.OnFinishToLoadAsync += m_blackScreen.Hide;
+            var loadingScreen = UI.GetLoadingScreen(m_loadingScreenEnum);
+            
+            SceneManager.OnStartToLoadAsync += loadingScreen.Show;
+            SceneManager.OnFinishToLoadAsync += loadingScreen.Hide;
             SceneManager.OnLoading += delegate(SceneLoadingInfo info)
             {
-                m_blackScreen.Progress(info.GlobalProgress);
+                loadingScreen.Progress(info);
             };
             
-            await SceneManager.Instance.LoadSceneGroup(m_groupToLoad);
+            //await SceneManager.Instance.LoadSceneGroup(m_groupToLoad);
         }
 
         [Button]
         private async void Unload()
         {
-            await SceneManager.Instance.UnloadSceneGroup(m_groupToLoad);
+            //await SceneManager.Instance.UnloadSceneGroup(m_groupToLoad);
         }
     }
 }

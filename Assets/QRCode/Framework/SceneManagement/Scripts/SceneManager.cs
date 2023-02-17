@@ -16,8 +16,27 @@ namespace QRCode.Framework.SceneManagement
 
     public class SceneManager : MonoBehaviourSingleton<SceneManager>
     {
-        private static CancellationTokenSource m_cancellationTokenSource = null;
+        #region FIELDS
+        #region Serialized
+        [TitleGroup(K.InspectorGroups.Settings)]
+        [SerializeField] private float m_minimalLoadDurationBefore = .5f;
         
+        [TitleGroup(K.InspectorGroups.Settings)]
+        [SerializeField] private float m_minimalLoadDurationAfter = .5f;
+
+        [TitleGroup(K.InspectorGroups.Settings)] 
+        [SerializeField] private string m_loadingSceneProgressionDescription = "Loading...";
+        
+        [TitleGroup(K.InspectorGroups.Debugging)]
+        [SerializeField][ReadOnly] private SceneLoadingInfo m_sceneLoadingInfo;
+        #endregion Serialized
+
+        #region Privates
+        private bool m_isLoading = false;
+        private  CancellationTokenSource m_cancellationTokenSource = null;
+        #endregion Privates
+
+        #region Statics
         private static SceneDatabase m_sceneDatabase = null;
         private static SceneDatabase SceneDatabase
         {
@@ -25,32 +44,24 @@ namespace QRCode.Framework.SceneManagement
             {
                 if (m_sceneDatabase == null)
                 {
-                    if (DB.Instance.TryGetDatabase<SceneDatabase>("Database_Scenes", out var sceneDatabase))
+                    if (DB.Instance.TryGetDatabase<SceneDatabase>(DBEnum.DB_Scene, out var sceneDatabase))
                     {
                         m_sceneDatabase = sceneDatabase;
                     }
                     else
                     {
-                        QRDebug.DebugError(K.DebugChannels.SceneManager, $"Cannot load SceneDatabase, verify DB.", Instance);
+                        QRDebug.DebugError(K.DebuggingChannels.SceneManager, $"Cannot load SceneDatabase, verify DB.", Instance);
                     }
                 }
 
                 return m_sceneDatabase;
             }
         }
-
-        [SerializeField][ReadOnly]
-        private SceneLoadingInfo m_sceneLoadingInfo = new SceneLoadingInfo();
-        public static SceneLoadingInfo SceneLoadingInfo
-        {
-            get
-            {
-                return Instance.m_sceneLoadingInfo;
-            }
-        }
-        
         private static List<SceneDatabase.SceneReferenceGroup> m_loadedSceneGroup = new List<SceneDatabase.SceneReferenceGroup>();
+        #endregion Statics
+        #endregion FIELDS
 
+        #region EVENTS 
         private static event Func<Task> m_onStartToLoadAsync;
         public static event Func<Task> OnStartToLoadAsync
         {
@@ -120,34 +131,84 @@ namespace QRCode.Framework.SceneManagement
                 m_onFinishToLoadAsync -= value;
             }
         }
-        
+        #endregion
+
+        #region METHODS
+        #region Initialization
         protected override void OnInitialize()
         {
             base.OnInitialize();
             m_cancellationTokenSource = new CancellationTokenSource();
         }
+        #endregion
 
-        public async Task<SceneLoadingInfo> LoadSceneGroup(SceneReferenceGroupEnum sceneReferenceGroupToLoad,
-            bool activateOnLoad = true, int priority = 100)
+        #region Publics
+        public async Task<SceneLoadingInfo> LoadSceneGroup(DB_SceneEnum sceneReferenceGroupToLoad, DB_LoadingScreenEnum loadingScreenEnum, bool forceReload = false, bool activateOnLoad = true, int priority = 100)
         {
-            if (SceneDatabase.TryGetSceneReferenceGroup(sceneReferenceGroupToLoad, out var sceneReferenceGroup))
+            if (m_isLoading)
             {
-                return await LoadSceneGroup(sceneReferenceGroup, activateOnLoad, priority);
+                QRDebug.DebugError(K.DebuggingChannels.SceneManager,"A scene is already in loading...");
+                return m_sceneLoadingInfo;
+            }
+
+            if (SceneDatabase.TryGetInDatabase(sceneReferenceGroupToLoad.ToString(), out var sceneReferenceGroup))
+            {
+                var loadingScreen = UI.GetLoadingScreen(loadingScreenEnum);
+                await loadingScreen.Show();
+
+                if (forceReload)
+                {
+                    await UnloadSceneGroup(sceneReferenceGroupToLoad);
+                }
+                
+                OnLoading += (sceneLoadingInfo) => loadingScreen.Progress(sceneLoadingInfo);
+                var sceneLoadingInfo = await LoadSceneGroup(sceneReferenceGroup, activateOnLoad, priority);
+                await loadingScreen.Hide();
+                
+                return sceneLoadingInfo!.Value;
             }
             else
             {
-                QRDebug.DebugError(K.DebugChannels.SceneManager, $"Cannot load {sceneReferenceGroupToLoad.ToString()}, verify SceneDatabase.", SceneDatabase);
+                QRDebug.DebugError(K.DebuggingChannels.SceneManager, $"Cannot load {sceneReferenceGroupToLoad.ToString()}, verify SceneDatabase.", SceneDatabase);
                 return m_sceneLoadingInfo;
             }
         }
         
-        public async Task<SceneLoadingInfo> LoadSceneGroup(SceneDatabase.SceneReferenceGroup sceneReferenceGroupToLoad, bool activateOnLoad = true, int priority = 100)
+        public async Task UnloadSceneGroup(DB_SceneEnum sceneReferenceGroupToUnload)
         {
+            if (m_sceneDatabase.TryGetInDatabase(sceneReferenceGroupToUnload.ToString(), out var foundedObject))
+            {
+                await UnloadSceneGroup(foundedObject);
+            }
+        }
+        #endregion Publics
+
+        #region LifeCycle
+        private void OnDestroy()
+        {
+            m_cancellationTokenSource?.Cancel();
+        }
+        #endregion LifeCycle
+        
+        #region Privates
+        private async Task<SceneLoadingInfo?> LoadSceneGroup(SceneDatabase.SceneReferenceGroup sceneReferenceGroupToLoad, bool activateOnLoad = true, int priority = 100)
+        {
+            m_sceneLoadingInfo = new SceneLoadingInfo()
+            {
+                GlobalProgress = 0f,
+                ProgressDescription = m_loadingSceneProgressionDescription,
+            };
+
             if (m_loadedSceneGroup.Contains(sceneReferenceGroupToLoad))
             {
-                QRDebug.DebugError(K.DebugChannels.SceneManager, $"{nameof(m_loadedSceneGroup)} already contain {sceneReferenceGroupToLoad.SceneReferenceGroupName}.");
-                return m_sceneLoadingInfo;
+                QRDebug.DebugError(K.DebuggingChannels.SceneManager, $"{nameof(m_loadedSceneGroup)} already contain {sceneReferenceGroupToLoad.ToString()}.");
+                m_isLoading = false;
+                return null;
             }
+
+            m_isLoading = true;
+            await Task.Delay(TimeSpan.FromSeconds(m_minimalLoadDurationBefore), m_cancellationTokenSource.Token);
+            OnLoadingScenes();
 
             if (m_onStartToLoadAsync != null)
             {
@@ -156,63 +217,76 @@ namespace QRCode.Framework.SceneManagement
             
             m_onStartToLoad?.Invoke();
             m_sceneLoadingInfo.SceneLoadingStatus = SceneLoadingStatus.NotLoaded;
-            var totalProgress = new float[sceneReferenceGroupToLoad.Scenes.Length];
-            m_sceneLoadingInfo.SceneLoadingStatus = SceneLoadingStatus.IsLoading;
+            m_sceneLoadingInfo.SceneLoadingStatus = SceneLoadingStatus.SceneAreLoading;
 
             if (sceneReferenceGroupToLoad.Scenes.IsNotNullOrEmpty())
             {
-                for (int i = 0; i < sceneReferenceGroupToLoad.Scenes.Length; i++)
+                var sceneReferenceGroupToLoadCount = sceneReferenceGroupToLoad.Scenes.Length;
+                for (var i = 0; i < sceneReferenceGroupToLoad.Scenes.Length; i++)
                 {
                     void OnLoadingSubScene(AsyncOperationHandle<SceneInstance> operation)
                     {
-                        totalProgress[i] = operation.GetDownloadStatus().Percent;
-                        m_sceneLoadingInfo.GlobalProgress = totalProgress.GetAverage();
+                        var currentSceneLoadingProgress = ((i + operation.GetDownloadStatus().Percent) / sceneReferenceGroupToLoad.Scenes.Length) /2f;
+                        m_sceneLoadingInfo.GlobalProgress = currentSceneLoadingProgress;
                     }
                     
                     void OnEndLoadingSubScene(AsyncOperationHandle<SceneInstance> operation)
                     {
-                        totalProgress[i] = operation.GetDownloadStatus().Percent;
+                        m_sceneLoadingInfo.GlobalProgress = ((i + 1f) / sceneReferenceGroupToLoadCount) /2f;
                     }
 
                     await LoadScene(sceneReferenceGroupToLoad.Scenes[i], OnLoadingSubScene, OnEndLoadingSubScene, activateOnLoad, priority);
-                    totalProgress[i] = 1f;
                 }
             }
 
-            m_sceneLoadingInfo.SceneLoadingStatus = SceneLoadingStatus.IsLoaded;
             m_loadedSceneGroup.Add(sceneReferenceGroupToLoad);
+            m_sceneLoadingInfo.SceneLoadingStatus = SceneLoadingStatus.SceneAreLoaded;
+
+            var initializeTask = InitializeLoadedScene();
+            await initializeTask;
+
+            await Task.Delay(TimeSpan.FromSeconds(m_minimalLoadDurationAfter), m_cancellationTokenSource.Token);
+
             m_onFinishToLoad?.Invoke();
             if (m_onFinishToLoadAsync != null)
             {
                 await m_onFinishToLoadAsync.Invoke();
             }
-            QRDebug.DebugInfo(K.DebugChannels.SceneManager, $"{sceneReferenceGroupToLoad.SceneReferenceGroupName} is loaded.");
+
+            m_isLoading = false;
+            QRDebug.DebugInfo(K.DebuggingChannels.SceneManager, $"{sceneReferenceGroupToLoad.ToString()} is loaded.");
             return m_sceneLoadingInfo;
         }
 
-        public async Task UnloadSceneGroup(SceneReferenceGroupEnum sceneReferenceGroupToUnload)
+        private async void OnLoadingScenes()
         {
-            if (SceneDatabase.TryGetSceneReferenceGroup(sceneReferenceGroupToUnload, out var sceneReferenceGroup))
+            while (m_isLoading)
             {
-                if (sceneReferenceGroup.Scenes.IsNotNullOrEmpty())
+                m_onLoading?.Invoke(m_sceneLoadingInfo);
+                await Task.Yield();
+            }
+        }
+        
+        private async Task UnloadSceneGroup(SceneDatabase.SceneReferenceGroup sceneReferenceGroupToUnload)
+        {
+            if (m_loadedSceneGroup.Contains(sceneReferenceGroupToUnload))
+            {
+                foreach (var sceneReference in sceneReferenceGroupToUnload.Scenes)
                 {
-                    for (int i = 0; i < sceneReferenceGroup.Scenes.Length; i++)
-                    {
-                        var unloadSceneOperation = sceneReferenceGroup.Scenes[i].UnLoadScene();
+                    var unloadSceneOperation = sceneReference.UnLoadScene();
 
-                        while (!unloadSceneOperation.IsDone && !m_cancellationTokenSource.IsCancellationRequested)
-                        {
-                            await Task.Yield();
-                        }
+                    while (!unloadSceneOperation.IsDone && !m_cancellationTokenSource.IsCancellationRequested)
+                    {
+                        await Task.Yield();
                     }
                 }
-
-                m_loadedSceneGroup.Remove(sceneReferenceGroup);
-                QRDebug.DebugInfo(K.DebugChannels.SceneManager, $"{sceneReferenceGroupToUnload.ToString()} is unloaded.");
+                
+                m_loadedSceneGroup.Remove(sceneReferenceGroupToUnload);
+                QRDebug.DebugInfo(K.DebuggingChannels.SceneManager, $"{sceneReferenceGroupToUnload.ToString()} is unloaded.");   
             }
             else
             {
-                QRDebug.DebugError(K.DebugChannels.SceneManager, $"{nameof(m_loadedSceneGroup)} don't contain {sceneReferenceGroupToUnload.ToString()}.");
+                QRDebug.DebugInfo(K.DebuggingChannels.SceneManager, $"{sceneReferenceGroupToUnload.ToString()} is already unloaded.");
             }
         }
 
@@ -220,50 +294,60 @@ namespace QRCode.Framework.SceneManagement
         {
             var loadingSceneObject = sceneObject.LoadSceneAsync(LoadSceneMode.Additive, activateOnLoad, priority);
             
-            m_sceneLoadingInfo.SceneLoadingStatus = SceneLoadingStatus.IsLoading;
+            m_sceneLoadingInfo.SceneLoadingStatus = SceneLoadingStatus.SceneAreLoading;
             while(!loadingSceneObject.IsDone && !m_cancellationTokenSource.IsCancellationRequested)
             {
-                var downloadPercent = loadingSceneObject.GetDownloadStatus().Percent;
-                m_sceneLoadingInfo.CurrentLoadingProgress = downloadPercent;
                 onLoading?.Invoke(loadingSceneObject);
-                m_onLoading?.Invoke(SceneLoadingInfo);
                 await Task.Yield();
             }
 
             onEndLoading?.Invoke(loadingSceneObject);
         }
 
-        private Scene[] GetActiveScenes()
+        private async Task InitializeLoadedScene()
         {
-            var sceneCount = UnityEngine.SceneManagement.SceneManager.sceneCount;
-            Scene[] scenesToReturn = new Scene[sceneCount];
+            var initialization = Initialization.Current;
 
-            for (var i = 0; i < sceneCount; i++)
+            if (initialization == null)
             {
-                scenesToReturn[i] = UnityEngine.SceneManagement.SceneManager.GetSceneAt(i);
+                return;
             }
+            else
+            {
+                m_sceneLoadingInfo.SceneLoadingStatus = SceneLoadingStatus.InitializationIsLoading;
 
-            return scenesToReturn;
+                var progression = new Progress<SceneLoadableProgressionInfos>(value =>
+                {
+                    m_sceneLoadingInfo.GlobalProgress = .5f + (value.LoadingProgressPercent / 2f);
+                    m_sceneLoadingInfo.ProgressDescription = value.ProgressionDescription;
+                });
+                
+                var loading = initialization.Load(m_cancellationTokenSource.Token, progression);
+                await loading;
+
+                m_sceneLoadingInfo.GlobalProgress = 1f;
+
+                m_sceneLoadingInfo.SceneLoadingStatus = SceneLoadingStatus.InitializationIsDone;
+            }
         }
-        
-        private void OnDestroy()
-        {
-            m_cancellationTokenSource?.Cancel();
-        }
+        #endregion Privates
+        #endregion METHODS
     }
 
     [Serializable]
     public struct SceneLoadingInfo
     {
-        [ProgressBar(0, 1)] [ReadOnly] public float GlobalProgress;
-        [ProgressBar(0, 1)] [ReadOnly] public float CurrentLoadingProgress;
+        [ReadOnly][ProgressBar(0f, 1f)] public float GlobalProgress;
+        [ReadOnly] public string ProgressDescription;
         [ReadOnly] public SceneLoadingStatus SceneLoadingStatus;
     }
 
     public enum SceneLoadingStatus
     {
         NotLoaded = 0,
-        IsLoading = 1,
-        IsLoaded = 2,
+        SceneAreLoading = 1,
+        SceneAreLoaded = 2,
+        InitializationIsLoading = 3,
+        InitializationIsDone = 4,
     }
 }

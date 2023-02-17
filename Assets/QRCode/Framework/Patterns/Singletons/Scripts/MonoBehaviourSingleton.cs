@@ -1,5 +1,6 @@
 namespace QRCode.Framework.Singleton
 {
+    using Sirenix.OdinInspector;
     using UnityEngine;
 
     /// <summary>
@@ -8,6 +9,7 @@ namespace QRCode.Framework.Singleton
     /// <typeparam name="T"></typeparam>
     public class MonoBehaviourSingleton<T> : MonoBehaviour where T : Component
     {
+        [TitleGroup(K.InspectorGroups.SingletonSettingsGroup)]
         [SerializeField] private bool m_dontDestroyOnLoad = true;
         
         private static T m_instance;
@@ -31,10 +33,12 @@ namespace QRCode.Framework.Singleton
                         var obj = new GameObject();
                         obj.name = "[SINGLETON] " + typeof(T).Name.ToString();
                         m_instance = obj.AddComponent<T>();
-                        if ((m_instance as MonoBehaviourSingleton<T>).m_dontDestroyOnLoad)
-                        {
-                            DontDestroyOnLoad(m_instance);
-                        }
+                    }
+                    
+                    if ((m_instance as MonoBehaviourSingleton<T>).m_dontDestroyOnLoad)
+                    {
+                        m_instance.transform.SetParent(null);
+                        DontDestroyOnLoad(m_instance);
                     }
                     
                     (m_instance as MonoBehaviourSingleton<T>).OnInitialize();

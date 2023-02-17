@@ -9,7 +9,7 @@ namespace QRCode.Framework.Debugging
     using UnityEditor;
 #endif
     
-    [CreateAssetMenu(menuName = "QRCode/Debugging/Channels Settings", fileName = "Channels Settings")]
+    [CreateAssetMenu(menuName = K.DebuggingPath.ChannelDebugPath, fileName = "Channels Settings")]
     public class QRDebugChannels : SingletonScriptableObject<QRDebugChannels>
     {
         #region FIELDS
