@@ -7,10 +7,10 @@ namespace QRCode.Framework
     [Serializable]
     public struct TweenParameters<T>
     {
-        [SuffixLabel("s")] 
+        [SuffixLabel("s", true)] 
         public float Delay;
         public T ToValue;
-        [SuffixLabel("s")] 
+        [SuffixLabel("s", true)] 
         public float Duration;
         public Ease Ease;
     }

@@ -20,16 +20,16 @@ namespace QRCode.Framework.SceneManagement.Tests
             SceneManager.OnFinishToLoadAsync += loadingScreen.Hide;
             SceneManager.OnLoading += delegate(SceneLoadingInfo info)
             {
-                loadingScreen.Progress(info.GlobalProgress);
+                loadingScreen.Progress(info);
             };
             
-            await SceneManager.Instance.LoadSceneGroup(m_groupToLoad);
+            //await SceneManager.Instance.LoadSceneGroup(m_groupToLoad);
         }
 
         [Button]
         private async void Unload()
         {
-            await SceneManager.Instance.UnloadSceneGroup(m_groupToLoad);
+            //await SceneManager.Instance.UnloadSceneGroup(m_groupToLoad);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace QRCode.Framework.Game
 
         private async void Initialize()
         {
-            await SceneManager.Instance.LoadSceneGroup(m_sceneUI);
+            await SceneManager.Instance.LoadSceneGroup(m_sceneUI, DB_LoadingScreenEnum.Null);
             
             InitializeGameStates();
             await PrepareSave();

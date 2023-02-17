@@ -6,6 +6,6 @@ namespace QRCode.Framework
     {
         Undefined = 0,
         Null = 1,
-        BlackScreen = 2,
+        LoadingScreenBase = 2,
     }
 }

@@ -310,6 +310,57 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &796961787
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 796961789}
+  - component: {fileID: 796961788}
+  m_Layer: 0
+  m_Name: '[SINGLETON] SceneManager'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &796961788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796961787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d3ad9b19995f6c48a9154f33fd7a16e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dontDestroyOnLoad: 1
+  m_minimalLoadDuration: 0.5
+  m_loadingSceneProgressionDescription: Loading...
+  m_sceneLoadingInfo:
+    GlobalProgress: 0
+    ProgressDescription: 
+    SceneLoadingStatus: 0
+--- !u!4 &796961789
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796961787}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &832575519 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2934921090214091625, guid: 0b7e8789a044d20499ae9b6e34c580a9,
@@ -556,6 +607,7 @@ MonoBehaviour:
   m_sceneLoader:
     m_sceneToLoad: 2
     m_loadingScreenEnum: 2
+    m_forceReload: 0
   m_onBeforeLoad:
     m_PersistentCalls:
       m_Calls: []
@@ -970,6 +1022,11 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 4793458072722902163}
+    - target: {fileID: 1889512379938331127, guid: 134e5ac63ff42d34b94ca3f6329e1bc2,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 3176638231390385187, guid: 134e5ac63ff42d34b94ca3f6329e1bc2,
         type: 3}
       propertyPath: m_Name
@@ -1129,7 +1186,7 @@ PrefabInstance:
         type: 3}
       propertyPath: Rules.Array.data[5].GameObject
       value: 
-      objectReference: {fileID: 714986943}
+      objectReference: {fileID: 0}
     - target: {fileID: 7993353371263518833, guid: 1ac56c0be7bb0aa48a41f7f29dd54bca,
         type: 3}
       propertyPath: m_RootOrder

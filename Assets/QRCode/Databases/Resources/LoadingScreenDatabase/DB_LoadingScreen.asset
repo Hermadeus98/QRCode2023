@@ -16,7 +16,7 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 8002832668530191820, guid: e0ff191012343ae4a9e866bbbadcacd1, type: 3}
+    - {fileID: 4277089200479019277, guid: fe8601c57e2bc024f9f9fb6653ecd7b5, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -41,7 +41,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: BlackScreen
+      Data: LoadingScreenBase
     - Name: $v
       Entry: 10
       Data: 0

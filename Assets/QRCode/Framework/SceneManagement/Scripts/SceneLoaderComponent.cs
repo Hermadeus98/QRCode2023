@@ -25,5 +25,11 @@ namespace QRCode.Framework
             await m_sceneLoader.LoadScenes();
             m_onAfterLoad.Invoke();
         }
+
+        [ButtonGroup(K.InspectorGroups.Debugging)]
+        public async void UnloadScenes()
+        {
+            await m_sceneLoader.UnloadScenes();
+        }
     }
 }
