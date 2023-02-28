@@ -17,8 +17,6 @@ namespace QRCode.Framework
         [SerializeField] private UnityEvent m_onAfterLoad = new UnityEvent();
 
         public SceneLoader SceneLoader => m_sceneLoader;
-        public UnityEvent OnBeforeLoad => m_onBeforeLoad;
-        public UnityEvent OnAfterLoad => m_onAfterLoad;
 
         private void Start()
         {

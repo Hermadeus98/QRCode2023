@@ -6,7 +6,6 @@ namespace QRCode.Framework.SceneManagement
     using System.Threading.Tasks;
     using Debugging;
     using Extensions;
-    using Singleton;
     using Sirenix.OdinInspector;
     using UnityEngine;
     using UnityEngine.AddressableAssets;
@@ -14,7 +13,7 @@ namespace QRCode.Framework.SceneManagement
     using UnityEngine.ResourceManagement.ResourceProviders;
     using UnityEngine.SceneManagement;
 
-    public class SceneManager : MonoBehaviourSingleton<SceneManager>
+    public class SceneManager : SerializedMonoBehaviour, ISceneManagementService
     {
         #region FIELDS
         #region Serialized
@@ -28,8 +27,8 @@ namespace QRCode.Framework.SceneManagement
         #endregion Privates
 
         #region Statics
-        private static SceneDatabase m_sceneDatabase = null;
-        private static SceneDatabase SceneDatabase
+        private SceneDatabase m_sceneDatabase = null;
+        private SceneDatabase SceneDatabase
         {
             get
             {
@@ -41,7 +40,7 @@ namespace QRCode.Framework.SceneManagement
                     }
                     else
                     {
-                        QRDebug.DebugError(K.DebuggingChannels.SceneManager, $"Cannot load SceneDatabase, verify DB.", Instance);
+                        QRDebug.DebugError(K.DebuggingChannels.SceneManager, $"Cannot load SceneDatabase, verify DB.", gameObject);
                     }
                 }
 
@@ -49,8 +48,8 @@ namespace QRCode.Framework.SceneManagement
             }
         }
 
-        private static SceneManagerSettings m_sceneManagerSettings = null;
-        private static SceneManagerSettings SceneManagerSettings
+        private SceneManagerSettings m_sceneManagerSettings = null;
+        private SceneManagerSettings SceneManagerSettings
         {
             get
             {
@@ -63,13 +62,13 @@ namespace QRCode.Framework.SceneManagement
             }
         }
         
-        private static List<SceneDatabase.SceneReferenceGroup> m_loadedSceneGroup = new List<SceneDatabase.SceneReferenceGroup>();
+        private List<SceneDatabase.SceneReferenceGroup> m_loadedSceneGroup = new List<SceneDatabase.SceneReferenceGroup>();
         #endregion Statics
         #endregion FIELDS
 
         #region EVENTS 
-        private static event Func<Task> m_onStartToLoadAsync;
-        public static event Func<Task> OnStartToLoadAsync
+        private event Func<Task> m_onStartToLoadAsync;
+        public event Func<Task> OnStartToLoadAsync
         {
             add
             {
@@ -82,8 +81,8 @@ namespace QRCode.Framework.SceneManagement
             }
         }
         
-        private static event Action m_onStartToLoad;
-        public static event Action OnStartToLoad
+        private event Action m_onStartToLoad;
+        public event Action OnStartToLoad
         {
             add
             {
@@ -96,8 +95,8 @@ namespace QRCode.Framework.SceneManagement
             }
         }
         
-        private static event Action<SceneLoadingInfo> m_onLoading;
-        public static event Action<SceneLoadingInfo> OnLoading
+        private event Action<SceneLoadingInfo> m_onLoading;
+        public event Action<SceneLoadingInfo> OnLoading
         {
             add
             {
@@ -110,8 +109,8 @@ namespace QRCode.Framework.SceneManagement
             }
         }
         
-        private static event Action m_onFinishToLoad;
-        public static event Action OnFinishToLoad
+        private event Action m_onFinishToLoad;
+        public event Action OnFinishToLoad
         {
             add
             {
@@ -124,8 +123,8 @@ namespace QRCode.Framework.SceneManagement
             }
         }
         
-        private static event Func<Task> m_onFinishToLoadAsync;
-        public static event Func<Task> OnFinishToLoadAsync
+        private event Func<Task> m_onFinishToLoadAsync;
+        public event Func<Task> OnFinishToLoadAsync
         {
             add
             {
@@ -141,9 +140,8 @@ namespace QRCode.Framework.SceneManagement
 
         #region METHODS
         #region Initialization
-        protected override void OnInitialize()
+        public void OnInitialize()
         {
-            base.OnInitialize();
             m_cancellationTokenSource = new CancellationTokenSource();
         }
         #endregion

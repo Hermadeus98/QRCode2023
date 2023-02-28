@@ -25,12 +25,14 @@ namespace QRCode.Framework
         {
             public const string CreateAssetMenuBasePath = "QRCode/Smart Strings Reference/";
             public const string SmartStringReference = CreateAssetMenuBasePath + "Smart String Reference";
+            public const string SmartInputIconReference = CreateAssetMenuBasePath + "Smart Input Icon Reference";
         }
         
         public static class SettingsPath
         {
             public const string BasePath = "QRCode/Settings/";
-            
+
+            public const string ServiceSettingsPath = BasePath + "Service Settings";
             public const string InputSettingsPath = BasePath + "Input Settings";
             public const string SceneManagerSettingsPath = BasePath + "Scene Manager Settings";
         }

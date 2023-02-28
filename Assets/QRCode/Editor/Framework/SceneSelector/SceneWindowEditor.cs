@@ -21,7 +21,7 @@ namespace QRCode.Editor.SceneSelector
         [MenuItem("QRCode/Scene Selector")]
         private static void Init()
         {
-            SceneWindowEditor window = (SceneWindowEditor)EditorWindow.GetWindow(typeof(SceneWindowEditor));
+            var window = (SceneWindowEditor)EditorWindow.GetWindow(typeof(SceneWindowEditor));
             window.titleContent = new GUIContent("Scene Selector");
             window.Show();
 

@@ -2,7 +2,6 @@ namespace QRCode.Framework
 {
     using System;
     using System.Threading.Tasks;
-    using SceneManagement;
     using UnityEngine;
 
     [Serializable]
@@ -11,23 +10,29 @@ namespace QRCode.Framework
         [SerializeField] private DB_SceneEnum m_sceneToLoad = DB_SceneEnum.Undefined;
         [SerializeField] private DB_LoadingScreenEnum m_loadingScreenEnum = DB_LoadingScreenEnum.Undefined;
         [SerializeField] private bool m_forceReload = false;
-        
-        private EventOneShot m_onBeforeLoad = null;
-        private EventOneShot m_onAfterLoad = null;
 
-        public EventOneShot OnBeforeLoad => m_onBeforeLoad;
-        public EventOneShot OnAfterLoad => m_onAfterLoad;
+        private ISceneManagementService m_sceneManagementService;
+        private ISceneManagementService SceneManagementService
+        {
+            get
+            {
+                if (m_sceneManagementService == null)
+                {
+                    m_sceneManagementService = ServiceLocator.Get<ISceneManagementService>();
+                }
+
+                return m_sceneManagementService;
+            }
+        }
         
         public async Task LoadScenes()
         {
-            m_onBeforeLoad?.Invoke();
-            await SceneManager.Instance.LoadSceneGroup(m_sceneToLoad, m_loadingScreenEnum, m_forceReload);
-            m_onAfterLoad?.Invoke();
+            await SceneManagementService.LoadSceneGroup(m_sceneToLoad, m_loadingScreenEnum, m_forceReload);
         }
 
         public async Task UnloadScenes()
         {
-            await SceneManager.Instance.UnloadSceneGroup(m_sceneToLoad);
+            await SceneManagementService.UnloadSceneGroup(m_sceneToLoad);
         }
     }
 }

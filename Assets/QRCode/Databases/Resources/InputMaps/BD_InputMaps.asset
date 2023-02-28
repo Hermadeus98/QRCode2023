@@ -16,21 +16,12 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
+    - {fileID: 11400000, guid: d54e0e9ad89cb8244837888930075d11, type: 2}
     - {fileID: 21300000, guid: 246343ee99456f340af1d3ed096773b2, type: 3}
-    - {fileID: 21300000, guid: c08e6a9019963a14bbd3069965c16ff5, type: 3}
     - {fileID: 21300000, guid: 6a31b65424f0af44ea3c9a6472d8b8d2, type: 3}
-    - {fileID: 21300000, guid: 58f1c46da09c9f0408165b4af93f7702, type: 3}
-    - {fileID: 21300000, guid: 32a3681c544a13447a6cbed3ea99c121, type: 3}
-    - {fileID: 21300000, guid: 7eea9185b18a29345b4e6cadd628b1cf, type: 3}
-    - {fileID: 21300000, guid: a01a8ff75d816bf4788e0d458654e8eb, type: 3}
-    - {fileID: 21300000, guid: ad889b12ae0239f429a2cf42155f8c1f, type: 3}
+    - {fileID: 11400000, guid: d8160bffca90a6047b627bc41277f22a, type: 2}
     - {fileID: 21300002, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}
     - {fileID: 21300008, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}
-    - {fileID: 21300000, guid: 16a86a7f581fc4dfb953e0df8ad3ecac, type: 3}
-    - {fileID: 21300014, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}
-    - {fileID: 21300000, guid: b4c9102f667849238fa89554c7433f4f, type: 3}
-    - {fileID: 21300000, guid: 561572c767cda204fba6dec8106495e9, type: 3}
-    - {fileID: 21300000, guid: 63ae1e939b41e484080f63f0b75cd118, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -62,33 +53,39 @@ MonoBehaviour:
     - Name: m_mapScheme
       Entry: 1
       Data: Keyboard
-    - Name: InputMapElements
+    - Name: m_iconsSpriteAsset
+      Entry: 10
+      Data: 0
+    - Name: m_inputMapElements
       Entry: 7
       Data: 3|QRCode.Framework.InputMapElement[], QRCode.Framework
     - Name: 
       Entry: 12
-      Data: 10
+      Data: 2
     - Name: 
       Entry: 7
       Data: 4|QRCode.Framework.InputMapElement, QRCode.Framework
     - Name: InputName
       Entry: 1
       Data: E
-    - Name: InputIcon
+    - Name: InputIcons
+      Entry: 7
+      Data: 5|UnityEngine.Sprite[], UnityEngine.CoreModule
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
       Entry: 10
-      Data: 0
+      Data: 1
+    - Name: 
+      Entry: 13
+      Data: 
     - Name: 
       Entry: 8
       Data: 
-    - Name: 
-      Entry: 7
-      Data: 5|QRCode.Framework.InputMapElement, QRCode.Framework
-    - Name: InputName
-      Entry: 1
-      Data: Q
-    - Name: InputIcon
-      Entry: 10
-      Data: 1
+    - Name: TextMeshProSpriteSheetIndex
+      Entry: 3
+      Data: 31
     - Name: 
       Entry: 8
       Data: 
@@ -98,93 +95,24 @@ MonoBehaviour:
     - Name: InputName
       Entry: 1
       Data: A
-    - Name: InputIcon
+    - Name: InputIcons
+      Entry: 7
+      Data: 7|UnityEngine.Sprite[], UnityEngine.CoreModule
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
       Entry: 10
       Data: 2
     - Name: 
-      Entry: 8
+      Entry: 13
       Data: 
-    - Name: 
-      Entry: 7
-      Data: 7|QRCode.Framework.InputMapElement, QRCode.Framework
-    - Name: InputName
-      Entry: 1
-      Data: W
-    - Name: InputIcon
-      Entry: 10
-      Data: 3
     - Name: 
       Entry: 8
       Data: 
-    - Name: 
-      Entry: 7
-      Data: 8|QRCode.Framework.InputMapElement, QRCode.Framework
-    - Name: InputName
-      Entry: 1
-      Data: Z
-    - Name: InputIcon
-      Entry: 10
-      Data: 4
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 9|QRCode.Framework.InputMapElement, QRCode.Framework
-    - Name: InputName
-      Entry: 1
-      Data: S
-    - Name: InputIcon
-      Entry: 10
-      Data: 5
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 10|QRCode.Framework.InputMapElement, QRCode.Framework
-    - Name: InputName
-      Entry: 1
-      Data: Escape
-    - Name: InputIcon
-      Entry: 10
-      Data: 6
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 11|QRCode.Framework.InputMapElement, QRCode.Framework
-    - Name: InputName
-      Entry: 1
-      Data: Echap
-    - Name: InputIcon
-      Entry: 10
-      Data: 6
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 12|QRCode.Framework.InputMapElement, QRCode.Framework
-    - Name: InputName
-      Entry: 1
-      Data: Space
-    - Name: InputIcon
-      Entry: 10
-      Data: 7
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 13|QRCode.Framework.InputMapElement, QRCode.Framework
-    - Name: InputName
-      Entry: 1
-      Data: Espace
-    - Name: InputIcon
-      Entry: 10
-      Data: 7
+    - Name: TextMeshProSpriteSheetIndex
+      Entry: 3
+      Data: 13
     - Name: 
       Entry: 8
       Data: 
@@ -208,121 +136,70 @@ MonoBehaviour:
       Data: XboxController
     - Name: $v
       Entry: 7
-      Data: 14|QRCode.Framework.InputMap, QRCode.Framework
+      Data: 8|QRCode.Framework.InputMap, QRCode.Framework
     - Name: m_mapScheme
       Entry: 1
       Data: XboxController
-    - Name: InputMapElements
+    - Name: m_iconsSpriteAsset
+      Entry: 10
+      Data: 3
+    - Name: m_inputMapElements
       Entry: 7
-      Data: 15|QRCode.Framework.InputMapElement[], QRCode.Framework
+      Data: 9|QRCode.Framework.InputMapElement[], QRCode.Framework
     - Name: 
       Entry: 12
-      Data: 9
+      Data: 2
     - Name: 
       Entry: 7
-      Data: 16|QRCode.Framework.InputMapElement, QRCode.Framework
+      Data: 10|QRCode.Framework.InputMapElement, QRCode.Framework
     - Name: InputName
       Entry: 1
       Data: A
-    - Name: InputIcon
+    - Name: InputIcons
+      Entry: 7
+      Data: 11|UnityEngine.Sprite[], UnityEngine.CoreModule
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
       Entry: 10
-      Data: 8
+      Data: 4
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: TextMeshProSpriteSheetIndex
+      Entry: 3
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 17|QRCode.Framework.InputMapElement, QRCode.Framework
+      Data: 12|QRCode.Framework.InputMapElement, QRCode.Framework
     - Name: InputName
       Entry: 1
       Data: X
-    - Name: InputIcon
+    - Name: InputIcons
+      Entry: 7
+      Data: 13|UnityEngine.Sprite[], UnityEngine.CoreModule
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
       Entry: 10
-      Data: 9
+      Data: 5
+    - Name: 
+      Entry: 13
+      Data: 
     - Name: 
       Entry: 8
       Data: 
-    - Name: 
-      Entry: 7
-      Data: 18|QRCode.Framework.InputMapElement, QRCode.Framework
-    - Name: InputName
-      Entry: 1
-      Data: LS Up
-    - Name: InputIcon
-      Entry: 10
-      Data: 10
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 19|QRCode.Framework.InputMapElement, QRCode.Framework
-    - Name: InputName
-      Entry: 1
-      Data: Left Stick Down
-    - Name: InputIcon
-      Entry: 10
-      Data: 11
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 20|QRCode.Framework.InputMapElement, QRCode.Framework
-    - Name: InputName
-      Entry: 1
-      Data: Left Stick Up
-    - Name: InputIcon
-      Entry: 10
-      Data: 12
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 21|QRCode.Framework.InputMapElement, QRCode.Framework
-    - Name: InputName
-      Entry: 1
-      Data: Menu
-    - Name: InputIcon
-      Entry: 10
-      Data: 13
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 22|QRCode.Framework.InputMapElement, QRCode.Framework
-    - Name: InputName
-      Entry: 1
-      Data: Start
-    - Name: InputIcon
-      Entry: 10
-      Data: 13
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 23|QRCode.Framework.InputMapElement, QRCode.Framework
-    - Name: InputName
-      Entry: 1
-      Data: View
-    - Name: InputIcon
-      Entry: 10
-      Data: 14
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 24|QRCode.Framework.InputMapElement, QRCode.Framework
-    - Name: InputName
-      Entry: 1
-      Data: Select
-    - Name: InputIcon
-      Entry: 10
-      Data: 14
+    - Name: TextMeshProSpriteSheetIndex
+      Entry: 3
+      Data: 18
     - Name: 
       Entry: 8
       Data: 

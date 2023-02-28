@@ -3,6 +3,7 @@ namespace QRCode.Framework
     using System;
     using Debugging;
     using Sirenix.OdinInspector;
+    using TMPro;
     using UnityEngine;
 
     [CreateAssetMenu(menuName = K.DatabasePath.BasePath + "Input Maps Database", fileName = "BD_InputMaps")]
@@ -15,21 +16,58 @@ namespace QRCode.Framework
     public class InputMap
     {
         [SerializeField] private string m_mapScheme;
+        [SerializeField] private TMP_SpriteAsset m_iconsSpriteAsset = null;
+        
         [TableList]
-        public InputMapElement[] InputMapElements;
+        [SerializeField] private InputMapElement[] m_inputMapElements;
 
-        public Sprite FindIcon(string inputName)
+        public TMP_SpriteAsset IconsSpriteAsset => m_iconsSpriteAsset;
+        
+        private InputSettings m_inputSettings = null;
+        private InputSettings InputSettings
         {
-            for (int i = 0; i < InputMapElements.Length; i++)
+            get
             {
-                if (inputName == InputMapElements[i].InputName)
+                if (m_inputSettings == null)
                 {
-                    return InputMapElements[i].InputIcon;
+                    m_inputSettings = InputSettings.Instance;
+                }
+
+                return m_inputSettings;
+            }
+        }
+
+        public Sprite FindIcon(string inputName, int alternativeInputIconIndex = 0)
+        {
+            for (int i = 0; i < m_inputMapElements.Length; i++)
+            {
+                if (inputName == m_inputMapElements[i].InputName)
+                {
+                    if (m_inputMapElements[i].InputIcons.Length - 1 > alternativeInputIconIndex)
+                    {
+                        QRDebug.DebugError(K.DebuggingChannels.Inputs, $"There is no icon at index {alternativeInputIconIndex} in {inputName} in {m_mapScheme}");
+                        return m_inputMapElements[i].InputIcons[0];
+                    }
+                    
+                    return m_inputMapElements[i].InputIcons[alternativeInputIconIndex];
                 }
             }
 
             QRDebug.DebugError(K.DebuggingChannels.Inputs, $"Cannot find InputMapElement with {inputName} in {m_mapScheme}.");
-            return null;
+            return InputSettings.NotFoundedIconSprite;
+        }
+
+        public int FindTextMeshProSpriteSheetIndex(string inputName)
+        {
+            for (int i = 0; i < m_inputMapElements.Length; i++)
+            {
+                if (inputName == m_inputMapElements[i].InputName)
+                {
+                    return m_inputMapElements[i].TextMeshProSpriteSheetIndex;
+                }
+            }
+            QRDebug.DebugError(K.DebuggingChannels.Inputs, $"Cannot find InputMapElement with {inputName} in {m_mapScheme}.");
+            return -1;
         }
     }
     
@@ -38,6 +76,7 @@ namespace QRCode.Framework
     {
         public string InputName;
         [PreviewField(ObjectFieldAlignment.Center)]
-        public Sprite InputIcon;
+        public Sprite[] InputIcons;
+        public int TextMeshProSpriteSheetIndex;
     }
 }
