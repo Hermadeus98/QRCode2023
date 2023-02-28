@@ -169,8 +169,51 @@ MonoBehaviour:
       Entry: 7
       Data: QRCode.Framework.SceneLoadableProgressionInfos, QRCode.Framework
     - Name: m_loadingProgressionDescription
+      Entry: 7
+      Data: 0|UnityEngine.Localization.LocalizedString, Unity.Localization
+    - Name: m_TableReference
+      Entry: 7
+      Data: UnityEngine.Localization.Tables.TableReference, Unity.Localization
+    - Name: m_TableCollectionName
       Entry: 1
-      Data: Loading systems...
+      Data: GUID:451d7ded6d693214ca8e7c88d67a10e7
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: m_TableEntryReference
+      Entry: 7
+      Data: UnityEngine.Localization.Tables.TableEntryReference, Unity.Localization
+    - Name: m_KeyId
+      Entry: 3
+      Data: 5560870514688
+    - Name: m_Key
+      Entry: 1
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: m_FallbackState
+      Entry: 3
+      Data: 0
+    - Name: m_WaitForCompletion
+      Entry: 5
+      Data: false
+    - Name: m_LocalVariables
+      Entry: 7
+      Data: 1|System.Collections.Generic.List`1[[UnityEngine.Localization.SmartFormat.PersistentVariables.VariableNameValuePair,
+        Unity.Localization]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: m_loadingProgressPercent
       Entry: 4
       Data: 0
@@ -203,8 +246,51 @@ MonoBehaviour:
       Entry: 7
       Data: QRCode.Framework.SceneLoadableProgressionInfos, QRCode.Framework
     - Name: m_loadingProgressionDescription
+      Entry: 7
+      Data: 0|UnityEngine.Localization.LocalizedString, Unity.Localization
+    - Name: m_TableReference
+      Entry: 7
+      Data: UnityEngine.Localization.Tables.TableReference, Unity.Localization
+    - Name: m_TableCollectionName
       Entry: 1
-      Data: Loading map...
+      Data: GUID:451d7ded6d693214ca8e7c88d67a10e7
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: m_TableEntryReference
+      Entry: 7
+      Data: UnityEngine.Localization.Tables.TableEntryReference, Unity.Localization
+    - Name: m_KeyId
+      Entry: 3
+      Data: 5560870514688
+    - Name: m_Key
+      Entry: 1
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: m_FallbackState
+      Entry: 3
+      Data: 0
+    - Name: m_WaitForCompletion
+      Entry: 5
+      Data: false
+    - Name: m_LocalVariables
+      Entry: 7
+      Data: 1|System.Collections.Generic.List`1[[UnityEngine.Localization.SmartFormat.PersistentVariables.VariableNameValuePair,
+        Unity.Localization]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: m_loadingProgressPercent
       Entry: 4
       Data: 0
@@ -237,8 +323,51 @@ MonoBehaviour:
       Entry: 7
       Data: QRCode.Framework.SceneLoadableProgressionInfos, QRCode.Framework
     - Name: m_loadingProgressionDescription
+      Entry: 7
+      Data: 0|UnityEngine.Localization.LocalizedString, Unity.Localization
+    - Name: m_TableReference
+      Entry: 7
+      Data: UnityEngine.Localization.Tables.TableReference, Unity.Localization
+    - Name: m_TableCollectionName
       Entry: 1
-      Data: Loading lights...
+      Data: GUID:451d7ded6d693214ca8e7c88d67a10e7
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: m_TableEntryReference
+      Entry: 7
+      Data: UnityEngine.Localization.Tables.TableEntryReference, Unity.Localization
+    - Name: m_KeyId
+      Entry: 3
+      Data: 5560870514688
+    - Name: m_Key
+      Entry: 1
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: m_FallbackState
+      Entry: 3
+      Data: 0
+    - Name: m_WaitForCompletion
+      Entry: 5
+      Data: false
+    - Name: m_LocalVariables
+      Entry: 7
+      Data: 1|System.Collections.Generic.List`1[[UnityEngine.Localization.SmartFormat.PersistentVariables.VariableNameValuePair,
+        Unity.Localization]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: m_loadingProgressPercent
       Entry: 4
       Data: 0
@@ -271,8 +400,51 @@ MonoBehaviour:
       Entry: 7
       Data: QRCode.Framework.SceneLoadableProgressionInfos, QRCode.Framework
     - Name: m_loadingProgressionDescription
+      Entry: 7
+      Data: 0|UnityEngine.Localization.LocalizedString, Unity.Localization
+    - Name: m_TableReference
+      Entry: 7
+      Data: UnityEngine.Localization.Tables.TableReference, Unity.Localization
+    - Name: m_TableCollectionName
       Entry: 1
-      Data: Loading assets...
+      Data: GUID:451d7ded6d693214ca8e7c88d67a10e7
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: m_TableEntryReference
+      Entry: 7
+      Data: UnityEngine.Localization.Tables.TableEntryReference, Unity.Localization
+    - Name: m_KeyId
+      Entry: 3
+      Data: 5560870514688
+    - Name: m_Key
+      Entry: 1
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: m_FallbackState
+      Entry: 3
+      Data: 0
+    - Name: m_WaitForCompletion
+      Entry: 5
+      Data: false
+    - Name: m_LocalVariables
+      Entry: 7
+      Data: 1|System.Collections.Generic.List`1[[UnityEngine.Localization.SmartFormat.PersistentVariables.VariableNameValuePair,
+        Unity.Localization]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: m_loadingProgressPercent
       Entry: 4
       Data: 0

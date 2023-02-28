@@ -9,7 +9,7 @@ showStatusBar = false
 scopes = {
 	"last_search.8788AF05" = ""
 	"OpenInspectorPreview.8788AF05" = "0"
-	"currentGroup.8788AF05" = "scene"
+	"currentGroup.8788AF05" = "all"
 }
 providers = {
 	adb = {
@@ -58,7 +58,7 @@ recentSearches = [
 searchItemFavorites = [
 ]
 savedSearchesSortOrder = 0
-showSavedSearchPanel = false
+showSavedSearchPanel = true
 expandedQueries = [
 ]
 queryBuilder = false

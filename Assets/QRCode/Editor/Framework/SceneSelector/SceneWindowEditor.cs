@@ -25,7 +25,7 @@ namespace QRCode.Editor.SceneSelector
             window.titleContent = new GUIContent("Scene Selector");
             window.Show();
 
-            DB.Instance.TryGetDatabase<SceneDatabase>("Database_Scenes", out m_sceneDatabase);
+            DB.Instance.TryGetDatabase<SceneDatabase>(DBEnum.DB_Scene, out m_sceneDatabase);
 
             if (m_sceneDatabase == null)
             {

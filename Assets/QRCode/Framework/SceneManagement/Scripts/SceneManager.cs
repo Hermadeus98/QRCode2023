@@ -18,15 +18,6 @@ namespace QRCode.Framework.SceneManagement
     {
         #region FIELDS
         #region Serialized
-        [TitleGroup(K.InspectorGroups.Settings)]
-        [SerializeField] private float m_minimalLoadDurationBefore = .5f;
-        
-        [TitleGroup(K.InspectorGroups.Settings)]
-        [SerializeField] private float m_minimalLoadDurationAfter = .5f;
-
-        [TitleGroup(K.InspectorGroups.Settings)] 
-        [SerializeField] private string m_loadingSceneProgressionDescription = "Loading...";
-        
         [TitleGroup(K.InspectorGroups.Debugging)]
         [SerializeField][ReadOnly] private SceneLoadingInfo m_sceneLoadingInfo;
         #endregion Serialized
@@ -57,6 +48,21 @@ namespace QRCode.Framework.SceneManagement
                 return m_sceneDatabase;
             }
         }
+
+        private static SceneManagerSettings m_sceneManagerSettings = null;
+        private static SceneManagerSettings SceneManagerSettings
+        {
+            get
+            {
+                if (m_sceneManagerSettings == null)
+                {
+                    m_sceneManagerSettings = SceneManagerSettings.Instance;
+                }
+
+                return m_sceneManagerSettings;
+            }
+        }
+        
         private static List<SceneDatabase.SceneReferenceGroup> m_loadedSceneGroup = new List<SceneDatabase.SceneReferenceGroup>();
         #endregion Statics
         #endregion FIELDS
@@ -176,7 +182,7 @@ namespace QRCode.Framework.SceneManagement
         
         public async Task UnloadSceneGroup(DB_SceneEnum sceneReferenceGroupToUnload)
         {
-            if (m_sceneDatabase.TryGetInDatabase(sceneReferenceGroupToUnload.ToString(), out var foundedObject))
+            if (SceneDatabase.TryGetInDatabase(sceneReferenceGroupToUnload.ToString(), out var foundedObject))
             {
                 await UnloadSceneGroup(foundedObject);
             }
@@ -196,7 +202,7 @@ namespace QRCode.Framework.SceneManagement
             m_sceneLoadingInfo = new SceneLoadingInfo()
             {
                 GlobalProgress = 0f,
-                ProgressDescription = m_loadingSceneProgressionDescription,
+                ProgressDescription = SceneManagerSettings.LoadingLocalizedString,
             };
 
             if (m_loadedSceneGroup.Contains(sceneReferenceGroupToLoad))
@@ -207,8 +213,8 @@ namespace QRCode.Framework.SceneManagement
             }
 
             m_isLoading = true;
-            await Task.Delay(TimeSpan.FromSeconds(m_minimalLoadDurationBefore), m_cancellationTokenSource.Token);
             OnLoadingScenes();
+            await Task.Delay(TimeSpan.FromSeconds(SceneManagerSettings.MinimalLoadDurationBefore), m_cancellationTokenSource.Token);
 
             if (m_onStartToLoadAsync != null)
             {
@@ -245,7 +251,7 @@ namespace QRCode.Framework.SceneManagement
             var initializeTask = InitializeLoadedScene();
             await initializeTask;
 
-            await Task.Delay(TimeSpan.FromSeconds(m_minimalLoadDurationAfter), m_cancellationTokenSource.Token);
+            await Task.Delay(TimeSpan.FromSeconds(SceneManagerSettings.MinimalLoadDurationAfter), m_cancellationTokenSource.Token);
 
             m_onFinishToLoad?.Invoke();
             if (m_onFinishToLoadAsync != null)
@@ -319,7 +325,7 @@ namespace QRCode.Framework.SceneManagement
                 var progression = new Progress<SceneLoadableProgressionInfos>(value =>
                 {
                     m_sceneLoadingInfo.GlobalProgress = .5f + (value.LoadingProgressPercent / 2f);
-                    m_sceneLoadingInfo.ProgressDescription = value.ProgressionDescription;
+                    m_sceneLoadingInfo.ProgressDescription = value.ProgressionDescription.GetLocalizedString();
                 });
                 
                 var loading = initialization.Load(m_cancellationTokenSource.Token, progression);

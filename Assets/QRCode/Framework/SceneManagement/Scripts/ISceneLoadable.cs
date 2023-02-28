@@ -5,6 +5,7 @@ namespace QRCode.Framework
     using System.Threading.Tasks;
     using Sirenix.OdinInspector;
     using UnityEngine;
+    using UnityEngine.Localization;
 
     public interface ISceneLoadable
     {
@@ -14,7 +15,7 @@ namespace QRCode.Framework
 
     public struct SceneLoadableProgressionInfos
     {
-        [SerializeField] private string m_loadingProgressionDescription;
+        [SerializeField] private LocalizedString m_loadingProgressionDescription;
         [SerializeField][ReadOnly] private float m_loadingProgressPercent;
 
         public float LoadingProgressPercent
@@ -22,7 +23,7 @@ namespace QRCode.Framework
             get => m_loadingProgressPercent;
             set => m_loadingProgressPercent = value;
         }
-        public string ProgressionDescription
+        public LocalizedString ProgressionDescription
         {
             get => m_loadingProgressionDescription;
             set => m_loadingProgressionDescription = value;

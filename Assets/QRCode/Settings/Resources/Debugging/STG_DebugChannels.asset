@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 32
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69f6613273a36eb48a35dabf5d93dc1e, type: 3}
+  m_Name: STG_DebugChannels
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  channels:
+  - channelName: SCENE MANAGER
+    isActive: 1
+  - channelName: LIFE CYCLE
+    isActive: 1
+  - channelName: DATABASE
+    isActive: 1
+  - channelName: TESTS
+    isActive: 1
+  - channelName: ERROR
+    isActive: 1
+  - channelName: GAME
+    isActive: 1
+  - channelName: INPUTS
+    isActive: 1
+  - channelName: EDITOR
+    isActive: 1

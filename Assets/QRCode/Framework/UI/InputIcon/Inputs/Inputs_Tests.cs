@@ -28,9 +28,45 @@ public partial class @Inputs_Tests : IInputActionCollection2, IDisposable
             ""id"": ""ae91eb92-99ac-4623-b508-7bd60c494102"",
             ""actions"": [
                 {
-                    ""name"": ""Validate"",
+                    ""name"": ""PrimaryAction"",
                     ""type"": ""Button"",
                     ""id"": ""0372df8d-bab7-4145-bbec-e8dbe2f61874"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SecondaryAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""44844788-740c-4563-ba61-0de7f57d9ad2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""d1d23a5e-8ddd-4888-b96d-42d7b13b18b4"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MoveUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""569639e3-c143-43a1-8675-e3576aaaf935"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TestInpuDisplayName"",
+                    ""type"": ""Button"",
+                    ""id"": ""7c29cdac-da29-4b36-ac61-57374532a6d3"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -45,7 +81,7 @@ public partial class @Inputs_Tests : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Validate"",
+                    ""action"": ""PrimaryAction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -56,7 +92,139 @@ public partial class @Inputs_Tests : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Xbox Controller"",
-                    ""action"": ""Validate"",
+                    ""action"": ""PrimaryAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9407acdc-78c9-429f-a4a4-d08036c8c40a"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SecondaryAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b520548e-ff26-4f68-8ca2-f0c0d830e49a"",
+                    ""path"": ""<XInputController>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Xbox Controller"",
+                    ""action"": ""SecondaryAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Keyboard"",
+                    ""id"": ""319d7d5f-5a1e-45d9-8250-111443b7101a"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""de12c740-fccb-4c74-a297-c2ffdb046575"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""5cc973f0-c246-47e4-bf74-733cdac5b1c6"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""XboxController"",
+                    ""id"": ""e77d377e-2a0b-40c9-b3c4-b7ca53815511"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""f20bb555-3fb4-4a11-b146-a3691f0f9df2"",
+                    ""path"": ""<XInputController>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Xbox Controller"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""3e65e305-f2a8-4fd2-83aa-8e8f33230191"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Xbox Controller"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ac44106a-3e2d-480b-9b2d-9052e77702e4"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""MoveUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d2ee4ff0-c282-43d9-87f1-f31e7822cfa0"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Xbox Controller"",
+                    ""action"": ""MoveUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""160fcef0-e281-4e71-b89b-ec867adfd7f8"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""TestInpuDisplayName"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2ca98096-bc5f-4bb9-9d6b-454518edf820"",
+                    ""path"": ""<XInputController>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Xbox Controller"",
+                    ""action"": ""TestInpuDisplayName"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -90,7 +258,11 @@ public partial class @Inputs_Tests : IInputActionCollection2, IDisposable
 }");
         // Tests
         m_Tests = asset.FindActionMap("Tests", throwIfNotFound: true);
-        m_Tests_Validate = m_Tests.FindAction("Validate", throwIfNotFound: true);
+        m_Tests_PrimaryAction = m_Tests.FindAction("PrimaryAction", throwIfNotFound: true);
+        m_Tests_SecondaryAction = m_Tests.FindAction("SecondaryAction", throwIfNotFound: true);
+        m_Tests_Move = m_Tests.FindAction("Move", throwIfNotFound: true);
+        m_Tests_MoveUp = m_Tests.FindAction("MoveUp", throwIfNotFound: true);
+        m_Tests_TestInpuDisplayName = m_Tests.FindAction("TestInpuDisplayName", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -150,12 +322,20 @@ public partial class @Inputs_Tests : IInputActionCollection2, IDisposable
     // Tests
     private readonly InputActionMap m_Tests;
     private ITestsActions m_TestsActionsCallbackInterface;
-    private readonly InputAction m_Tests_Validate;
+    private readonly InputAction m_Tests_PrimaryAction;
+    private readonly InputAction m_Tests_SecondaryAction;
+    private readonly InputAction m_Tests_Move;
+    private readonly InputAction m_Tests_MoveUp;
+    private readonly InputAction m_Tests_TestInpuDisplayName;
     public struct TestsActions
     {
         private @Inputs_Tests m_Wrapper;
         public TestsActions(@Inputs_Tests wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Validate => m_Wrapper.m_Tests_Validate;
+        public InputAction @PrimaryAction => m_Wrapper.m_Tests_PrimaryAction;
+        public InputAction @SecondaryAction => m_Wrapper.m_Tests_SecondaryAction;
+        public InputAction @Move => m_Wrapper.m_Tests_Move;
+        public InputAction @MoveUp => m_Wrapper.m_Tests_MoveUp;
+        public InputAction @TestInpuDisplayName => m_Wrapper.m_Tests_TestInpuDisplayName;
         public InputActionMap Get() { return m_Wrapper.m_Tests; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -165,16 +345,40 @@ public partial class @Inputs_Tests : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_TestsActionsCallbackInterface != null)
             {
-                @Validate.started -= m_Wrapper.m_TestsActionsCallbackInterface.OnValidate;
-                @Validate.performed -= m_Wrapper.m_TestsActionsCallbackInterface.OnValidate;
-                @Validate.canceled -= m_Wrapper.m_TestsActionsCallbackInterface.OnValidate;
+                @PrimaryAction.started -= m_Wrapper.m_TestsActionsCallbackInterface.OnPrimaryAction;
+                @PrimaryAction.performed -= m_Wrapper.m_TestsActionsCallbackInterface.OnPrimaryAction;
+                @PrimaryAction.canceled -= m_Wrapper.m_TestsActionsCallbackInterface.OnPrimaryAction;
+                @SecondaryAction.started -= m_Wrapper.m_TestsActionsCallbackInterface.OnSecondaryAction;
+                @SecondaryAction.performed -= m_Wrapper.m_TestsActionsCallbackInterface.OnSecondaryAction;
+                @SecondaryAction.canceled -= m_Wrapper.m_TestsActionsCallbackInterface.OnSecondaryAction;
+                @Move.started -= m_Wrapper.m_TestsActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_TestsActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_TestsActionsCallbackInterface.OnMove;
+                @MoveUp.started -= m_Wrapper.m_TestsActionsCallbackInterface.OnMoveUp;
+                @MoveUp.performed -= m_Wrapper.m_TestsActionsCallbackInterface.OnMoveUp;
+                @MoveUp.canceled -= m_Wrapper.m_TestsActionsCallbackInterface.OnMoveUp;
+                @TestInpuDisplayName.started -= m_Wrapper.m_TestsActionsCallbackInterface.OnTestInpuDisplayName;
+                @TestInpuDisplayName.performed -= m_Wrapper.m_TestsActionsCallbackInterface.OnTestInpuDisplayName;
+                @TestInpuDisplayName.canceled -= m_Wrapper.m_TestsActionsCallbackInterface.OnTestInpuDisplayName;
             }
             m_Wrapper.m_TestsActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Validate.started += instance.OnValidate;
-                @Validate.performed += instance.OnValidate;
-                @Validate.canceled += instance.OnValidate;
+                @PrimaryAction.started += instance.OnPrimaryAction;
+                @PrimaryAction.performed += instance.OnPrimaryAction;
+                @PrimaryAction.canceled += instance.OnPrimaryAction;
+                @SecondaryAction.started += instance.OnSecondaryAction;
+                @SecondaryAction.performed += instance.OnSecondaryAction;
+                @SecondaryAction.canceled += instance.OnSecondaryAction;
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @MoveUp.started += instance.OnMoveUp;
+                @MoveUp.performed += instance.OnMoveUp;
+                @MoveUp.canceled += instance.OnMoveUp;
+                @TestInpuDisplayName.started += instance.OnTestInpuDisplayName;
+                @TestInpuDisplayName.performed += instance.OnTestInpuDisplayName;
+                @TestInpuDisplayName.canceled += instance.OnTestInpuDisplayName;
             }
         }
     }
@@ -199,6 +403,10 @@ public partial class @Inputs_Tests : IInputActionCollection2, IDisposable
     }
     public interface ITestsActions
     {
-        void OnValidate(InputAction.CallbackContext context);
+        void OnPrimaryAction(InputAction.CallbackContext context);
+        void OnSecondaryAction(InputAction.CallbackContext context);
+        void OnMove(InputAction.CallbackContext context);
+        void OnMoveUp(InputAction.CallbackContext context);
+        void OnTestInpuDisplayName(InputAction.CallbackContext context);
     }
 }
