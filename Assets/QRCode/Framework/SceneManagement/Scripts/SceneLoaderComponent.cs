@@ -6,6 +6,8 @@ namespace QRCode.Framework
 
     public class SceneLoaderComponent : SerializedMonoBehaviour
     {
+        [TitleGroup(K.InspectorGroups.Settings)] 
+        [SerializeField] private bool m_playOnStart = false;
         [TitleGroup(K.InspectorGroups.Settings)]
         [SerializeField] private SceneLoader m_sceneLoader = new SceneLoader();
 
@@ -15,8 +17,14 @@ namespace QRCode.Framework
         [SerializeField] private UnityEvent m_onAfterLoad = new UnityEvent();
 
         public SceneLoader SceneLoader => m_sceneLoader;
-        public UnityEvent OnBeforeLoad => m_onBeforeLoad;
-        public UnityEvent OnAfterLoad => m_onAfterLoad;
+
+        private void Start()
+        {
+            if (m_playOnStart)
+            {
+                LoadScenes();
+            }
+        }
 
         [ButtonGroup(K.InspectorGroups.Debugging)]
         public async void LoadScenes()

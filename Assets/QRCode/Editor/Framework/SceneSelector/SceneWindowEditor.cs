@@ -21,11 +21,11 @@ namespace QRCode.Editor.SceneSelector
         [MenuItem("QRCode/Scene Selector")]
         private static void Init()
         {
-            SceneWindowEditor window = (SceneWindowEditor)EditorWindow.GetWindow(typeof(SceneWindowEditor));
+            var window = (SceneWindowEditor)EditorWindow.GetWindow(typeof(SceneWindowEditor));
             window.titleContent = new GUIContent("Scene Selector");
             window.Show();
 
-            DB.Instance.TryGetDatabase<SceneDatabase>("Database_Scenes", out m_sceneDatabase);
+            DB.Instance.TryGetDatabase<SceneDatabase>(DBEnum.DB_Scene, out m_sceneDatabase);
 
             if (m_sceneDatabase == null)
             {

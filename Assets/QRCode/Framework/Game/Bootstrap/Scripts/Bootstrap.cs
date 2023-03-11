@@ -2,44 +2,60 @@ namespace QRCode.Framework.Game
 {
     using System.Threading.Tasks;
     using SceneManagement;
-    using Sirenix.OdinInspector;
     using UnityEngine;
 
-    public class Bootstrap : SerializedMonoBehaviour
+    public static class Bootstrap
     {
-        [SerializeField] private DB_SceneEnum m_sceneUI = DB_SceneEnum.Scenes_UI;
-        
-        private void Awake()
+        private static ServiceSettings m_serviceSettings = null;
+        private static ServiceSettings ServiceSettings
         {
-            Initialize();
+            get
+            {
+                if (m_serviceSettings == null)
+                {
+                    m_serviceSettings = ServiceSettings.Instance;
+                }
+
+                return m_serviceSettings;
+            }
         }
 
-        private async void Initialize()
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static async void Initialize()
         {
-            await SceneManager.Instance.LoadSceneGroup(m_sceneUI, DB_LoadingScreenEnum.Null);
-            
-            InitializeGameStates();
             await PrepareSave();
-            InitializeManagers();
+            RegisterServices();
+            InitializeServices();
+            InitializeGameStates();
             ExitBootstrapAndLaunchGame();
         }
 
-        private void InitializeGameStates()
+        private static void InitializeGameStates()
         {
             Game.PreInitialize();
         }
 
-        private Task PrepareSave()
+        private static Task PrepareSave()
         {
             return Task.CompletedTask;
         }
 
-        private void InitializeManagers()
+        private static void RegisterServices()
         {
+            ServiceLocator.Create();
             
+            //SceneManagementService
+            ISceneManagementService sceneManagementService = Object.Instantiate((SceneManager)ServiceSettings.SceneManagementService);
+            ServiceLocator.Current.RegisterService<ISceneManagementService>(sceneManagementService);
+            Object.DontDestroyOnLoad(sceneManagementService as Object);
         }
 
-        private void ExitBootstrapAndLaunchGame()
+        private static void InitializeServices()
+        {
+            ServiceLocator.Current.InitializeService();
+        }
+
+        private static void ExitBootstrapAndLaunchGame()
         {
             
         }

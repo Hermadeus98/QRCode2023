@@ -1,53 +1,57 @@
 namespace QRCode.Framework
 {
+    using DG.Tweening;
     using Sirenix.OdinInspector;
     using UnityEngine;
     using UnityEngine.InputSystem;
+    using UnityEngine.UI;
 
-    public class InputIcon : MonoBehaviour
+    public class InputIcon : InputIconBase
     {
-        [SerializeField] private InputActionReference m_inputActionReference;
-        [SerializeField] private PlayerInput m_playerInput;
-
-        [SerializeField, DrawWithUnity] private InputControl m_binding;
-
-        private string m_currentInputScheme;
-
-        [Button]
-        private void UpdateIcon()
-        {
-            m_currentInputScheme = m_playerInput.currentControlScheme;
-            
-            Debug.Log("new  scheme = " + m_currentInputScheme);
-            
-            var readOnlyArray = m_inputActionReference.action.bindings;
-
-            for (int i = 0; i < readOnlyArray.Count; i++)
-            {
-                Debug.Log("input " + readOnlyArray[i]);
-                
-                if(InputControlPath.Matches(readOnlyArray[i].action, m_binding))
-                {
-                    Debug.Log("MATCH");
-                }
-            }
-            
-        }
-
-        private void Update()
-        {
-            CheckCurrentScheme();
-        }
+        [TitleGroup(K.InspectorGroups.Settings)] 
+        [SerializeField] private bool m_preserveAspect = true;
         
-        private void CheckCurrentScheme()
+        [TitleGroup(K.InspectorGroups.References)]
+        [SerializeField] private Image m_icon;
+
+
+        private Sequence m_onPerformInputSequence;
+
+        protected override void OnEnable()
         {
-            if (m_currentInputScheme == m_playerInput.currentControlScheme)
+            if (m_feedbackOnPerformInput)
             {
-                return;
+                m_icon.DOFade(.8f, 0f);
             }
-            else
+            
+            base.OnEnable();
+        }
+
+        protected override void LoadIcon()
+        {
+            base.LoadIcon();
+
+            var sanitizeControlScheme = m_currentControlScheme.Replace(" ", "");
+            InputMapDatabase.TryGetInDatabase(sanitizeControlScheme, out var inputMap);
+            var icon = inputMap.FindIcon(m_currentDisplayName, m_alternativeIconIndex);
+
+            m_icon.sprite = icon;
+
+            gameObject.name = $"Input Icon [{m_currentDisplayName}]";
+            m_icon.preserveAspect = m_preserveAspect;
+        }
+
+        protected override void OnPerformInput(InputAction.CallbackContext context)
+        {
+            base.OnPerformInput(context);
+            
+            if (m_feedbackOnPerformInput)
             {
-                UpdateIcon();
+                m_onPerformInputSequence?.Kill();
+                m_onPerformInputSequence = DOTween.Sequence();
+                m_onPerformInputSequence.Append(m_icon.DOFade(1f, .2f));
+                m_onPerformInputSequence.Append(m_icon.DOFade(.8f, .2f).SetDelay(.2f));
+                m_onPerformInputSequence.Play();
             }
         }
     }

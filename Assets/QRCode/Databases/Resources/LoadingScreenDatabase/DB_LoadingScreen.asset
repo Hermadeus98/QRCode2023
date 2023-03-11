@@ -15,8 +15,7 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 4277089200479019277, guid: fe8601c57e2bc024f9f9fb6653ecd7b5, type: 3}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -24,7 +23,7 @@ MonoBehaviour:
     SerializationNodes:
     - Name: m_database
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[QRCode.Framework.ILoadingScreen,
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[QRCode.Framework.LoadingScreenReference,
         QRCode.Framework]], mscorlib
     - Name: comparer
       Entry: 7
@@ -43,8 +42,29 @@ MonoBehaviour:
       Entry: 1
       Data: LoadingScreenBase
     - Name: $v
-      Entry: 10
-      Data: 0
+      Entry: 7
+      Data: QRCode.Framework.LoadingScreenReference, QRCode.Framework
+    - Name: LoadingScreenAssetReference
+      Entry: 7
+      Data: 2|UnityEngine.AddressableAssets.AssetReference, Unity.Addressables
+    - Name: m_AssetGUID
+      Entry: 1
+      Data: fe8601c57e2bc024f9f9fb6653ecd7b5
+    - Name: m_SubObjectName
+      Entry: 1
+      Data: 
+    - Name: m_SubObjectType
+      Entry: 1
+      Data: 
+    - Name: m_EditorAssetChanged
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 

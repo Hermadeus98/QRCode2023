@@ -7,6 +7,7 @@ namespace QRCode.Framework
     {
         public Task Show();
         public Task Hide();
+
         public void Progress(SceneLoadingInfo loadingInfo);
     }
 }

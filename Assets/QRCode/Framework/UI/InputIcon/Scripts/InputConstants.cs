@@ -7,5 +7,10 @@ namespace QRCode.Framework
             public const string Keyboard = "Keyboard";
             public const string XboxController = "Xbox Controller";
         }
+        
+        public static class InputPath
+        {
+            public const string Keyboard_E = "<Keyboard>/e[Keyboard]";
+        }
     }
 }

@@ -35,6 +35,10 @@ MonoBehaviour:
     m_Address: Assets/QRCode/Gameplay/UI/Scenes/Scene_UI.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: fe8601c57e2bc024f9f9fb6653ecd7b5
+    m_Address: Assets/QRCode/Gameplay/Templates/Prefabs/UI/LoadingScreens/P_LoadingScreenBase.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 383727ea88213544abed9fa8aa57676f, type: 2}
   m_SchemaSet:

@@ -1,10 +1,10 @@
 namespace QRCode.Framework
 {
+    using System.Threading.Tasks;
     using SceneManagement;
     using Sirenix.OdinInspector;
     using TMPro;
     using UnityEngine;
-    using UnityEngine.UI;
 
     public class LoadingScreen : UIView, ILoadingScreen
     {
@@ -12,7 +12,7 @@ namespace QRCode.Framework
         [SerializeField] protected bool m_useProgressBar = false;
 
         [ToggleGroup("m_useProgressBar")] 
-        [SerializeField] protected Slider m_progressionSlider = null;
+        [SerializeField] protected ProgressBar m_progressionSlider = null;
 
         [ToggleGroup("m_useProgressionDescription", "Use Progression Description")]
         [SerializeField] protected bool m_useProgressionDescription = false;
@@ -26,10 +26,10 @@ namespace QRCode.Framework
         [ToggleGroup("m_useTooltips")] 
         [SerializeField] protected TextMeshProUGUI m_tooltipsText = null;
 
-        protected override void Start()
+        public override void Initialize()
         {
-            base.Start();
-
+            base.Initialize();
+            
             if (!m_useTooltips)
             {
                 m_tooltipsText?.gameObject.SetActive(false);
@@ -46,6 +46,16 @@ namespace QRCode.Framework
             }
         }
 
+        public override async Task Show()
+        {
+            await base.Show();
+            
+            if (m_useProgressBar)
+            {
+                m_progressionSlider.UpdateProgressBar(0f);
+            }
+        }
+
         public virtual void Progress(SceneLoadingInfo loadingInfo)
         {
             if (m_useProgressionDescription)
@@ -55,7 +65,7 @@ namespace QRCode.Framework
             
             if (m_useProgressBar)
             {
-                m_progressionSlider.value = loadingInfo.GlobalProgress;
+                m_progressionSlider.UpdateProgressBar(loadingInfo.GlobalProgress);
             }
         }
     }
