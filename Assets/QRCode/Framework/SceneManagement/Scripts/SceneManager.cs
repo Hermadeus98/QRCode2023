@@ -139,12 +139,6 @@ namespace QRCode.Framework.SceneManagement
         #endregion
 
         #region METHODS
-        #region Initialization
-        public void OnInitialize()
-        {
-            m_cancellationTokenSource = new CancellationTokenSource();
-        }
-        #endregion
 
         #region Publics
         public async Task<SceneLoadingInfo> LoadSceneGroup(DB_SceneEnum sceneReferenceGroupToLoad, DB_LoadingScreenEnum loadingScreenEnum, bool forceReload = false, bool activateOnLoad = true, int priority = 100)
@@ -188,6 +182,11 @@ namespace QRCode.Framework.SceneManagement
         #endregion Publics
 
         #region LifeCycle
+        private void Start()
+        {
+            m_cancellationTokenSource = new CancellationTokenSource();
+        }
+
         private void OnDestroy()
         {
             m_cancellationTokenSource?.Cancel();

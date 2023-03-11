@@ -36,6 +36,7 @@ namespace QRCode.Framework
             public const string ServiceSettingsPath = BasePath + "Service Settings";
             public const string InputSettingsPath = BasePath + "Input Settings";
             public const string SceneManagerSettingsPath = BasePath + "Scene Manager Settings";
+            public const string SaveSystemSettingsPath = BasePath + "Save System Settings";
         }
         
         public static class DebuggingChannels
@@ -49,6 +50,7 @@ namespace QRCode.Framework
             public const string Game = "Game";
             public const string Error = "Error";
             public const string Inputs = "Inputs";
+            public const string SaveSystem = "Save System";
         } 
         
         public static class Game

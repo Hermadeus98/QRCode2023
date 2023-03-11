@@ -12,6 +12,8 @@ namespace QRCode.Framework
     {
         [TitleGroup(K.InspectorGroups.Settings)]
         [SerializeField] private string m_viewName = "";
+        [TitleGroup(K.InspectorGroups.Settings)] [SerializeField]
+        private bool m_startHide = false;
 
         [TitleGroup(K.InspectorGroups.Settings)] [SerializeField]
         private UIAnimationFade m_animationFade = new UIAnimationFade();
@@ -32,6 +34,11 @@ namespace QRCode.Framework
             m_cancellationTokenSource = new CancellationTokenSource();
             
             base.Initialize();
+
+            if (m_startHide)
+            {
+                gameObject.SetActive(false);
+            }
         }
 
         public virtual async Task Show()

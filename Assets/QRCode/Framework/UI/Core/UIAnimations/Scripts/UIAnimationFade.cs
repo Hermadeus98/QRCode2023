@@ -31,6 +31,7 @@ namespace QRCode.Framework
         {
             element.CanvasGroup.DOFade(m_hideTweenParameters.ToValue, m_hideTweenParameters.Duration).SetEase(m_hideTweenParameters.Ease).SetDelay(m_hideTweenParameters.Delay);
             await Task.Delay(TimeSpan.FromSeconds(m_hideTweenParameters.Duration), cancellationToken);
+            onComplete?.Invoke();
         }
     }
 }

@@ -6,19 +6,22 @@ namespace QRCode.Framework
 
     public class UIAnimation
     {
-        public virtual async Task ShowAnimation(UIElement element, Action onStartAnimation, CancellationToken cancellationToken)
+        public virtual Task ShowAnimation(UIElement element, Action onStartAnimation, CancellationToken cancellationToken)
         {
             onStartAnimation?.Invoke();
+            return Task.CompletedTask;
         }
         
-        public virtual async Task HideAnimation(UIElement element, Action onComplete, CancellationToken cancellationToken)
+        public virtual Task HideAnimation(UIElement element, Action onComplete, CancellationToken cancellationToken)
         {
             onComplete?.Invoke();
+            return Task.CompletedTask;
         }
 
-        public virtual async Task HighLightAnimation(UIElement element, Action onHighlight, CancellationToken cancellationToken)
+        public virtual Task HighLightAnimation(UIElement element, Action onHighlight, CancellationToken cancellationToken)
         {
             onHighlight?.Invoke();
+            return Task.CompletedTask;
         }
     }
 }

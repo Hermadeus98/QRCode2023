@@ -23,9 +23,10 @@ namespace QRCode.Framework.Game
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static async void Initialize()
         {
+            ServiceLocator.Create();
+
             await PrepareSave();
             RegisterServices();
-            InitializeServices();
             InitializeGameStates();
             ExitBootstrapAndLaunchGame();
         }
@@ -35,24 +36,21 @@ namespace QRCode.Framework.Game
             Game.PreInitialize();
         }
 
-        private static Task PrepareSave()
+        private static async Task PrepareSave()
         {
-            return Task.CompletedTask;
+            var gameObject = new GameObject("[SERVICE] Save System");
+            ISaveService saveService = gameObject.AddComponent<SaveService>();
+            ServiceLocator.Current.RegisterService<ISaveService>(saveService);
+            await saveService.Initialize();
         }
 
         private static void RegisterServices()
         {
-            ServiceLocator.Create();
-            
             //SceneManagementService
             ISceneManagementService sceneManagementService = Object.Instantiate((SceneManager)ServiceSettings.SceneManagementService);
             ServiceLocator.Current.RegisterService<ISceneManagementService>(sceneManagementService);
             Object.DontDestroyOnLoad(sceneManagementService as Object);
-        }
-
-        private static void InitializeServices()
-        {
-            ServiceLocator.Current.InitializeService();
+            
         }
 
         private static void ExitBootstrapAndLaunchGame()

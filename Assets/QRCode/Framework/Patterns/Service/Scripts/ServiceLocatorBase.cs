@@ -39,13 +39,5 @@ namespace QRCode.Framework
 
             return (T)m_services[key];
         }
-
-        public void InitializeService()
-        {
-            foreach (var service in m_services.Values)
-            {
-                service.OnInitialize();
-            }
-        }
     }
 }
