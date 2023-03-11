@@ -1,12 +1,13 @@
 namespace QRCode.Framework
 {
+    using System.Threading.Tasks;
+    using UnityEngine;
+
     public static class UI
     {
-        private static Database<CanvasEnum, UICanvas> m_canvasDatabase = new Database<CanvasEnum, UICanvas>();
-
-        private static Database<DB_LoadingScreenEnum, ILoadingScreen> m_loadedLoadingScreen =
-            new Database<DB_LoadingScreenEnum, ILoadingScreen>();
-
+        private static Database<CanvasEnum, UICanvas> m_canvasDatabase = null;
+        private static Database<string, UIView> m_UIViewDatabase = null;
+        private static Database<DB_LoadingScreenEnum, ILoadingScreen> m_loadedLoadingScreen = null;
         private static LoadingScreenDatabase m_loadingScreenDatabase = null;
         private static LoadingScreenDatabase LoadingScreenDatabase
         {
@@ -22,7 +23,7 @@ namespace QRCode.Framework
             }
         }
         
-        public static Database<CanvasEnum, UICanvas> GetCanvasDatabase
+        public static Database<CanvasEnum, UICanvas> CanvasDatabase
         {
             get
             {
@@ -30,7 +31,24 @@ namespace QRCode.Framework
             }
         }
 
-        public static ILoadingScreen GetLoadingScreen(DB_LoadingScreenEnum loadingScreenEnum)
+        public static Database<string, UIView> UIViewDatabase
+        {
+            get
+            {
+                return m_UIViewDatabase;
+            }
+        }
+
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void Init()
+        {
+            m_canvasDatabase = new Database<CanvasEnum, UICanvas>();
+            m_loadedLoadingScreen = new Database<DB_LoadingScreenEnum, ILoadingScreen>();
+            m_UIViewDatabase = new Database<string, UIView>();
+        }
+        
+        public static async Task<ILoadingScreen> GetLoadingScreen(DB_LoadingScreenEnum loadingScreenEnum)
         {
             LoadingScreenDatabase.TryGetInDatabase(loadingScreenEnum.ToString(), out var loadingScreen);
 
@@ -41,7 +59,7 @@ namespace QRCode.Framework
             }
             else
             {
-                var loadingScreenInstance = LoadingScreenFactory.InstantiateLoadingScreen<ILoadingScreen>(loadingScreen);
+                var loadingScreenInstance = await LoadingScreenFactory.InstantiateLoadingScreen<ILoadingScreen>(loadingScreen.LoadingScreenAssetReference);
                 m_loadedLoadingScreen.AddToDatabase(loadingScreenEnum, loadingScreenInstance);
                 return loadingScreenInstance;
             }

@@ -22,6 +22,14 @@ MonoBehaviour:
     m_Localized: Loading...
     m_Metadata:
       m_Items: []
+  - m_Id: 4405701492748288
+    m_Localized: HP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4405751874727936
+    m_Localized: Health
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -12,6 +12,7 @@ namespace QRCode.Framework
             public const string Cosmetics = "Cosmetics";
             public const string GameEvents = "GameEvents";
             public const string Debugging = "Debugging";
+            public const string Options = "Options";
         }
         
         public static class DebuggingPath

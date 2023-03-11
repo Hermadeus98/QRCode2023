@@ -22,6 +22,14 @@ MonoBehaviour:
     m_Localized: Chargement...
     m_Metadata:
       m_Items: []
+  - m_Id: 4405701492748288
+    m_Localized: PV
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4405751874727936
+    m_Localized: Vie
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

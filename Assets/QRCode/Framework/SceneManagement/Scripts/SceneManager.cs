@@ -157,7 +157,7 @@ namespace QRCode.Framework.SceneManagement
 
             if (SceneDatabase.TryGetInDatabase(sceneReferenceGroupToLoad.ToString(), out var sceneReferenceGroup))
             {
-                var loadingScreen = UI.GetLoadingScreen(loadingScreenEnum);
+                var loadingScreen = await UI.GetLoadingScreen(loadingScreenEnum);
                 await loadingScreen.Show();
 
                 if (forceReload)

@@ -18,12 +18,12 @@ namespace QRCode.Framework
 
         private void OnEnable()
         {
-            UI.GetCanvasDatabase.AddToDatabase(m_canvasEnum, this);
+            UI.CanvasDatabase.AddToDatabase(m_canvasEnum, this);
         }
 
         private void OnDisable()
         {
-            UI.GetCanvasDatabase.RemoveOfDatabase(m_canvasEnum);
+            UI.CanvasDatabase.RemoveOfDatabase(m_canvasEnum);
         }
     }
 

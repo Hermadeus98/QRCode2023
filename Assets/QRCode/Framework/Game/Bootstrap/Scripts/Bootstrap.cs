@@ -46,12 +46,13 @@ namespace QRCode.Framework.Game
             
             //SceneManagementService
             ISceneManagementService sceneManagementService = Object.Instantiate((SceneManager)ServiceSettings.SceneManagementService);
-            ServiceLocator.RegisterService<ISceneManagementService>(sceneManagementService);
+            ServiceLocator.Current.RegisterService<ISceneManagementService>(sceneManagementService);
+            Object.DontDestroyOnLoad(sceneManagementService as Object);
         }
 
         private static void InitializeServices()
         {
-            ServiceLocator.InitializeService();
+            ServiceLocator.Current.InitializeService();
         }
 
         private static void ExitBootstrapAndLaunchGame()

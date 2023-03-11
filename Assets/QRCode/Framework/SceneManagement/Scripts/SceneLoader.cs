@@ -18,7 +18,7 @@ namespace QRCode.Framework
             {
                 if (m_sceneManagementService == null)
                 {
-                    m_sceneManagementService = ServiceLocator.Get<ISceneManagementService>();
+                    m_sceneManagementService = ServiceLocator.Current.Get<ISceneManagementService>();
                 }
 
                 return m_sceneManagementService;

@@ -14,4 +14,14 @@ namespace QRCode.Framework
         public float Duration;
         public Ease Ease;
     }
+    
+    [Serializable]
+    public struct TweenParameters
+    {
+        [SuffixLabel("s", true)] 
+        public float Delay;
+        [SuffixLabel("s", true)] 
+        public float Duration;
+        public Ease Ease;
+    }
 }
