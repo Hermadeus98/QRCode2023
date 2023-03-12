@@ -10,7 +10,8 @@
             {
                 case FormatterTypeEnum.JSON:
                     return new JSONFormatter(); 
-                case FormatterTypeEnum.BYTES:
+                case FormatterTypeEnum.BINARY:
+                    return new BinaryFormatter();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(formatterType), formatterType, null);

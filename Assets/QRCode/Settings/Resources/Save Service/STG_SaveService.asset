@@ -23,5 +23,7 @@ MonoBehaviour:
     SerializationNodes: []
   m_fileName: QRCodeSave
   m_fileNameExtension: .save
+  m_useEncryption: 1
   m_useApplicationPersistentDataPath: 1
   m_dataDirectoryPathDefault: 
+  m_formatterType: 1

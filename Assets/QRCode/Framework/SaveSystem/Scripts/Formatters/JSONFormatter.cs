@@ -8,6 +8,8 @@
     
     public class JSONFormatter : IFormatter
     {
+        private readonly string m_encryptionCodeWord = "372a9fcc-2639-4d91-8660-b75cd27903b0";
+
         public async Task<T> Load<T>(string path)
         {
             if (File.Exists(path))
@@ -23,6 +25,11 @@
                         }
                     }
 
+                    if (SaveServiceSettings.Instance.UseEncryption)
+                    {
+                        dataToLoad = EncryptDecrypt(dataToLoad);
+                    }
+                    
                     return JsonUtility.FromJson<T>(dataToLoad);
                 }
                 catch (Exception e)
@@ -38,6 +45,11 @@
         public async Task Save(object obj, string path)
         {
             var dataToStore = JsonUtility.ToJson(obj, true);
+
+            if (SaveServiceSettings.Instance.UseEncryption)
+            {
+                dataToStore = EncryptDecrypt(dataToStore);
+            }
             
             try
             {
@@ -65,28 +77,16 @@
                 throw;
             }
         }
-
-        public Task<bool> TryDeleteFile(string path)
+        
+        private string EncryptDecrypt(string data)
         {
-            try
+            var modifiedData = "";
+            for (var i = 0; i < data.Length; i++)
             {
-                if (File.Exists(path))
-                {
-                    File.Delete(path);
-                    return Task.FromResult(true);
-                }
-                else
-                {
-                    QRDebug.DebugFatal(K.DebuggingChannels.SaveSystem, $"Cannot delete any file at path {path}.");
-                }
-            }
-            catch (Exception e)
-            {
-                QRDebug.DebugFatal(K.DebuggingChannels.SaveSystem, e);
-                throw;
+                modifiedData += (char)(data[i] ^ m_encryptionCodeWord[i % m_encryptionCodeWord.Length]);
             }
 
-            return Task.FromResult(false);
+            return modifiedData;
         }
     }
 }

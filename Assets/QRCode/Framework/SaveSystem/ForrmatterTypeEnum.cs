@@ -3,6 +3,6 @@
     public enum FormatterTypeEnum
     {
         JSON,
-        BYTES,
+        BINARY,
     }
 }

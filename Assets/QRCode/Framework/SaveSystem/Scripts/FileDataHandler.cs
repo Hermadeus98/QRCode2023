@@ -1,7 +1,9 @@
 ﻿namespace QRCode.Framework
 {
+    using System;
     using System.IO;
     using System.Threading.Tasks;
+    using Debugging;
     using Formatters;
 
     /// <summary>
@@ -36,12 +38,27 @@
             await m_formatter.Save(gameData, m_fullPath);
         }
 
-        public async Task<bool> TryDeleteSave()
+        public Task<bool> TryDeleteSave()
         {
-            var task = m_formatter.TryDeleteFile(m_fullPath);
-            var result = await task;
-            
-            return result;
+            try
+            {
+                if (File.Exists(m_fullPath))
+                {
+                    File.Delete(m_fullPath);
+                    return Task.FromResult(true);
+                }
+                else
+                {
+                    QRDebug.DebugFatal(K.DebuggingChannels.SaveSystem, $"Cannot delete any file at path {m_fullPath}.");
+                }
+            }
+            catch (Exception e)
+            {
+                QRDebug.DebugFatal(K.DebuggingChannels.SaveSystem, e);
+                throw;
+            }
+
+            return Task.FromResult(false);
         }
     }
 }

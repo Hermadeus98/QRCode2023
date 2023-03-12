@@ -6,6 +6,5 @@
     {
         public Task<T> Load<T>(string path);
         public Task Save(object obj, string path);
-        public Task<bool> TryDeleteFile(string path);
     }
 }

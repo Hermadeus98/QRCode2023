@@ -10,6 +10,7 @@
         [TitleGroup("General Settings")] 
         [SerializeField] private string m_fileName = "save";
         [SerializeField] private string m_fileNameExtension = ".save";
+        [SerializeField] private bool m_useEncryption = true;
         
         [TitleGroup("Default")] 
         [SerializeField] private bool m_useApplicationPersistentDataPath = true;
@@ -32,5 +33,6 @@
         public string FullFileName => m_fileName + m_fileNameExtension;
 
         public FormatterTypeEnum FormatterTypeDefault => m_formatterType;
+        public bool UseEncryption => m_useEncryption;
     }
 }
