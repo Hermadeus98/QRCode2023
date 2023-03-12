@@ -6,5 +6,6 @@
     {
         public Task<GameData> Load();
         public Task Save(GameData gameData);
+        public Task<bool> TryDeleteSave();
     }
 }

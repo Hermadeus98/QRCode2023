@@ -17,12 +17,19 @@ namespace QRCode.Framework
         }
         
         [Button]
-        public async void Load()
+        public void Load()
         {
             var saveService = ServiceLocator.Current.Get<ISaveService>();
-            await saveService.LoadGame();
+            //await saveService.LoadGame();
             var gameData = saveService.GetGameData();
             LoadData(gameData);
+        }
+
+        [Button]
+        public async void DeleteSave()
+        {
+            var saveService = ServiceLocator.Current.Get<ISaveService>();
+            await saveService.DeleteSave();
         }
         
         public void LoadData(GameData gameData)

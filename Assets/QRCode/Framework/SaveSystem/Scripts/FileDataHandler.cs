@@ -1,82 +1,47 @@
 ﻿namespace QRCode.Framework
 {
-    using System;
     using System.IO;
     using System.Threading.Tasks;
-    using Debugging;
-    using UnityEngine;
+    using Formatters;
 
+    /// <summary>
+    /// Default File Data Handler, used for PC save and Editor Save.
+    /// </summary>
     public class FileDataHandler : IFileDataHandler
     {
         private string m_dataDirectoryPath = "";
         private string m_dataFileName = "";
+
+        private string m_fullPath = "";
+        private IFormatter m_formatter = null;
         
         public FileDataHandler(string dataDirectoryPath, string dataFileName)
         {
             m_dataDirectoryPath = dataDirectoryPath;
             m_dataFileName = dataFileName;
+            
+            m_fullPath = Path.Combine(m_dataDirectoryPath, m_dataFileName);
+            m_formatter = FormatterFactory.CreateFormatter(SaveServiceSettings.Instance.FormatterTypeDefault);
         }
 
         public async Task<GameData> Load()
         {
-            var fullPath = Path.Combine(m_dataDirectoryPath, m_dataFileName);
-            GameData loadedGameData = null;
-            
-            if (File.Exists(fullPath))
-            {
-                try
-                {
-                    var dataToLoad = "";
-                    using (var fileStream = new FileStream(fullPath, FileMode.Open))
-                    {
-                        using (var streamReader = new StreamReader(fileStream))
-                        {
-                            dataToLoad = await streamReader.ReadToEndAsync();
-                        }
-                    }
+            var loadedObject = await m_formatter.Load<GameData>(m_fullPath);
 
-                    loadedGameData = JsonUtility.FromJson<GameData>(dataToLoad);
-                }
-                catch (Exception e)
-                {
-                    QRDebug.DebugFatal(K.DebuggingChannels.SaveSystem, e);
-                    throw;
-                }    
-            }
-
-            return loadedGameData;
+            return loadedObject;
         }
         
         public async Task Save(GameData gameData)
         {
-            var fullPath = Path.Combine(m_dataDirectoryPath, SaveServiceSettings.Instance.FullFileName);
-            var dataToStore = JsonUtility.ToJson(gameData, true);
-            
-            try
-            {
-                var directoryName = Path.GetDirectoryName(fullPath);
-                if (directoryName != null)
-                {
-                    Directory.CreateDirectory(directoryName);
+            await m_formatter.Save(gameData, m_fullPath);
+        }
 
-                    using (var fileStream = new FileStream(fullPath, FileMode.Create))
-                    {
-                        using (var streamWriter = new StreamWriter(fileStream))
-                        {
-                            await streamWriter.WriteAsync(dataToStore);
-                        }
-                    }
-                }
-                else
-                {
-                    QRDebug.DebugFatal(K.DebuggingChannels.SaveSystem, $"{nameof(directoryName)} should not be null.");
-                }
-            }
-            catch (Exception e)
-            {
-                QRDebug.DebugFatal(K.DebuggingChannels.SaveSystem, e);
-                throw;
-            }
+        public async Task<bool> TryDeleteSave()
+        {
+            var task = m_formatter.TryDeleteFile(m_fullPath);
+            var result = await task;
+            
+            return result;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace QRCode.Framework
             
 #if UNITY_EDITOR
             return new FileDataHandler(saveSystemSettings.FullPath, saveSystemSettings.FullFileName);
-#endif
+#else
             
             //#if PS
             
@@ -20,6 +20,7 @@ namespace QRCode.Framework
             //#else
             return new FileDataHandler(saveSystemSettings.FullPath, saveSystemSettings.FullFileName);
             //#endif
+#endif
         }
     }
 }
