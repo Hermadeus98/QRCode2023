@@ -33,5 +33,6 @@ namespace QRCode.Framework
         GameCanvas = 1,
         LoadingScreenCanvas = 2,
         SubtitleCanvas = 3,
+        Save = 4,
     }
 }

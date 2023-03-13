@@ -1,5 +1,6 @@
 namespace QRCode.Framework
 {
+    using System;
     using Sirenix.OdinInspector;
     using UnityEngine;
     
@@ -27,7 +28,17 @@ namespace QRCode.Framework
         {
             Initialize();
         }
-        
+
+        protected virtual void OnEnable()
+        {
+            
+        }
+
+        protected virtual void OnDisable()
+        {
+            
+        }
+
         public virtual void Initialize()
         {
             

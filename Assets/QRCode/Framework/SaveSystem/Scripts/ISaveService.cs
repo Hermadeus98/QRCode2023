@@ -13,6 +13,7 @@ namespace QRCode.Framework
         public Task DeleteSave();
         public bool IsSaving();
         public bool IsLoading();
+        public bool IsInit();
 
         public event Action OnStartSave;
         public event Action OnEndSave;

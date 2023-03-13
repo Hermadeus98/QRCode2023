@@ -3,20 +3,34 @@ namespace QRCode.Framework.Observer
     using System;
     using System.Collections.Generic;
 
-    public abstract class Observer
+    public class Observer
     {
+        private List<IObservable> m_allObservables = new List<IObservable>();
         
+        
+        public void RegisterObservable(IObservable observable)
+        {
+            m_allObservables.Add(observable);
+        }
+
+        public void UnregisterObservable(IObservable observable)
+        {
+            m_allObservables.Remove(observable);
+        }
+
+        public void NotifyAllObservable()
+        {
+            for (int i = 0; i < m_allObservables.Count; i++)
+            {
+                m_allObservables[i].OnNotify();
+            }
+        }
     }
 
-    public class Observer<T> : Observer, IDisposable
+    public class Observer<T>
     {
         private List<IObservable<T>> m_allObservables = new List<IObservable<T>>();
 
-        public Observer()
-        {
-            Observers.RegisterObserver(this);
-        }
-        
         public void RegisterObservable(IObservable<T> observable)
         {
             m_allObservables.Add(observable);
@@ -33,11 +47,6 @@ namespace QRCode.Framework.Observer
             {
                 m_allObservables[i].OnNotify(argument);
             }
-        }
-
-        public void Dispose()
-        {
-            Observers.UnregisterObserver(this);
         }
     }
 }

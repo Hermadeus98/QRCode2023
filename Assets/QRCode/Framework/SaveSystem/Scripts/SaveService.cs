@@ -1,6 +1,7 @@
 ﻿namespace QRCode.Framework
 {
     using System;
+    using System.Threading;
     using System.Threading.Tasks;
     using Debugging;
     using Sirenix.OdinInspector;
@@ -10,15 +11,18 @@
     {
         private GameData m_gameData = null;
         private IFileDataHandler m_fileDataHandler = null;
+        private SaveServiceSettings m_saveServiceSettings = null;
+        private CancellationTokenSource m_cancellationTokenSource = null;
 
         private bool m_isSaving = false;
         private bool m_isLoading = false;
+        private bool m_isInit = false;
 
         private Action m_onStartSave;
         private Action m_onEndSave;
         private Action m_onStartLoad;
         private Action m_onEndLoad;
-        
+
         public event Action OnStartSave
         {
             add => m_onStartSave += value;
@@ -51,7 +55,10 @@
         public async Task Initialize()
         {
             m_fileDataHandler = FileDataHandlerFactory.CreateFileDataHandler();
+            m_saveServiceSettings = SaveServiceSettings.Instance;
+            m_cancellationTokenSource = new CancellationTokenSource();
             await LoadGame();
+            m_isInit = true;
         }
 
         public Task NewGame()
@@ -71,9 +78,8 @@
             
             m_isLoading = true;
             m_onStartLoad?.Invoke();
+
             m_gameData = await m_fileDataHandler.Load();
-            m_onEndLoad?.Invoke();
-            m_isLoading = false;
 
             if (m_gameData == null)
             {
@@ -81,6 +87,10 @@
                 await NewGame();
             }
             
+            Load.Current.LoadObjects();
+            m_onEndLoad?.Invoke();
+            m_isLoading = false;
+
             QRDebug.Debug(K.DebuggingChannels.SaveSystem,$"Game is load.");
         }
 
@@ -94,6 +104,13 @@
             
             m_isSaving = true;
             m_onStartSave?.Invoke();
+            
+            if (m_saveServiceSettings.UseFakeSave)
+            {
+                await Task.Delay(TimeSpan.FromSeconds(m_saveServiceSettings.FakeSaveDuration), m_cancellationTokenSource.Token);
+            }
+            
+            Save.Current.SaveObjects();
             await m_fileDataHandler.Save(m_gameData);
             m_onEndSave?.Invoke();
             m_isSaving = false;
@@ -121,10 +138,24 @@
         {
             return m_isLoading;
         }
+        
+        public bool IsInit()
+        {
+            return m_isInit;
+        }
 
         private async void OnApplicationQuit()
         {
+            while (IsSaving())
+            {
+                await Task.Yield();
+            }
             await SaveGame();
+        }
+
+        private void OnDestroy()
+        {
+            m_cancellationTokenSource.Cancel();
         }
     }
 }

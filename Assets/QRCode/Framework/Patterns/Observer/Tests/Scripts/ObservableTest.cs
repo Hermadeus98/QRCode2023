@@ -10,12 +10,12 @@ namespace QRCode.Framework
     {
         private void OnEnable()
         {
-            Observers.GetObserver<EventArgs>().RegisterObservable(this);
+            //Observers.GetObserver<EventArgs>().RegisterObservable(this);
         }
 
         private void OnDisable()
         {
-            Observers.GetObserver<EventArgs>().UnregisterObservable(this);
+            //Observers.GetObserver<EventArgs>().UnregisterObservable(this);
         }
 
         public void OnNotify(EventArgs arg)

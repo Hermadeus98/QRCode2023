@@ -47,10 +47,32 @@ namespace QRCode.Framework.Game
         private static void RegisterServices()
         {
             //SceneManagementService
+            CreateSceneManagementService();
+        }
+
+        private static void CreateSceneManagementService()
+        {
             ISceneManagementService sceneManagementService = Object.Instantiate((SceneManager)ServiceSettings.SceneManagementService);
             ServiceLocator.Current.RegisterService<ISceneManagementService>(sceneManagementService);
-            Object.DontDestroyOnLoad(sceneManagementService as Object);
+            Object.DontDestroyOnLoad((Object)sceneManagementService);
             
+            if (SaveServiceSettings.Instance.SaveAsyncBeforeSceneLoading)
+            {
+                sceneManagementService.OnStartToLoadAsync += async delegate
+                {
+                    var saveService = ServiceLocator.Current.Get<ISaveService>();
+                    await saveService.SaveGame();
+                };
+            }
+
+            if (SaveServiceSettings.Instance.LoadAsyncAfterSceneLoading)
+            {
+                sceneManagementService.OnFinishToLoadAsync += delegate
+                {
+                    Load.Current.LoadObjects();
+                    return Task.CompletedTask;
+                };
+            }
         }
 
         private static void ExitBootstrapAndLaunchGame()

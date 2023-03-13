@@ -1,26 +1,31 @@
 namespace QRCode.Framework
 {
     using System.Collections.Generic;
-    using SerializedTypes;
     using Sirenix.OdinInspector;
     using UnityEngine;
 
-    public class SaveObjectExample : SerializedMonoBehaviour, IDataPersistence
+    public class SaveObjectExample : SerializedMonoBehaviour, ILoadableObject, ISavableObject
     {
         [SerializeField] private int m_savedInt;
-
         [SerializeField] private Dictionary<string, float> m_dictionary;
+
+        private void OnEnable()
+        {
+            Framework.Save.Current.Register(this);
+            Framework.Load.Current.Register(this);
+        }
+
+        private void OnDisable()
+        {
+            Framework.Save.Current.Unregister(this);
+            Framework.Load.Current.Unregister(this);
+        }
 
         [Button]
         public async void Save()
         {
             var saveService = ServiceLocator.Current.Get<ISaveService>();
             var gameData = saveService.GetGameData();
-            
-            gameData.DictionaryTest.Clear();
-            gameData.DictionaryTest.Add("key1", 11);
-            gameData.DictionaryTest.Add("key2", 141);
-            gameData.DictionaryTest.Add("key3", 1414);
             
             SaveData(ref gameData);
             await saveService.SaveGame();
@@ -54,6 +59,11 @@ namespace QRCode.Framework
         public void SaveData(ref GameData gameData)
         {
             gameData.ValueTest = m_savedInt;
+            
+            gameData.DictionaryTest.Clear();
+            gameData.DictionaryTest.Add("key1", 11);
+            gameData.DictionaryTest.Add("key2", 141);
+            gameData.DictionaryTest.Add("key3", 1414);
         }
     }
 }

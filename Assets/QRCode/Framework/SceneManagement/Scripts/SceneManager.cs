@@ -154,6 +154,11 @@ namespace QRCode.Framework.SceneManagement
                 var loadingScreen = await UI.GetLoadingScreen(loadingScreenEnum);
                 await loadingScreen.Show();
 
+                if (m_onStartToLoadAsync != null)
+                {
+                    await m_onStartToLoadAsync.Invoke();
+                }
+                
                 if (forceReload)
                 {
                     await UnloadSceneGroup(sceneReferenceGroupToLoad);
@@ -213,11 +218,6 @@ namespace QRCode.Framework.SceneManagement
             OnLoadingScenes();
             await Task.Delay(TimeSpan.FromSeconds(SceneManagerSettings.MinimalLoadDurationBefore), m_cancellationTokenSource.Token);
 
-            if (m_onStartToLoadAsync != null)
-            {
-                await m_onStartToLoadAsync.Invoke();
-            }
-            
             m_onStartToLoad?.Invoke();
             m_sceneLoadingInfo.SceneLoadingStatus = SceneLoadingStatus.NotLoaded;
             m_sceneLoadingInfo.SceneLoadingStatus = SceneLoadingStatus.SceneAreLoading;

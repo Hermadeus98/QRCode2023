@@ -10,18 +10,13 @@ namespace QRCode.Framework.Observer
 
         private void Awake()
         {
-            m_floatObserver = Observers.GetObserver<EventArgs>();
+           // m_floatObserver = Observers.GetObserver<EventArgs>();
         }
 
         [Button]
         private void Notify()
         {
             m_floatObserver.NotifyAllObservable(new WrapperArgs<float>(5f));
-        }
-
-        private void OnDestroy()
-        {
-            m_floatObserver.Dispose();
         }
     }
 }
