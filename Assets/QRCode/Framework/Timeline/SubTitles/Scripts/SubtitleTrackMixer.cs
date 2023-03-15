@@ -31,12 +31,19 @@ namespace QRCode.Framework
 
                     if (input.SubtitleText.IsEmpty)
                     {
-                        currentText = "No Text Founded...";
+                        currentText = input.Text;
                     }
                     else
                     {
                         currentText = input.SubtitleText.GetLocalizedString();
                     }
+
+#if UNITY_EDITOR
+                    if (!Application.isPlaying)
+                    {
+                        currentText = input.Text;
+                    }
+#endif
 
                     currentAlpha = inputWeight;
                 }

@@ -6,5 +6,6 @@ namespace QRCode.Framework
     public class SubtitleBehaviour : PlayableBehaviour
     {
         public LocalizedString SubtitleText;
+        public string Text;
     }
 }

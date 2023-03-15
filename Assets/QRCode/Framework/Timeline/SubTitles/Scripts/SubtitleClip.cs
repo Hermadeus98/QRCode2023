@@ -7,6 +7,7 @@ namespace QRCode.Framework
     public class SubtitleClip : PlayableAsset
     {
         public LocalizedString SubtitleText;
+        public string Text;
 
         public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)
         {
@@ -14,6 +15,7 @@ namespace QRCode.Framework
 
             var subtitleBehaviour = playable.GetBehaviour();
             subtitleBehaviour.SubtitleText = SubtitleText;
+            subtitleBehaviour.Text = Text;
 
             return playable;
         }

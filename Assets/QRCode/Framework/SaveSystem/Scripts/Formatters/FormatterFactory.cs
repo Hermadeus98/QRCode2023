@@ -6,18 +6,12 @@
     {
         public static IFormatter CreateFormatter(FormatterTypeEnum formatterType)
         {
-            switch (formatterType)
+            return formatterType switch
             {
-                case FormatterTypeEnum.JSON:
-                    return new JSONFormatter(); 
-                case FormatterTypeEnum.BINARY:
-                    return new BinaryFormatter();
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(formatterType), formatterType, null);
-            }
-
-            return null;
+                FormatterTypeEnum.JSON => new JSONFormatter(),
+                FormatterTypeEnum.BINARY => new BinaryFormatter(),
+                _ => throw new ArgumentOutOfRangeException(nameof(formatterType), formatterType, null)
+            };
         }
     }
 }

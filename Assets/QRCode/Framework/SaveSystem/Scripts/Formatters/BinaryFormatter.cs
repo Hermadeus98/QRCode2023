@@ -12,7 +12,7 @@
     {
         private readonly string m_encryptionCodeWord = "372a9fcc-2639-4d91-8660-b75cd27903b0";
 
-        public async Task<T> Load<T>(string path)
+        public Task<T> Load<T>(string path)
         {
             if (File.Exists(path))
             {
@@ -28,7 +28,7 @@
                         json = EncryptDecrypt(json);
                     }
                     
-                    return JsonUtility.FromJson<T>(json);
+                    return Task.FromResult(JsonUtility.FromJson<T>(json));
                 }
                 catch (Exception e)
                 {
@@ -37,7 +37,7 @@
                 }    
             }
 
-            return default;
+            return Task.FromResult<T>(default);
         }
 
         public Task Save(object obj, string path)
