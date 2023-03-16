@@ -17,21 +17,21 @@ namespace QRCode.Framework
         
         public static class DebuggingPath
         {
-            public const string CreateAssetMenuBasePath = "QRCode/Debugging/";
+            private const string CreateAssetMenuBasePath = "QRCode/Debugging/";
             public const string ChannelDebugPath = CreateAssetMenuBasePath + "Channels Settings";
             public const string ScriptableDebugPath = CreateAssetMenuBasePath + "Scriptable Object Debugger";
         }
         
         public static class SmartStringPath
         {
-            public const string CreateAssetMenuBasePath = "QRCode/Smart Strings Reference/";
+            private const string CreateAssetMenuBasePath = "QRCode/Smart Strings Reference/";
             public const string SmartStringReference = CreateAssetMenuBasePath + "Smart String Reference";
             public const string SmartInputIconReference = CreateAssetMenuBasePath + "Smart Input Icon Reference";
         }
         
         public static class SettingsPath
         {
-            public const string BasePath = "QRCode/Settings/";
+            private const string BasePath = "QRCode/Settings/";
 
             public const string ServiceSettingsPath = BasePath + "Service Settings";
             public const string InputSettingsPath = BasePath + "Input Settings";
@@ -68,7 +68,7 @@ namespace QRCode.Framework
         
         public static class CreateMenuItemPath
         {
-            public const string BasePath = "GameObject/QRCode/";
+            private const string BasePath = "GameObject/QRCode/";
 
             public const string UI = BasePath + "UI/";
             public const string UIUtilities = UI + "/Utilities/";

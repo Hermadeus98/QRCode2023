@@ -14,7 +14,9 @@ using static BOC.BTagged.Shared.BTaggedSharedSettings;
 
 namespace BOC.BTagged.EditorTools
 {
-    public class BTaggedSOEditorBase : Editor
+    using Sirenix.OdinInspector.Editor;
+
+    public class BTaggedSOEditorBase : OdinEditor
     {
         [NonSerialized]
         // Used for a visual highlight to help editor navigation of assets

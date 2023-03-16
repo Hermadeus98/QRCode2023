@@ -1,0 +1,215 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8548936179222087221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4519e0710003aaa469627cbec057d11a, type: 3}
+  m_Name: UI/UISound_Test_01
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: m_audioClips
+      Entry: 6
+      Data: 
+  _Hash:
+    Value:
+      x: 2694397155
+      y: 1206040544
+      z: 1601636771
+      w: 1092962814
+  m_priority: 128
+  m_volume: {x: 1, y: 1}
+  m_pitch: {x: 1, y: 1}
+  m_stereoPan: {x: 0, y: 0}
+  m_spatialBlend: {x: 1, y: 1}
+  m_loop: 0
+  m_bypassEffects: 0
+  m_bypassListenerEffects: 0
+  m_bypassReverbZone: 0
+--- !u!114 &-7720724696264797487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4519e0710003aaa469627cbec057d11a, type: 3}
+  m_Name: Music/Music_Test01
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: m_audioClips
+      Entry: 6
+      Data: 
+  _Hash:
+    Value:
+      x: 736640950
+      y: 1233674675
+      z: 4200056464
+      w: 452474634
+  m_priority: 128
+  m_volume: {x: 1, y: 1}
+  m_pitch: {x: 1, y: 1}
+  m_stereoPan: {x: 0, y: 0}
+  m_spatialBlend: {x: 1, y: 1}
+  m_loop: 0
+  m_bypassEffects: 0
+  m_bypassListenerEffects: 0
+  m_bypassReverbZone: 0
+--- !u!114 &-6710186054422738601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4519e0710003aaa469627cbec057d11a, type: 3}
+  m_Name: Ambiant/Ambiant_Test01
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: m_audioClips
+      Entry: 6
+      Data: 
+  _Hash:
+    Value:
+      x: 2464416730
+      y: 1080688012
+      z: 1968041632
+      w: 4001127275
+  m_priority: 128
+  m_volume: {x: 1, y: 1}
+  m_pitch: {x: 1, y: 1}
+  m_stereoPan: {x: 0, y: 0}
+  m_spatialBlend: {x: 1, y: 1}
+  m_loop: 0
+  m_bypassEffects: 0
+  m_bypassListenerEffects: 0
+  m_bypassReverbZone: 0
+--- !u!114 &-5168037195476874962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4519e0710003aaa469627cbec057d11a, type: 3}
+  m_Name: Voices/Voice_Test01
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: m_audioClips
+      Entry: 6
+      Data: 
+  _Hash:
+    Value:
+      x: 1516372989
+      y: 1293714693
+      z: 303848888
+      w: 497637694
+  m_priority: 128
+  m_volume: {x: 1, y: 1}
+  m_pitch: {x: 1, y: 1}
+  m_stereoPan: {x: 0, y: 0}
+  m_spatialBlend: {x: 1, y: 1}
+  m_loop: 0
+  m_bypassEffects: 0
+  m_bypassListenerEffects: 0
+  m_bypassReverbZone: 0
+--- !u!114 &-3092090965128844563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4519e0710003aaa469627cbec057d11a, type: 3}
+  m_Name: SFX/SFX_Beeps_01
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: m_audioClips
+      Entry: 6
+      Data: 
+  _Hash:
+    Value:
+      x: 2369194689
+      y: 1319393040
+      z: 1036657331
+      w: 945830000
+  m_priority: 128
+  m_volume: {x: 1, y: 1}
+  m_pitch: {x: 1, y: 1}
+  m_stereoPan: {x: 0, y: 0}
+  m_spatialBlend: {x: 1, y: 1}
+  m_loop: 0
+  m_bypassEffects: 0
+  m_bypassListenerEffects: 0
+  m_bypassReverbZone: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50350144f45d2d145a36d2a3ea346dd5, type: 3}
+  m_Name: Test
+  m_EditorClassIdentifier: 
+  Assets:
+  - {fileID: -6710186054422738601}
+  - {fileID: -7720724696264797487}
+  - {fileID: -3092090965128844563}
+  - {fileID: -8548936179222087221}
+  - {fileID: -5168037195476874962}

@@ -4,11 +4,7 @@ using UnityEngine;
 
 namespace BOC.BTagged
 {
-#if ODIN_INSPECTOR && BTAGGED_ODIN_BASE
     public class BTaggedSO : Sirenix.OdinInspector.SerializedScriptableObject
-#else
-    public class BTaggedSO : ScriptableObject
-#endif
     {
         // A ReadOnly unique hash created once for the asset
         [SerializeField, HideInInspector]
