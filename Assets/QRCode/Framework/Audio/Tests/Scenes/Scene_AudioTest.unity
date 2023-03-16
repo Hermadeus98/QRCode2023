@@ -367,6 +367,7 @@ GameObject:
   - component: {fileID: 2137742551}
   - component: {fileID: 2137742550}
   - component: {fileID: 2137742549}
+  - component: {fileID: 2137742552}
   m_Layer: 0
   m_Name: TEST
   m_TagString: Untagged
@@ -482,6 +483,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32883ef36a2bf7a429db6914d68d2ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   m_soundData: {fileID: -8548936179222087221, guid: 961322bede7812342933878936ab8ca4,
     type: 2}
 --- !u!4 &2137742551
@@ -499,3 +509,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &2137742552
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137742548}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fb59cc8b9e6e6bf49bcdbbc011e33b4f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

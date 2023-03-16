@@ -25,8 +25,8 @@ namespace QRCode.Framework.Game
         {
             ServiceLocator.Create();
 
-            await PrepareSave();
             RegisterServices();
+            await PrepareSave();
             InitializeGameStates();
             ExitBootstrapAndLaunchGame();
         }
@@ -46,8 +46,8 @@ namespace QRCode.Framework.Game
 
         private static void RegisterServices()
         {
-            //SceneManagementService
             CreateSceneManagementService();
+            CreateAudioService();
         }
 
         private static void CreateSceneManagementService()
@@ -73,6 +73,12 @@ namespace QRCode.Framework.Game
                     return Task.CompletedTask;
                 };
             }
+        }
+
+        private static void CreateAudioService()
+        {
+            IAudioService audioService = new AudioService();
+            ServiceLocator.Current.RegisterService<IAudioService>(audioService);
         }
 
         private static void ExitBootstrapAndLaunchGame()
