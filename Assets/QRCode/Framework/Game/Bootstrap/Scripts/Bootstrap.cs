@@ -1,7 +1,6 @@
 namespace QRCode.Framework.Game
 {
     using System.Threading.Tasks;
-    using SceneManagement;
     using UnityEngine;
 
     public static class Bootstrap
@@ -20,20 +19,21 @@ namespace QRCode.Framework.Game
             }
         }
 
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static async void Initialize()
         {
             ServiceLocator.Create();
+            GameInstance.Create();
 
             RegisterServices();
             await PrepareSave();
             InitializeGameStates();
             ExitBootstrapAndLaunchGame();
         }
-
+        
         private static void InitializeGameStates()
         {
-            Game.PreInitialize();
+            GameInstance.Instance.PreInitialize();
         }
 
         private static async Task PrepareSave()
@@ -41,38 +41,33 @@ namespace QRCode.Framework.Game
             var gameObject = new GameObject("[SERVICE] Save System");
             ISaveService saveService = gameObject.AddComponent<SaveService>();
             ServiceLocator.Current.RegisterService<ISaveService>(saveService);
+            Object.DontDestroyOnLoad((Object)saveService);
             await saveService.Initialize();
         }
 
         private static void RegisterServices()
         {
             CreateSceneManagementService();
+            CreateInputManagementService();
             CreateAudioService();
         }
 
         private static void CreateSceneManagementService()
         {
-            ISceneManagementService sceneManagementService = Object.Instantiate((SceneManager)ServiceSettings.SceneManagementService);
+            var instantiateSceneManagementServiceTask = ServiceSettings.SceneManagementService.InstantiateAsync();
+            var sceneManagementServiceInstance = instantiateSceneManagementServiceTask.WaitForCompletion();
+            var sceneManagementService = sceneManagementServiceInstance.GetComponent<ISceneManagementService>();
             ServiceLocator.Current.RegisterService<ISceneManagementService>(sceneManagementService);
             Object.DontDestroyOnLoad((Object)sceneManagementService);
-            
-            if (SaveServiceSettings.Instance.SaveAsyncBeforeSceneLoading)
-            {
-                sceneManagementService.OnStartToLoadAsync += async delegate
-                {
-                    var saveService = ServiceLocator.Current.Get<ISaveService>();
-                    await saveService.SaveGame();
-                };
-            }
+        }
 
-            if (SaveServiceSettings.Instance.LoadAsyncAfterSceneLoading)
-            {
-                sceneManagementService.OnFinishToLoadAsync += delegate
-                {
-                    Load.Current.LoadObjects();
-                    return Task.CompletedTask;
-                };
-            }
+        private static void CreateInputManagementService()
+        {
+            var instantiateInputManagementServiceTask = ServiceSettings.InputManagementService.InstantiateAsync();
+            var inputManagementServiceInstance = instantiateInputManagementServiceTask.WaitForCompletion();
+            var inputManagementService = inputManagementServiceInstance.GetComponent<IInputManagementService>();
+            ServiceLocator.Current.RegisterService<IInputManagementService>(inputManagementService);
+            Object.DontDestroyOnLoad((Object)inputManagementService);
         }
 
         private static void CreateAudioService()

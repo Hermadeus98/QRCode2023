@@ -2,12 +2,10 @@ namespace QRCode.Framework
 {
     public static class FileDataHandlerFactory
     {
-        public static IFileDataHandler CreateFileDataHandler()
+        public static IFileDataHandler CreateFileDataHandler(string fullPath, string fullFileName)
         {
-            var saveSystemSettings = SaveServiceSettings.Instance;
-            
-#if UNITY_EDITOR
-            return new FileDataHandler(saveSystemSettings.FullPath, saveSystemSettings.FullFileName);
+#if UNITY_EDITOR || UNITY_STANDALONE
+            return new FileDataHandler(fullPath, fullFileName);
 #else
             
             //#if PS

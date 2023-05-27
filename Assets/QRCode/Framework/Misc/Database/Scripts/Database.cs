@@ -5,10 +5,12 @@ namespace QRCode.Framework
     using Debugging;
     using UnityEngine;
 
-    public abstract class DatabaseBase
+    public abstract class DatabaseBase : IDatabase
     {
         
     }
+    
+    public interface IDatabase{}
     
     [Serializable]
     public class Database<T> : DatabaseBase

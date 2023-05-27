@@ -27,8 +27,8 @@ namespace QRCode.Framework
             var saveService = ServiceLocator.Current.Get<ISaveService>();
             var gameData = saveService.GetGameData();
             
-            SaveData(ref gameData);
-            await saveService.SaveGame();
+            SaveGameData(ref gameData);
+            await saveService.SaveGameAsync();
         }
         
         [Button]
@@ -36,7 +36,7 @@ namespace QRCode.Framework
         {
             var saveService = ServiceLocator.Current.Get<ISaveService>();
             var gameData = saveService.GetGameData();
-            LoadData(gameData);
+            LoadGameData(gameData);
         }
 
         [Button]
@@ -46,7 +46,7 @@ namespace QRCode.Framework
             await saveService.DeleteSave();
         }
         
-        public void LoadData(GameData gameData)
+        public void LoadGameData(GameData gameData)
         {
             m_savedInt = gameData.ValueTest;
             m_dictionary = new Dictionary<string, float>();
@@ -56,7 +56,7 @@ namespace QRCode.Framework
             }
         }
 
-        public void SaveData(ref GameData gameData)
+        public void SaveGameData(ref GameData gameData)
         {
             gameData.ValueTest = m_savedInt;
             

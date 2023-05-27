@@ -2,11 +2,11 @@
 {
     public interface ISavableObject
     {
-        public void SaveData(ref GameData gameData);
+        public void SaveGameData(ref GameData gameData);
     }
 
     public interface ILoadableObject
     {
-        public void LoadData(GameData gameData);
+        public void LoadGameData(GameData gameData);
     }
 }

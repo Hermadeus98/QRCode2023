@@ -30,6 +30,10 @@ MonoBehaviour:
     m_Localized: Vie
     m_Metadata:
       m_Items: []
+  - m_Id: 35438911831814144
+    m_Localized: Sauvegarde en cours...
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

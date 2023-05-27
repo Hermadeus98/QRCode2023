@@ -9,7 +9,7 @@ namespace QRCode.Framework
     using TextGenerator = Utils.TextGenerator;
 
     [CreateAssetMenu(menuName = K.DatabasePath.BasePath + "DB", fileName = "DB")]
-    public class DB : SingletonScriptableObject<DB>
+    public class DB : SingletonScriptableObject<DB>, IDatabase
     {
         [SerializeField] private Dictionary<string, ScriptableDatabaseBase> m_allDatabase = new Dictionary<string, ScriptableDatabaseBase>();
         [SerializeField] private string m_generatedEnumPath;

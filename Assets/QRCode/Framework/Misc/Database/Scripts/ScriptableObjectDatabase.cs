@@ -7,7 +7,10 @@ namespace QRCode.Framework
     using UnityEngine;
     using TextGenerator = Utils.TextGenerator;
 
-    public abstract class ScriptableDatabaseBase : SerializedScriptableObject{}
+    public abstract class ScriptableDatabaseBase : SerializedScriptableObject, IDatabase
+    {
+        
+    }
     
     public abstract class ScriptableObjectDatabase<T> : ScriptableDatabaseBase
     {

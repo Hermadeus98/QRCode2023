@@ -8,9 +8,12 @@ namespace QRCode.Framework
 
     public class SceneLoadableTest : SerializedMonoBehaviour, ISceneLoadable
     {
+        [TitleGroup(K.InspectorGroups.Settings)]
         [SerializeField] private float m_waitDuration = 1f;
 
+        [TitleGroup(K.InspectorGroups.Debugging)]
         [SerializeField] private SceneLoadableProgressionInfos m_sceneLoadableProgressionInfos;
+        [SerializeField][ReadOnly] private bool m_isLoaded = false;
 
         public SceneLoadableProgressionInfos SceneLoadableProgressionInfos
         {
@@ -43,6 +46,7 @@ namespace QRCode.Framework
             }
             
             progress.Report(1f);
+            m_isLoaded = true;
         }
     }
 }

@@ -54,10 +54,14 @@
 
         public async Task Initialize()
         {
-            m_fileDataHandler = FileDataHandlerFactory.CreateFileDataHandler();
+            if(m_isInit)
+                return;
+            
+            var saveSystemSettings = SaveServiceSettings.Instance;
+            m_fileDataHandler = FileDataHandlerFactory.CreateFileDataHandler(saveSystemSettings.FullPath, saveSystemSettings.FullFileName);
             m_saveServiceSettings = SaveServiceSettings.Instance;
             m_cancellationTokenSource = new CancellationTokenSource();
-            await LoadGame();
+            await LoadGameAsync();
             m_isInit = true;
         }
 
@@ -68,7 +72,7 @@
             return Task.CompletedTask;
         }
 
-        public async Task LoadGame()
+        public async Task LoadGameAsync()
         {
             if (m_isLoading)
             {
@@ -94,7 +98,7 @@
             QRDebug.Debug(K.DebuggingChannels.SaveSystem,$"Game is load.");
         }
 
-        public async Task SaveGame()
+        public async Task SaveGameAsync()
         {
             if (m_isSaving)
             {
@@ -146,11 +150,7 @@
 
         private async void OnApplicationQuit()
         {
-            while (IsSaving())
-            {
-                await Task.Yield();
-            }
-            await SaveGame();
+            await SaveGameAsync();
         }
 
         private void OnDestroy()

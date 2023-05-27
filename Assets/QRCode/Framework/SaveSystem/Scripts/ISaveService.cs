@@ -8,8 +8,8 @@ namespace QRCode.Framework
         public GameData GetGameData();
         public Task Initialize();
         public Task NewGame();
-        public Task LoadGame();
-        public Task SaveGame();
+        public Task LoadGameAsync();
+        public Task SaveGameAsync();
         public Task DeleteSave();
         public bool IsSaving();
         public bool IsLoading();

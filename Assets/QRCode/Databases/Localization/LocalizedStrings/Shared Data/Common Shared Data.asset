@@ -27,6 +27,10 @@ MonoBehaviour:
     m_Key: Health
     m_Metadata:
       m_Items: []
+  - m_Id: 35438911831814144
+    m_Key: Saving
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

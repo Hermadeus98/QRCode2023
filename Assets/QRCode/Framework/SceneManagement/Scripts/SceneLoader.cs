@@ -27,12 +27,12 @@ namespace QRCode.Framework
         
         public async Task LoadScenes()
         {
-            await SceneManagementService.LoadSceneGroup(m_sceneToLoad, m_loadingScreenEnum, m_forceReload);
+            await SceneManagementService.LoadLevel(m_sceneToLoad, m_loadingScreenEnum, m_forceReload);
         }
 
         public async Task UnloadScenes()
         {
-            await SceneManagementService.UnloadSceneGroup(m_sceneToLoad);
+            await SceneManagementService.UnloadLevel(m_sceneToLoad);
         }
     }
 }

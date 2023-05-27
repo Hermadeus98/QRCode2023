@@ -15,13 +15,19 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 1789646377053581697, guid: eee9b7435e6771449b9dda5b895be7a9, type: 3}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: m_sceneManagementService
-      Entry: 10
-      Data: 0
+    SerializationNodes: []
+  m_sceneManagementService:
+    m_AssetGUID: eee9b7435e6771449b9dda5b895be7a9
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  m_inputManagementService:
+    m_AssetGUID: a2b0304fb1f11b149abc2299ebdb397e
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0

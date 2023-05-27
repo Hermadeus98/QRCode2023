@@ -12,7 +12,7 @@ namespace QRCode.Framework
             public const string Cosmetics = "Cosmetics";
             public const string GameEvents = "GameEvents";
             public const string Debugging = "Debugging";
-            public const string Options = "Options";
+            public const string Infos = "Infos";
         }
         
         public static class DebuggingPath
@@ -74,6 +74,17 @@ namespace QRCode.Framework
 
             public const string UI = BasePath + "UI/";
             public const string UIUtilities = UI + "/Utilities/";
+        }
+        
+        public static class MenuNameTestPath
+        {
+            private const string BasePath = "QRCode/";
+            public const string Test = BasePath + "Tests/";
+        }
+
+        public static class Catalog
+        {
+            public const string NamePrefix = "Catalog_";
         }
     }
 }

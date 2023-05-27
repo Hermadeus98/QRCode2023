@@ -1,6 +1,5 @@
 namespace QRCode.Framework.Debugging
 {
-    using QRCode.Framework.Singleton;
     using UnityEngine;
     using System;
     using System.Collections.Generic;
@@ -10,7 +9,7 @@ namespace QRCode.Framework.Debugging
 #endif
     
     [CreateAssetMenu(menuName = K.DebuggingPath.ChannelDebugPath, fileName = "Channels Settings")]
-    public class QRDebugChannels : SingletonScriptableObject<QRDebugChannels>
+    public class QRDebugChannels : Settings<QRDebugChannels>
     {
         #region FIELDS
         [SerializeField][TableList] private List<QRDebugChannel> channels = new List<QRDebugChannel>();

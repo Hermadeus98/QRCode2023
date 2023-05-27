@@ -1,6 +1,7 @@
 namespace QRCode.Framework
 {
     using System.Threading.Tasks;
+    using Debugging;
     using SceneManagement;
     using Sirenix.OdinInspector;
     using TMPro;
@@ -48,12 +49,20 @@ namespace QRCode.Framework
 
         public override async Task Show()
         {
+            QRDebug.Debug(K.DebuggingChannels.Game, $"Loading Screen show.");
+            
             await base.Show();
             
             if (m_useProgressBar)
             {
                 m_progressionSlider.UpdateProgressBar(0f);
             }
+        }
+
+        public override async Task Hide()
+        {
+            await base.Hide();
+            QRDebug.Debug(K.DebuggingChannels.Game, $"Loading Screen hide.");
         }
 
         public virtual void Progress(SceneLoadingInfo loadingInfo)

@@ -1,12 +1,11 @@
 namespace QRCode.Framework
 {
-    using Singleton;
     using Sirenix.OdinInspector;
     using UnityEngine;
     using UnityEngine.Localization;
 
     [CreateAssetMenu(menuName = K.SettingsPath.SceneManagerSettingsPath, fileName = "STG_SceneManagerSettings")]
-    public class SceneManagerSettings : SingletonScriptableObject<SceneManagerSettings>
+    public class SceneManagerSettings : Settings<SceneManagerSettings>
     {
         [TitleGroup(K.InspectorGroups.Settings)]
         [SerializeField] private float m_minimalLoadDurationBefore = .5f;

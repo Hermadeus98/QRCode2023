@@ -39,6 +39,14 @@ MonoBehaviour:
     m_Address: Assets/QRCode/Gameplay/Templates/Prefabs/UI/LoadingScreens/P_LoadingScreenBase.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: eee9b7435e6771449b9dda5b895be7a9
+    m_Address: Assets/QRCode/Prefabs/Services/SERVICE - Scene Management.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a2b0304fb1f11b149abc2299ebdb397e
+    m_Address: Assets/QRCode/Prefabs/Services/SERVICE - Input Management.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 383727ea88213544abed9fa8aa57676f, type: 2}
   m_SchemaSet:

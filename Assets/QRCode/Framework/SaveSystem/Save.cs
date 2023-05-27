@@ -55,7 +55,7 @@
             foreach (var savableObject in m_savableObjects)
             {
                 var gameData = SaveService.GetGameData();
-                savableObject.SaveData(ref gameData);
+                savableObject.SaveGameData(ref gameData);
             }
         }
     }
@@ -113,7 +113,7 @@
             foreach (var loadableObject in m_loadableObjects)
             {
                 var gameData = SaveService.GetGameData();
-                loadableObject.LoadData(gameData);
+                loadableObject.LoadGameData(gameData);
             }
         }
     }

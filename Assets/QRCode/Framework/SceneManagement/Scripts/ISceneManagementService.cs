@@ -6,13 +6,15 @@ namespace QRCode.Framework
 
     public interface ISceneManagementService : IService
     {
-        public Task<SceneLoadingInfo> LoadSceneGroup(DB_SceneEnum sceneReferenceGroupToLoad,
+        public Task<SceneLoadingInfo> LoadLevel(DB_SceneEnum sceneReferenceGroupToLoad,
             DB_LoadingScreenEnum loadingScreenEnum, 
             bool forceReload = false, 
             bool activateOnLoad = true,
             int priority = 100);
 
-        public Task UnloadSceneGroup(DB_SceneEnum sceneReferenceGroupToUnload);
+        public Task UnloadLevel(DB_SceneEnum sceneReferenceGroupToUnload);
+
+        public bool IsLoading();
 
         public event Func<Task> OnStartToLoadAsync;
         public event Action OnStartToLoad;
