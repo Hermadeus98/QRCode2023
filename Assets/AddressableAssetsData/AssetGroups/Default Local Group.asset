@@ -47,6 +47,21 @@ MonoBehaviour:
     m_Address: Assets/QRCode/Prefabs/Services/SERVICE - Input Management.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 182ae6e09719398479789c26e007245c
+    m_Address: Assets/QRCode/Framework/LevelManagement/Tests/Scenes/Scene_SceneManagementEx1
+      1.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d9fa935e7ed1b744dbebcabcb6da61a6
+    m_Address: Assets/QRCode/Framework/LevelManagement/Tests/Scenes/Scene_SceneManagementEx2
+      1.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1382bf0c175d1d349867ba2689e0aad0
+    m_Address: Assets/QRCode/Framework/LevelManagement/Tests/Scenes/Scene_SceneManagementEx3
+      1.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 383727ea88213544abed9fa8aa57676f, type: 2}
   m_SchemaSet:

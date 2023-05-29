@@ -14,8 +14,8 @@ namespace QRCode.Editor.SceneSelector
 
     public class SceneWindowEditor : EditorWindow
     {
-        private static SceneDatabase m_sceneDatabase = null;
-        private static Dictionary<string, SceneDatabase.SceneReferenceGroup> SceneReferenceGroups = null;
+        private static LevelDatabase m_levelDatabase = null;
+        private static Dictionary<string, LevelReferenceGroup> SceneReferenceGroups = null;
 
         
         [MenuItem("QRCode/Scene Selector")]
@@ -25,27 +25,27 @@ namespace QRCode.Editor.SceneSelector
             window.titleContent = new GUIContent("Scene Selector");
             window.Show();
 
-            DB.Instance.TryGetDatabase<SceneDatabase>(DBEnum.DB_Scene, out m_sceneDatabase);
+            DB.Instance.TryGetDatabase<LevelDatabase>(DBEnum.DB_Levels, out m_levelDatabase);
 
-            if (m_sceneDatabase == null)
+            if (m_levelDatabase == null)
             {
-                QRDebug.DebugMessage(LogType.Error, "Editor", $"Impossible to load {nameof(m_sceneDatabase)}.");
+                QRDebug.DebugMessage(LogType.Error, "Editor", $"Impossible to load {nameof(m_levelDatabase)}.");
                 return;
             }
             
-            SceneReferenceGroups = new Dictionary<string, SceneDatabase.SceneReferenceGroup>(m_sceneDatabase.GetDatabase);
+            SceneReferenceGroups = new Dictionary<string, LevelReferenceGroup>(m_levelDatabase.GetDatabase);
         }
         
         void OnGUI()
         {
-            if (m_sceneDatabase == null)
+            if (m_levelDatabase == null)
             {
                 return;
             }
 
             if (SceneReferenceGroups == null)
             {
-                SceneReferenceGroups = m_sceneDatabase.GetDatabase;
+                SceneReferenceGroups = m_levelDatabase.GetDatabase;
                 return;
             }
 
@@ -78,17 +78,17 @@ namespace QRCode.Editor.SceneSelector
                 }
                 if(GUILayout.Button($"SELECT", EditorStyles.miniButton))
                 {
-                    EditorGUIUtility.PingObject(SceneReferenceGroups[key].Scenes[0].editorAsset);
+                    EditorGUIUtility.PingObject(SceneReferenceGroups[key].Levels[0].editorAsset);
                 }
                 GUILayout.EndHorizontal();
             }
         }
 
-        private void LoadSceneGroup(SceneDatabase.SceneReferenceGroup sceneReferenceGroup)
+        private void LoadSceneGroup(LevelReferenceGroup levelReferenceGroup)
         {
-            EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(sceneReferenceGroup.Scenes[0].editorAsset), OpenSceneMode.Single);
+            EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(levelReferenceGroup.Levels[0].editorAsset), OpenSceneMode.Single);
 
-            var subScenes = sceneReferenceGroup.Scenes;
+            var subScenes = levelReferenceGroup.Levels;
             if (subScenes.IsNotNullOrEmpty())
             {
                 for (int i = 0; i < subScenes.Length; i++)

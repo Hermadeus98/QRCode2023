@@ -8,12 +8,12 @@ namespace QRCode.Framework
     public class ServiceSettings : Settings<ServiceSettings>
     {
         [TitleGroup("Framework Service")] [SerializeField]
-        private AssetReference m_sceneManagementService = null;
+        private AssetReference m_levelLoadingManagementService = null;
 
         [TitleGroup("Input Service")] [SerializeField]
         private AssetReference m_inputManagementService = null;
 
-        public AssetReference SceneManagementService => m_sceneManagementService;
+        public AssetReference LevelLoadingManagementService => m_levelLoadingManagementService;
         public AssetReference InputManagementService => m_inputManagementService;
     }
 }

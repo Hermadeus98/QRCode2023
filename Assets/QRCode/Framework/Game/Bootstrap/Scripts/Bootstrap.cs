@@ -1,6 +1,7 @@
 namespace QRCode.Framework.Game
 {
     using System.Threading.Tasks;
+    using Debugging;
     using UnityEngine;
 
     public static class Bootstrap
@@ -29,6 +30,8 @@ namespace QRCode.Framework.Game
             await PrepareSave();
             InitializeGameStates();
             ExitBootstrapAndLaunchGame();
+            
+            QRDebug.Debug(K.DebuggingChannels.LifeCycle, $"Bootstrapper has been initialized.");
         }
         
         private static void InitializeGameStates()
@@ -47,17 +50,17 @@ namespace QRCode.Framework.Game
 
         private static void RegisterServices()
         {
-            CreateSceneManagementService();
+            CreateLevelManagementService();
             CreateInputManagementService();
             CreateAudioService();
         }
 
-        private static void CreateSceneManagementService()
+        private static void CreateLevelManagementService()
         {
-            var instantiateSceneManagementServiceTask = ServiceSettings.SceneManagementService.InstantiateAsync();
+            var instantiateSceneManagementServiceTask = ServiceSettings.LevelLoadingManagementService.InstantiateAsync();
             var sceneManagementServiceInstance = instantiateSceneManagementServiceTask.WaitForCompletion();
-            var sceneManagementService = sceneManagementServiceInstance.GetComponent<ISceneManagementService>();
-            ServiceLocator.Current.RegisterService<ISceneManagementService>(sceneManagementService);
+            var sceneManagementService = sceneManagementServiceInstance.GetComponent<ILevelLoadingManagementService>();
+            ServiceLocator.Current.RegisterService<ILevelLoadingManagementService>(sceneManagementService);
             Object.DontDestroyOnLoad((Object)sceneManagementService);
         }
 

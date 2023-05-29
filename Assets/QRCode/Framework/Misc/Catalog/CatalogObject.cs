@@ -13,8 +13,10 @@ namespace QRCode.Framework
 
         private void SetCatalogNameInEditor()
         {
+#if UNITY_EDITOR
             var path = AssetDatabase.GetAssetPath(this);
             AssetDatabase.RenameAsset(path,  K.Catalog.NamePrefix + m_catalogName);
+#endif
         }
     }
 }

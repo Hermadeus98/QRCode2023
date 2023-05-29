@@ -150,9 +150,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StringReference:
     m_TableReference:
-      m_TableCollectionName: GUID:451d7ded6d693214ca8e7c88d67a10e7
+      m_TableCollectionName: GUID:f9e911ce893b9a045b528703c4c701a5
     m_TableEntryReference:
-      m_KeyId: 35438911831814144
+      m_KeyId: 306766557184
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -162,7 +162,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2954972941655544755}
-        m_TargetAssemblyTypeName: 
+        m_TargetAssemblyTypeName: TMPro.TextMeshProUGUI, Unity.TextMeshPro
         m_MethodName: set_text
         m_Mode: 0
         m_Arguments:

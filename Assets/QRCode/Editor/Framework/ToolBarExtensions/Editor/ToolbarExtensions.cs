@@ -23,9 +23,9 @@ namespace UnityToolbarExtender
             GUILayout.FlexibleSpace();
             m_sceneGenericMenu = new GenericMenu();
 
-            DB.Instance.TryGetDatabase<SceneDatabase>(DBEnum.DB_Scene, out var sceneDatabase);
+            DB.Instance.TryGetDatabase<LevelDatabase>(DBEnum.DB_Levels, out var levelDatabase);
 
-            foreach (var sceneReference in sceneDatabase.GetDatabase)
+            foreach (var sceneReference in levelDatabase.GetDatabase)
             {
                 m_sceneGenericMenu.AddItem(new GUIContent(sceneReference.Key), false, () => LoadSceneGroup(sceneReference.Value));
             }
@@ -41,11 +41,11 @@ namespace UnityToolbarExtender
             
         }
         
-        private static void LoadSceneGroup(SceneDatabase.SceneReferenceGroup sceneReferenceGroup)
+        private static void LoadSceneGroup(LevelReferenceGroup levelReferenceGroup)
         {
-            EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(sceneReferenceGroup.Scenes[0].editorAsset), OpenSceneMode.Single);
+            EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(levelReferenceGroup.Levels[0].editorAsset), OpenSceneMode.Single);
 
-            var subScenes = sceneReferenceGroup.Scenes;
+            var subScenes = levelReferenceGroup.Levels;
             if (subScenes.IsNotNullOrEmpty())
             {
                 for (int i = 0; i < subScenes.Length; i++)

@@ -55,7 +55,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: DB_Scene
+      Data: DB_Levels
     - Name: $v
       Entry: 10
       Data: 1
@@ -80,4 +80,4 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  m_generatedEnumPath: Assets/QRCode/Framework/Misc/Database
+  m_generatedEnumPath: Assets/QRCode/Framework/Misc/Database/GeneratedEnums

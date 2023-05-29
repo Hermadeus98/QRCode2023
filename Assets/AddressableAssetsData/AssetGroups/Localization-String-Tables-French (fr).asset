@@ -17,20 +17,20 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 31c6f2d86d538524bb1e89426bc028e0
   m_SerializeEntries:
-  - m_GUID: 6b159849f7eaba1479fb3702feaad5c0
+  - m_GUID: 19c5c93efada18c49b6c56b65e49efbd
     m_Address: Common_fr
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-fr
     - Preload
-  - m_GUID: 644830db7de510c48b3bd1d262d70445
-    m_Address: Actions_fr
+  - m_GUID: f0ad067987990d5499db162c6f3b4ecc
+    m_Address: Framework_fr
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-fr
     - Preload
-  - m_GUID: eac4e767a7e61a64084960cbac88932e
-    m_Address: Framework_fr
+  - m_GUID: b762dc3d49159cd4ab8fa8b6a888fbfa
+    m_Address: Actions_fr
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-fr
