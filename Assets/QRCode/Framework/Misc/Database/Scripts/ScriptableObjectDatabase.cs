@@ -14,7 +14,9 @@ namespace QRCode.Framework
     
     public abstract class ScriptableObjectDatabase<T> : ScriptableDatabaseBase
     {
+        [TitleGroup(K.InspectorGroups.References)]
         [SerializeField] protected Dictionary<string, T> m_database = new Dictionary<string, T>();
+        [TitleGroup(K.InspectorGroups.Settings)]
         [SerializeField] protected string m_generatedEnumPath;
 
         public Dictionary<string, T> GetDatabase

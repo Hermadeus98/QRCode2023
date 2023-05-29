@@ -41,7 +41,7 @@ namespace QRCode.Framework.SceneManagement
                     }
                     else
                     {
-                        QRDebug.DebugError(K.DebuggingChannels.SceneManager, $"Cannot load SceneDatabase, verify DB.", gameObject);
+                        QRDebug.DebugError(K.DebuggingChannels.LevelManager, $"Cannot load LevelDatabase, verify DB.", gameObject);
                     }
                 }
 
@@ -151,7 +151,7 @@ namespace QRCode.Framework.SceneManagement
         {
             if (m_isLoading)
             {
-                QRDebug.DebugError(K.DebuggingChannels.SceneManager,"A scene is already in loading...");
+                QRDebug.DebugError(K.DebuggingChannels.LevelManager,"A scene is already in loading...");
                 return m_sceneLoadingInfo;
             }
 
@@ -172,7 +172,7 @@ namespace QRCode.Framework.SceneManagement
         {
             if (m_isLoading)
             {
-                QRDebug.DebugError(K.DebuggingChannels.SceneManager,"A scene is already in loading...");
+                QRDebug.DebugError(K.DebuggingChannels.LevelManager,"A scene is already in loading...");
                 return m_sceneLoadingInfo;
             }
 
@@ -206,7 +206,7 @@ namespace QRCode.Framework.SceneManagement
             }
             else
             {
-                QRDebug.DebugError(K.DebuggingChannels.SceneManager, $"Cannot load {levelToLoad.ToString()}, verify SceneDatabase.", LevelDatabase);
+                QRDebug.DebugError(K.DebuggingChannels.LevelManager, $"Cannot load {levelToLoad.ToString()}, verify SceneDatabase.", LevelDatabase);
                 return m_sceneLoadingInfo;
             }
         }
@@ -244,7 +244,7 @@ namespace QRCode.Framework.SceneManagement
 
             if (m_loadedLevelGroup.Contains(levelReferenceGroupToLoad))
             {
-                QRDebug.DebugError(K.DebuggingChannels.SceneManager, $"{nameof(m_loadedLevelGroup)} already contain {levelReferenceGroupToLoad.ToString()}.");
+                QRDebug.DebugError(K.DebuggingChannels.LevelManager, $"{nameof(m_loadedLevelGroup)} already contain {levelReferenceGroupToLoad.ToString()}.");
                 m_isLoading = false;
                 return null;
             }
@@ -275,7 +275,7 @@ namespace QRCode.Framework.SceneManagement
             }
 
             m_loadedLevelGroup.Add(levelReferenceGroupToLoad);
-            QRDebug.DebugInfo(K.DebuggingChannels.SceneManager, $"{levelReferenceGroupToLoad.ToString()} is loaded.");
+            QRDebug.DebugInfo(K.DebuggingChannels.LevelManager, $"{levelReferenceGroupToLoad.ToString()} is loaded.");
 
             if (SaveServiceSettings.Instance.LoadAsyncAfterSceneLoading)
             {
@@ -333,11 +333,11 @@ namespace QRCode.Framework.SceneManagement
                 }
 
                 m_loadedLevelGroup.Remove(levelReferenceGroupToUnload);
-                QRDebug.DebugInfo(K.DebuggingChannels.SceneManager, $"{levelReferenceGroupToUnload.ToString()} is unloaded.");   
+                QRDebug.DebugInfo(K.DebuggingChannels.LevelManager, $"{levelReferenceGroupToUnload.ToString()} is unloaded.");   
             }
             else
             {
-                QRDebug.DebugInfo(K.DebuggingChannels.SceneManager, $"{levelReferenceGroupToUnload.ToString()} is already unloaded.");
+                QRDebug.DebugInfo(K.DebuggingChannels.LevelManager, $"{levelReferenceGroupToUnload.ToString()} is already unloaded.");
             }
         }
 

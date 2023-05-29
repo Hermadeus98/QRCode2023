@@ -8,5 +8,6 @@ namespace QRCode.Framework
         DB_LoadingScreen = 1,
         DB_Levels = 2,
         DB_InputMaps = 3,
+        DB_Scenes = 4,
     }
 }

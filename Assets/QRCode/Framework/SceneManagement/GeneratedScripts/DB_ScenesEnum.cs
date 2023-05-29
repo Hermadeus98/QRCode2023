@@ -2,11 +2,10 @@ namespace QRCode.Framework
 {
 
 // MACHINE-GENERATED CODE - DO NOT MODIFY BY HAND!
-    public enum BD_InputMapsEnum
+    public enum DB_ScenesEnum
     {
         Undefined = 0,
         Null = 1,
-        Keyboard = 2,
-        XboxController = 3,
+        Scene_UI = 2,
     }
 }

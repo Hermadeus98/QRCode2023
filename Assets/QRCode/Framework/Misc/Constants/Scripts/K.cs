@@ -44,6 +44,7 @@ namespace QRCode.Framework
         {
             public const string Editor = "Editor";
             public const string LifeCycle = "Life Cycle";
+            public const string LevelManager = "Level Manager";
             public const string SceneManager = "Scene Manager";
             public const string Database = "Database";
             public const string Misc = "Misc";

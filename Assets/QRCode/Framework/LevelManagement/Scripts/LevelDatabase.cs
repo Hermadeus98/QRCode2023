@@ -5,7 +5,7 @@ namespace QRCode.Framework.SceneManagement
     using UnityEngine;
     using UnityEngine.AddressableAssets;
 
-    [CreateAssetMenu(menuName = K.DatabasePath.BasePath + "Scene Database", fileName = "DB_SceneDatabase")]
+    [CreateAssetMenu(menuName = K.DatabasePath.BasePath + "Level Database", fileName = "DB_LevelDatabase")]
     public class LevelDatabase : ScriptableObjectDatabase<LevelReferenceGroup>
     {
         

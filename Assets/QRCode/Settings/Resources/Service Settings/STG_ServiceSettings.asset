@@ -26,6 +26,11 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+  m_sceneManagementService:
+    m_AssetGUID: 36ae7d97d48a9e346be064450d381611
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   m_inputManagementService:
     m_AssetGUID: a2b0304fb1f11b149abc2299ebdb397e
     m_SubObjectName: 

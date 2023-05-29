@@ -28,6 +28,7 @@ namespace QRCode.Framework.Game
 
             RegisterServices();
             await PrepareSave();
+            await InitScenes();
             InitializeGameStates();
             ExitBootstrapAndLaunchGame();
             
@@ -50,6 +51,7 @@ namespace QRCode.Framework.Game
 
         private static void RegisterServices()
         {
+            CreateSceneManagementService();
             CreateLevelManagementService();
             CreateInputManagementService();
             CreateAudioService();
@@ -73,10 +75,25 @@ namespace QRCode.Framework.Game
             Object.DontDestroyOnLoad((Object)inputManagementService);
         }
 
+        private static void CreateSceneManagementService()
+        {
+            var instantiateSceneManagementServiceTask = ServiceSettings.SceneManagementService.InstantiateAsync();
+            var sceneManagementServiceInstance = instantiateSceneManagementServiceTask.WaitForCompletion();
+            var sceneManagementService = sceneManagementServiceInstance.GetComponent<ISceneManagementService>();
+            ServiceLocator.Current.RegisterService<ISceneManagementService>(sceneManagementService);
+            Object.DontDestroyOnLoad((Object)sceneManagementService);
+        }
+        
         private static void CreateAudioService()
         {
             IAudioService audioService = new AudioService();
             ServiceLocator.Current.RegisterService<IAudioService>(audioService);
+        }
+
+        private static async Task InitScenes()
+        {
+            var sceneManagementService = ServiceLocator.Current.Get<ISceneManagementService>();
+            await sceneManagementService.LoadScene(DB_ScenesEnum.Scene_UI);
         }
 
         private static void ExitBootstrapAndLaunchGame()

@@ -40,3 +40,5 @@ MonoBehaviour:
     isActive: 1
   - channelName: SAVE SYSTEM
     isActive: 1
+  - channelName: LEVEL MANAGER
+    isActive: 1
