@@ -16,5 +16,10 @@ namespace QRCode.Framework.Extensions
                 return Color.clear;
             }
         }
+
+        public static string ToHex(this Color color)
+        {
+            return "#" + ColorUtility.ToHtmlStringRGBA(color);
+        }
     }
 }

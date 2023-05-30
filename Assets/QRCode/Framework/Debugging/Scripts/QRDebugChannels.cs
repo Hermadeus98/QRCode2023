@@ -17,40 +17,54 @@ namespace QRCode.Framework.Debugging
 
         #region STRUCTURES
         [Serializable]
-        private struct QRDebugChannel
+        public struct QRDebugChannel
         {
             [ReadOnly] public string channelName;
             public bool isActive;
+            [ColorPalette("Debug Channels")] public Color channelColor;
+            public LogType activeLogTypes;
+
+            public QRDebugChannel(string channelName)
+            {
+                this.channelName = channelName;
+                isActive = true;
+                channelColor = Color.white;
+                activeLogTypes = LogType.Debug | LogType.Error | LogType.Fatal | LogType.Info | LogType.Trace | LogType.Warning;
+            }
         }
         #endregion
 
         #region METHODS
-        public bool ChannelIsActive(string channelName)
+        public bool ChannelIsActive(string channelName, out QRDebugChannel outChannel)
         {
-            for (int i = 0; i < channels.Count; i++)
+            for (var i = 0; i < channels.Count; i++)
             {
                 if (channels[i].channelName == channelName)
                 {
+                    outChannel = channels[i];
                     return channels[i].isActive;
                 }
             }
 
-            AddChannel(channelName);
-            
+            var newDebugChannel = AddChannel(channelName);
+            outChannel = newDebugChannel;
             return true;
         }
         
-        private void AddChannel(string channelName)
+        private QRDebugChannel AddChannel(string channelName)
         {
-            channels.Add(new QRDebugChannel()
+            var newDebugChannel = new QRDebugChannel()
             {
                 channelName = channelName,
                 isActive = true
-            });
+            };
+
+            channels.Add(newDebugChannel);
 
 #if UNITY_EDITOR
             EditorUtility.SetDirty(this);
 #endif
+            return newDebugChannel;
         }
         #endregion
     }

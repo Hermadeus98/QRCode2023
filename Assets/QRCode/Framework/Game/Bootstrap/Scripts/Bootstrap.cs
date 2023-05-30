@@ -26,9 +26,11 @@ namespace QRCode.Framework.Game
         private static async void Initialize()
         {
             m_isInit = false;
+            EnableLogger();
+
             ServiceLocator.Create();
             GameInstance.Create();
-
+            
             RegisterServices();
             await PrepareSave();
             await InitScenes();
@@ -103,6 +105,13 @@ namespace QRCode.Framework.Game
         private static void ExitBootstrapAndLaunchGame()
         {
             
+        }
+
+        private static void EnableLogger()
+        {
+#if RELEASE
+            Debug.unityLogger.logEnabled = false;
+#endif
         }
 
         public static bool IsInit()
