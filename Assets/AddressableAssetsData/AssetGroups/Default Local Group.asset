@@ -66,6 +66,10 @@ MonoBehaviour:
     m_Address: Assets/QRCode/Prefabs/Services/SERVICE - Scene Management.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 3cf1cf652d54cea458d5a5047a243a64
+    m_Address: Assets/QRCode/Prefabs/UI/LoadingScreens/P_LoadingScreenBase 1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 383727ea88213544abed9fa8aa57676f, type: 2}
   m_SchemaSet:

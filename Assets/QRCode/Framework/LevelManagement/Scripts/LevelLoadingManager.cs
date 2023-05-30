@@ -23,7 +23,7 @@ namespace QRCode.Framework.SceneManagement
 
         #region Privates
         private bool m_isLoading = false;
-        private  CancellationTokenSource m_cancellationTokenSource = null;
+        private CancellationTokenSource m_cancellationTokenSource = null;
         private ISaveService m_saveService = null;
         #endregion Privates
         

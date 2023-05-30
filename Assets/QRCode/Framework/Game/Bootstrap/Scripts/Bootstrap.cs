@@ -6,6 +6,8 @@ namespace QRCode.Framework.Game
 
     public static class Bootstrap
     {
+        private static bool m_isInit = false;
+        
         private static ServiceSettings m_serviceSettings = null;
         private static ServiceSettings ServiceSettings
         {
@@ -23,6 +25,7 @@ namespace QRCode.Framework.Game
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static async void Initialize()
         {
+            m_isInit = false;
             ServiceLocator.Create();
             GameInstance.Create();
 
@@ -31,7 +34,8 @@ namespace QRCode.Framework.Game
             await InitScenes();
             InitializeGameStates();
             ExitBootstrapAndLaunchGame();
-            
+
+            m_isInit = true;
             QRDebug.Debug(K.DebuggingChannels.LifeCycle, $"Bootstrapper has been initialized.");
         }
         
@@ -99,6 +103,11 @@ namespace QRCode.Framework.Game
         private static void ExitBootstrapAndLaunchGame()
         {
             
+        }
+
+        public static bool IsInit()
+        {
+            return m_isInit;
         }
     }
 }

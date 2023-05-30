@@ -35,6 +35,11 @@ namespace QRCode.Framework
 
         private async void Initialize()
         {
+            while (Bootstrap.IsInit() == false)
+            {
+                await Task.Yield();
+            }
+            
             if (ServiceLocator.Current.Get<ILevelLoadingManagementService>().IsLoading())
             {
                 return;
