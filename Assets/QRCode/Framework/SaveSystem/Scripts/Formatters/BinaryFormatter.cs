@@ -7,6 +7,7 @@
     using Debugging;
     using Surrogates;
     using UnityEngine;
+    using K = Framework.K;
 
     public class BinaryFormatter : IFormatter
     {

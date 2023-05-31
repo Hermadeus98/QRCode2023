@@ -5,7 +5,8 @@
     using System.Threading.Tasks;
     using Debugging;
     using UnityEngine;
-    
+    using K = Framework.K;
+
     public class JSONFormatter : IFormatter
     {
         private readonly string m_encryptionCodeWord = "372a9fcc-2639-4d91-8660-b75cd27903b0";

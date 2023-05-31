@@ -14,7 +14,7 @@ namespace QRCode.Framework.Debugging
         [Preserve]
         public void Debug(string message)
         {
-            QRDebug.DebugTrace(K.DebuggingChannels.Misc, message);
+            QRDebug.DebugTrace("Misc", message);
         }
     }
 }

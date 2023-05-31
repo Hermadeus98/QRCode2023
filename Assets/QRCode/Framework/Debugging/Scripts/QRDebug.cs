@@ -1,7 +1,7 @@
 namespace QRCode.Framework.Debugging
 {
     using System;
-    using Extensions;
+    using UnityEngine;
     using Object = UnityEngine.Object;
     
     public static class QRDebug
@@ -73,13 +73,15 @@ namespace QRCode.Framework.Debugging
 
             if (m_debugChannels.ChannelIsActive(channel.ToUpper(), out var debugChannel))
             {
+                var color =  "#" + ColorUtility.ToHtmlStringRGBA(debugChannel.channelColor);
+                
                 switch (logType)
                 {
                     case LogType.Trace:
                         if(debugChannel.activeLogTypes.HasFlag(LogType.Trace))
                         {
                             UnityEngine.Debug.Log(
-                                $"{GetColoredMessage(debugChannel.channelColor.ToHex(), $"[{channel.ToUpper()}] -> ")} {message}",
+                                $"{GetColoredMessage(color, $"[{channel.ToUpper()}] -> ")} {message}",
                                 context);
                         }
                         break;
@@ -87,7 +89,7 @@ namespace QRCode.Framework.Debugging
                         if(debugChannel.activeLogTypes.HasFlag(LogType.Debug))
                         {
                             UnityEngine.Debug.Log(
-                                $"{GetColoredMessage(debugChannel.channelColor.ToHex(), $"[{channel.ToUpper()}] -> ")} {message}",
+                                $"{GetColoredMessage(color, $"[{channel.ToUpper()}] -> ")} {message}",
                                 context);
                         }
                         break;
@@ -95,7 +97,7 @@ namespace QRCode.Framework.Debugging
                         if(debugChannel.activeLogTypes.HasFlag(LogType.Info))
                         {
                             UnityEngine.Debug.Log(
-                                $"{GetColoredMessage(debugChannel.channelColor.ToHex(), $"[{channel.ToUpper()}] -> ")} {message}",
+                                $"{GetColoredMessage(color, $"[{channel.ToUpper()}] -> ")} {message}",
                                 context);
                         }
                         break;
@@ -103,7 +105,7 @@ namespace QRCode.Framework.Debugging
                         if(debugChannel.activeLogTypes.HasFlag(LogType.Warning))
                         {
                             UnityEngine.Debug.LogWarning(
-                                $"{GetColoredMessage(debugChannel.channelColor.ToHex(), $"[{channel.ToUpper()}] -> ")} {message}",
+                                $"{GetColoredMessage(color, $"[{channel.ToUpper()}] -> ")} {message}",
                                 context);
                         }
                         break;
@@ -111,7 +113,7 @@ namespace QRCode.Framework.Debugging
                         if(debugChannel.activeLogTypes.HasFlag(LogType.Error))
                         {
                             UnityEngine.Debug.LogError(
-                                $"{GetColoredMessage(debugChannel.channelColor.ToHex(), $"[{channel.ToUpper()}] -> ")} {message}",
+                                $"{GetColoredMessage(color, $"[{channel.ToUpper()}] -> ")} {message}",
                                 context);
                         }
                         break;
@@ -119,7 +121,7 @@ namespace QRCode.Framework.Debugging
                         if(debugChannel.activeLogTypes.HasFlag(LogType.Fatal))
                         {
                             UnityEngine.Debug.LogError(
-                                $"{GetColoredMessage(debugChannel.channelColor.ToHex(), $"[{channel.ToUpper()}] -> ")} {message}",
+                                $"{GetColoredMessage(color, $"[{channel.ToUpper()}] -> ")} {message}",
                                 context);
                         }
                         break;

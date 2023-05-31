@@ -3,14 +3,31 @@ namespace QRCode.Framework.Debugging
     using UnityEngine;
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Sirenix.OdinInspector;
 #if UNITY_EDITOR
     using UnityEditor;
 #endif
     
     [CreateAssetMenu(menuName = K.DebuggingPath.ChannelDebugPath, fileName = "Channels Settings")]
-    public class QRDebugChannels : Settings<QRDebugChannels>
+    public class QRDebugChannels : SerializedScriptableObject
     {
+        private static QRDebugChannels m_instance;
+
+        public static QRDebugChannels Instance
+        {
+            get
+            {
+                if (!m_instance)
+                {
+                    m_instance = Resources.LoadAll<QRDebugChannels>("").FirstOrDefault();
+                }
+                if (!m_instance) throw new Exception($"Cannot find instance of {typeof(QRDebugChannels)} in Resources.");
+                if(m_instance) m_instance.hideFlags = HideFlags.DontUnloadUnusedAsset;
+                return m_instance;
+            }
+        }
+        
         #region FIELDS
         [SerializeField][TableList] private List<QRDebugChannel> channels = new List<QRDebugChannel>();
         #endregion

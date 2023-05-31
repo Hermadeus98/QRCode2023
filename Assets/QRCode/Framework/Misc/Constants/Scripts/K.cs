@@ -15,13 +15,6 @@ namespace QRCode.Framework
             public const string Infos = "Infos";
         }
         
-        public static class DebuggingPath
-        {
-            private const string CreateAssetMenuBasePath = "QRCode/Debugging/";
-            public const string ChannelDebugPath = CreateAssetMenuBasePath + "Channels Settings";
-            public const string ScriptableDebugPath = CreateAssetMenuBasePath + "Scriptable Object Debugger";
-        }
-        
         public static class SmartStringPath
         {
             private const string CreateAssetMenuBasePath = "QRCode/Smart Strings Reference/";

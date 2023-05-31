@@ -12,6 +12,7 @@ namespace QRCode.Framework.SceneManagement
     using UnityEngine.ResourceManagement.AsyncOperations;
     using UnityEngine.ResourceManagement.ResourceProviders;
     using UnityEngine.SceneManagement;
+    using K = Framework.K;
 
     public class LevelLoadingManager : SerializedMonoBehaviour, ILevelLoadingManagementService
     {

@@ -1,10 +1,7 @@
 {
-    "name": "QRCode.Framework.Debugging.Tests",
-    "rootNamespace": "QRCode.Framework.Debugging.Tests",
-    "references": [
-        "GUID:186862afe89a22947bc7398c01f6cbdf",
-        "GUID:360ae7e827994ba4580b03b3d959f134"
-    ],
+    "name": "QRCode.Framework.Debugging",
+    "rootNamespace": "QRCode.Framework.Debugging",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

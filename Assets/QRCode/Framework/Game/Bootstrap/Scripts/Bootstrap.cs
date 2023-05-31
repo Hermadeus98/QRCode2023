@@ -3,6 +3,7 @@ namespace QRCode.Framework.Game
     using System.Threading.Tasks;
     using Debugging;
     using UnityEngine;
+    using K = Framework.K;
 
     public static class Bootstrap
     {

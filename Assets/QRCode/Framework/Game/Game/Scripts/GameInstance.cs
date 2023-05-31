@@ -4,6 +4,7 @@ namespace QRCode.Framework.Game
     using System.Collections.Generic;
     using Framework;
     using Framework.Debugging;
+    using K = Framework.K;
 
     public class GameInstance
     {
