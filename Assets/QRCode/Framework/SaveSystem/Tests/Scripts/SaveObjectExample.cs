@@ -3,6 +3,7 @@ namespace QRCode.Framework
     using System.Collections.Generic;
     using Sirenix.OdinInspector;
     using UnityEngine;
+    using QRCode.Framework.Debugging;
 
     public class SaveObjectExample : SerializedMonoBehaviour, ILoadableObject, ISavableObject
     {
@@ -24,19 +25,35 @@ namespace QRCode.Framework
         [Button]
         public async void Save()
         {
+#if UNITY_EDITOR
+            SaveService.SaveInEditor();          
+#else
             var saveService = ServiceLocator.Current.Get<ISaveService>();
             var gameData = saveService.GetGameData();
             
             SaveGameData(ref gameData);
             await saveService.SaveGameAsync();
+#endif
         }
         
         [Button]
-        public void Load()
+        public async void Load()
         {
+#if UNITY_EDITOR
+            var gameDataInEditor = await SaveService.LoadInEditor();
+            
+            if(gameDataInEditor == null)
+            {
+                QRDebug.DebugError(K.DebuggingChannels.SaveSystem, $"There is no Save Data.");
+            }
+
+            LoadGameData(gameDataInEditor);
+            return;
+#else
             var saveService = ServiceLocator.Current.Get<ISaveService>();
             var gameData = saveService.GetGameData();
             LoadGameData(gameData);
+#endif
         }
 
         [Button]

@@ -48,7 +48,7 @@ namespace QRCode.Framework.Game
 
         private static async Task PrepareSave()
         {
-            var gameObject = new GameObject("[SERVICE] Save System");
+            var gameObject = new GameObject("SERVICE - Save System");
             ISaveService saveService = gameObject.AddComponent<SaveService>();
             ServiceLocator.Current.RegisterService<ISaveService>(saveService);
             Object.DontDestroyOnLoad((Object)saveService);

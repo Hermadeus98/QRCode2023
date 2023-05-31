@@ -42,5 +42,25 @@
         public bool LoadAsyncAfterSceneLoading => m_loadAsyncAfterSceneLoading;
         public bool UseFakeSave => m_useFakeSave;
         public float FakeSaveDuration => m_fakeSaveDuration;
+
+#if UNITY_EDITOR
+        [Button]
+        public void SaveInEditor()
+        {
+            SaveService.SaveInEditor();   
+        }
+        
+        [Button]
+        public async void LoadInEditor()
+        {
+            await SaveService.LoadInEditor();
+        }
+
+        [Button]
+        public void DeleteSaveInEditor()
+        {
+            SaveService.DeleteSaveInEditor();
+        }
+#endif
     }
 }

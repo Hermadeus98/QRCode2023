@@ -1,4 +1,7 @@
-﻿namespace QRCode.Framework
+﻿using System.Linq;
+using UnityEngine;
+
+namespace QRCode.Framework
 {
     using System;
     using System.Threading;
@@ -72,6 +75,7 @@
             return Task.CompletedTask;
         }
 
+        [Button]
         public async Task LoadGameAsync()
         {
             if (m_isLoading)
@@ -98,6 +102,7 @@
             QRDebug.Debug(K.DebuggingChannels.SaveSystem,$"Game is load.");
         }
 
+        [Button]
         public async Task SaveGameAsync()
         {
             if (m_isSaving)
@@ -122,6 +127,7 @@
             QRDebug.Debug(K.DebuggingChannels.SaveSystem,$"Game is save.");
         }
 
+        [Button]
         public async Task DeleteSave()
         {
             var task = m_fileDataHandler.TryDeleteSave();
@@ -156,6 +162,58 @@
         private void OnDestroy()
         {
             m_cancellationTokenSource.Cancel();
+        }
+
+        public static async Task<GameData> LoadInEditor()
+        {
+            var saveSystemSettings = SaveServiceSettings.Instance;
+            var fileDataHandler = FileDataHandlerFactory.CreateFileDataHandler(saveSystemSettings.FullPath,
+                saveSystemSettings.FullFileName);
+            var gameData = await fileDataHandler.Load();
+
+            if (gameData == null)
+            {
+                QRDebug.DebugError(K.DebuggingChannels.Editor, $"There is no Game Data");
+                return null;
+            }
+                
+            var loadableObjects = FindObjectsOfType<MonoBehaviour>().OfType<ILoadableObject>().ToArray();
+
+            for (var i = 0; i < loadableObjects.Length; i++)
+            {
+                loadableObjects[i].LoadGameData(gameData);
+            }
+                
+            QRDebug.Debug(K.DebuggingChannels.Editor, $"Load in editor is successful.");
+            return gameData;
+        }
+
+        public static async void SaveInEditor()
+        {
+            var gameData = new GameData();
+            var savableObjects = FindObjectsOfType<MonoBehaviour>().OfType<ISavableObject>().ToArray();
+
+            for (var i = 0; i < savableObjects.Length; i++)
+            {
+                savableObjects[i].SaveGameData(ref gameData);
+            }
+            
+            var saveSystemSettings = SaveServiceSettings.Instance;
+            var fileDataHandler = FileDataHandlerFactory.CreateFileDataHandler(saveSystemSettings.FullPath,
+                saveSystemSettings.FullFileName);
+            await fileDataHandler.Save(gameData);
+            
+            QRDebug.Debug(K.DebuggingChannels.Editor, $"Save in editor is successful.");
+        }
+        
+        public static void DeleteSaveInEditor()
+        {
+            var saveSystemSettings = SaveServiceSettings.Instance;
+            var fileDataHandler = FileDataHandlerFactory.CreateFileDataHandler(saveSystemSettings.FullPath,
+                saveSystemSettings.FullFileName);
+            fileDataHandler.TryDeleteSave();
+            QRDebug.Debug(K.DebuggingChannels.Editor, $"Save Data has been deleted successfully");
+            
         }
     }
 }
