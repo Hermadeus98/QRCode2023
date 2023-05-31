@@ -7,8 +7,9 @@
     public class GameData
     {
         public int ValueTest;
-
         public SerializableDictionary<string, float> DictionaryTest;
+        
+        // Settings Data
 
         //The values defined in this constructor will be default values.
         //The game starts with when there is no data to load.

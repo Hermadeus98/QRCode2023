@@ -23,7 +23,9 @@ namespace QRCode.Framework
         }
 
         [Button]
+#pragma warning disable CS1998
         public async void Save()
+#pragma warning restore CS1998
         {
 #if UNITY_EDITOR
             SaveService.SaveInEditor();          
@@ -45,6 +47,7 @@ namespace QRCode.Framework
             if(gameDataInEditor == null)
             {
                 QRDebug.DebugError(K.DebuggingChannels.SaveSystem, $"There is no Save Data.");
+                return;
             }
 
             LoadGameData(gameDataInEditor);

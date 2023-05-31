@@ -30,3 +30,7 @@ MonoBehaviour:
     isActive: 1
     channelColor: {r: 0.2285066, g: 0.745283, b: 0.2678486, a: 1}
     activeLogTypes: 63
+  - channelName: EDITOR
+    isActive: 1
+    channelColor: {r: 0.227451, g: 0.74509805, b: 0.26666668, a: 1}
+    activeLogTypes: 63
