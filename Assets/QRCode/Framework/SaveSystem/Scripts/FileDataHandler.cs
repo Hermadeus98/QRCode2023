@@ -11,18 +11,12 @@
     /// </summary>
     public class FileDataHandler : IFileDataHandler
     {
-        private string m_dataDirectoryPath = "";
-        private string m_dataFileName = "";
-
-        private string m_fullPath = "";
-        private IFormatter m_formatter = null;
+        private readonly string m_fullPath;
+        private readonly IFormatter m_formatter = null;
         
         public FileDataHandler(string dataDirectoryPath, string dataFileName)
         {
-            m_dataDirectoryPath = dataDirectoryPath;
-            m_dataFileName = dataFileName;
-            
-            m_fullPath = Path.Combine(m_dataDirectoryPath, m_dataFileName);
+            m_fullPath = Path.Combine(dataDirectoryPath, dataFileName);
             m_formatter = FormatterFactory.CreateFormatter(SaveServiceSettings.Instance.FormatterTypeDefault);
         }
 
