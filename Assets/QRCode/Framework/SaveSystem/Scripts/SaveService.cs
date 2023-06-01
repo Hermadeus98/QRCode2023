@@ -87,7 +87,7 @@ namespace QRCode.Framework
             m_isLoading = true;
             m_onStartLoad?.Invoke();
 
-            m_gameData = await m_fileDataHandler.Load();
+            m_gameData = await m_fileDataHandler.Load<GameData>();
 
             if (m_gameData == null)
             {
@@ -169,7 +169,7 @@ namespace QRCode.Framework
             var saveSystemSettings = SaveServiceSettings.Instance;
             var fileDataHandler = FileDataHandlerFactory.CreateFileDataHandler(saveSystemSettings.FullPath,
                 saveSystemSettings.FullFileName);
-            var gameData = await fileDataHandler.Load();
+            var gameData = await fileDataHandler.Load<GameData>();
 
             if (gameData == null)
             {
@@ -181,11 +181,11 @@ namespace QRCode.Framework
 
             for (var i = 0; i < loadableObjects.Length; i++)
             {
-                loadableObjects[i].LoadGameData(gameData);
+                loadableObjects[i].LoadGameData(gameData as GameData);
             }
                 
             QRDebug.Debug(K.DebuggingChannels.Editor, $"Load in editor is successful.");
-            return gameData;
+            return gameData as GameData;
         }
 
         public static async void SaveInEditor()

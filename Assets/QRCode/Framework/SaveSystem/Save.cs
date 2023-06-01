@@ -110,9 +110,10 @@
 
         public void LoadObjects()
         {
+            var gameData = SaveService.GetGameData();
+
             foreach (var loadableObject in m_loadableObjects)
             {
-                var gameData = SaveService.GetGameData();
                 loadableObject.LoadGameData(gameData);
             }
         }

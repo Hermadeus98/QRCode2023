@@ -20,14 +20,14 @@
             m_formatter = FormatterFactory.CreateFormatter(SaveServiceSettings.Instance.FormatterTypeDefault);
         }
 
-        public async Task<GameData> Load()
+        public async Task<T> Load<T>()
         {
-            var loadedObject = await m_formatter.Load<GameData>(m_fullPath);
+            var loadedObject = await m_formatter.Load<T>(m_fullPath);
 
             return loadedObject;
         }
         
-        public async Task Save(GameData gameData)
+        public async Task Save(object gameData)
         {
             await m_formatter.Save(gameData, m_fullPath);
         }

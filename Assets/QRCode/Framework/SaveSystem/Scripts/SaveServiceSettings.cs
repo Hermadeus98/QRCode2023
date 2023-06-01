@@ -42,7 +42,7 @@
         public bool LoadAsyncAfterSceneLoading => m_loadAsyncAfterSceneLoading;
         public bool UseFakeSave => m_useFakeSave;
         public float FakeSaveDuration => m_fakeSaveDuration;
-
+        
 #if UNITY_EDITOR
         [Button]
         public void SaveInEditor()

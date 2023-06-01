@@ -42,21 +42,23 @@ namespace QRCode.Framework
         public async void Load()
         {
 #if UNITY_EDITOR
-            var gameDataInEditor = await SaveService.LoadInEditor();
-            
-            if(gameDataInEditor == null)
+            if (Application.isPlaying == false)
             {
-                QRDebug.DebugError(K.DebuggingChannels.SaveSystem, $"There is no Save Data.");
+                var gameDataInEditor = await SaveService.LoadInEditor();
+
+                if (gameDataInEditor == null)
+                {
+                    QRDebug.DebugError(K.DebuggingChannels.SaveSystem, $"There is no Save Data.");
+                    return;
+                }
+
+                LoadGameData(gameDataInEditor);
                 return;
             }
-
-            LoadGameData(gameDataInEditor);
-            return;
-#else
+#endif
             var saveService = ServiceLocator.Current.Get<ISaveService>();
             var gameData = saveService.GetGameData();
             LoadGameData(gameData);
-#endif
         }
 
         [Button]

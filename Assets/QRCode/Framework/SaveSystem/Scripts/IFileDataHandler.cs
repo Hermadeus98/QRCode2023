@@ -4,8 +4,8 @@
 
     public interface IFileDataHandler
     {
-        public Task<GameData> Load();
-        public Task Save(GameData gameData);
+        public Task<T> Load<T>();
+        public Task Save(object saveData);
         public Task<bool> TryDeleteSave();
     }
 }

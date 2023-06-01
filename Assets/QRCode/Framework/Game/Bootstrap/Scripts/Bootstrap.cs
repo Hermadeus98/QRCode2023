@@ -34,6 +34,7 @@ namespace QRCode.Framework.Game
             
             RegisterServices();
             await PrepareSave();
+            await PrepareUserSettings();
             await InitScenes();
             InitializeGameStates();
             ExitBootstrapAndLaunchGame();
@@ -56,6 +57,13 @@ namespace QRCode.Framework.Game
             await saveService.Initialize();
         }
 
+        private static async Task PrepareUserSettings()
+        {
+            IUserSettingsService userSettingsService = new UserSettingsService();
+            ServiceLocator.Current.RegisterService<IUserSettingsService>(userSettingsService);
+            await userSettingsService.Initialize();
+        }
+        
         private static void RegisterServices()
         {
             CreateSceneManagementService();
