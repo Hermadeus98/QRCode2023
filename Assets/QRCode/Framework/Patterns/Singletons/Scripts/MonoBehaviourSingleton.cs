@@ -1,6 +1,5 @@
 namespace QRCode.Framework.Singleton
 {
-    using System.Linq;
     using Sirenix.OdinInspector;
     using UnityEngine;
 
@@ -32,7 +31,7 @@ namespace QRCode.Framework.Singleton
                     if (m_instance == null)
                     {
                         var obj = new GameObject();
-                        obj.name =  "[SINGLETON] " + typeof(T).Name.ToString();
+                        obj.name =  "[SINGLETON] " + typeof(T).Name;
                         m_instance = obj.AddComponent<T>();
                     }
                     

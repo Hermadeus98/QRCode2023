@@ -6,7 +6,7 @@ namespace QRCode.Framework
     using UnityEngine.Localization.Components;
     using UnityEngine.Scripting;
 
-    public class InputIconForText : InputIconBase
+    public class InputHintForText : InputHintBase
     {
         [TitleGroup(K.InspectorGroups.References)] [SerializeField] [Required]
         private TextMeshProUGUI m_text = null;

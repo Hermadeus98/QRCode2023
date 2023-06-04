@@ -49,7 +49,7 @@
 
         public async Task SaveUserSettingsData()
         {
-            await m_fileDataHandler.Save(m_fileDataHandler);
+            await m_fileDataHandler.Save(m_userSettingsData);
             
             QRDebug.Debug(K.DebuggingChannels.UserSettings,$"User Settings is save.");
         }

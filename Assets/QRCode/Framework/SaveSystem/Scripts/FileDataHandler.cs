@@ -27,9 +27,9 @@
             return loadedObject;
         }
         
-        public async Task Save(object gameData)
+        public async Task Save(object saveData)
         {
-            await m_formatter.Save(gameData, m_fullPath);
+            await m_formatter.Save(saveData, m_fullPath);
         }
 
         public Task<bool> TryDeleteSave()

@@ -5,11 +5,8 @@ namespace QRCode.Framework
     [CreateAssetMenu(menuName = K.SmartStringPath.SmartInputIconReference, fileName = "Smart Input Icon Reference")]
     public class SmartInputIconReference : SmartStringReferenceBase<string>
     {
-        
         private string GetInputIconCode()
         {
-            
-            
             return string.Empty;
         }
     }

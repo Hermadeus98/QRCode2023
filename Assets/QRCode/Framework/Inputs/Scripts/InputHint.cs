@@ -6,14 +6,13 @@ namespace QRCode.Framework
     using UnityEngine.InputSystem;
     using UnityEngine.UI;
 
-    public class InputIcon : InputIconBase
+    public class InputHint : InputHintBase
     {
         [TitleGroup(K.InspectorGroups.Settings)] 
         [SerializeField] private bool m_preserveAspect = true;
         
         [TitleGroup(K.InspectorGroups.References)]
         [SerializeField] private Image m_icon;
-
 
         private Sequence m_onPerformInputSequence;
 

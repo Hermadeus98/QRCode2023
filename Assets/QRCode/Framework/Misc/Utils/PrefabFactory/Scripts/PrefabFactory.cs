@@ -19,7 +19,7 @@ namespace QRCode.Framework
         [MenuItem("GameObject/QRCode/UI/Components/Input Icon", false)]
         public static void CreateInputIconPrefab()
         {
-            CreatePrefabs<InputIcon>(m_inputIconPath, m_inputIconName, true);
+            CreatePrefabs<InputHint>(m_inputIconPath, m_inputIconName, true);
         }
 
         [MenuItem("GameObject/QRCode/UI/Components/Progress Bar", false)]

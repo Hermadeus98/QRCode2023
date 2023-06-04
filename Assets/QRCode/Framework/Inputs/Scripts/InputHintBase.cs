@@ -6,7 +6,7 @@ namespace QRCode.Framework
     using UnityEngine;
     using UnityEngine.InputSystem;
 
-    public class InputIconBase : SerializedMonoBehaviour
+    public class InputHintBase : SerializedMonoBehaviour
     {
         [TitleGroup(K.InspectorGroups.Settings)] 
         [SerializeField] protected bool m_inputIconForAxis = false;
