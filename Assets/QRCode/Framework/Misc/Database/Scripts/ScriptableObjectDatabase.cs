@@ -46,7 +46,6 @@ namespace QRCode.Framework
             }
         }
         
-#if UNITY_EDITOR
         [Button]
         private void GenerateDatabaseEnum()
         {
@@ -56,8 +55,9 @@ namespace QRCode.Framework
                 return;
             }
             
-            var fields = new List<string>();
-            fields.Add("Null");
+            QRDebug.Debug(K.DebuggingChannels.Database, $"Start generate database {name}...");
+            
+            var fields = new List<string> { "Null" };
 
             for (int i = 0; i < m_database.Count; i++)
             {
@@ -66,6 +66,5 @@ namespace QRCode.Framework
             
             TextGenerator.GenerateCSEnum(m_generatedEnumPath, name + "Enum", "QRCode.Framework", fields);
         }
-#endif
     }
 }

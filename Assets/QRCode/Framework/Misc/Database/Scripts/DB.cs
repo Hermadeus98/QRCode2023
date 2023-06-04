@@ -11,7 +11,10 @@ namespace QRCode.Framework
     [CreateAssetMenu(menuName = K.DatabasePath.BasePath + "DB", fileName = "DB")]
     public class DB : SingletonScriptableObject<DB>, IDatabase
     {
+        [TitleGroup(K.InspectorGroups.References)]
         [SerializeField] private Dictionary<string, ScriptableDatabaseBase> m_allDatabase = new Dictionary<string, ScriptableDatabaseBase>();
+        
+        [TitleGroup(K.InspectorGroups.Settings)]
         [SerializeField] private string m_generatedEnumPath;
 
         public bool TryGetDatabase<T>(DBEnum key, out T foundedDatabase) where T : ScriptableDatabaseBase
@@ -38,11 +41,6 @@ namespace QRCode.Framework
         [Button]
         private void GenerateDatabaseEnum()
         {
-            /*for (int i = 0; i < m_allDatabase.Count; i++)
-            {
-                AssetDatabase.AddObjectToAsset(m_allDatabase.Values.ElementAt(i), this);
-            }*/
-            
             if (string.IsNullOrEmpty(m_generatedEnumPath))
             {
                 QRDebug.DebugError("Editor", $"{nameof(m_generatedEnumPath)} shouldn't be empty.");

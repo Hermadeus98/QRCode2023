@@ -4,7 +4,7 @@ namespace QRCode.Framework
 
     public interface ISceneManagementService : IService
     {
-        public Task<SceneReference> LoadScene(DB_ScenesEnum sceneToLoad);
-        public Task<SceneReference> UnLoadScene(DB_ScenesEnum sceneToUnload);
+        public Task LoadScene(DB_ScenesEnum sceneToLoad);
+        public Task UnLoadScene(DB_ScenesEnum sceneToUnload);
     }
 }

@@ -7,5 +7,6 @@ namespace QRCode.Framework
         Undefined = 0,
         Null = 1,
         Scene_UI = 2,
+        Scene_Main = 3,
     }
 }

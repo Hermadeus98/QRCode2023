@@ -20,7 +20,7 @@ namespace QRCode.Framework
         public string FullFileName => m_fileName + m_fileNameExtension;
         public UserSettingsData DefaultUserSettingsData => m_defaultValues;
 
-
+        [Button]
         private void ResetDefaultValues()
         {
             m_defaultValues = new UserSettingsData();

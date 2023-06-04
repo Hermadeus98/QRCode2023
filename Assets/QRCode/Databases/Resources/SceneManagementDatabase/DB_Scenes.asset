@@ -34,7 +34,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 7
       Data: 
@@ -50,6 +50,39 @@ MonoBehaviour:
     - Name: m_AssetGUID
       Entry: 1
       Data: e7e479cb31b34ed4a9c54498dd9696bb
+    - Name: m_SubObjectName
+      Entry: 1
+      Data: 
+    - Name: m_SubObjectType
+      Entry: 1
+      Data: 
+    - Name: m_EditorAssetChanged
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Scene_Main
+    - Name: $v
+      Entry: 7
+      Data: QRCode.Framework.SceneReference, QRCode.Framework
+    - Name: m_scene
+      Entry: 7
+      Data: 3|UnityEngine.AddressableAssets.AssetReference, Unity.Addressables
+    - Name: m_AssetGUID
+      Entry: 1
+      Data: c8cc1806d92cb3c44aef83f271cfa9f5
     - Name: m_SubObjectName
       Entry: 1
       Data: 

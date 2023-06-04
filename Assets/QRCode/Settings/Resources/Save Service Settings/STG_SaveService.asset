@@ -31,3 +31,4 @@ MonoBehaviour:
   m_formatterType: 0
   m_useFakeSave: 1
   m_fakeSaveDuration: 2
+  m_notLoadedTexture: {fileID: 2800000, guid: 42032fc14f2be424d8602f8194bee982, type: 3}

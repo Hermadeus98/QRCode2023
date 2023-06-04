@@ -36,6 +36,7 @@ namespace QRCode.Utils
             
             var fullPath = path + $"/{enumName}.cs";
             File.WriteAllText(fullPath, content);
+            
             EditorUtility.RequestScriptReload();
 
             return AssetDatabase.LoadAssetAtPath<TextAsset>(fullPath);

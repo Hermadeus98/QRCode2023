@@ -153,7 +153,7 @@ Transform:
   m_Children:
   - {fileID: 1226326930}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &356815366
 PrefabInstance:
@@ -297,6 +297,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_CameraUI
       objectReference: {fileID: 0}
+    - target: {fileID: 893830152587929217, guid: 6866149bf09fdcd4d99bdfaeacacc4b2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 893830152587929228, guid: 6866149bf09fdcd4d99bdfaeacacc4b2,
         type: 3}
       propertyPath: m_RootOrder
@@ -351,6 +356,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 893830152587929231, guid: 6866149bf09fdcd4d99bdfaeacacc4b2,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6866149bf09fdcd4d99bdfaeacacc4b2, type: 3}
@@ -541,7 +551,7 @@ Transform:
   m_Children:
   - {fileID: 1619252876}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2097061991
 PrefabInstance:

@@ -108,6 +108,8 @@ namespace QRCode.Framework.Game
         private static async Task InitScenes()
         {
             var sceneManagementService = ServiceLocator.Current.Get<ISceneManagementService>();
+
+            await sceneManagementService.LoadScene(DB_ScenesEnum.Scene_Main);
             await sceneManagementService.LoadScene(DB_ScenesEnum.Scene_UI);
         }
 

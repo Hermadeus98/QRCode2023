@@ -4,6 +4,7 @@ namespace QRCode.Framework
     using System.Threading.Tasks;
     using Debugging;
     using Sirenix.OdinInspector;
+    using UnityEngine.AddressableAssets;
     using UnityEngine.SceneManagement;
 
     public class SceneManagementService : SerializedMonoBehaviour, ISceneManagementService
@@ -29,13 +30,20 @@ namespace QRCode.Framework
             }
         }
         
-        public async Task<SceneReference> LoadScene(DB_ScenesEnum sceneToLoad)
+        public async Task LoadScene(DB_ScenesEnum sceneToLoad)
         {
             if (SceneDatabase.TryGetInDatabase(sceneToLoad.ToString(), out var sceneReference))
             {
+                for (int i = 0; i < SceneManager.sceneCount; i++)
+                {
+                    if (SceneManager.GetSceneAt(i).name == sceneReference.Scene.editorAsset.name)
+                    {
+                        return;
+                    }
+                }
+                
                 var op = sceneReference.Scene.LoadSceneAsync(LoadSceneMode.Additive).Task;
                 await op;
-                return sceneReference;
             }
             else
             {
@@ -43,13 +51,12 @@ namespace QRCode.Framework
             }
         }
 
-        public async Task<SceneReference> UnLoadScene(DB_ScenesEnum sceneToUnload)
+        public async Task UnLoadScene(DB_ScenesEnum sceneToUnload)
         {
             if (SceneDatabase.TryGetInDatabase(sceneToUnload.ToString(), out var sceneReference))
             {
                 var op = sceneReference.Scene.UnLoadScene().Task;
                 await op;
-                return sceneReference;
             }
             else
             {

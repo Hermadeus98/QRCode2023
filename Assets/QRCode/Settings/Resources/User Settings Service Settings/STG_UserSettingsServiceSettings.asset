@@ -24,21 +24,22 @@ MonoBehaviour:
   m_fileName: userSettings
   m_fileNameExtension: .save
   m_defaultValues:
-    m_brightness: 0
-    m_contrast: 0
-    colorBlindModeSetting: 1
+    m_brightness: 5
+    m_contrast: 5
+    m_colorBlindModeSetting: 0
     m_fieldOfView: 96
     m_fpsLimit: 30
-    windowModeSetting: 0
+    m_windowModeSetting: 0
     m_activeMonitor: 
     m_aspectRatio: 16:10
     m_resolution: 1920 x 1080
     m_VSync: 0
     m_graphicsQualitySetting: 0
     m_useAdaptativeQuality: 0
+    m_adaptativeQualitySetting: 60
     m_antiAliasingSetting: 0
     m_depthOfFieldSetting: 0
-    m_motionBlurSetting: 0
+    m_useMotionBlur: 1
     m_inputModePC: 0
     m_menuHoldFactor: 10
     m_mouseSensitivity: 1

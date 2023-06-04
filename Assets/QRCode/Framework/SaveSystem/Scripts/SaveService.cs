@@ -213,7 +213,6 @@ namespace QRCode.Framework
                 saveSystemSettings.FullFileName);
             fileDataHandler.TryDeleteSave();
             QRDebug.Debug(K.DebuggingChannels.Editor, $"Save Data has been deleted successfully");
-            
         }
     }
 }

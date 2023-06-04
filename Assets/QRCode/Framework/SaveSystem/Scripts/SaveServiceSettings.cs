@@ -17,7 +17,7 @@
         [SerializeField] private bool m_saveAsyncBeforeSceneLoading = true;
         [Tooltip("Automatic load after scene loading.")]
         [SerializeField] private bool m_loadAsyncAfterSceneLoading = true;
- 
+
         [TitleGroup("Default")] 
         [Tooltip("RECOMMENDED : Keep this setting as TRUE to save on the application persistent data path.")]
         [SerializeField] private bool m_useApplicationPersistentDataPath = true;
@@ -34,6 +34,10 @@
         [Tooltip("Duration of the fake save.")]
         [SerializeField][SuffixLabel("s")] private float m_fakeSaveDuration = 2f;
 
+        [TitleGroup("Image Save & Load Settings")] 
+        [Tooltip("If an error occured during load or save of an image or a thumbnail, it will be replaced by this Texture2D.")]
+        [SerializeField] private Texture2D m_notLoadedTexture = null;
+
         [ShowInInspector] [ReadOnly] public string FullPath => m_useApplicationPersistentDataPath ? Application.persistentDataPath : m_dataDirectoryPathDefault;
         public string FullFileName => m_fileName + m_fileNameExtension;
         public FormatterTypeEnum FormatterTypeDefault => m_formatterType;
@@ -42,6 +46,7 @@
         public bool LoadAsyncAfterSceneLoading => m_loadAsyncAfterSceneLoading;
         public bool UseFakeSave => m_useFakeSave;
         public float FakeSaveDuration => m_fakeSaveDuration;
+        public Texture2D NotLoadedTexture => m_notLoadedTexture;
         
 #if UNITY_EDITOR
         [Button]
