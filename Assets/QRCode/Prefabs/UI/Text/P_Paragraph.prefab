@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 2527124551663895930, guid: 0a8a260de02cc6e418537433b3eb2957,
         type: 3}
       propertyPath: m_Name
-      value: Paragraph Variant
+      value: P_Paragraph
       objectReference: {fileID: 0}
     - target: {fileID: 3708063787154010461, guid: 0a8a260de02cc6e418537433b3eb2957,
         type: 3}
@@ -21,13 +21,13 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: a7cf2bc8733f6c0468062c8e95e84690,
+      objectReference: {fileID: 11400000, guid: 2f490f72b6ed6ae4d8b31cee2cac3de7,
         type: 2}
     - target: {fileID: 3708063787154010461, guid: 0a8a260de02cc6e418537433b3eb2957,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -7371932871882357731, guid: a7cf2bc8733f6c0468062c8e95e84690,
+      objectReference: {fileID: -6263097307693789204, guid: 2f490f72b6ed6ae4d8b31cee2cac3de7,
         type: 2}
     - target: {fileID: 3708063787154010461, guid: 0a8a260de02cc6e418537433b3eb2957,
         type: 3}

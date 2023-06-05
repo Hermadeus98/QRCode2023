@@ -217,6 +217,12 @@
         [SerializeField]
         private bool m_showSubtitleSpeakerName;
         
+        [TabGroup("Sound", TextColor = "#9b59b6")] 
+        [SerializeField]
+        private bool m_audioDescriptionTrack;
+
+        public TextSizeSetting TextSizeSetting => m_textSizeSetting;
+        
         public UserSettingsData()
         {
             m_brightness = 5;
@@ -273,6 +279,7 @@
             m_showSubtitleBackground = false;
             m_subtitleBackgroundOpacity = 100;
             m_showSubtitleSpeakerName = true;
+            m_audioDescriptionTrack = false;
         }
 
         public UserSettingsData(UserSettingsService userSettingsService)
@@ -332,6 +339,7 @@
             m_showSubtitleBackground = defaultUserSettingsData.m_showSubtitleBackground;
             m_subtitleBackgroundOpacity = defaultUserSettingsData.m_subtitleBackgroundOpacity;
             m_showSubtitleSpeakerName = defaultUserSettingsData.m_showSubtitleSpeakerName;
+            m_audioDescriptionTrack = defaultUserSettingsData.m_audioDescriptionTrack;
         }
     }
 }

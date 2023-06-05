@@ -10,6 +10,8 @@
 
         private bool m_IsInit = false;
 
+        public UserSettingsEvents UserSettingsEvents { get; private set; }
+
         public async Task Initialize()
         {
             if (m_IsInit)
@@ -17,6 +19,8 @@
                 return;
             }
 
+            UserSettingsEvents = new UserSettingsEvents();
+            
             var saveServiceSettings = SaveServiceSettings.Instance;
             var userSettingsSettings = UserSettingsServiceSettings.Instance;
             m_fileDataHandler = FileDataHandlerFactory.CreateFileDataHandler(saveServiceSettings.FullPath, userSettingsSettings.FullFileName);
@@ -52,6 +56,11 @@
             await m_fileDataHandler.Save(m_userSettingsData);
             
             QRDebug.Debug(K.DebuggingChannels.UserSettings,$"User Settings is save.");
+        }
+
+        public void ApplyChange()
+        {
+            UserSettingsEvents.RaiseEvents();
         }
     }
 }

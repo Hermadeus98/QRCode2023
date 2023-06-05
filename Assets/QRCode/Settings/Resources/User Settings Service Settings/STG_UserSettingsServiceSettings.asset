@@ -55,8 +55,8 @@ MonoBehaviour:
     m_swapStickSetting: 0
     m_quickTimeEventsInputTypeSetting: 0
     m_screenShakeSetting: 0
-    m_textSizeSetting: 0
-    m_iconSizeSetting: 0
+    m_textSizeSetting: 1
+    m_iconSizeSetting: 1
     m_menuNavigationSettings: 0
     m_holdAlternativeSetting: 0
     m_showHUDBackground: 0
@@ -73,3 +73,4 @@ MonoBehaviour:
     m_showSubtitleBackground: 0
     m_subtitleBackgroundOpacity: 0
     m_showSubtitleSpeakerName: 0
+    m_audioDescriptionTrack: 0

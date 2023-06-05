@@ -34,5 +34,12 @@ namespace QRCode.Framework
             await fileDataHandler.Save(m_defaultValues);
             QRDebug.Debug(K.DebuggingChannels.Editor,$"User Settings is save.");
         }
+
+        [Button()][EnableIf("Application.isPlaying")]
+        private void ApplyChange()
+        {
+            var userSettingService = ServiceLocator.Current.Get<IUserSettingsService>();
+            userSettingService.UserSettingsEvents.RaiseEvents();
+        }
     }
 }

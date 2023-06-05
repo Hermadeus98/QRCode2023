@@ -71,6 +71,13 @@ namespace QRCode.Framework
             public const string UIUtilities = UI + "/Utilities/";
         }
         
+        public static class UI
+        {
+            private const string BasePath = "QRCode/UI/";
+
+            public const string UIRuleSets = BasePath + "UI Rule Sets/";
+        }
+        
         public static class MenuNameTestPath
         {
             private const string BasePath = "QRCode/";
@@ -80,6 +87,8 @@ namespace QRCode.Framework
         public static class Catalog
         {
             public const string NamePrefix = "Catalog_";
+            public const string BasePath = "QRCode/Catalog/";
+            public const string CatalogPath = BasePath + "New Catalog";
         }
     }
 }
