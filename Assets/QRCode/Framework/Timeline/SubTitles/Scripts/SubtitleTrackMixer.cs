@@ -6,13 +6,12 @@ namespace QRCode.Framework
 
     public class SubtitleTrackMixer : PlayableBehaviour
     {
+        private SubtitleComponent m_subtitleComponent = null;
+
         public override void ProcessFrame(Playable playable, FrameData info, object playerData)
         {
-            var subtitleComponent = playerData as SubtitleComponent;
-
-            if (subtitleComponent == null)
+            if (CheckMissingReferences() == false)
             {
-                QRDebug.DebugError(K.DebuggingChannels.Error, "Text Component is missing as binding.");
                 return;
             }
 
@@ -49,8 +48,35 @@ namespace QRCode.Framework
                 }
             }
             
-            subtitleComponent.SetTextRaw(currentText);
-            subtitleComponent.SubtitleCanvasGroup.alpha = currentAlpha;
+            m_subtitleComponent.SetTextRaw(currentText);
+            m_subtitleComponent.SetTransparency(currentAlpha);
+        }
+
+        private bool CheckMissingReferences()
+        {
+            if (m_subtitleComponent == null)
+            {
+                if (Application.isPlaying)
+                {
+                    m_subtitleComponent = Subtitles.Instance.MainSubtitleComponent;
+                    return false;
+                }
+                else
+                {
+#if UNITY_EDITOR
+                    m_subtitleComponent = GameObject.FindObjectOfType<SubtitleComponent>();
+                    return false;
+#endif
+                }
+            }
+            
+            if (m_subtitleComponent == null)
+            {
+                QRDebug.DebugError(K.DebuggingChannels.Error, "Text Component cannot be found.");
+                return false;
+            }
+
+            return true;
         }
     }
 }

@@ -1,5 +1,6 @@
 namespace QRCode.Framework
 {
+    using System.Threading.Tasks;
     using Debugging;
     using Sirenix.OdinInspector;
     using UnityEngine;
@@ -29,16 +30,25 @@ namespace QRCode.Framework
         [Button]
         private async void SaveAsDefault()
         {
+            await SaveAsDefaultTask();
+        }
+
+        private async Task SaveAsDefaultTask()
+        {
             var saveServiceSettings = SaveServiceSettings.Instance;
             var fileDataHandler = FileDataHandlerFactory.CreateFileDataHandler(saveServiceSettings.FullPath, FullFileName);
             await fileDataHandler.Save(m_defaultValues);
-            QRDebug.Debug(K.DebuggingChannels.Editor,$"User Settings is save.");
+            QRDebug.Debug(K.DebuggingChannels.Editor,$"User Settings has been changed.");
         }
 
-        [Button()][EnableIf("Application.isPlaying")]
-        private void ApplyChange()
+        [Button()]
+        private async void ApplyChange()
         {
             var userSettingService = ServiceLocator.Current.Get<IUserSettingsService>();
+
+            await SaveAsDefaultTask();
+            await userSettingService.LoadUserSettingsData();
+            
             userSettingService.UserSettingsEvents.RaiseEvents();
         }
     }

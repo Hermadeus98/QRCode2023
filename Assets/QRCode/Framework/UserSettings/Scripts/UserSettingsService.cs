@@ -11,7 +11,7 @@
         private bool m_IsInit = false;
 
         public UserSettingsEvents UserSettingsEvents { get; private set; }
-
+        
         public async Task Initialize()
         {
             if (m_IsInit)

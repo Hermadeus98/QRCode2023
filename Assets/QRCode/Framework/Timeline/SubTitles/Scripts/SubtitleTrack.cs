@@ -4,7 +4,6 @@ namespace QRCode.Framework
     using UnityEngine.Playables;
     using UnityEngine.Timeline;
 
-    [TrackBindingType(typeof(SubtitleComponent))]
     [TrackClipType(typeof(SubtitleClip))]
     public class SubtitleTrack : TrackAsset
     {

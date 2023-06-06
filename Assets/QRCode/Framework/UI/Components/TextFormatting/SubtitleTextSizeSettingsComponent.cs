@@ -1,6 +1,5 @@
-namespace QRCode.Framework
+﻿namespace QRCode.Framework
 {
-    using System;
     using System.Threading;
     using System.Threading.Tasks;
     using Game;
@@ -9,14 +8,15 @@ namespace QRCode.Framework
     using TMPro;
     using UnityEngine;
 
-    public class TextSettingsComponent : MonoBehaviour
+    public class SubtitleTextSizeSettingsComponent : MonoBehaviour
     {
         [TitleGroup(K.InspectorGroups.References)]
         [SerializeField] private TextMeshProUGUI m_textMeshProUGUI = null;
 
         [TitleGroup(K.InspectorGroups.Settings)] [SerializeField]
         private string m_textRuleSetName = "Default";
-        
+
+        private CancellationTokenSource m_cancellationTokenSource = null;
         private IUserSettingsService m_userSettingsService = null;
 
         private IUserSettingsService UserSettingsService
@@ -48,33 +48,28 @@ namespace QRCode.Framework
 
         private async void OnEnable()
         {
-            var cancellationTokenSource = new CancellationTokenSource();
-            while (Bootstrap.IsInit() == false && cancellationTokenSource.Token.IsCancellationRequested == false)
+            m_cancellationTokenSource = new CancellationTokenSource();
+            while (Bootstrap.IsInit() == false && m_cancellationTokenSource.Token.IsCancellationRequested == false)
             {
                 await Task.Yield();
             }
-            cancellationTokenSource.Dispose();
+            m_cancellationTokenSource.Dispose();
             
-            UserSettingsService.UserSettingsEvents.OnTextSizeSettingChange += UpdateTextFromSettings;
-            UpdateTextFromSettings(m_userSettingsService.GetUserSettingsData().TextSizeSetting);
+            UserSettingsService.UserSettingsEvents.OnSubtitleTextSizeSettingChange += UpdateTextFromSettings;
+            UpdateTextFromSettings(m_userSettingsService.GetUserSettingsData().SubtitlesTextSizeSetting);
         }
 
         private void OnDisable()
         {
-            UserSettingsService.UserSettingsEvents.OnTextSizeSettingChange -= UpdateTextFromSettings;
-        }
-
-        private void Start()
-        {
-            
+            UserSettingsService.UserSettingsEvents.OnSubtitleTextSizeSettingChange -= UpdateTextFromSettings;
         }
 
         [Button]
-        private void UpdateTextFromSettings(TextSizeSetting textSizeSetting)
+        private void UpdateTextFromSettings(TextSizeSetting subtitlesTextSizeSetting)
         {
             var textRuleSetCatalog = Catalog.GetCatalogOfType<TextRuleSetCatalog>();
             var textRuleSet = textRuleSetCatalog.GetDataFromId(m_textRuleSetName);
-            var setting = textRuleSet.GetTextSetting(textSizeSetting);
+            var setting = textRuleSet.GetTextSetting(subtitlesTextSizeSetting);
             m_textMeshProUGUI.fontSize = setting.FontSize;
         }
 

@@ -22,7 +22,7 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 2.7666666666666666
+    m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: 1751215545633600785}
     m_Duration: 5
@@ -91,7 +91,7 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: SubtitleClip
   - m_Version: 1
-    m_Start: 7.766666666666667
+    m_Start: 5
     m_ClipIn: 0
     m_Asset: {fileID: 8680573457105890066}
     m_Duration: 5
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bfda56da833e2384a9677cd3c976a436, type: 3}
-  m_Name: TA_Test
+  m_Name: Cinematic_SubtitlesTests
   m_EditorClassIdentifier: 
   m_Version: 0
   m_Tracks:
@@ -196,9 +196,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SubtitleText:
     m_TableReference:
-      m_TableCollectionName: GUID:16dcfad76f6ea5e4882586dc16ebd8a3
+      m_TableCollectionName: GUID:4455220624d283b4fad8e4d95a3f96bf
     m_TableEntryReference:
-      m_KeyId: 70526578688
+      m_KeyId: 7838511104
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -229,9 +229,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SubtitleText:
     m_TableReference:
-      m_TableCollectionName: GUID:451d7ded6d693214ca8e7c88d67a10e7
+      m_TableCollectionName: 
     m_TableEntryReference:
-      m_KeyId: 5560870514688
+      m_KeyId: 0
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

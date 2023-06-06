@@ -38,3 +38,7 @@ MonoBehaviour:
     isActive: 1
     channelColor: {r: 0.25882354, g: 0.5294118, b: 0.76470596, a: 1}
     activeLogTypes: 63
+  - channelName: ERROR
+    isActive: 1
+    channelColor: {r: 1, g: 0, b: 0, a: 1}
+    activeLogTypes: 63

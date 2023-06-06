@@ -203,7 +203,7 @@
         
         [TabGroup("Sound", TextColor = "#9b59b6")] 
         [SerializeField]
-        private SubtitlesTextSizeSetting m_subtitlesTextSizeSetting;
+        private TextSizeSetting m_subtitlesTextSizeSetting;
         
         [TabGroup("Sound", TextColor = "#9b59b6")] 
         [SerializeField]
@@ -221,7 +221,12 @@
         [SerializeField]
         private bool m_audioDescriptionTrack;
 
+        //INTERFACE
         public TextSizeSetting TextSizeSetting => m_textSizeSetting;
+        
+        //SOUND
+        public bool ShowSubtitles => m_showSubtitles;
+        public TextSizeSetting SubtitlesTextSizeSetting => m_subtitlesTextSizeSetting;
         
         public UserSettingsData()
         {
@@ -275,7 +280,7 @@
             m_soundFXVolume = 100;
             m_dialogueBoost = false;
             m_showSubtitles = true;
-            m_subtitlesTextSizeSetting = SubtitlesTextSizeSetting.Small;
+            m_subtitlesTextSizeSetting = TextSizeSetting.Small;
             m_showSubtitleBackground = false;
             m_subtitleBackgroundOpacity = 100;
             m_showSubtitleSpeakerName = true;
