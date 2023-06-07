@@ -9,8 +9,6 @@
         private IFileDataHandler m_fileDataHandler = null;
 
         private bool m_IsInit = false;
-
-        public UserSettingsEvents UserSettingsEvents { get; private set; }
         
         public async Task Initialize()
         {
@@ -18,13 +16,12 @@
             {
                 return;
             }
-
-            UserSettingsEvents = new UserSettingsEvents();
             
             var saveServiceSettings = SaveServiceSettings.Instance;
             var userSettingsSettings = UserSettingsServiceSettings.Instance;
             m_fileDataHandler = FileDataHandlerFactory.CreateFileDataHandler(saveServiceSettings.FullPath, userSettingsSettings.FullFileName);
             await LoadUserSettingsData();
+            UserSettingsEvents.RaiseUserSettingsEvents();
         }
 
         public UserSettingsData GetUserSettingsData()
@@ -58,9 +55,9 @@
             QRDebug.Debug(K.DebuggingChannels.UserSettings,$"User Settings is save.");
         }
 
-        public void ApplyChange()
+        public void ApplyChange(UserSettingsData newUserSettingsData = null)
         {
-            UserSettingsEvents.RaiseEvents();
+            UserSettingsEvents.RaiseUserSettingsEvents();
         }
     }
 }

@@ -19,7 +19,6 @@ namespace QRCode.Framework
         private UserSettingsData m_defaultValues = new UserSettingsData();
         
         public string FullFileName => m_fileName + m_fileNameExtension;
-        public UserSettingsData DefaultUserSettingsData => m_defaultValues;
 
         [Button]
         private void ResetDefaultValues()
@@ -42,14 +41,19 @@ namespace QRCode.Framework
         }
 
         [Button()]
-        private async void ApplyChange()
+        private void ApplyChange()
         {
             var userSettingService = ServiceLocator.Current.Get<IUserSettingsService>();
+            var userSettings = userSettingService.GetUserSettingsData();
 
-            await SaveAsDefaultTask();
-            await userSettingService.LoadUserSettingsData();
+            //INTERFACE
+            userSettings.TextSizeSetting = m_defaultValues.TextSizeSetting;
             
-            userSettingService.UserSettingsEvents.RaiseEvents();
+            //SOUND
+            userSettings.ShowSubtitles = m_defaultValues.ShowSubtitles;
+            userSettings.SubtitlesTextSizeSetting = m_defaultValues.SubtitlesTextSizeSetting;
+            
+            userSettingService.ApplyChange(m_defaultValues);
         }
     }
 }

@@ -1,63 +1,40 @@
 ﻿namespace QRCode.Framework
 {
-    using System;
-    using Settings.InterfaceSettings;
+    using Events;
+    using UnityEngine;
 
-    public class UserSettingsEvents
+    public struct UserSettingsEvents
     {
-        #region TEXT SIZE SETTING
-        private Action<TextSizeSetting> m_onTextSizeSettingChange;
-        public event Action<TextSizeSetting> OnTextSizeSettingChange
-        {
-            add
-            {
-                m_onTextSizeSettingChange -= value;
-                m_onTextSizeSettingChange += value;
-            }
-            remove
-            {
-                m_onTextSizeSettingChange -= value;
-            }
-        }
-        
-        public void UpdateTextSizeSettings(TextSizeSetting textSizeSetting)
-        {
-            m_onTextSizeSettingChange.Invoke(textSizeSetting);
-        }
-        #endregion TEXT SIZE SETTING
+        private static UserSettingsData m_userSettingsService = null;
 
-        #region SUBTITLE TEXT SIZE SETTING
-        private Action<TextSizeSetting> m_onSubtitleTextSizeSettingChange;
-        public event Action<TextSizeSetting> OnSubtitleTextSizeSettingChange
+        private static UserSettingsData UserSettingsService
         {
-            add
+            get
             {
-                m_onSubtitleTextSizeSettingChange -= value;
-                m_onSubtitleTextSizeSettingChange += value;
-            }
-            remove
-            {
-                m_onSubtitleTextSizeSettingChange -= value;
-            }
-        }
-        
-        public void UpdateSubtitleTextSizeSettings(TextSizeSetting subtitlesTextSizeSetting)
-        {
-            m_onSubtitleTextSizeSettingChange.Invoke(subtitlesTextSizeSetting);
-        }
-        #endregion SUBTITLE TEXT SIZE SETTING
+                if (m_userSettingsService == null)
+                {
+                    m_userSettingsService = ServiceLocator.Current.Get<IUserSettingsService>().GetUserSettingsData();
+                }
 
-        public UserSettingsEvents()
+                return m_userSettingsService;
+            }
+        }
+
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void RuntimeInitialization()
         {
-            
+            m_userSettingsService = null;
         }
         
-        public void RaiseEvents()
+        public static void RaiseUserSettingsEvents()
         {
-            var userSettingsData = ServiceLocator.Current.Get<IUserSettingsService>().GetUserSettingsData();
+            //INTERFACE
+            TextSizeSettingEvent.Trigger(UserSettingsService.TextSizeSetting);
             
-            UpdateTextSizeSettings(userSettingsData.TextSizeSetting);
-            UpdateSubtitleTextSizeSettings(userSettingsData.SubtitlesTextSizeSetting);
+            //SOUND
+            SubtitlesTextSizeSettingEvent.Trigger(UserSettingsService.SubtitlesTextSizeSetting);
+            ShowSubtitleEvent.Trigger(UserSettingsService.ShowSubtitles);
         }
     }
 }

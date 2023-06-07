@@ -1,8 +1,6 @@
 namespace QRCode.Framework
 {
-    using System;
-    using System.Threading;
-    using System.Threading.Tasks;
+    using Events;
     using Game;
     using Sirenix.OdinInspector;
     using TMPro;
@@ -20,26 +18,43 @@ namespace QRCode.Framework
         [TitleGroup(K.InspectorGroups.Settings)] [SerializeField]
         private bool m_isMainSubtitleComponent = true;
 
-        private IUserSettingsService m_userSettingsService = null;
-        private CancellationTokenSource m_cancellationTokenSource = null;
+        private bool m_showSubtitles = false;
 
-        public TextMeshProUGUI SubtitleText => m_subtitleText;
+        private UserSettingsData m_userSettingsData = null;
+        private UserSettingsData UserSettingsData
+        {
+            get
+            {
+                if (m_userSettingsData == null)
+                {
+                    m_userSettingsData = ServiceLocator.Current.Get<IUserSettingsService>().GetUserSettingsData();
+                }
 
-        private async void Start()
+                return m_userSettingsData;
+            }
+        }
+
+        private void Start()
         {
             if (m_isMainSubtitleComponent)
             {
                 Subtitles.Instance.SetMainSubtitleComponent(this);
             }
+        }
 
-            m_cancellationTokenSource = new CancellationTokenSource();
-            while (Bootstrap.IsInit() == false && m_cancellationTokenSource.Token.IsCancellationRequested == false)
+        private void OnEnable()
+        {
+            ShowSubtitleEvent.Register(UpdateShowSubtitleFromSettings);
+
+            if (Bootstrap.IsInit())
             {
-                await Task.Yield();
+                UpdateShowSubtitleFromSettings(UserSettingsData.ShowSubtitles);
             }
-            m_cancellationTokenSource.Dispose();
+        }
 
-            m_userSettingsService = ServiceLocator.Current.Get<IUserSettingsService>();
+        private void OnDisable()
+        {
+            ShowSubtitleEvent.Unregister(UpdateShowSubtitleFromSettings);
         }
 
         private void Update()
@@ -47,7 +62,10 @@ namespace QRCode.Framework
 #if UNITY_EDITOR
             if (Application.isPlaying == false)
             {
-                CheckTextCharacterCount();
+                if (TextIsValid() == false)
+                {
+                    m_subtitleCanvasGroup.alpha = 0f;
+                }
             }
 #endif
         }
@@ -59,25 +77,32 @@ namespace QRCode.Framework
 
         public void SetTransparency(float alpha)
         {
-            if (Application.isPlaying)
+            if (m_showSubtitles == false)
             {
-                if (m_userSettingsService != null && m_userSettingsService.GetUserSettingsData().ShowSubtitles == false)
-                {
-                    alpha = 0f;
-                }
+                alpha = 0f;
             }
             
-            CheckTextCharacterCount();
+            if (TextIsValid() == false)
+            {
+                alpha = 0f;
+            }
 
             m_subtitleCanvasGroup.alpha = alpha;
         }
 
-        private void CheckTextCharacterCount()
+        private bool TextIsValid()
         {
             if (string.IsNullOrEmpty(m_subtitleText.text))
             {
-                m_subtitleCanvasGroup.alpha = 0f;
+                return false;
             }
+
+            return true;
+        }
+
+        private void UpdateShowSubtitleFromSettings(bool showSubtitle)
+        {
+            m_showSubtitles = showSubtitle;
         }
     }
 }

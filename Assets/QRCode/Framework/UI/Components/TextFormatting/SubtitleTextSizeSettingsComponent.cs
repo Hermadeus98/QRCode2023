@@ -1,7 +1,6 @@
 ﻿namespace QRCode.Framework
 {
-    using System.Threading;
-    using System.Threading.Tasks;
+    using Events;
     using Game;
     using Settings.InterfaceSettings;
     using Sirenix.OdinInspector;
@@ -16,22 +15,6 @@
         [TitleGroup(K.InspectorGroups.Settings)] [SerializeField]
         private string m_textRuleSetName = "Default";
 
-        private CancellationTokenSource m_cancellationTokenSource = null;
-        private IUserSettingsService m_userSettingsService = null;
-
-        private IUserSettingsService UserSettingsService
-        {
-            get
-            {
-                if (m_userSettingsService == null)
-                {
-                    m_userSettingsService = ServiceLocator.Current.Get<IUserSettingsService>();
-                }
-
-                return m_userSettingsService;
-            }
-        }
-        
         private Catalog m_catalog = null;
         private Catalog Catalog
         {
@@ -46,22 +29,33 @@
             }
         }
 
-        private async void OnEnable()
+        private UserSettingsData m_userSettingsData = null;
+        private UserSettingsData UserSettingsData
         {
-            m_cancellationTokenSource = new CancellationTokenSource();
-            while (Bootstrap.IsInit() == false && m_cancellationTokenSource.Token.IsCancellationRequested == false)
+            get
             {
-                await Task.Yield();
+                if (m_userSettingsData == null)
+                {
+                    m_userSettingsData = ServiceLocator.Current.Get<IUserSettingsService>().GetUserSettingsData();
+                }
+
+                return m_userSettingsData;
             }
-            m_cancellationTokenSource.Dispose();
-            
-            UserSettingsService.UserSettingsEvents.OnSubtitleTextSizeSettingChange += UpdateTextFromSettings;
-            UpdateTextFromSettings(m_userSettingsService.GetUserSettingsData().SubtitlesTextSizeSetting);
+        }
+        
+        private void OnEnable()
+        {
+            SubtitlesTextSizeSettingEvent.Register(UpdateTextFromSettings);
+
+            if (Bootstrap.IsInit())
+            {
+                UpdateTextFromSettings(UserSettingsData.SubtitlesTextSizeSetting);
+            }
         }
 
         private void OnDisable()
         {
-            UserSettingsService.UserSettingsEvents.OnSubtitleTextSizeSettingChange -= UpdateTextFromSettings;
+            SubtitlesTextSizeSettingEvent.Unregister(UpdateTextFromSettings);
         }
 
         [Button]
@@ -71,15 +65,6 @@
             var textRuleSet = textRuleSetCatalog.GetDataFromId(m_textRuleSetName);
             var setting = textRuleSet.GetTextSetting(subtitlesTextSizeSetting);
             m_textMeshProUGUI.fontSize = setting.FontSize;
-        }
-
-        private void OnValidate()
-        {
-            if (m_textMeshProUGUI == null)
-            {
-                m_textMeshProUGUI = GetComponent<TextMeshProUGUI>();
-                UpdateTextFromSettings(m_userSettingsService.GetUserSettingsData().TextSizeSetting);
-            }
         }
     }
 }

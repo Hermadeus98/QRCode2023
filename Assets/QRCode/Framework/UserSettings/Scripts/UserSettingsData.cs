@@ -222,11 +222,24 @@
         private bool m_audioDescriptionTrack;
 
         //INTERFACE
-        public TextSizeSetting TextSizeSetting => m_textSizeSetting;
+        public TextSizeSetting TextSizeSetting
+        {
+            get => m_textSizeSetting;
+            set => m_textSizeSetting = value;
+        }
         
         //SOUND
-        public bool ShowSubtitles => m_showSubtitles;
-        public TextSizeSetting SubtitlesTextSizeSetting => m_subtitlesTextSizeSetting;
+        public bool ShowSubtitles
+        {
+            get => m_showSubtitles;
+            set => m_showSubtitles = value;
+        }
+
+        public TextSizeSetting SubtitlesTextSizeSetting
+        {
+            get => m_subtitlesTextSizeSetting;
+            set => m_subtitlesTextSizeSetting = value;
+        }
         
         public UserSettingsData()
         {
@@ -285,66 +298,6 @@
             m_subtitleBackgroundOpacity = 100;
             m_showSubtitleSpeakerName = true;
             m_audioDescriptionTrack = false;
-        }
-
-        public UserSettingsData(UserSettingsService userSettingsService)
-        {
-            var defaultUserSettingsData = userSettingsService.GetUserSettingsData();
-            m_brightness = defaultUserSettingsData.m_brightness;
-            m_contrast = defaultUserSettingsData.m_contrast;
-            m_colorBlindModeSetting = defaultUserSettingsData.m_colorBlindModeSetting;
-            m_fieldOfView = defaultUserSettingsData.m_fieldOfView;
-            m_fpsLimit = defaultUserSettingsData.m_fpsLimit;
-            m_activeMonitor = defaultUserSettingsData.m_activeMonitor;
-            m_windowModeSetting = defaultUserSettingsData.m_windowModeSetting;
-            m_aspectRatio = defaultUserSettingsData.m_aspectRatio;
-            m_resolution = defaultUserSettingsData.m_resolution;
-            m_VSync = defaultUserSettingsData.m_VSync;
-
-            m_graphicsQualitySetting = defaultUserSettingsData.m_graphicsQualitySetting;
-            m_useAdaptativeQuality = defaultUserSettingsData.m_useAdaptativeQuality;
-            m_adaptativeQualitySetting = defaultUserSettingsData.m_adaptativeQualitySetting;
-            m_antiAliasingSetting = defaultUserSettingsData.m_antiAliasingSetting;
-            m_depthOfFieldSetting = defaultUserSettingsData.m_depthOfFieldSetting;
-            m_useMotionBlur = defaultUserSettingsData.m_useMotionBlur;
-            
-            m_inputModePC = defaultUserSettingsData.m_inputModePC;
-            m_menuHoldFactor = defaultUserSettingsData.m_menuHoldFactor;
-            m_mouseSensitivity = defaultUserSettingsData.m_mouseSensitivity;
-            m_mouseXAxisModeSetting = defaultUserSettingsData.m_mouseXAxisModeSetting;
-            m_mouseYAxisModeSetting = defaultUserSettingsData.m_mouseYAxisModeSetting;
-            m_leftHandedMouseSetting = defaultUserSettingsData.m_leftHandedMouseSetting;
-            m_lockCursor = defaultUserSettingsData.m_lockCursor;
-            m_controllerXAxisSensitivity = defaultUserSettingsData.m_controllerXAxisSensitivity;
-            m_controllerYAxisSensitivity = defaultUserSettingsData.m_controllerYAxisSensitivity;
-            m_controllerXAxisModeSetting = defaultUserSettingsData.m_controllerXAxisModeSetting;
-            m_controllerYAxisModeSetting = defaultUserSettingsData.m_controllerYAxisModeSetting;
-            m_controllerVibrationSetting = defaultUserSettingsData.m_controllerVibrationSetting;
-            m_swapStickSetting = defaultUserSettingsData.m_swapStickSetting;
-
-            m_quickTimeEventsInputTypeSetting = defaultUserSettingsData.m_quickTimeEventsInputTypeSetting;
-            m_screenShakeSetting = defaultUserSettingsData.m_screenShakeSetting;
-
-            m_textSizeSetting = defaultUserSettingsData.m_textSizeSetting;
-            m_iconSizeSetting = defaultUserSettingsData.m_iconSizeSetting;
-            m_menuNavigationSettings = defaultUserSettingsData.m_menuNavigationSettings;
-            m_holdAlternativeSetting = defaultUserSettingsData.m_holdAlternativeSetting;
-            m_showHUDBackground = defaultUserSettingsData.m_showHUDBackground;
-            m_HUDBackgroundOpacity = defaultUserSettingsData.m_HUDBackgroundOpacity;
-            m_showTipsAndMessages = defaultUserSettingsData.m_showTipsAndMessages;
-            m_showContextualAction = defaultUserSettingsData.m_showContextualAction;
-            m_showControlHints = defaultUserSettingsData.m_showControlHints;
-
-            m_masterVolume = defaultUserSettingsData.m_masterVolume;
-            m_musicVolume = defaultUserSettingsData.m_musicVolume;
-            m_soundFXVolume = defaultUserSettingsData.m_soundFXVolume;
-            m_dialogueBoost = defaultUserSettingsData.m_dialogueBoost;
-            m_showSubtitles = defaultUserSettingsData.m_showSubtitles;
-            m_subtitlesTextSizeSetting = defaultUserSettingsData.m_subtitlesTextSizeSetting;
-            m_showSubtitleBackground = defaultUserSettingsData.m_showSubtitleBackground;
-            m_subtitleBackgroundOpacity = defaultUserSettingsData.m_subtitleBackgroundOpacity;
-            m_showSubtitleSpeakerName = defaultUserSettingsData.m_showSubtitleSpeakerName;
-            m_audioDescriptionTrack = defaultUserSettingsData.m_audioDescriptionTrack;
         }
     }
 }
