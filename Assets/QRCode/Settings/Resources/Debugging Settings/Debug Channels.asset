@@ -40,5 +40,9 @@ MonoBehaviour:
     activeLogTypes: 63
   - channelName: ERROR
     isActive: 1
-    channelColor: {r: 1, g: 0, b: 0, a: 1}
+    channelColor: {r: 0.6981132, g: 0.26673195, b: 0.26673195, a: 1}
+    activeLogTypes: 63
+  - channelName: SUBTITLES
+    isActive: 1
+    channelColor: {r: 0.69803923, g: 0.583112, b: 0.26666668, a: 1}
     activeLogTypes: 63

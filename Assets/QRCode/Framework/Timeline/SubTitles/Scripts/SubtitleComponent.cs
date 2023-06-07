@@ -7,13 +7,12 @@ namespace QRCode.Framework
     using UnityEngine;
 
     [ExecuteInEditMode]
-    public class SubtitleComponent : SerializedMonoBehaviour
+    public class SubtitleComponent : MonoBehaviour
     {
-        [TitleGroup(K.InspectorGroups.References)] [SerializeField]
-        private TextMeshProUGUI m_subtitleText = null;
-
-        [TitleGroup(K.InspectorGroups.References)] [SerializeField]
-        private CanvasGroup m_subtitleCanvasGroup = null;
+        [TitleGroup(K.InspectorGroups.References)] 
+        [SerializeField] private TextMeshProUGUI m_subtitleSpeakerName = null;
+        [SerializeField] private TextMeshProUGUI m_subtitleText = null;
+        [SerializeField] private CanvasGroup m_subtitleCanvasGroup = null;
 
         [TitleGroup(K.InspectorGroups.Settings)] [SerializeField]
         private bool m_isMainSubtitleComponent = true;
@@ -68,6 +67,11 @@ namespace QRCode.Framework
                 }
             }
 #endif
+        }
+
+        public void SetSpeakerName(string speakerName)
+        {
+            m_subtitleSpeakerName.SetText(speakerName);
         }
 
         public void SetTextRaw(string text)

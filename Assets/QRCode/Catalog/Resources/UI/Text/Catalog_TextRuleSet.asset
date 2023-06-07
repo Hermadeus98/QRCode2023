@@ -31,7 +31,7 @@ MonoBehaviour:
       m_fontSize: 36
     - m_textSizeSetting: 2
       m_fontSize: 45
-  - m_name: SubTitles
+  - m_name: SubtitlesText
     m_textSettings:
     - m_textSizeSetting: 0
       m_fontSize: 25
@@ -39,3 +39,11 @@ MonoBehaviour:
       m_fontSize: 36
     - m_textSizeSetting: 2
       m_fontSize: 45
+  - m_name: SubtitlesSpeakerName
+    m_textSettings:
+    - m_textSizeSetting: 0
+      m_fontSize: 30
+    - m_textSizeSetting: 1
+      m_fontSize: 41
+    - m_textSizeSetting: 2
+      m_fontSize: 50

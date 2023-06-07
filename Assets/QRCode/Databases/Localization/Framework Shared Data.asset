@@ -19,6 +19,14 @@ MonoBehaviour:
     m_Key: TestSmartText
     m_Metadata:
       m_Items: []
+  - m_Id: 3306247507292160
+    m_Key: SubtitleTextExample
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3306274602496000
+    m_Key: SubtitleSpeakerNameExample
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

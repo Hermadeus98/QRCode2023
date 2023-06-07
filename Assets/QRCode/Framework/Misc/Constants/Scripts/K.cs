@@ -48,6 +48,7 @@ namespace QRCode.Framework
             public const string SaveSystem = "Save System";
             public const string Audio = "Audio";
             public const string UserSettings = "User Settings";
+            public const string Subtitles = "Subtitles";
         } 
         
         public static class Game
@@ -89,6 +90,16 @@ namespace QRCode.Framework
             public const string NamePrefix = "Catalog_";
             public const string BasePath = "QRCode/Catalog/";
             public const string CatalogPath = BasePath + "New Catalog";
+        }
+        
+        public static class Subtitles
+        {
+            private const string BasePath = "QRCode/Subtitles/";
+
+            public const string SubtitleDataPath = BasePath + "Subtitle Data";
+
+            public const string SubtitleTextPlaceHolder = "This is a place holder text !!!";
+            public const string SubtitleSpeakerNamePlaceHolder = "SpeakerName";
         }
     }
 }

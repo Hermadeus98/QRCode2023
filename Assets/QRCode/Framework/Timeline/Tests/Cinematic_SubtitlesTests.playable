@@ -194,27 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a8339c6df32e04f88c601a06db6259, type: 3}
   m_Name: SubtitleClip
   m_EditorClassIdentifier: 
-  SubtitleText:
-    m_TableReference:
-      m_TableCollectionName: GUID:4455220624d283b4fad8e4d95a3f96bf
-    m_TableEntryReference:
-      m_KeyId: 7838511104
-      m_Key: 
-    m_FallbackState: 0
-    m_WaitForCompletion: 0
-    m_LocalVariables:
-    - name: str
-      variable:
-        rid: 6245271577369247746
-  Text: Je suis un text de test.
-  references:
-    version: 2
-    RefIds:
-    - rid: 6245271577369247746
-      type: {class: ObjectVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables,
-        asm: Unity.Localization}
-      data:
-        m_Value: {fileID: 11400000, guid: d4d135ae92d7fbe4e892d84e8299f837, type: 2}
+  m_subtitleData: {fileID: 11400000, guid: ed1c3b1f57a669c43a8ee2a5afa9d2e3, type: 2}
 --- !u!114 &8680573457105890066
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -227,16 +207,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a8339c6df32e04f88c601a06db6259, type: 3}
   m_Name: SubtitleClip(Clone)(Clone)
   m_EditorClassIdentifier: 
-  SubtitleText:
-    m_TableReference:
-      m_TableCollectionName: 
-    m_TableEntryReference:
-      m_KeyId: 0
-      m_Key: 
-    m_FallbackState: 0
-    m_WaitForCompletion: 0
-    m_LocalVariables: []
-  Text: Je suis un autre text de test.
-  references:
-    version: 2
-    RefIds: []
+  m_subtitleData: {fileID: 0}

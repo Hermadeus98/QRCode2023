@@ -8,6 +8,10 @@ namespace QRCode.Framework
     {
         private SubtitleComponent m_subtitleComponent = null;
 
+        private string m_currentSpeakerName;
+        private string m_currentText;
+        private float m_currentAlpha = 0f;
+
         public override void ProcessFrame(Playable playable, FrameData info, object playerData)
         {
             if (CheckMissingReferences() == false)
@@ -15,8 +19,9 @@ namespace QRCode.Framework
                 return;
             }
 
-            var currentAlpha = 0f;
-            var currentText = "";
+            m_currentAlpha = 0f;
+            m_currentSpeakerName = string.Empty;
+            m_currentText = string.Empty;
             
             var inputCount = playable.GetInputCount();
             for (var i = 0; i < inputCount; i++)
@@ -28,28 +33,15 @@ namespace QRCode.Framework
                     ScriptPlayable<SubtitleBehaviour> inputPlayable = (ScriptPlayable<SubtitleBehaviour>)playable.GetInput(i);
                     SubtitleBehaviour input = inputPlayable.GetBehaviour();
 
-                    if (input.SubtitleText.IsEmpty)
-                    {
-                        currentText = input.Text;
-                    }
-                    else
-                    {
-                        currentText = input.SubtitleText.GetLocalizedString();
-                    }
-
-#if UNITY_EDITOR
-                    if (!Application.isPlaying)
-                    {
-                        currentText = input.Text;
-                    }
-#endif
-
-                    currentAlpha = inputWeight;
+                    m_currentText = input.GetText();
+                    m_currentSpeakerName = input.GetSpeakerName();
+                    m_currentAlpha = inputWeight;
                 }
             }
             
-            m_subtitleComponent.SetTextRaw(currentText);
-            m_subtitleComponent.SetTransparency(currentAlpha);
+            m_subtitleComponent.SetSpeakerName(m_currentSpeakerName);
+            m_subtitleComponent.SetTextRaw(m_currentText);
+            m_subtitleComponent.SetTransparency(m_currentAlpha);
         }
 
         private bool CheckMissingReferences()
