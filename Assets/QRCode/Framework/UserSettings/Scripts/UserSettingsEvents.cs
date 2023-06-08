@@ -34,7 +34,10 @@
             
             //SOUND
             SubtitlesTextSizeSettingEvent.Trigger(UserSettingsService.SubtitlesTextSizeSetting);
-            ShowSubtitleEvent.Trigger(UserSettingsService.ShowSubtitles);
+            ShowSubtitleBackgroundSettingEvent.Trigger(UserSettingsService.ShowSubtitleBackground);
+            ChangeSubtitleBackgroundOpacityEvent.Trigger(UserSettingsService.SubtitleBackgroundOpacity);
+            ShowSpeakerNameSettingEvents.Trigger(UserSettingsService.ShowSubtitleSpeakerName);
+            ShowSubtitleSettingEvent.Trigger(UserSettingsService.ShowSubtitles);
         }
     }
 }

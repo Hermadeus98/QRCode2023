@@ -235,6 +235,24 @@
             set => m_showSubtitles = value;
         }
 
+        public bool ShowSubtitleBackground
+        {
+            get => m_showSubtitleBackground;
+            set => m_showSubtitleBackground = value;
+        }
+
+        public int SubtitleBackgroundOpacity
+        {
+            get => m_subtitleBackgroundOpacity;
+            set => m_subtitleBackgroundOpacity = value;
+        }
+
+        public bool ShowSubtitleSpeakerName
+        {
+            get => m_showSubtitleSpeakerName;
+            set => m_showSubtitleSpeakerName = value;
+        }
+
         public TextSizeSetting SubtitlesTextSizeSetting
         {
             get => m_subtitlesTextSizeSetting;

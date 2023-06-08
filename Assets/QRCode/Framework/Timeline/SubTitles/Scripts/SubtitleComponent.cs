@@ -13,11 +13,13 @@ namespace QRCode.Framework
         [SerializeField] private TextMeshProUGUI m_subtitleSpeakerName = null;
         [SerializeField] private TextMeshProUGUI m_subtitleText = null;
         [SerializeField] private CanvasGroup m_subtitleCanvasGroup = null;
+        [SerializeField] private CanvasGroup m_subtitleBackGround = null;
 
-        [TitleGroup(K.InspectorGroups.Settings)] [SerializeField]
-        private bool m_isMainSubtitleComponent = true;
+        [TitleGroup(K.InspectorGroups.Settings)] 
+        [SerializeField] private bool m_isMainSubtitleComponent = true;
 
         private bool m_showSubtitles = false;
+        private bool m_showBackground = false;
 
         private UserSettingsData m_userSettingsData = null;
         private UserSettingsData UserSettingsData
@@ -43,17 +45,24 @@ namespace QRCode.Framework
 
         private void OnEnable()
         {
-            ShowSubtitleEvent.Register(UpdateShowSubtitleFromSettings);
+            ShowSubtitleSettingEvent.Register(UpdateShowSubtitleFromSettings);
+            ShowSpeakerNameSettingEvents.Register(UpdateShowSpeakerNameFromSettings);
+            ChangeSubtitleBackgroundOpacityEvent.Register(UpdateBackgroundOpacityFromSettings);
+            ShowSubtitleBackgroundSettingEvent.Register(UpdateShowBackgroundFromSettings);
 
             if (Bootstrap.IsInit())
             {
                 UpdateShowSubtitleFromSettings(UserSettingsData.ShowSubtitles);
+                UpdateShowSpeakerNameFromSettings(UserSettingsData.ShowSubtitleSpeakerName);
             }
         }
 
         private void OnDisable()
         {
-            ShowSubtitleEvent.Unregister(UpdateShowSubtitleFromSettings);
+            ShowSubtitleSettingEvent.Unregister(UpdateShowSubtitleFromSettings);
+            ShowSpeakerNameSettingEvents.Unregister(UpdateShowSpeakerNameFromSettings);
+            ChangeSubtitleBackgroundOpacityEvent.Unregister(UpdateBackgroundOpacityFromSettings);
+            ShowSubtitleBackgroundSettingEvent.Unregister(UpdateShowBackgroundFromSettings);
         }
 
         private void Update()
@@ -107,6 +116,27 @@ namespace QRCode.Framework
         private void UpdateShowSubtitleFromSettings(bool showSubtitle)
         {
             m_showSubtitles = showSubtitle;
+        }
+
+        private void UpdateShowSpeakerNameFromSettings(bool showSubtitleSpeakerName)
+        {
+            m_subtitleSpeakerName.gameObject.SetActive(showSubtitleSpeakerName);
+        }
+
+        private void UpdateBackgroundOpacityFromSettings(int subtitleBackgroundOpacity)
+        {
+            if (m_showBackground == false)
+            {
+                m_subtitleBackGround.alpha = 0f;
+                return;
+            }
+
+            m_subtitleBackGround.alpha = (float)subtitleBackgroundOpacity / 100;
+        }
+
+        private void UpdateShowBackgroundFromSettings(bool showSubtitleBackground)
+        {
+            m_showBackground = showSubtitleBackground;
         }
     }
 }

@@ -1,5 +1,6 @@
 namespace QRCode.Framework
 {
+    using System;
     using System.Threading.Tasks;
     using Debugging;
     using Sirenix.OdinInspector;
@@ -40,7 +41,14 @@ namespace QRCode.Framework
             QRDebug.Debug(K.DebuggingChannels.Editor,$"User Settings has been changed.");
         }
 
-        [Button()]
+        private void OnValidate()
+        {
+            if (Application.isPlaying)
+            {
+                ApplyChange();
+            }
+        }
+
         private void ApplyChange()
         {
             var userSettingService = ServiceLocator.Current.Get<IUserSettingsService>();
@@ -51,6 +59,9 @@ namespace QRCode.Framework
             
             //SOUND
             userSettings.ShowSubtitles = m_defaultValues.ShowSubtitles;
+            userSettings.ShowSubtitleBackground = m_defaultValues.ShowSubtitleBackground;
+            userSettings.SubtitleBackgroundOpacity = m_defaultValues.SubtitleBackgroundOpacity;
+            userSettings.ShowSubtitleSpeakerName = m_defaultValues.ShowSubtitleSpeakerName;
             userSettings.SubtitlesTextSizeSetting = m_defaultValues.SubtitlesTextSizeSetting;
             
             userSettingService.ApplyChange(m_defaultValues);

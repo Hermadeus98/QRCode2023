@@ -21,6 +21,11 @@
             var userSettingsSettings = UserSettingsServiceSettings.Instance;
             m_fileDataHandler = FileDataHandlerFactory.CreateFileDataHandler(saveServiceSettings.FullPath, userSettingsSettings.FullFileName);
             await LoadUserSettingsData();
+            
+#if UNITY_EDITOR
+            //This delay should not exist in build, the bootstrap must be finish before launch first game scene.
+            await Task.Delay(500);
+#endif
             UserSettingsEvents.RaiseUserSettingsEvents();
         }
 

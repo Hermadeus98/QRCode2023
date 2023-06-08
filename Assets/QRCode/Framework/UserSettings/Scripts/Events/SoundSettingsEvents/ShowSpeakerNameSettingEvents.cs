@@ -2,7 +2,7 @@
 {
     using UnityEngine;
 
-    public struct ShowSubtitleEvent
+    public struct ShowSpeakerNameSettingEvents
     {
         private static event Delegate OnEvent;
         
@@ -12,11 +12,11 @@
         public static void Register(Delegate callback) { OnEvent += callback; }
         public static void Unregister(Delegate callback) { OnEvent -= callback; }
 
-        public delegate void Delegate(bool showSubtitles);
+        public delegate void Delegate(bool showSubtitleSpeakerName);
 
-        public static void Trigger(bool showSubtitles)
+        public static void Trigger(bool showSubtitleSpeakerName)
         {
-            OnEvent?.Invoke(showSubtitles);
+            OnEvent?.Invoke(showSubtitleSpeakerName);
         }
     }
 }
