@@ -30,6 +30,7 @@
         public static void RaiseUserSettingsEvents()
         {
             //INTERFACE
+            InterfaceAreaCalibrationEvent.Trigger(UserSettingsService.InterfaceAreaCalibrationSize);
             TextSizeSettingEvent.Trigger(UserSettingsService.TextSizeSetting);
             
             //SOUND

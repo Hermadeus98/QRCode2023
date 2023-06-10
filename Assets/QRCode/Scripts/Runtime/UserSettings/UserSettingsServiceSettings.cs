@@ -55,6 +55,7 @@ namespace QRCode.Framework
             var userSettings = userSettingService.GetUserSettingsData();
 
             //INTERFACE
+            userSettings.InterfaceAreaCalibrationSize = m_defaultValues.InterfaceAreaCalibrationSize;
             userSettings.TextSizeSetting = m_defaultValues.TextSizeSetting;
             
             //SOUND

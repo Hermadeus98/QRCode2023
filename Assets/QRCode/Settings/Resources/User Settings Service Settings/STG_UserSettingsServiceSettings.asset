@@ -55,6 +55,7 @@ MonoBehaviour:
     m_swapStickSetting: 0
     m_quickTimeEventsInputTypeSetting: 0
     m_screenShakeSetting: 1
+    m_interfaceAreaCalibrationSize: 41
     m_textSizeSetting: 0
     m_iconSizeSetting: 0
     m_menuNavigationSettings: 0

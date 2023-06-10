@@ -143,6 +143,9 @@
         
         [TabGroup("Interface", TextColor = "#f1c40f")] 
         [Title("General")]
+        [SerializeField] [Range(-25, 50)] private int m_interfaceAreaCalibrationSize = 12;
+        
+        [TabGroup("Interface", TextColor = "#f1c40f")] 
         [SerializeField]
         private TextSizeSetting m_textSizeSetting;
         
@@ -222,6 +225,12 @@
         private bool m_audioDescriptionTrack;
 
         //INTERFACE
+        public int InterfaceAreaCalibrationSize
+        {
+            get => m_interfaceAreaCalibrationSize;
+            set => m_interfaceAreaCalibrationSize = value;
+        }
+        
         public TextSizeSetting TextSizeSetting
         {
             get => m_textSizeSetting;
@@ -261,6 +270,7 @@
         
         public UserSettingsData()
         {
+            //SCREEN
             m_brightness = 5;
             m_contrast = 5;
             m_colorBlindModeSetting = ColorblindModeSetting.Off;
@@ -272,6 +282,7 @@
             m_resolution = "1920 x 1080";
             m_VSync = VSyncMode.Off;
 
+            //GRAPHICS
             m_graphicsQualitySetting = GraphicsQualitySetting.High;
             m_useAdaptativeQuality = false;
             m_adaptativeQualitySetting = 60;
@@ -279,6 +290,7 @@
             m_depthOfFieldSetting = DepthOfFieldSetting.High;
             m_useMotionBlur = true;
 
+            //CONTROLS
             m_inputModePC = InputModePC.HybridMode;
             m_menuHoldFactor = 1000;
             m_mouseSensitivity = 5;
@@ -293,9 +305,12 @@
             m_controllerVibrationSetting = ControllerVibrationSetting.Normal;
             m_swapStickSetting = SwapStickSetting.Off;
 
+            //GAMEPLAY
             m_quickTimeEventsInputTypeSetting = QuickTimeEventsInputTypeSetting.Repeated;
             m_screenShakeSetting = true;
 
+            //INTERFACE
+            m_interfaceAreaCalibrationSize = 12;
             m_textSizeSetting = TextSizeSetting.Small;
             m_iconSizeSetting = IconSizeSetting.Small;
             m_menuNavigationSettings = MenuNavigationSettings.Cursor;
@@ -306,6 +321,7 @@
             m_showContextualAction = true;
             m_showControlHints = true;
 
+            //SOUND
             m_masterVolume = 100;
             m_musicVolume = 100;
             m_soundFXVolume = 100;
