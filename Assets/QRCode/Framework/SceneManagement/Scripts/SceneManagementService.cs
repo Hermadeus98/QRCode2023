@@ -1,14 +1,20 @@
 namespace QRCode.Framework
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Debugging;
     using Sirenix.OdinInspector;
     using UnityEngine.AddressableAssets;
+    using UnityEngine.ResourceManagement.AsyncOperations;
+    using UnityEngine.ResourceManagement.ResourceProviders;
     using UnityEngine.SceneManagement;
 
     public class SceneManagementService : SerializedMonoBehaviour, ISceneManagementService
     {
+        private readonly Dictionary<DB_ScenesEnum, AsyncOperationHandle<SceneInstance>> m_scenesInstanceHandle = new();
+
         private SceneDatabase m_sceneDatabase = null;
         private SceneDatabase SceneDatabase
         {
@@ -29,21 +35,33 @@ namespace QRCode.Framework
                 return m_sceneDatabase;
             }
         }
-        
+
+        private void OnDestroy()
+        {
+            if (m_scenesInstanceHandle.Count > 0)
+            {
+                for (int i = 0; i < m_scenesInstanceHandle.Count; i++)
+                {
+                    Addressables.ReleaseInstance(m_scenesInstanceHandle.ElementAt(i).Value);
+                }
+            }
+            
+            m_scenesInstanceHandle.Clear();
+        }
+
         public async Task LoadScene(DB_ScenesEnum sceneToLoad)
         {
             if (SceneDatabase.TryGetInDatabase(sceneToLoad.ToString(), out var sceneReference))
             {
-                for (int i = 0; i < SceneManager.sceneCount; i++)
+                if (SceneIsAlreadyLoad(sceneReference))
                 {
-                    if (SceneManager.GetSceneAt(i).name == sceneReference.Scene.editorAsset.name)
-                    {
-                        return;
-                    }
+                    return;
                 }
                 
-                var op = sceneReference.Scene.LoadSceneAsync(LoadSceneMode.Additive).Task;
-                await op;
+                var loadOperationHandle = sceneReference.Scene.LoadSceneAsync(LoadSceneMode.Additive);
+                await loadOperationHandle.Task;
+                
+                m_scenesInstanceHandle.Add(sceneToLoad, loadOperationHandle);
             }
             else
             {
@@ -55,13 +73,29 @@ namespace QRCode.Framework
         {
             if (SceneDatabase.TryGetInDatabase(sceneToUnload.ToString(), out var sceneReference))
             {
-                var op = sceneReference.Scene.UnLoadScene().Task;
-                await op;
+                var unloadOperationHandle = sceneReference.Scene.UnLoadScene();
+                await unloadOperationHandle.Task;
+                
+                Addressables.ReleaseInstance(m_scenesInstanceHandle[sceneToUnload]);
+                m_scenesInstanceHandle.Remove(sceneToUnload);
             }
             else
             {
                 throw new SceneManagementException($"Cannot find {sceneToUnload.ToString()} in {m_sceneDatabase.name}");
             }
+        }
+
+        private bool SceneIsAlreadyLoad(SceneReference sceneReference)
+        {
+            for (var i = 0; i < SceneManager.sceneCount; i++)
+            {
+                if (SceneManager.GetSceneAt(i).name == sceneReference.Scene.editorAsset.name)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 

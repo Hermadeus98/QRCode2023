@@ -381,6 +381,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1521420346}
     m_Modifications:
+    - target: {fileID: 1475893096016497183, guid: 055b854f1ff47694982ad5d850e4b82a,
+        type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2898861366210096978, guid: 055b854f1ff47694982ad5d850e4b82a,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -1117,6 +1122,11 @@ PrefabInstance:
       value: Canvas - Game
       objectReference: {fileID: 0}
     - target: {fileID: 5604664777480558791, guid: 529a48e4c5ff8584f8b8efd3d050200d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173550001566499599, guid: 529a48e4c5ff8584f8b8efd3d050200d,
         type: 3}
       propertyPath: m_IsActive
       value: 1

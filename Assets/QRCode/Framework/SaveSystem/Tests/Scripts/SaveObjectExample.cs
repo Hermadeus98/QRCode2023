@@ -1,6 +1,8 @@
 namespace QRCode.Framework
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using Game;
     using Sirenix.OdinInspector;
     using UnityEngine;
     using QRCode.Framework.Debugging;
@@ -24,7 +26,7 @@ namespace QRCode.Framework
 
         [Button]
 #pragma warning disable CS1998
-        public async void Save()
+        private async void Save()
 #pragma warning restore CS1998
         {
 #if UNITY_EDITOR
@@ -39,7 +41,7 @@ namespace QRCode.Framework
         }
         
         [Button]
-        public async void Load()
+        private async void Load()
         {
 #if UNITY_EDITOR
             if (Application.isPlaying == false)
@@ -62,14 +64,19 @@ namespace QRCode.Framework
         }
 
         [Button]
-        public async void DeleteSave()
+        private async void DeleteSave()
         {
             var saveService = ServiceLocator.Current.Get<ISaveService>();
             await saveService.DeleteSave();
         }
         
-        public void LoadGameData(GameData gameData)
+        public async void LoadGameData(GameData gameData)
         {
+            while (Bootstrap.IsInit() == false)
+            {
+                await Task.Yield();
+            }
+            
             m_savedInt = gameData.ValueTest;
             m_dictionary = new Dictionary<string, float>();
             foreach (var keyValuePair in gameData.DictionaryTest)

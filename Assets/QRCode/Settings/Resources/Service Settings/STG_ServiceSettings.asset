@@ -21,6 +21,11 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+  m_saveService:
+    m_AssetGUID: 3184743629e71f54882a6d6d665f34ae
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   m_levelLoadingManagementService:
     m_AssetGUID: eee9b7435e6771449b9dda5b895be7a9
     m_SubObjectName: 

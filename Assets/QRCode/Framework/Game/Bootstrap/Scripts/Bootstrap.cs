@@ -50,10 +50,13 @@ namespace QRCode.Framework.Game
 
         private static async Task PrepareSave()
         {
-            var gameObject = new GameObject("SERVICE - Save System");
-            ISaveService saveService = gameObject.AddComponent<SaveService>();
+            var instantiateSaveServiceTask = ServiceSettings.SaveService.InstantiateAsync();
+            var saveServiceInstance = instantiateSaveServiceTask.WaitForCompletion();
+            var saveService = saveServiceInstance.GetComponent<ISaveService>();
             ServiceLocator.Current.RegisterService<ISaveService>(saveService);
             Object.DontDestroyOnLoad((Object)saveService);
+            saveServiceInstance.AddComponent<ReleaseAddressableInstanceOnDestroy>();
+            
             await saveService.Initialize();
         }
 
@@ -79,6 +82,7 @@ namespace QRCode.Framework.Game
             var sceneManagementService = sceneManagementServiceInstance.GetComponent<ILevelLoadingManagementService>();
             ServiceLocator.Current.RegisterService<ILevelLoadingManagementService>(sceneManagementService);
             Object.DontDestroyOnLoad((Object)sceneManagementService);
+            sceneManagementServiceInstance.AddComponent<ReleaseAddressableInstanceOnDestroy>();
         }
 
         private static void CreateInputManagementService()
@@ -88,6 +92,7 @@ namespace QRCode.Framework.Game
             var inputManagementService = inputManagementServiceInstance.GetComponent<IInputManagementService>();
             ServiceLocator.Current.RegisterService<IInputManagementService>(inputManagementService);
             Object.DontDestroyOnLoad((Object)inputManagementService);
+            inputManagementServiceInstance.AddComponent<ReleaseAddressableInstanceOnDestroy>();
         }
 
         private static void CreateSceneManagementService()
@@ -97,6 +102,7 @@ namespace QRCode.Framework.Game
             var sceneManagementService = sceneManagementServiceInstance.GetComponent<ISceneManagementService>();
             ServiceLocator.Current.RegisterService<ISceneManagementService>(sceneManagementService);
             Object.DontDestroyOnLoad((Object)sceneManagementService);
+            sceneManagementServiceInstance.AddComponent<ReleaseAddressableInstanceOnDestroy>();
         }
         
         private static void CreateAudioService()

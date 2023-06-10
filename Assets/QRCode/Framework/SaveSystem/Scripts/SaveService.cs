@@ -12,7 +12,9 @@ namespace QRCode.Framework
     //https://www.google.com/search?client=firefox-b-d&q=save+system+unity#fpstate=ive&vld=cid:47854c46,vid:aUi9aijvpgs,st:899
     public class SaveService : SerializedMonoBehaviour , ISaveService
     {
-        private GameData m_gameData = null;
+        [TitleGroup(K.InspectorGroups.Debugging)]
+        [ShowInInspector] private GameData m_gameData = null;
+        
         private IFileDataHandler m_fileDataHandler = null;
         private SaveServiceSettings m_saveServiceSettings = null;
         private CancellationTokenSource m_cancellationTokenSource = null;
@@ -20,6 +22,7 @@ namespace QRCode.Framework
         private bool m_isSaving = false;
         private bool m_isLoading = false;
         private bool m_isInit = false;
+        private bool m_gameExit = false;
 
         private Action m_onStartSave;
         private Action m_onEndSave;
@@ -64,6 +67,11 @@ namespace QRCode.Framework
             m_fileDataHandler = FileDataHandlerFactory.CreateFileDataHandler(saveSystemSettings.FullPath, saveSystemSettings.FullFileName);
             m_saveServiceSettings = SaveServiceSettings.Instance;
             m_cancellationTokenSource = new CancellationTokenSource();
+
+#if UNITY_STANDALONE
+            Application.wantsToQuit += OnStandaloneExit;
+#endif
+
             await LoadGameAsync();
             m_isInit = true;
         }
@@ -154,16 +162,51 @@ namespace QRCode.Framework
             return m_isInit;
         }
 
-        private async void OnApplicationQuit()
-        {
-            await SaveGameAsync();
-        }
-
         private void OnDestroy()
         {
             m_cancellationTokenSource.Cancel();
         }
 
+        private bool OnStandaloneExit()
+        {
+            m_gameExit = true;
+            Application.wantsToQuit -= OnStandaloneExit;
+            if (m_isSaving)
+            {
+                StandaloneQuitAfterSave(10);
+                return false;
+            }
+
+            return true;
+        }
+        
+        private async void StandaloneQuitAfterSave(int a_timeout)
+        {
+            var time = 0f;
+            while (m_isSaving && time < a_timeout)
+            {
+                await Task.Yield();
+                time += Time.deltaTime;
+            }
+
+            Clear();
+            Application.Quit();
+        }
+        
+        private void Clear()
+        {
+            m_gameData = null;
+            if (m_cancellationTokenSource != null)
+            {
+                m_cancellationTokenSource.Cancel();
+                m_cancellationTokenSource.Dispose();
+                m_cancellationTokenSource = null;
+            }
+
+            m_fileDataHandler = null;
+        }
+
+#if UNITY_EDITOR
         public static async Task<GameData> LoadInEditor()
         {
             var saveSystemSettings = SaveServiceSettings.Instance;
@@ -214,5 +257,6 @@ namespace QRCode.Framework
             fileDataHandler.TryDeleteSave();
             QRDebug.Debug(K.DebuggingChannels.Editor, $"Save Data has been deleted successfully");
         }
+#endif
     }
 }

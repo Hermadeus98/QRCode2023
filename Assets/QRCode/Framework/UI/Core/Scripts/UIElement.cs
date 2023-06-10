@@ -1,6 +1,5 @@
 namespace QRCode.Framework
 {
-    using System;
     using Sirenix.OdinInspector;
     using UnityEngine;
     

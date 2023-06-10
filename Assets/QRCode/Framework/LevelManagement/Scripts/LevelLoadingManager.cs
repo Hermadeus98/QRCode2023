@@ -63,8 +63,9 @@ namespace QRCode.Framework.SceneManagement
                 return m_levelLoadingManagerSettings;
             }
         }
-        
-        private List<LevelReferenceGroup> m_loadedLevelGroup = new List<LevelReferenceGroup>();
+
+        private LevelReferenceGroup? m_levelLoaded = null;
+        private List<AsyncOperationHandle<SceneInstance>> m_sceneInstanceHandles = new();
         #endregion Statics
         #endregion FIELDS
 
@@ -158,11 +159,11 @@ namespace QRCode.Framework.SceneManagement
 
             if (LevelDatabase.TryGetInDatabase(levelToLoad.ToString(), out var levelReferenceGroup))
             {
-                if (m_loadedLevelGroup.Count > 0)
+                if (m_levelLoaded != null)
                 {
-                    await UnloadSceneGroup(m_loadedLevelGroup[0]);
+                    await UnloadSceneGroup(m_levelLoaded.Value);
                 }
-                
+
                 await LoadLevel(levelToLoad, loadingScreenEnum, forceReload, activateOnLoad, priority);
             }
 
@@ -230,7 +231,19 @@ namespace QRCode.Framework.SceneManagement
 
         private void OnDestroy()
         {
-            m_cancellationTokenSource?.Cancel();
+            ReleaseLevelInstances();
+
+            if (m_cancellationTokenSource != null)
+            {
+                m_cancellationTokenSource.Cancel();
+                m_cancellationTokenSource.Dispose();
+            }
+
+            m_saveService = null;
+            m_levelDatabase = null;
+            m_levelLoaded = null;
+            m_cancellationTokenSource = null;
+            m_levelLoadingManagerSettings = null;
         }
         #endregion LifeCycle
         
@@ -243,11 +256,14 @@ namespace QRCode.Framework.SceneManagement
                 ProgressDescription = LevelLoadingManagerSettings.LoadingLocalizedString,
             };
 
-            if (m_loadedLevelGroup.Contains(levelReferenceGroupToLoad))
+            if (m_levelLoaded != null)
             {
-                QRDebug.DebugError(K.DebuggingChannels.LevelManager, $"{nameof(m_loadedLevelGroup)} already contain {levelReferenceGroupToLoad.ToString()}.");
-                m_isLoading = false;
-                return null;
+                if (m_levelLoaded.Value.GetHashCode() == levelReferenceGroupToLoad.GetHashCode())
+                {
+                    QRDebug.DebugError(K.DebuggingChannels.LevelManager, $"{nameof(m_levelLoaded)} already contain {levelReferenceGroupToLoad.ToString()}.");
+                    m_isLoading = false;
+                    return null;
+                }
             }
 
             m_sceneLoadingInfo.SceneLoadingStatus = SceneLoadingStatus.SceneAreLoading;
@@ -275,7 +291,7 @@ namespace QRCode.Framework.SceneManagement
                 }
             }
 
-            m_loadedLevelGroup.Add(levelReferenceGroupToLoad);
+            m_levelLoaded = levelReferenceGroupToLoad;
             QRDebug.DebugInfo(K.DebuggingChannels.LevelManager, $"{levelReferenceGroupToLoad.ToString()} is loaded.");
 
             if (SaveServiceSettings.Instance.LoadAsyncAfterSceneLoading)
@@ -315,7 +331,7 @@ namespace QRCode.Framework.SceneManagement
         
         private async Task UnloadSceneGroup(LevelReferenceGroup levelReferenceGroupToUnload)
         {
-            if (m_loadedLevelGroup.Contains(levelReferenceGroupToUnload))
+            if (m_levelLoaded != null)
             {
                 var levelInitialization = LevelInitialization.Current;
                 if (levelInitialization != null)
@@ -333,7 +349,7 @@ namespace QRCode.Framework.SceneManagement
                     }
                 }
 
-                m_loadedLevelGroup.Remove(levelReferenceGroupToUnload);
+                m_levelLoaded = null;
                 QRDebug.DebugInfo(K.DebuggingChannels.LevelManager, $"{levelReferenceGroupToUnload.ToString()} is unloaded.");   
             }
             else
@@ -345,14 +361,19 @@ namespace QRCode.Framework.SceneManagement
         private async Task LoadScene(AssetReference sceneObject, Action<AsyncOperationHandle<SceneInstance>> onLoading, Action<AsyncOperationHandle<SceneInstance>> onEndLoading, bool activateOnLoad = true, int priority = 100)
         {
             var loadingSceneObject = sceneObject.LoadSceneAsync(LoadSceneMode.Additive, activateOnLoad, priority);
-            
+
+            if (loadingSceneObject.IsValid())
+            {
+                m_sceneInstanceHandles.Add(loadingSceneObject);
+            }
+
             m_sceneLoadingInfo.SceneLoadingStatus = SceneLoadingStatus.SceneAreLoading;
             while(!loadingSceneObject.IsDone && !m_cancellationTokenSource.IsCancellationRequested)
             {
                 onLoading?.Invoke(loadingSceneObject);
                 await Task.Yield();
             }
-
+            
             onEndLoading?.Invoke(loadingSceneObject);
         }
 
@@ -390,6 +411,26 @@ namespace QRCode.Framework.SceneManagement
             {
                 await UnloadLevel(sceneReferenceGroupToLoad);
             }
+        }
+
+        private void ReleaseLevelInstances()
+        {
+            var handlesCount = m_sceneInstanceHandles.Count;
+            
+            if (handlesCount <= 0)
+            {
+                return;
+            }
+            
+            for (var i = 0; i < handlesCount; i++)
+            {
+                if (m_sceneInstanceHandles[i].IsValid())
+                {
+                    Addressables.ReleaseInstance(m_sceneInstanceHandles[i]);
+                }
+            }
+            
+            m_sceneInstanceHandles.Clear();
         }
         #endregion Privates
         #endregion METHODS
