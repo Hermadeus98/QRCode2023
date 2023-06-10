@@ -203,4 +203,4 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  m_generatedEnumPath: Assets/QRCode/Framework/LevelManagement/GeneratedEnums
+  m_generatedEnumPath: Assets/QRCode/Scripts/Runtime/LevelManagement/GeneratedEnums

@@ -74,4 +74,4 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  m_generatedEnumPath: Assets/QRCode/Framework/UI/LoadingScreen/GeneratedEnum
+  m_generatedEnumPath: Assets/QRCode/Scripts/Runtime/UI/LoadingScreen/GeneratedEnum

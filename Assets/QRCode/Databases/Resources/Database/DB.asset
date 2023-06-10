@@ -93,4 +93,4 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  m_generatedEnumPath: Assets/QRCode/Framework/Misc/Database/GeneratedEnums
+  m_generatedEnumPath: Assets/QRCode/Scripts/Runtime/Misc/Database/GeneratedEnums
