@@ -49,6 +49,7 @@ namespace QRCode.Framework
             public const string Audio = "Audio";
             public const string UserSettings = "User Settings";
             public const string Subtitles = "Subtitles";
+            public const string Importer = "Importer";
         } 
         
         public static class Game
