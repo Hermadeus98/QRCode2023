@@ -17,20 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: ea065454afb325743a13cb6aaac40ccb
   m_SerializeEntries:
-  - m_GUID: 7431746a44738ef499106d721e0a520e
-    m_Address: Assets/QRCode/Framework/Misc/SceneManagement/Scenes/Scene_SceneManagementEx3.unity
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - default
-  - m_GUID: a1f0e337e6c9dae42960f63727b4a153
-    m_Address: Assets/QRCode/Framework/Misc/SceneManagement/Scenes/Scene_SceneManagementEx2.unity
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - default
-  - m_GUID: ba68db8bebdb4ff4b92636394ab6840c
-    m_Address: Assets/QRCode/Framework/Misc/SceneManagement/Scenes/Scene_SceneManagementEx1.unity
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: e7e479cb31b34ed4a9c54498dd9696bb
     m_Address: Assets/QRCode/Gameplay/UI/Scenes/Scene_UI.unity
     m_ReadOnly: 0

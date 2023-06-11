@@ -3,6 +3,7 @@ namespace QRCode.Framework.Game
     using System.Threading.Tasks;
     using Debugging;
     using UnityEngine;
+    using UnityEngine.SceneManagement;
     using K = Framework.K;
 
     public static class Bootstrap
@@ -35,9 +36,10 @@ namespace QRCode.Framework.Game
             RegisterServices();
             await PrepareSave();
             await PrepareUserSettings();
-            await InitScenes();
             InitializeGameStates();
             ExitBootstrapAndLaunchGame();
+
+            await InitScenes();
 
             m_isInit = true;
             QRDebug.Debug(K.DebuggingChannels.LifeCycle, $"Bootstrapper has been initialized.");
@@ -115,8 +117,8 @@ namespace QRCode.Framework.Game
         {
             var sceneManagementService = ServiceLocator.Current.Get<ISceneManagementService>();
 
-            await sceneManagementService.LoadScene(DB_ScenesEnum.Scene_Main);
-            await sceneManagementService.LoadScene(DB_ScenesEnum.Scene_UI);
+            await sceneManagementService.LoadScene(DB_ScenesEnum.Scene_Main, LoadSceneMode.Single);
+            await sceneManagementService.LoadScene(DB_ScenesEnum.Scene_UI, LoadSceneMode.Additive);
         }
 
         private static void ExitBootstrapAndLaunchGame()

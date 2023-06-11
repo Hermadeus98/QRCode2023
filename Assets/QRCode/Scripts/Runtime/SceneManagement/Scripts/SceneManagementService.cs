@@ -49,7 +49,7 @@ namespace QRCode.Framework
             m_scenesInstanceHandle.Clear();
         }
 
-        public async Task LoadScene(DB_ScenesEnum sceneToLoad)
+        public async Task LoadScene(DB_ScenesEnum sceneToLoad, LoadSceneMode loadSceneMode = LoadSceneMode.Additive)
         {
             if (SceneDatabase.TryGetInDatabase(sceneToLoad.ToString(), out var sceneReference))
             {
@@ -58,7 +58,7 @@ namespace QRCode.Framework
                     return;
                 }
                 
-                var loadOperationHandle = sceneReference.Scene.LoadSceneAsync(LoadSceneMode.Additive);
+                var loadOperationHandle = sceneReference.Scene.LoadSceneAsync(loadSceneMode);
                 await loadOperationHandle.Task;
                 
                 m_scenesInstanceHandle.Add(sceneToLoad, loadOperationHandle);
