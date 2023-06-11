@@ -20,7 +20,6 @@ namespace QRCode.Framework
             
             AddStates(states);
             SetState(firstState);
-            Updater.Instance.RegisterEvent(m_updateModeEnum, UpdateCurrentState);
         }
 
         public void AddStates(params IState[] states)

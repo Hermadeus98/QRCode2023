@@ -17,16 +17,13 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: e23e143bcaf3e2e44b28e2a1bc41eda5
   m_SerializeEntries:
-  - m_GUID: f9e911ce893b9a045b528703c4c701a5
-    m_Address: Assets/QRCode/Databases/Localization/Common Shared Data.asset
+  - m_GUID: 25cc2e8128ce56f46bb6e8c1714e6190
+    m_Address: Assets/QRCode/Localization/Generics Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
-  - m_GUID: 4455220624d283b4fad8e4d95a3f96bf
-    m_Address: Assets/QRCode/Databases/Localization/Framework Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-  - m_GUID: 9c4e6fad4860980469de624fcd50a6ec
-    m_Address: Assets/QRCode/Databases/Localization/Actions Shared Data.asset
+  - m_GUID: 2a224e207b019044fa34d8e07ab61fcc
+    m_Address: Assets/QRCode/Localization/Audio Localization/Audio_Dialogues Shared
+      Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
   m_ReadOnly: 1

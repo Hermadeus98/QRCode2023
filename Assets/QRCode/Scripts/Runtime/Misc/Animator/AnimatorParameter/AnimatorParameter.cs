@@ -3,7 +3,7 @@ namespace QRCode.Framework
     using System;
     using UnityEngine;
 
-    public abstract class AnimatorParameter<T> : IDisposable
+    public abstract class AnimatorParameter<T>
     {
         [SerializeField] protected string m_parameterName;
         [SerializeField] protected Animator m_animator;
@@ -16,9 +16,5 @@ namespace QRCode.Framework
 
         public abstract T GetValue();
         public abstract void SetValue(T value);
-
-        public virtual void Dispose()
-        {
-        }
     }
 }

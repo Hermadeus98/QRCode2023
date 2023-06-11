@@ -38,14 +38,6 @@ namespace QRCode.Framework
 
         private void OnDestroy()
         {
-            if (m_scenesInstanceHandle.Count > 0)
-            {
-                for (int i = 0; i < m_scenesInstanceHandle.Count; i++)
-                {
-                    Addressables.ReleaseInstance(m_scenesInstanceHandle.ElementAt(i).Value);
-                }
-            }
-            
             m_scenesInstanceHandle.Clear();
         }
 

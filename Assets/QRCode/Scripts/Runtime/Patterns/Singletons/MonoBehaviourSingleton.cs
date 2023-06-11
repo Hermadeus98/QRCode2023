@@ -28,6 +28,7 @@ namespace QRCode.Framework.Singleton
                     {
                         Debug.LogError("There is more than one " + typeof(T).Name + " in the scene.");
                     }
+                    
                     if (m_instance == null)
                     {
                         var obj = new GameObject();

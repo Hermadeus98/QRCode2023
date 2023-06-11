@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-Asset-Tables-Polish (pl)
+  m_EditorClassIdentifier: 
+  m_GroupName: Localization-Asset-Tables-Polish (pl)
+  m_Data:
+    m_SerializedData: []
+  m_GUID: f4a81a79bf3e8324087b5ea2967e477f
+  m_SerializeEntries:
+  - m_GUID: 7a5c57b4004f56e4e944f967bdd4002d
+    m_Address: Audio_Dialogues_pl
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-pl
+    - Preload
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: 383727ea88213544abed9fa8aa57676f, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 906409b80c468184481949bef11bcc32, type: 2}
+    - {fileID: 11400000, guid: 04899ce5e50e52743be9ab4c12ed12df, type: 2}

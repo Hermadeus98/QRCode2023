@@ -115,10 +115,17 @@ namespace QRCode.Framework.Game
 
         private static async Task InitScenes()
         {
+#if DONT_USE_BOOTSTRAP_DEBUG
+            var sceneManagementService = ServiceLocator.Current.Get<ISceneManagementService>();
+
+            await sceneManagementService.LoadScene(DB_ScenesEnum.Scene_Main, LoadSceneMode.Additive);
+            await sceneManagementService.LoadScene(DB_ScenesEnum.Scene_UI, LoadSceneMode.Additive);
+#else
             var sceneManagementService = ServiceLocator.Current.Get<ISceneManagementService>();
 
             await sceneManagementService.LoadScene(DB_ScenesEnum.Scene_Main, LoadSceneMode.Single);
             await sceneManagementService.LoadScene(DB_ScenesEnum.Scene_UI, LoadSceneMode.Additive);
+#endif
         }
 
         private static void ExitBootstrapAndLaunchGame()

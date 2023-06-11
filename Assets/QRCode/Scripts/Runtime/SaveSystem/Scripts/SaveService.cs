@@ -103,7 +103,7 @@ namespace QRCode.Framework
                 await NewGame();
             }
             
-#if UNITY_EDITOR && USE_NOT_BOOTSTRAP_DEBUG
+#if UNITY_EDITOR && DONT_USE_BOOTSTRAP_DEBUG
             //This delay should not exist in build, the bootstrap must be finish before launch first game scene.
             await Task.Delay(500);
 #endif

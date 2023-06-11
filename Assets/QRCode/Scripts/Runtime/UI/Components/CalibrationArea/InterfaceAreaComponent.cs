@@ -2,10 +2,12 @@ namespace QRCode.Framework
 {
     using Events;
     using Game;
+    using Sirenix.OdinInspector;
     using UnityEngine;
 
     public class InterfaceAreaComponent : MonoBehaviour
     {
+        [TitleGroup(K.InspectorGroups.References)] [SerializeField]
         private RectTransform m_rectTransform = null;
         
         private int m_interfaceAreaCalibrationSize = 12;

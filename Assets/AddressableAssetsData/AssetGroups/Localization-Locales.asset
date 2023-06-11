@@ -22,8 +22,73 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale
-  - m_GUID: b811ca57abeec8e43b0553cfa1b3d761
-    m_Address: French (fr)
+  - m_GUID: 9f39a25361c0e1549b81c69275404b8e
+    m_Address: Chinese (Simplified) (zh-Hans)
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale
+  - m_GUID: 26fa14c746db12d40bf71b162da38067
+    m_Address: Czech (cs)
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale
+  - m_GUID: 46b69d0c7337d2a43ae1df3c4516820f
+    m_Address: German (de)
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale
+  - m_GUID: 9d7537c03c018024c9d0f242d3145c39
+    m_Address: Italian (it)
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale
+  - m_GUID: b2e87cd9de1470245a32e3311e4e4963
+    m_Address: Korean (ko)
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale
+  - m_GUID: fbb6158451c2e134aa9fad3e27b874aa
+    m_Address: Dutch (nl)
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale
+  - m_GUID: d79fb5241361099419acdabc89396675
+    m_Address: Polish (pl)
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale
+  - m_GUID: c5c4f696b9419a24c9ec83e5461330e6
+    m_Address: Russian (ru)
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale
+  - m_GUID: 0771c3cc187f60a4e8e1977d878b44f1
+    m_Address: English (United States) (en-US)
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale
+  - m_GUID: 29a3ee37b7913e442991266a44258fd3
+    m_Address: French (France) (fr-FR)
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale
+  - m_GUID: f33b31e439f145e43ab211fa69e0e5c5
+    m_Address: Japanese (Japan) (ja-JP)
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale
+  - m_GUID: f149e612158ab404985b89aaa01efc18
+    m_Address: Portuguese (Brazil) (pt-BR)
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale
+  - m_GUID: 5a0edc1f345fde14f9c6e0085fc0d379
+    m_Address: Spanish (Spain) (es-ES)
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale
+  - m_GUID: 1596c3576f8c187478d78d8bc85eb60e
+    m_Address: Chinese (Traditional) (zh-Hant)
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale

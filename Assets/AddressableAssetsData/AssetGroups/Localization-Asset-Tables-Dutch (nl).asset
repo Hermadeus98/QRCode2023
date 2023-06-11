@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-Asset-Tables-Dutch (nl)
+  m_EditorClassIdentifier: 
+  m_GroupName: Localization-Asset-Tables-Dutch (nl)
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 13fb5abbe2cc17c4b94aaf9b137d118f
+  m_SerializeEntries:
+  - m_GUID: d41765d5dbecee340ae1cf18a5fc0953
+    m_Address: Audio_Dialogues_nl
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-nl
+    - Preload
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: 383727ea88213544abed9fa8aa57676f, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 13b967e89d37c53478b29e21635127f0, type: 2}
+    - {fileID: 11400000, guid: ab5abaae092b80346948999cdc408f22, type: 2}
