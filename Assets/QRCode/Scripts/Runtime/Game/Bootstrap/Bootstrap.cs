@@ -39,7 +39,9 @@ namespace QRCode.Framework.Game
             InitializeGameStates();
             ExitBootstrapAndLaunchGame();
 
+#if !DONT_LOAD_INITIALIZATION_SCENES            
             await InitScenes();
+#endif
 
             m_isInit = true;
             QRDebug.Debug(K.DebuggingChannels.LifeCycle, $"Bootstrapper has been initialized.");

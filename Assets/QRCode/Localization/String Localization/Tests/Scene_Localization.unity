@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 139392011}
   - component: {fileID: 139392012}
   - component: {fileID: 139392010}
+  - component: {fileID: 139392013}
   m_Layer: 0
   m_Name: Audio Localization
   m_TagString: Untagged
@@ -300,6 +301,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e64accea647efa04489c99af673d5cb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &139392013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139392008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 717c4d8287a0b814292354b1bef23dcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_localizeAudioClipEvent: {fileID: 139392011}
+  m_audioLocaleVariable:
+    m_Code: en
 --- !u!1 &276255954
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,6 +442,7 @@ GameObject:
   - component: {fileID: 1923408980}
   - component: {fileID: 1923408979}
   - component: {fileID: 1923408981}
+  - component: {fileID: 1923408982}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -524,6 +541,14 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!81 &1923408982
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923408977}
+  m_Enabled: 1
 --- !u!1 &2033462051
 GameObject:
   m_ObjectHideFlags: 0

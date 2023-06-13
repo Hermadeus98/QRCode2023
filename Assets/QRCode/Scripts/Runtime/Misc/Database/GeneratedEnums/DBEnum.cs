@@ -9,5 +9,6 @@ namespace QRCode.Framework
         DB_Levels = 2,
         DB_InputMaps = 3,
         DB_Scenes = 4,
+        DB_AvailableVoiceLocales = 5,
     }
 }

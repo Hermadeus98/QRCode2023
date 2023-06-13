@@ -29,11 +29,15 @@
         
         public static void RaiseUserSettingsEvents()
         {
+            DB.Instance.TryGetDatabase<AvailableVoiceLocalizationDatabase>(DBEnum.DB_AvailableVoiceLocales, out var availableVoiceLocalizationDatabase);
+            availableVoiceLocalizationDatabase.TryGetInDatabase(UserSettingsService.VoiceLanguage.ToString(), out var foundedLocale);
+            
             //INTERFACE
             InterfaceAreaCalibrationEvent.Trigger(UserSettingsService.InterfaceAreaCalibrationSize);
             TextSizeSettingEvent.Trigger(UserSettingsService.TextSizeSetting);
             
             //SOUND
+            VoiceLanguageSettingEvent.Trigger(foundedLocale);
             SubtitlesTextSizeSettingEvent.Trigger(UserSettingsService.SubtitlesTextSizeSetting);
             ShowSubtitleBackgroundSettingEvent.Trigger(UserSettingsService.ShowSubtitleBackground);
             ChangeSubtitleBackgroundOpacityEvent.Trigger(UserSettingsService.SubtitleBackgroundOpacity);

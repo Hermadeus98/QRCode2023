@@ -59,6 +59,7 @@ namespace QRCode.Framework
             userSettings.TextSizeSetting = m_defaultValues.TextSizeSetting;
             
             //SOUND
+            userSettings.VoiceLanguage = m_defaultValues.VoiceLanguage;
             userSettings.ShowSubtitles = m_defaultValues.ShowSubtitles;
             userSettings.ShowSubtitleBackground = m_defaultValues.ShowSubtitleBackground;
             userSettings.SubtitleBackgroundOpacity = m_defaultValues.SubtitleBackgroundOpacity;

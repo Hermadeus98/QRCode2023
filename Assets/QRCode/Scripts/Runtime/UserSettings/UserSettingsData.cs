@@ -6,6 +6,7 @@
     using Settings.InterfaceSettings;
     using Sirenix.OdinInspector;
     using UnityEngine;
+    using UnityEngine.Localization;
 
     [Serializable]
     public class UserSettingsData
@@ -181,9 +182,12 @@
         [TabGroup("Interface", TextColor = "#f1c40f")] 
         [SerializeField]
         private bool m_showControlHints;
+
+        [TabGroup("Sound", TextColor = "#9b59b6")] 
+        [Title("General")] 
+        [SerializeField] private DB_AvailableVoiceLocalesEnum m_voiceLanguage;
         
         [TabGroup("Sound", TextColor = "#9b59b6")] 
-        [Title("General")]
         [SerializeField] [Range(0, 100)] [SuffixLabel("%")]
         private int m_masterVolume;
         
@@ -238,6 +242,12 @@
         }
         
         //SOUND
+        public DB_AvailableVoiceLocalesEnum VoiceLanguage
+        {
+            get => m_voiceLanguage;
+            set => m_voiceLanguage = value;
+        }
+        
         public bool ShowSubtitles
         {
             get => m_showSubtitles;
@@ -322,6 +332,7 @@
             m_showControlHints = true;
 
             //SOUND
+            m_voiceLanguage = DB_AvailableVoiceLocalesEnum.English;
             m_masterVolume = 100;
             m_musicVolume = 100;
             m_soundFXVolume = 100;

@@ -10,10 +10,10 @@ scopes = {
 	"last_search.8788AF05" = ""
 	"OpenInspectorPreview.8788AF05" = "0"
 	"currentGroup.8788AF05" = "all"
-	"last_search.B655092D" = "st:ex"
+	"last_search.B655092D" = "st:te"
 	"OpenInspectorPreview.B655092D" = "0"
 	"currentGroup.B655092D" = "all"
-	"last_search.B655095F" = "at:te"
+	"last_search.B655095F" = "at:test"
 	"OpenInspectorPreview.B655095F" = "0"
 	"currentGroup.B655095F" = "all"
 }
