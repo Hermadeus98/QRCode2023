@@ -25,7 +25,24 @@ namespace QRCode.Framework
         {
             if (m_canvas.worldCamera == null)
             {
-                var uiCamera = UICamera.Instance;
+                UICamera uiCamera = null;
+#if UNITY_EDITOR
+                if (Application.isPlaying)
+                {
+                    uiCamera = UICamera.Instance;
+                }
+                else
+                {
+                    uiCamera = FindObjectOfType<UICamera>();
+                }
+#else
+                uiCamera = UICamera.Instance;
+#endif
+                if (uiCamera == null)
+                {
+                    return;
+                }
+                
                 m_canvas.worldCamera = uiCamera.Camera;
             }
         }

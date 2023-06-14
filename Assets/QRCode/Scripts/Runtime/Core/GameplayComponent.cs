@@ -5,12 +5,12 @@ namespace QRCode.Framework
 
     public abstract class GameplayComponent : SerializedMonoBehaviour, ILoadableObject, ISavableObject
     {
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             GameInstance.Instance.RegisterGameplayComponent(this);
         }
 
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
             GameInstance.Instance.UnregisterGameplayComponent(this);
         }

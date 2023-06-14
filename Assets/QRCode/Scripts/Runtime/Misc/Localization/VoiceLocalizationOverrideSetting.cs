@@ -1,10 +1,9 @@
-using UnityEngine;
-
 namespace QRCode.Framework
 {
     using Events;
     using Game;
     using Sirenix.OdinInspector;
+    using UnityEngine;
     using UnityEngine.Localization;
     using UnityEngine.Localization.Components;
     using UnityEngine.Localization.Settings;
@@ -40,7 +39,7 @@ namespace QRCode.Framework
                     DB.Instance.TryGetDatabase(DBEnum.DB_AvailableVoiceLocales, out m_availableVoiceLocalizationDatabase);
                 }
 
-                return null;
+                return m_availableVoiceLocalizationDatabase;
             }
         }
 
