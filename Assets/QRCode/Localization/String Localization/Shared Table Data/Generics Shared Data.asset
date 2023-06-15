@@ -18,15 +18,18 @@ MonoBehaviour:
   - m_Id: 119772519215104
     m_Key: GEN_EXAMPLE
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 6535173116019605504
   - m_Id: 119772565352448
     m_Key: GEN_LOADING
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 6535173116019605505
   - m_Id: 119772565352449
     m_Key: GEN_SAVING
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 6535173116019605506
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
@@ -39,3 +42,15 @@ MonoBehaviour:
         asm: Unity.Localization}
       data:
         m_CustomEpoch: 1686485839813
+    - rid: 6535173116019605504
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: '-'
+    - rid: 6535173116019605505
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: '-'
+    - rid: 6535173116019605506
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: '-'

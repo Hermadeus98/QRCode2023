@@ -19,7 +19,15 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 905310015488
-    m_Localized: No actions
+    m_Localized: "\u017D\xE1dn\xE9 akce"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 905335181312
+    m_Localized: "H\xFDbat se"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 905339375616
+    m_Localized: "D\xEDvej se"
     m_Metadata:
       m_Items: []
   references:

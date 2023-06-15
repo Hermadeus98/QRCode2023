@@ -22,6 +22,14 @@ MonoBehaviour:
     m_Localized: "Jestem wzorem do na\u015Bladowania."
     m_Metadata:
       m_Items: []
+  - m_Id: 119772565352448
+    m_Localized: "\u0141adowanie..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 119772565352449
+    m_Localized: Kopia zapasowa
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

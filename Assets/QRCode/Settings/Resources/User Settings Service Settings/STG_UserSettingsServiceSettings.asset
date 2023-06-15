@@ -65,7 +65,7 @@ MonoBehaviour:
     m_showTipsAndMessages: 1
     m_showContextualAction: 1
     m_showControlHints: 1
-    m_voiceLanguage: 3
+    m_voiceLanguage: 2
     m_masterVolume: 100
     m_musicVolume: 100
     m_soundFXVolume: 100

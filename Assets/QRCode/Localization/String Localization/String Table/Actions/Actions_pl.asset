@@ -19,7 +19,15 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 905310015488
-    m_Localized: No actions
+    m_Localized: "Brak dzia\u0142a\u0144"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 905335181312
+    m_Localized: "Przenosi\u0107"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 905339375616
+    m_Localized: "Patrze\u0107"
     m_Metadata:
       m_Items: []
   references:

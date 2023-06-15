@@ -314,8 +314,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_localizeAudioClipEvent: {fileID: 139392011}
-  m_audioLocaleVariable:
-    m_Code: en
 --- !u!1 &276255954
 GameObject:
   m_ObjectHideFlags: 0
@@ -663,7 +661,7 @@ GameObject:
   - component: {fileID: 2117034615}
   - component: {fileID: 2117034617}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text Example
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

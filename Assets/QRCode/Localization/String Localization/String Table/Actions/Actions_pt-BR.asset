@@ -19,7 +19,15 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 905310015488
-    m_Localized: No actions
+    m_Localized: "Nenhuma a\xE7\xE3o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 905335181312
+    m_Localized: Mover
+    m_Metadata:
+      m_Items: []
+  - m_Id: 905339375616
+    m_Localized: Olhar
     m_Metadata:
       m_Items: []
   references:
