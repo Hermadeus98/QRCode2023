@@ -24,6 +24,62 @@ namespace UnityToolbarExtender
         private static void DrawLeftGUI()
         {
             GUILayout.FlexibleSpace();
+            DrawSceneSelector();
+            
+        }
+
+        private static void DrawRightGUI()
+        {
+            GUILayout.FlexibleSpace();
+            PullAllLocalizationTable();
+        }
+
+        private static void PullAllLocalizationTable()
+        {
+            if (GUILayout.Button("Pull LocKit"))
+            {
+                /*var stringTableCollections = LocalizationEditorSettings.GetStringTableCollections();
+
+                foreach (var collection in stringTableCollections)
+                {
+                    // Its possible a String Table Collection may have more than one GoogleSheetsExtension.
+                    // For example if each Locale we pushed/pulled from a different sheet.
+                    foreach (var extension in collection.Extensions)
+                    {
+                        if (extension is GoogleSheetsExtension googleExtension)
+                        {
+                            PullExtension(googleExtension);
+                        }
+                    }
+                }*/
+            }
+        }
+
+        private static void PullExtension(string tableCollectionName)
+        {
+            /*var tableCollection = LocalizationEditorSettings.GetStringTableCollection(tableCollectionName);
+            var googleExtension = tableCollection.Extensions.FirstOrDefault(e => e is GoogleSheetsExtension) as GoogleSheetsExtension;
+            if (googleExtension == null)
+            {
+                Debug.LogError($"String Table Collection {tableCollection.TableCollectionName} Does not contain a Google Sheets Extension.");
+                return;
+            }
+
+            PullExtension(googleExtension);*/
+        }
+
+        /*static void PullExtension(GoogleSheetsExtension googleExtension)
+        {
+            /#1#/ Setup the connection to Google
+            var googleSheets = new GoogleSheets(googleExtension.SheetsServiceProvider);
+            googleSheets.SpreadSheetId = googleExtension.SpreadsheetId;
+
+            // Now update the collection. We can pass in an optional ProgressBarReporter so that we can updates in the Editor.
+            googleSheets.PullIntoStringTableCollection(googleExtension.SheetId, googleExtension.TargetCollection as StringTableCollection, googleExtension.Columns, reporter: new ProgressBarReporter());#1#
+        }*/
+
+        private static void DrawSceneSelector()
+        {
             m_sceneGenericMenu = new GenericMenu();
 
             DB.Instance.TryGetDatabase<LevelDatabase>(DBEnum.DB_Levels, out var levelDatabase);
@@ -45,12 +101,7 @@ namespace UnityToolbarExtender
                 m_sceneGenericMenu.ShowAsContext();
             }
         }
-
-        private static void DrawRightGUI()
-        {
-            
-        }
-
+        
         private static void TryLoadScene(SceneReference sceneReference)
         {
             var openedScenes = new List<Scene>();
@@ -109,9 +160,15 @@ namespace UnityToolbarExtender
             }
         }
 
-        private static void LoadScene(SceneReference sceneReference)
-        {
-            
+        private static IEnumerable<T> FindAssetsByType<T>() where T : Object {
+            var guids = AssetDatabase.FindAssets($"t:{typeof(T)}");
+            foreach (var t in guids) {
+                var assetPath = AssetDatabase.GUIDToAssetPath(t);
+                var asset = AssetDatabase.LoadAssetAtPath<T>(assetPath);
+                if (asset != null) {
+                    yield return asset;
+                }
+            }
         }
     }
 }

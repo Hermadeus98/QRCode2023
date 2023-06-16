@@ -31,6 +31,7 @@ namespace QRCode.Framework
             public const string SceneManagerSettingsPath = BasePath + "Scene Manager Settings";
             public const string SaveSystemSettingsPath = BasePath + "Save System Settings";
             public const string AudioSettingsPath = BasePath + "Audio Settings";
+            public const string LocalizationPath = BasePath + "Localization Settings";
         }
         
         public static class DebuggingChannels

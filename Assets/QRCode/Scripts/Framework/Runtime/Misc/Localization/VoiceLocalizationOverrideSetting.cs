@@ -1,3 +1,5 @@
+using UnityEngine.Localization.Settings;
+
 namespace QRCode.Framework
 {
     using Events;
@@ -6,7 +8,6 @@ namespace QRCode.Framework
     using UnityEngine;
     using UnityEngine.Localization;
     using UnityEngine.Localization.Components;
-    using UnityEngine.Localization.Settings;
 
     [RequireComponent(typeof(LocalizeAudioClipEvent))]
     public class VoiceLocalizationOverrideSetting : MonoBehaviour

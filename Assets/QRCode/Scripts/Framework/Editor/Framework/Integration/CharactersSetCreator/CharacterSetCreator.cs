@@ -29,14 +29,8 @@ namespace QRCode.Editor.Integration
         [InfoBox("The analyzed locales.")]
         private LocaleIdentifier[] m_localeIdentifierTargets;
 
-        [InfoBox("The output is the target file where all the founded characters will be generated.")]
-        [SerializeField] private TextAsset m_output;
-
         [FolderPath]
         [SerializeField] private string m_path;
-        
-        [InfoBox("Can be longer to execute but more optimize for TMP Creator process.")]
-        [SerializeField] private bool m_avoidOccurence = true;
 
         private Dictionary<LocaleIdentifier, string> m_foundedCharactersPerLocales = null;
 
