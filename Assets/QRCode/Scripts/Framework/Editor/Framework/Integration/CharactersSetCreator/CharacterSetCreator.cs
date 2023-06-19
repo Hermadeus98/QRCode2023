@@ -30,7 +30,7 @@ namespace QRCode.Editor.Integration
         private LocaleIdentifier[] m_localeIdentifierTargets;
 
         [FolderPath]
-        [SerializeField] private string m_path;
+        [SerializeField] private string m_path = "Assets/QRCode/Fonts/_Characters Sets";
 
         private Dictionary<LocaleIdentifier, string> m_foundedCharactersPerLocales = null;
 

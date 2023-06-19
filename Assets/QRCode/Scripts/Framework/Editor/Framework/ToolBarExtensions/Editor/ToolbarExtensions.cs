@@ -1,19 +1,28 @@
 namespace UnityToolbarExtender
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using QRCode.Framework;
     using QRCode.Framework.Extensions;
     using QRCode.Framework.SceneManagement;
     using UnityEditor;
+    using UnityEditor.Localization;
+    using UnityEditor.Localization.Plugins.Google;
     using UnityEditor.SceneManagement;
     using UnityEngine;
+    using UnityEngine.Localization;
+    using UnityEngine.Localization.Settings;
     using UnityEngine.SceneManagement;
+    using Object = UnityEngine.Object;
 
     [InitializeOnLoad]
     public static class ToolbarExtensions
     {
         private static GenericMenu m_sceneGenericMenu;
+
+        private static bool m_isTestingLocalization;
         
         static ToolbarExtensions()
         {
@@ -32,13 +41,53 @@ namespace UnityToolbarExtender
         {
             GUILayout.FlexibleSpace();
             PullAllLocalizationTable();
+            LocalizationTest();
         }
 
+        private static async void LocalizationTest()
+        {
+            var color = GUI.color;
+            if (m_isTestingLocalization)
+            {
+                GUI.color = new Color(1f, 0.41f, 0.39f);    
+            }
+            else
+            {
+                GUI.color = color;
+            }
+            
+            if (GUILayout.Button("Localization Test"))
+            {
+                if (m_isTestingLocalization)
+                {
+                    m_isTestingLocalization = false;
+                    return;
+                }
+                
+                if (m_isTestingLocalization)
+                {
+                    return;
+                }
+                
+                m_isTestingLocalization = true;
+
+                List<Locale> allLocales = LocalizationSettings.AvailableLocales.Locales;
+
+                for (int i = 0; i < allLocales.Count(); i++)
+                {
+                    LocalizationSettings.SelectedLocale = allLocales[i];
+                    await Task.Delay(TimeSpan.FromSeconds(0.4f));
+                }
+
+                m_isTestingLocalization = true;
+            }
+        }
+        
         private static void PullAllLocalizationTable()
         {
             if (GUILayout.Button("Pull LocKit"))
             {
-                /*var stringTableCollections = LocalizationEditorSettings.GetStringTableCollections();
+                var stringTableCollections = UnityEditor.Localization.LocalizationEditorSettings.GetStringTableCollections();
 
                 foreach (var collection in stringTableCollections)
                 {
@@ -51,32 +100,19 @@ namespace UnityToolbarExtender
                             PullExtension(googleExtension);
                         }
                     }
-                }*/
+                }
             }
         }
 
-        private static void PullExtension(string tableCollectionName)
+        static void PullExtension(GoogleSheetsExtension googleExtension)
         {
-            /*var tableCollection = LocalizationEditorSettings.GetStringTableCollection(tableCollectionName);
-            var googleExtension = tableCollection.Extensions.FirstOrDefault(e => e is GoogleSheetsExtension) as GoogleSheetsExtension;
-            if (googleExtension == null)
-            {
-                Debug.LogError($"String Table Collection {tableCollection.TableCollectionName} Does not contain a Google Sheets Extension.");
-                return;
-            }
-
-            PullExtension(googleExtension);*/
-        }
-
-        /*static void PullExtension(GoogleSheetsExtension googleExtension)
-        {
-            /#1#/ Setup the connection to Google
+            // Setup the connection to Google
             var googleSheets = new GoogleSheets(googleExtension.SheetsServiceProvider);
             googleSheets.SpreadSheetId = googleExtension.SpreadsheetId;
 
             // Now update the collection. We can pass in an optional ProgressBarReporter so that we can updates in the Editor.
-            googleSheets.PullIntoStringTableCollection(googleExtension.SheetId, googleExtension.TargetCollection as StringTableCollection, googleExtension.Columns, reporter: new ProgressBarReporter());#1#
-        }*/
+            googleSheets.PullIntoStringTableCollection(googleExtension.SheetId, googleExtension.TargetCollection as StringTableCollection, googleExtension.Columns);
+        }
 
         private static void DrawSceneSelector()
         {

@@ -30,6 +30,10 @@ MonoBehaviour:
     m_Localized: "Zp\u011Btn\xE1 vazba"
     m_Metadata:
       m_Items: []
+  - m_Id: 1502088277667840
+    m_Localized: "Pokra\u010Dovat"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -30,6 +30,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 6535173116019605547
+  - m_Id: 1502088277667840
+    m_Key: UI_CONTINUE
+    m_Metadata:
+      m_Items:
+      - rid: 6535173209797165059
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
@@ -51,6 +56,10 @@ MonoBehaviour:
       data:
         m_CommentText: '-'
     - rid: 6535173116019605547
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: '-'
+    - rid: 6535173209797165059
       type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
         m_CommentText: '-'

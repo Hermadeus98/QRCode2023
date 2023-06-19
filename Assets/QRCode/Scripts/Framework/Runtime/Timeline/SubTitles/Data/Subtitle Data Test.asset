@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_subtitleLocalizedSpeakerName:
     m_TableReference:
-      m_TableCollectionName: GUID:4455220624d283b4fad8e4d95a3f96bf
+      m_TableCollectionName: GUID:25cc2e8128ce56f46bb6e8c1714e6190
     m_TableEntryReference:
-      m_KeyId: 3306274602496000
+      m_KeyId: 119772519215104
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -24,9 +24,9 @@ MonoBehaviour:
   m_subtitleSpeakerName: Speaker Name
   m_subtitleLocalizedText:
     m_TableReference:
-      m_TableCollectionName: GUID:4455220624d283b4fad8e4d95a3f96bf
+      m_TableCollectionName: GUID:25cc2e8128ce56f46bb6e8c1714e6190
     m_TableEntryReference:
-      m_KeyId: 3306247507292160
+      m_KeyId: 119772519215104
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

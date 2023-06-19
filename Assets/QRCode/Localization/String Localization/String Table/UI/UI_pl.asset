@@ -30,6 +30,10 @@ MonoBehaviour:
     m_Localized: Informacja zwrotna
     m_Metadata:
       m_Items: []
+  - m_Id: 1502088277667840
+    m_Localized: "Kontynuowa\u0107"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
