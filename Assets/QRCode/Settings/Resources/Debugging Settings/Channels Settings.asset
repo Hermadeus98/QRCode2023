@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 32
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69f6613273a36eb48a35dabf5d93dc1e, type: 3}
+  m_Name: Channels Settings
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  channels:
+  - channelName: SAVE SYSTEM
+    isActive: 1
+    channelColor: {r: 1, g: 1, b: 1, a: 1}
+    activeLogTypes: 63
+  - channelName: USER SETTINGS
+    isActive: 1
+    channelColor: {r: 0.7924528, g: 0.2953008, b: 0.2953008, a: 1}
+    activeLogTypes: 63
+  - channelName: LIFE CYCLE
+    isActive: 1
+    channelColor: {r: 0.4625019, g: 0.764151, b: 0.4289338, a: 1}
+    activeLogTypes: 63
+  m_exportLog: 1
+  m_path: QRCodeLog

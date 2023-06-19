@@ -9,6 +9,7 @@ namespace QRCode.Framework.Game
     public static class Bootstrap
     {
         private static bool m_isInit = false;
+        private static QRLogExporter m_logExporter = null;
         
         private static ServiceSettings m_serviceSettings = null;
         private static ServiceSettings ServiceSettings
@@ -139,6 +140,14 @@ namespace QRCode.Framework.Game
         {
 #if RELEASE
             Debug.unityLogger.logEnabled = false;
+#endif
+
+#if RELEASE == false
+            if (QRDebugChannels.Instance.UseExportLogOption)
+            {
+                m_logExporter = new QRLogExporter();
+                Application.quitting += m_logExporter.ExportLogFile;
+            }
 #endif
         }
 

@@ -1,0 +1,14 @@
+{
+    "name": "QRCode.Framework.Debugging",
+    "rootNamespace": "QRCode.Framework.Debugging",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
