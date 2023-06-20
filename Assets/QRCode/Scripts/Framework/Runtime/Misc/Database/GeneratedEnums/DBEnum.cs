@@ -10,5 +10,6 @@ namespace QRCode.Framework
         DB_InputMaps = 3,
         DB_Scenes = 4,
         DB_AvailableVoiceLocales = 5,
+        DB_InputHintReminderDatabase = 6,
     }
 }

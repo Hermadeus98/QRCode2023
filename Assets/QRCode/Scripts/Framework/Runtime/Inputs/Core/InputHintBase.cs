@@ -1,6 +1,5 @@
 namespace QRCode.Framework
 {
-    using System;
     using System.Threading.Tasks;
     using Debugging;
     using Sirenix.OdinInspector;

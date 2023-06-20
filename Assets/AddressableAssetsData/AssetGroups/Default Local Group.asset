@@ -132,6 +132,16 @@ MonoBehaviour:
     m_Address: Assets/QRCode/Prefabs/UI/Text/P_Title.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: e1b9fb002d343704894cb1b3cc780e1f
+    m_Address: Assets/QRCode/Prefabs/UI/Components/InputHint/InputHintReminder Variants/P_InputHintReminder_Validate
+      Variant.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9ba41b978db65454586d1d1742d7ca6e
+    m_Address: Assets/QRCode/Prefabs/UI/Components/InputHint/InputHintReminder Variants/P_InputHintReminder_Move
+      Variant.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 383727ea88213544abed9fa8aa57676f, type: 2}
   m_SchemaSet:

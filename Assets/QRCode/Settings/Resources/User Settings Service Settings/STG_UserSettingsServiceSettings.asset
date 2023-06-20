@@ -41,7 +41,7 @@ MonoBehaviour:
     m_depthOfFieldSetting: 2
     m_useMotionBlur: 1
     m_inputModePC: 0
-    m_menuHoldFactor: 834
+    m_menuHoldFactor: 1000
     m_mouseSensitivity: 5
     m_mouseXAxisModeSetting: 0
     m_mouseYAxisModeSetting: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
     m_swapStickSetting: 0
     m_quickTimeEventsInputTypeSetting: 0
     m_screenShakeSetting: 1
-    m_interfaceAreaCalibrationSize: 12
+    m_interfaceAreaCalibrationSize: 13
     m_textSizeSetting: 0
     m_iconSizeSetting: 0
     m_menuNavigationSettings: 0

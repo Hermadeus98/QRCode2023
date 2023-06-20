@@ -150,9 +150,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StringReference:
     m_TableReference:
-      m_TableCollectionName: GUID:f9e911ce893b9a045b528703c4c701a5
+      m_TableCollectionName: GUID:25cc2e8128ce56f46bb6e8c1714e6190
     m_TableEntryReference:
-      m_KeyId: 306766557184
+      m_KeyId: 119772565352449
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -283,7 +283,7 @@ MonoBehaviour:
   m_PixelsPerUnitMultiplier: 1
 --- !u!95 &3429928152700084999
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -300,7 +300,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!225 &7381918909452032697
 CanvasGroup:
   m_ObjectHideFlags: 0
