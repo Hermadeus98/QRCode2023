@@ -5,6 +5,7 @@ namespace QRCode.Framework
     using Sirenix.OdinInspector;
     using UnityEngine;
     using UnityEngine.InputSystem;
+    using UnityEngine.InputSystem.Users;
 
     public class InputHintBase : SerializedMonoBehaviour
     {
@@ -24,13 +25,20 @@ namespace QRCode.Framework
         [SerializeField] protected bool m_feedbackOnPerformInput = true;
         
         [TitleGroup(K.InspectorGroups.Debugging)]
-        [SerializeField][ReadOnly] protected string m_currentControlScheme;
+        [SerializeField][ReadOnly] private string m_currentControlScheme;
         [TitleGroup(K.InspectorGroups.Debugging)]
         [SerializeField][ReadOnly]protected string m_currentDisplayName;
 
         private InputMapDatabase m_inputMapDatabase;
         private IInputManagementService m_inputManagementService;
         protected PlayerInput m_playerInput;
+        private string m_lastControlScheme;
+
+        protected string CurrentControlScheme
+        {
+            get => m_currentControlScheme;
+            private set => m_currentControlScheme = value;
+        }
 
         protected InputMapDatabase InputMapDatabase
         {
@@ -63,27 +71,32 @@ namespace QRCode.Framework
             {
                 await Task.Yield();
             }
-            m_playerInput.actions[m_inputActionReference.action.name].performed += OnPerformInput;
+
+            InputUser.onChange += OnInputDeviceChange;
+
+            if (m_playerInput != null)
+            {
+                m_playerInput.actions[m_inputActionReference.action.name].performed += OnPerformInput;
+            }
+
+            UpdateIcon();
         }
 
         private void OnDisable()
         {
+            InputUser.onChange -= OnInputDeviceChange;
+
             if (m_playerInput != null)
             {
                 m_playerInput.actions[m_inputActionReference.action.name].performed -= OnPerformInput;
             }
         }
 
-        private void Update()
-        {
-            CheckCurrentScheme();
-        }
-
         [Button]
         private void UpdateIcon()
         {
             //SCHEME
-            m_currentControlScheme = m_playerInput.currentControlScheme;
+            CurrentControlScheme = m_playerInput.currentControlScheme;
 
             if (m_inputActionReference.action.bindings[0].isComposite)
             {
@@ -133,19 +146,15 @@ namespace QRCode.Framework
                 QRDebug.Debug(K.DebuggingChannels.Inputs, $"SCHEME = {m_currentControlScheme} & INPUT = {m_currentDisplayName} for {m_inputActionReference.action.name}", InputMapDatabase);
             }
         }
-
-        private void CheckCurrentScheme()
+        
+        private void OnInputDeviceChange(InputUser user, InputUserChange change, InputDevice device) 
         {
-            if (m_currentControlScheme == m_playerInput.currentControlScheme)
-            {
-                return;
-            }
-            else
+            if (change == InputUserChange.ControlSchemeChanged) 
             {
                 UpdateIcon();
             }
         }
-
+        
         protected virtual void OnPerformInput(InputAction.CallbackContext context)
         {
             if (m_activateLogMessage)

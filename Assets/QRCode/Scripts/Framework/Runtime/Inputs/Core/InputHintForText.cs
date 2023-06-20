@@ -24,7 +24,7 @@ namespace QRCode.Framework
         {
             base.LoadIcon();
 
-            var sanitizeControlScheme = m_currentControlScheme.Replace(" ", "");
+            var sanitizeControlScheme = CurrentControlScheme.Replace(" ", "");
             InputMapDatabase.TryGetInDatabase(sanitizeControlScheme, out var inputMap);
             var index = inputMap.FindTextMeshProSpriteSheetIndex(m_currentDisplayName);
             

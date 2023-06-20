@@ -79,7 +79,7 @@ namespace UnityToolbarExtender
                     await Task.Delay(TimeSpan.FromSeconds(0.4f));
                 }
 
-                m_isTestingLocalization = true;
+                m_isTestingLocalization = false;
             }
         }
         

@@ -161,6 +161,28 @@
                     "action": "SecondaryAction",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fec34a7d-9891-434c-9539-bb0c9b79239d",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "MoveUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d4d31a89-b502-4cf2-afdb-6281e637f154",
+                    "path": "<XInputController>/leftStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XboxController",
+                    "action": "MoveUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

@@ -30,7 +30,7 @@ namespace QRCode.Framework
         {
             base.LoadIcon();
 
-            var sanitizeControlScheme = m_currentControlScheme.Replace(" ", "");
+            var sanitizeControlScheme = CurrentControlScheme.Replace(" ", "");
             InputMapDatabase.TryGetInDatabase(sanitizeControlScheme, out var inputMap);
             var icon = inputMap.FindIcon(m_currentDisplayName, m_alternativeIconIndex);
 
