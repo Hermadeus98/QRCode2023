@@ -41,7 +41,7 @@ MonoBehaviour:
     m_depthOfFieldSetting: 2
     m_useMotionBlur: 1
     m_inputModePC: 0
-    m_menuHoldFactor: 1000
+    m_menuHoldFactor: 834
     m_mouseSensitivity: 5
     m_mouseXAxisModeSetting: 0
     m_mouseYAxisModeSetting: 0

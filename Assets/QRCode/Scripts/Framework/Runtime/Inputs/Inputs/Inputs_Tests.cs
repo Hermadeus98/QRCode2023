@@ -33,7 +33,7 @@ public partial class @Inputs_Tests: IInputActionCollection2, IDisposable
                     ""id"": ""0372df8d-bab7-4145-bbec-e8dbe2f61874"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -207,6 +207,45 @@ public partial class @Inputs_Tests: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""c71d0661-0b18-4eda-8b4f-c557353cf59a"",
+            ""actions"": [
+                {
+                    ""name"": ""Validate"",
+                    ""type"": ""Button"",
+                    ""id"": ""277f3243-c393-4504-b20e-6a5ae1b52cac"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""cebf4e21-708a-435e-b8d3-365a65bb4197"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Validate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a879eb89-c9e6-4ab6-b6b1-046a7143b211"",
+                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XboxController"",
+                    ""action"": ""Validate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -241,6 +280,9 @@ public partial class @Inputs_Tests: IInputActionCollection2, IDisposable
         m_Tests_Move = m_Tests.FindAction("Move", throwIfNotFound: true);
         m_Tests_MoveUp = m_Tests.FindAction("MoveUp", throwIfNotFound: true);
         m_Tests_TestInpuDisplayName = m_Tests.FindAction("TestInpuDisplayName", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_Validate = m_UI.FindAction("Validate", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -376,6 +418,52 @@ public partial class @Inputs_Tests: IInputActionCollection2, IDisposable
         }
     }
     public TestsActions @Tests => new TestsActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+    private readonly InputAction m_UI_Validate;
+    public struct UIActions
+    {
+        private @Inputs_Tests m_Wrapper;
+        public UIActions(@Inputs_Tests wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Validate => m_Wrapper.m_UI_Validate;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void AddCallbacks(IUIActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
+            @Validate.started += instance.OnValidate;
+            @Validate.performed += instance.OnValidate;
+            @Validate.canceled += instance.OnValidate;
+        }
+
+        private void UnregisterCallbacks(IUIActions instance)
+        {
+            @Validate.started -= instance.OnValidate;
+            @Validate.performed -= instance.OnValidate;
+            @Validate.canceled -= instance.OnValidate;
+        }
+
+        public void RemoveCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IUIActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     private int m_XboxControllerSchemeIndex = -1;
     public InputControlScheme XboxControllerScheme
     {
@@ -401,5 +489,9 @@ public partial class @Inputs_Tests: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnMoveUp(InputAction.CallbackContext context);
         void OnTestInpuDisplayName(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
+        void OnValidate(InputAction.CallbackContext context);
     }
 }

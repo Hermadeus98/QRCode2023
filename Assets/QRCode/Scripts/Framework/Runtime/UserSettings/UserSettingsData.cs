@@ -86,7 +86,7 @@
         
         [TabGroup("Controls", TextColor = "#e67e22")] 
         [SerializeField] [Range(10, 1000)] [SuffixLabel("ms")]
-        private float m_menuHoldFactor;
+        private int m_menuHoldFactor;
         
         [TabGroup("Controls", TextColor = "#e67e22")] 
         [SerializeField] [Range(1,10)]
@@ -228,6 +228,13 @@
         [SerializeField]
         private bool m_audioDescriptionTrack;
 
+        //CONTROLS
+        public int MenuHoldFactor
+        {
+            get => m_menuHoldFactor;
+            set => m_menuHoldFactor = value;
+        }
+        
         //INTERFACE
         public int InterfaceAreaCalibrationSize
         {

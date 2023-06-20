@@ -13,7 +13,10 @@ namespace QRCode.Framework
         
         [TitleGroup(K.InspectorGroups.References)]
         [SerializeField] private Image m_icon;
+        [TitleGroup(K.InspectorGroups.References)]
+        [SerializeField] private InputHoldFeedback m_inputHoldFeedback;
 
+        private bool m_containHoldInteraction;
         private Sequence m_onPerformInputSequence;
 
         protected override void OnEnable()
@@ -24,6 +27,20 @@ namespace QRCode.Framework
             }
             
             base.OnEnable();
+
+            if (m_inputActionReference.action.interactions == "Hold")
+            {
+                m_containHoldInteraction = true;
+                m_inputHoldFeedback.Activate();
+            }
+        }
+
+        private void Update()
+        {
+            if (m_containHoldInteraction)
+            {
+                m_inputHoldFeedback.UpdateHoldFeedback(m_inputActionReference.action.GetTimeoutCompletionPercentage() / InputSystem.settings.defaultHoldTime);
+            }
         }
 
         protected override void LoadIcon()
@@ -43,7 +60,7 @@ namespace QRCode.Framework
         protected override void OnPerformInput(InputAction.CallbackContext context)
         {
             base.OnPerformInput(context);
-            
+
             if (m_feedbackOnPerformInput)
             {
                 m_onPerformInputSequence?.Kill();

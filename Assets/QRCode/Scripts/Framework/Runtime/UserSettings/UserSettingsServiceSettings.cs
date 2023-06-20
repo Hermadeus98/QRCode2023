@@ -54,10 +54,13 @@ namespace QRCode.Framework
             var userSettingService = ServiceLocator.Current.Get<IUserSettingsService>();
             var userSettings = userSettingService.GetUserSettingsData();
 
+            //CONTROLS
+            userSettings.MenuHoldFactor = m_defaultValues.MenuHoldFactor;
+            
             //INTERFACE
             userSettings.InterfaceAreaCalibrationSize = m_defaultValues.InterfaceAreaCalibrationSize;
             userSettings.TextSizeSetting = m_defaultValues.TextSizeSetting;
-            
+
             //SOUND
             userSettings.VoiceLanguage = m_defaultValues.VoiceLanguage;
             userSettings.ShowSubtitles = m_defaultValues.ShowSubtitles;

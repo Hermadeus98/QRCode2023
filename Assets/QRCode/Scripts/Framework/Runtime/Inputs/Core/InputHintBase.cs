@@ -1,5 +1,6 @@
 namespace QRCode.Framework
 {
+    using System;
     using System.Threading.Tasks;
     using Debugging;
     using Sirenix.OdinInspector;
@@ -76,13 +77,14 @@ namespace QRCode.Framework
 
             if (m_playerInput != null)
             {
+                m_playerInput.actions[m_inputActionReference.action.name].performed -= OnPerformInput;
                 m_playerInput.actions[m_inputActionReference.action.name].performed += OnPerformInput;
             }
 
             UpdateIcon();
         }
 
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
             InputUser.onChange -= OnInputDeviceChange;
 
@@ -114,7 +116,7 @@ namespace QRCode.Framework
                     QRDebug.Debug(K.DebuggingChannels.Error, $"You should check {nameof(m_inputIconForAxis)} = false because action seems to be a button.", gameObject);
                     m_inputIconForAxis = false;
                 }
-                
+
                 LoadIconForInput();
             }
         }
@@ -161,6 +163,12 @@ namespace QRCode.Framework
             {
                 QRDebug.Debug(K.DebuggingChannels.Inputs, $"SCHEME = {m_currentControlScheme} & INPUT = {m_currentDisplayName} for {m_inputActionReference.action.name}", InputMapDatabase);
             }
+        }
+
+        [Button]
+        private void UpdateLongPressButton(float value)
+        {
+            InputSystem.settings.defaultHoldTime = 2f;
         }
     }
 }

@@ -2,6 +2,7 @@
 {
     using Events;
     using UnityEngine;
+    using UnityEngine.InputSystem;
 
     public struct UserSettingsEvents
     {
@@ -31,6 +32,9 @@
         {
             DB.Instance.TryGetDatabase<AvailableVoiceLocalizationDatabase>(DBEnum.DB_AvailableVoiceLocales, out var availableVoiceLocalizationDatabase);
             availableVoiceLocalizationDatabase.TryGetInDatabase(UserSettingsService.VoiceLanguage.ToString(), out var foundedLocale);
+            
+            //CONTROLS
+            InputSystem.settings.defaultHoldTime = (float)UserSettingsService.MenuHoldFactor / 1000;
             
             //INTERFACE
             InterfaceAreaCalibrationEvent.Trigger(UserSettingsService.InterfaceAreaCalibrationSize);

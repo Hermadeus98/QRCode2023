@@ -11,7 +11,7 @@
                     "id": "0372df8d-bab7-4145-bbec-e8dbe2f61874",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "initialStateCheck": false
                 },
                 {
@@ -181,6 +181,45 @@
                     "processors": "",
                     "groups": "XboxController",
                     "action": "MoveUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "c71d0661-0b18-4eda-8b4f-c557353cf59a",
+            "actions": [
+                {
+                    "name": "Validate",
+                    "type": "Button",
+                    "id": "277f3243-c393-4504-b20e-6a5ae1b52cac",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "cebf4e21-708a-435e-b8d3-365a65bb4197",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Validate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a879eb89-c9e6-4ab6-b6b1-046a7143b211",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XboxController",
+                    "action": "Validate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

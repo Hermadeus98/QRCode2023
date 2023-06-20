@@ -23,6 +23,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 32a3681c544a13447a6cbed3ea99c121, type: 3}
     - {fileID: 21300000, guid: 7eea9185b18a29345b4e6cadd628b1cf, type: 3}
     - {fileID: 21300000, guid: 58f1c46da09c9f0408165b4af93f7702, type: 3}
+    - {fileID: 21300000, guid: d2a73e7f7f7e99946be97b6da9ae0673, type: 3}
     - {fileID: 11400000, guid: d8160bffca90a6047b627bc41277f22a, type: 2}
     - {fileID: 21300002, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}
     - {fileID: 21300008, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}
@@ -67,7 +68,7 @@ MonoBehaviour:
       Data: 3|QRCode.Framework.InputMapElement[], QRCode.Framework
     - Name: 
       Entry: 12
-      Data: 6
+      Data: 9
     - Name: 
       Entry: 7
       Data: 4|QRCode.Framework.InputMapElement, QRCode.Framework
@@ -127,10 +128,37 @@ MonoBehaviour:
       Data: 8|QRCode.Framework.InputMapElement, QRCode.Framework
     - Name: InputName
       Entry: 1
-      Data: Y
+      Data: Hold A
     - Name: InputIcons
       Entry: 7
       Data: 9|UnityEngine.Sprite[], UnityEngine.CoreModule
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: TextMeshProSpriteSheetIndex
+      Entry: 3
+      Data: 13
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 10|QRCode.Framework.InputMapElement, QRCode.Framework
+    - Name: InputName
+      Entry: 1
+      Data: Y
+    - Name: InputIcons
+      Entry: 7
+      Data: 11|UnityEngine.Sprite[], UnityEngine.CoreModule
     - Name: 
       Entry: 12
       Data: 1
@@ -151,13 +179,13 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 10|QRCode.Framework.InputMapElement, QRCode.Framework
+      Data: 12|QRCode.Framework.InputMapElement, QRCode.Framework
     - Name: InputName
       Entry: 1
       Data: Z
     - Name: InputIcons
       Entry: 7
-      Data: 11|UnityEngine.Sprite[], UnityEngine.CoreModule
+      Data: 13|UnityEngine.Sprite[], UnityEngine.CoreModule
     - Name: 
       Entry: 12
       Data: 1
@@ -178,13 +206,13 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 12|QRCode.Framework.InputMapElement, QRCode.Framework
+      Data: 14|QRCode.Framework.InputMapElement, QRCode.Framework
     - Name: InputName
       Entry: 1
       Data: S
     - Name: InputIcons
       Entry: 7
-      Data: 13|UnityEngine.Sprite[], UnityEngine.CoreModule
+      Data: 15|UnityEngine.Sprite[], UnityEngine.CoreModule
     - Name: 
       Entry: 12
       Data: 1
@@ -205,13 +233,13 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 14|QRCode.Framework.InputMapElement, QRCode.Framework
+      Data: 16|QRCode.Framework.InputMapElement, QRCode.Framework
     - Name: InputName
       Entry: 1
       Data: W
     - Name: InputIcons
       Entry: 7
-      Data: 15|UnityEngine.Sprite[], UnityEngine.CoreModule
+      Data: 17|UnityEngine.Sprite[], UnityEngine.CoreModule
     - Name: 
       Entry: 12
       Data: 1
@@ -227,6 +255,60 @@ MonoBehaviour:
     - Name: TextMeshProSpriteSheetIndex
       Entry: 3
       Data: 90
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 18|QRCode.Framework.InputMapElement, QRCode.Framework
+    - Name: InputName
+      Entry: 1
+      Data: Entree
+    - Name: InputIcons
+      Entry: 7
+      Data: 19|UnityEngine.Sprite[], UnityEngine.CoreModule
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: TextMeshProSpriteSheetIndex
+      Entry: 3
+      Data: 33
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 20|QRCode.Framework.InputMapElement, QRCode.Framework
+    - Name: InputName
+      Entry: 1
+      Data: Enter
+    - Name: InputIcons
+      Entry: 7
+      Data: 21|UnityEngine.Sprite[], UnityEngine.CoreModule
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: TextMeshProSpriteSheetIndex
+      Entry: 3
+      Data: 33
     - Name: 
       Entry: 8
       Data: 
@@ -250,55 +332,28 @@ MonoBehaviour:
       Data: XboxController
     - Name: $v
       Entry: 7
-      Data: 16|QRCode.Framework.InputMap, QRCode.Framework
+      Data: 22|QRCode.Framework.InputMap, QRCode.Framework
     - Name: m_mapScheme
       Entry: 1
       Data: XboxController
     - Name: m_iconsSpriteAsset
       Entry: 10
-      Data: 7
+      Data: 8
     - Name: m_inputMapElements
       Entry: 7
-      Data: 17|QRCode.Framework.InputMapElement[], QRCode.Framework
+      Data: 23|QRCode.Framework.InputMapElement[], QRCode.Framework
     - Name: 
       Entry: 12
-      Data: 6
+      Data: 7
     - Name: 
       Entry: 7
-      Data: 18|QRCode.Framework.InputMapElement, QRCode.Framework
+      Data: 24|QRCode.Framework.InputMapElement, QRCode.Framework
     - Name: InputName
       Entry: 1
       Data: A
     - Name: InputIcons
       Entry: 7
-      Data: 19|UnityEngine.Sprite[], UnityEngine.CoreModule
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 10
-      Data: 8
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: TextMeshProSpriteSheetIndex
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 20|QRCode.Framework.InputMapElement, QRCode.Framework
-    - Name: InputName
-      Entry: 1
-      Data: X
-    - Name: InputIcons
-      Entry: 7
-      Data: 21|UnityEngine.Sprite[], UnityEngine.CoreModule
+      Data: 25|UnityEngine.Sprite[], UnityEngine.CoreModule
     - Name: 
       Entry: 12
       Data: 1
@@ -313,19 +368,46 @@ MonoBehaviour:
       Data: 
     - Name: TextMeshProSpriteSheetIndex
       Entry: 3
-      Data: 18
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 22|QRCode.Framework.InputMapElement, QRCode.Framework
+      Data: 26|QRCode.Framework.InputMapElement, QRCode.Framework
     - Name: InputName
       Entry: 1
-      Data: Y
+      Data: Hold A
     - Name: InputIcons
       Entry: 7
-      Data: 23|UnityEngine.Sprite[], UnityEngine.CoreModule
+      Data: 27|UnityEngine.Sprite[], UnityEngine.CoreModule
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 9
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: TextMeshProSpriteSheetIndex
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 28|QRCode.Framework.InputMapElement, QRCode.Framework
+    - Name: InputName
+      Entry: 1
+      Data: X
+    - Name: InputIcons
+      Entry: 7
+      Data: 29|UnityEngine.Sprite[], UnityEngine.CoreModule
     - Name: 
       Entry: 12
       Data: 1
@@ -340,25 +422,52 @@ MonoBehaviour:
       Data: 
     - Name: TextMeshProSpriteSheetIndex
       Entry: 3
+      Data: 18
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 30|QRCode.Framework.InputMapElement, QRCode.Framework
+    - Name: InputName
+      Entry: 1
+      Data: Y
+    - Name: InputIcons
+      Entry: 7
+      Data: 31|UnityEngine.Sprite[], UnityEngine.CoreModule
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 11
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: TextMeshProSpriteSheetIndex
+      Entry: 3
       Data: 19
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 24|QRCode.Framework.InputMapElement, QRCode.Framework
+      Data: 32|QRCode.Framework.InputMapElement, QRCode.Framework
     - Name: InputName
       Entry: 1
       Data: Left Stick Down
     - Name: InputIcons
       Entry: 7
-      Data: 25|UnityEngine.Sprite[], UnityEngine.CoreModule
+      Data: 33|UnityEngine.Sprite[], UnityEngine.CoreModule
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 10
-      Data: 11
+      Data: 12
     - Name: 
       Entry: 13
       Data: 
@@ -373,19 +482,19 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 26|QRCode.Framework.InputMapElement, QRCode.Framework
+      Data: 34|QRCode.Framework.InputMapElement, QRCode.Framework
     - Name: InputName
       Entry: 1
       Data: Left Stick Up
     - Name: InputIcons
       Entry: 7
-      Data: 27|UnityEngine.Sprite[], UnityEngine.CoreModule
+      Data: 35|UnityEngine.Sprite[], UnityEngine.CoreModule
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 10
-      Data: 11
+      Data: 12
     - Name: 
       Entry: 13
       Data: 
@@ -400,19 +509,19 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 28|QRCode.Framework.InputMapElement, QRCode.Framework
+      Data: 36|QRCode.Framework.InputMapElement, QRCode.Framework
     - Name: InputName
       Entry: 1
       Data: LS Up
     - Name: InputIcons
       Entry: 7
-      Data: 29|UnityEngine.Sprite[], UnityEngine.CoreModule
+      Data: 37|UnityEngine.Sprite[], UnityEngine.CoreModule
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 10
-      Data: 11
+      Data: 12
     - Name: 
       Entry: 13
       Data: 
