@@ -148,7 +148,7 @@
         
         [TabGroup("Interface", TextColor = "#f1c40f")] 
         [SerializeField]
-        private TextSizeSetting m_textSizeSetting;
+        private Settings.InterfaceSettings.TextSizeSetting m_textSizeSetting;
         
         [TabGroup("Interface", TextColor = "#f1c40f")] 
         [SerializeField]
@@ -210,7 +210,7 @@
         
         [TabGroup("Sound", TextColor = "#9b59b6")] 
         [SerializeField]
-        private TextSizeSetting m_subtitlesTextSizeSetting;
+        private Settings.InterfaceSettings.TextSizeSetting m_subtitlesTextSizeSetting;
         
         [TabGroup("Sound", TextColor = "#9b59b6")] 
         [SerializeField]
@@ -242,7 +242,7 @@
             set => m_interfaceAreaCalibrationSize = value;
         }
         
-        public TextSizeSetting TextSizeSetting
+        public Settings.InterfaceSettings.TextSizeSetting TextSizeSetting
         {
             get => m_textSizeSetting;
             set => m_textSizeSetting = value;
@@ -279,7 +279,7 @@
             set => m_showSubtitleSpeakerName = value;
         }
 
-        public TextSizeSetting SubtitlesTextSizeSetting
+        public Settings.InterfaceSettings.TextSizeSetting SubtitlesTextSizeSetting
         {
             get => m_subtitlesTextSizeSetting;
             set => m_subtitlesTextSizeSetting = value;
@@ -328,7 +328,7 @@
 
             //INTERFACE
             m_interfaceAreaCalibrationSize = 12;
-            m_textSizeSetting = TextSizeSetting.Small;
+            m_textSizeSetting = Settings.InterfaceSettings.TextSizeSetting.Small;
             m_iconSizeSetting = IconSizeSetting.Small;
             m_menuNavigationSettings = MenuNavigationSettings.Cursor;
             m_holdAlternativeSetting = HoldAlternativeSetting.Hold;
@@ -345,7 +345,7 @@
             m_soundFXVolume = 100;
             m_dialogueBoost = false;
             m_showSubtitles = true;
-            m_subtitlesTextSizeSetting = TextSizeSetting.Small;
+            m_subtitlesTextSizeSetting = Settings.InterfaceSettings.TextSizeSetting.Small;
             m_showSubtitleBackground = false;
             m_subtitleBackgroundOpacity = 100;
             m_showSubtitleSpeakerName = true;

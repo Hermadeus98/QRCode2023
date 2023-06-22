@@ -1,4 +1,4 @@
-namespace QRCode.Framework
+﻿namespace QRCode.Framework
 {
     using Events;
     using Game;
@@ -7,7 +7,7 @@ namespace QRCode.Framework
     using TMPro;
     using UnityEngine;
 
-    public class TextSizeSettingsComponent : MonoBehaviour
+    public class SubtitleTextSizeSettingsComponent : MonoBehaviour
     {
         [TitleGroup(K.InspectorGroups.References)]
         [SerializeField] private TextMeshProUGUI m_textMeshProUGUI = null;
@@ -28,7 +28,7 @@ namespace QRCode.Framework
                 return m_catalog;
             }
         }
-        
+
         private UserSettingsData m_userSettingsData = null;
         private UserSettingsData UserSettingsData
         {
@@ -42,28 +42,28 @@ namespace QRCode.Framework
                 return m_userSettingsData;
             }
         }
-
+        
         private void OnEnable()
         {
-            TextSizeSettingEvent.Register(UpdateTextFromSettings);
+            SubtitlesTextSizeSettingEvent.Register(UpdateTextFromSettings);
 
             if (Bootstrap.IsInit())
             {
-                UpdateTextFromSettings(UserSettingsData.TextSizeSetting);
+                UpdateTextFromSettings(UserSettingsData.SubtitlesTextSizeSetting);
             }
         }
 
         private void OnDisable()
         {
-            TextSizeSettingEvent.Unregister(UpdateTextFromSettings);
+            SubtitlesTextSizeSettingEvent.Unregister(UpdateTextFromSettings);
         }
 
         [Button]
-        private void UpdateTextFromSettings(TextSizeSetting textSizeSetting)
+        private void UpdateTextFromSettings(Settings.InterfaceSettings.TextSizeSetting subtitlesTextSizeSetting)
         {
             var textRuleSetCatalog = Catalog.GetCatalogOfType<TextRuleSetCatalog>();
             var textRuleSet = textRuleSetCatalog.GetDataFromId(m_textRuleSetName);
-            var setting = textRuleSet.GetTextSetting(textSizeSetting);
+            var setting = textRuleSet.GetTextSetting(subtitlesTextSizeSetting);
             m_textMeshProUGUI.fontSize = setting.FontSize;
         }
     }

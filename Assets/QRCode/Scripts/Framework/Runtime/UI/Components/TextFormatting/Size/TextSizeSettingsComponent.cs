@@ -1,4 +1,4 @@
-﻿namespace QRCode.Framework
+namespace QRCode.Framework
 {
     using Events;
     using Game;
@@ -7,7 +7,7 @@
     using TMPro;
     using UnityEngine;
 
-    public class SubtitleTextSizeSettingsComponent : MonoBehaviour
+    public class TextSizeSettingsComponent : MonoBehaviour
     {
         [TitleGroup(K.InspectorGroups.References)]
         [SerializeField] private TextMeshProUGUI m_textMeshProUGUI = null;
@@ -28,7 +28,7 @@
                 return m_catalog;
             }
         }
-
+        
         private UserSettingsData m_userSettingsData = null;
         private UserSettingsData UserSettingsData
         {
@@ -42,28 +42,28 @@
                 return m_userSettingsData;
             }
         }
-        
+
         private void OnEnable()
         {
-            SubtitlesTextSizeSettingEvent.Register(UpdateTextFromSettings);
+            TextSizeSettingEvent.Register(UpdateTextFromSettings);
 
             if (Bootstrap.IsInit())
             {
-                UpdateTextFromSettings(UserSettingsData.SubtitlesTextSizeSetting);
+                UpdateTextFromSettings(UserSettingsData.TextSizeSetting);
             }
         }
 
         private void OnDisable()
         {
-            SubtitlesTextSizeSettingEvent.Unregister(UpdateTextFromSettings);
+            TextSizeSettingEvent.Unregister(UpdateTextFromSettings);
         }
 
         [Button]
-        private void UpdateTextFromSettings(TextSizeSetting subtitlesTextSizeSetting)
+        private void UpdateTextFromSettings(Settings.InterfaceSettings.TextSizeSetting textSizeSetting)
         {
             var textRuleSetCatalog = Catalog.GetCatalogOfType<TextRuleSetCatalog>();
             var textRuleSet = textRuleSetCatalog.GetDataFromId(m_textRuleSetName);
-            var setting = textRuleSet.GetTextSetting(subtitlesTextSizeSetting);
+            var setting = textRuleSet.GetTextSetting(textSizeSetting);
             m_textMeshProUGUI.fontSize = setting.FontSize;
         }
     }

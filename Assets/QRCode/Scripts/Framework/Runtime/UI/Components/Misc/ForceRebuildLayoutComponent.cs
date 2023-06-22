@@ -1,6 +1,6 @@
 namespace QRCode.Framework
 {
-    using System;
+    using Sirenix.OdinInspector;
     using UnityEngine;
     using UnityEngine.Scripting;
     using UnityEngine.UI;
@@ -12,7 +12,7 @@ namespace QRCode.Framework
             ForceRebuildLayout();
         }
 
-        [Preserve]
+        [Preserve][Button]
         public void ForceRebuildLayout()
         {
             LayoutRebuilder.ForceRebuildLayoutImmediate(transform as RectTransform);

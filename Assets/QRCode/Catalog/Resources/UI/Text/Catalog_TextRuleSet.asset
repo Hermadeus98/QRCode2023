@@ -24,26 +24,29 @@ MonoBehaviour:
   m_catalogName: TextRuleSet
   m_catalogData:
   - m_name: Default
-    m_textSettings:
+    m_textSizeSettings:
     - m_textSizeSetting: 0
       m_fontSize: 25
     - m_textSizeSetting: 1
       m_fontSize: 36
     - m_textSizeSetting: 2
       m_fontSize: 45
+    m_textColor: {r: 0, g: 0, b: 0, a: 1}
   - m_name: SubtitlesText
-    m_textSettings:
+    m_textSizeSettings:
     - m_textSizeSetting: 0
       m_fontSize: 25
     - m_textSizeSetting: 1
       m_fontSize: 36
     - m_textSizeSetting: 2
       m_fontSize: 45
+    m_textColor: {r: 1, g: 1, b: 1, a: 1}
   - m_name: SubtitlesSpeakerName
-    m_textSettings:
+    m_textSizeSettings:
     - m_textSizeSetting: 0
       m_fontSize: 30
     - m_textSizeSetting: 1
-      m_fontSize: 41
+      m_fontSize: 40
     - m_textSizeSetting: 2
       m_fontSize: 50
+    m_textColor: {r: 1, g: 1, b: 1, a: 1}

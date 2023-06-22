@@ -170,7 +170,7 @@ PrefabInstance:
     - target: {fileID: 7825516387981053083, guid: 067c3fde56292e849be8a2c4400dfd00,
         type: 3}
       propertyPath: m_Name
-      value: P_InputHintReminder_Validate
+      value: P_InputHintReminder_Validate Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7904761239877165662, guid: 067c3fde56292e849be8a2c4400dfd00,
         type: 3}
@@ -180,3 +180,21 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 067c3fde56292e849be8a2c4400dfd00, type: 3}
+--- !u!1 &54070527139139059 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7825516387981053083, guid: 067c3fde56292e849be8a2c4400dfd00,
+    type: 3}
+  m_PrefabInstance: {fileID: 7807492886855516520}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-902292761276255073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54070527139139059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28f502a6ec439a94398aa958923546e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8098877051011004213}
   - component: {fileID: 6553127362032593963}
   - component: {fileID: 3708063787154010461}
+  - component: {fileID: 192242461478922308}
   m_Layer: 5
   m_Name: P_TextBase
   m_TagString: Untagged
@@ -68,8 +69,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Loading...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2f490f72b6ed6ae4d8b31cee2cac3de7, type: 2}
-  m_sharedMaterial: {fileID: -6263097307693789204, guid: 2f490f72b6ed6ae4d8b31cee2cac3de7,
+  m_fontAsset: {fileID: 11400000, guid: d1fe64fe54e4be242a42d2adfa8bbb17, type: 2}
+  m_sharedMaterial: {fileID: -197705157671528995, guid: d1fe64fe54e4be242a42d2adfa8bbb17,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -136,3 +137,17 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &192242461478922308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2527124551663895930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 579f0cb18d73483aa3d51dfac4b74d05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_textMeshProUGUI: {fileID: 3708063787154010461}
+  m_textRuleSetName: Default

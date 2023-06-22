@@ -1,7 +1,6 @@
 namespace QRCode.Framework
 {
     using System;
-    using Settings.InterfaceSettings;
     using Sirenix.OdinInspector;
     using UnityEngine;
 
@@ -14,34 +13,37 @@ namespace QRCode.Framework
     [Serializable]
     public class TextRuleSet : CatalogDataBase
     {
-        [SerializeField] private TextSettings[] m_textSettings;
+        [SerializeField] private TextSizeSettingsData[] m_textSizeSettings;
 
-        public TextSettings GetTextSetting(TextSizeSetting textSizeSetting)
+        [SerializeField][ColorPalette("UI")] private UnityEngine.Color m_textColor;
+
+        public TextSizeSettingsData GetTextSetting(Settings.InterfaceSettings.TextSizeSetting textSizeSetting)
         {
-            for (var i = 0; i < m_textSettings.Length; i++)
+            for (var i = 0; i < m_textSizeSettings.Length; i++)
             {
-                if (m_textSettings[i].TextSizeSetting == textSizeSetting)
+                if (m_textSizeSettings[i].TextSizeSetting == textSizeSetting)
                 {
-                    return m_textSettings[i];
+                    return m_textSizeSettings[i];
                 }
             }
 
             throw new Exception();
         }
+        public UnityEngine.Color TextColor => m_textColor;
     }
 
     [Serializable]
-    public struct TextSettings
+    public struct TextSizeSettingsData
     {
-        [SerializeField] private TextSizeSetting m_textSizeSetting;
+        [SerializeField] private Settings.InterfaceSettings.TextSizeSetting m_textSizeSetting;
         [SerializeField] [Min(0)] [SuffixLabel("px")] private int m_fontSize;
 
-        public TextSizeSetting TextSizeSetting => m_textSizeSetting;
+        public Settings.InterfaceSettings.TextSizeSetting TextSizeSetting => m_textSizeSetting;
         public int FontSize => m_fontSize;
     }
 
     [Serializable]
-    public struct TextSetting
+    public struct TextSizeSetting
     {
         [SuffixLabel("px")]
         [SerializeField] private int m_fontSize;
