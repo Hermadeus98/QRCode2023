@@ -10,7 +10,7 @@ namespace QRCode.Editor
     {
         [SerializeField][InlineEditor(InlineEditorModes.FullEditor)] private InputMapDatabase m_inputMapDatabase = null;
 
-        [MenuItem("QRCode/Input Icons Database")]
+        [MenuItem("QRCode/Inputs/Input Icons Database")]
         private static void OpenWindow()
         {
             GetWindow<InputIconsDatabaseWindowEditor>().Show();

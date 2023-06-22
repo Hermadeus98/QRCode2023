@@ -3,6 +3,7 @@ namespace QRCode.Framework
     using Sirenix.OdinInspector;
     using UnityEngine;
     
+    [RequireComponent(typeof(CanvasGroup))]
     public class UIElement : SerializedMonoBehaviour
     {
         public RectTransform RectTransform

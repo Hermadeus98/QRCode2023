@@ -6,7 +6,7 @@ namespace QRCode.Framework
     using TMPro;
     using UnityEngine;
 
-    [CreateAssetMenu(menuName = K.DatabasePath.BasePath + "Input Maps Database", fileName = "BD_InputMaps")]
+    [CreateAssetMenu(menuName = K.DatabasePath.Inputs + "Input Maps Database", fileName = "DB_InputMaps")]
     public class InputMapDatabase : ScriptableObjectDatabase<InputMap>
     {
         
@@ -39,6 +39,11 @@ namespace QRCode.Framework
 
         public Sprite FindIcon(string inputName, int alternativeInputIconIndex = 0)
         {
+            if (string.IsNullOrEmpty(inputName))
+            {
+                return InputSettings.NotFoundedIconSprite;
+            }
+            
             for (int i = 0; i < m_inputMapElements.Length; i++)
             {
                 if (inputName == m_inputMapElements[i].InputName)

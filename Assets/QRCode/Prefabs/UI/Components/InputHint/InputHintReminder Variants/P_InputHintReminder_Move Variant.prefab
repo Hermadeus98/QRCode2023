@@ -169,14 +169,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7904761239877165662, guid: 067c3fde56292e849be8a2c4400dfd00,
         type: 3}
-      propertyPath: m_inputIconForAxis
-      value: 1
+      propertyPath: m_customName
+      value: Move
       objectReference: {fileID: 0}
     - target: {fileID: 7904761239877165662, guid: 067c3fde56292e849be8a2c4400dfd00,
         type: 3}
       propertyPath: m_inputActionReference
       value: 
-      objectReference: {fileID: -8517968198892661047, guid: 9ddf774bcd3d31d49ab84ea91743bda2,
+      objectReference: {fileID: 2294988818262079066, guid: 9ddf774bcd3d31d49ab84ea91743bda2,
         type: 3}
     - target: {fileID: 7904761239877165662, guid: 067c3fde56292e849be8a2c4400dfd00,
         type: 3}

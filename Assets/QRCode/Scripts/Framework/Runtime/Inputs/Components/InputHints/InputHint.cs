@@ -49,6 +49,7 @@ namespace QRCode.Framework
 
             var sanitizeControlScheme = CurrentControlScheme.Replace(" ", "");
             InputMapDatabase.TryGetInDatabase(sanitizeControlScheme, out var inputMap);
+            
             var icon = inputMap.FindIcon(m_currentDisplayName, m_alternativeIconIndex);
 
             m_icon.sprite = icon;

@@ -25,9 +25,9 @@ MonoBehaviour:
   m_minimalLoadDurationAfter: 0.5
   m_loadingLocalizedString:
     m_TableReference:
-      m_TableCollectionName: GUID:f9e911ce893b9a045b528703c4c701a5
+      m_TableCollectionName: GUID:25cc2e8128ce56f46bb6e8c1714e6190
     m_TableEntryReference:
-      m_KeyId: 245907206144
+      m_KeyId: 119772565352448
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

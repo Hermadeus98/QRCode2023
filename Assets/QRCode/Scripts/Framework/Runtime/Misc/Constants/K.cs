@@ -66,6 +66,7 @@ namespace QRCode.Framework
         public static class DatabasePath
         {
             public const string BasePath = "QRCode/Databases/";
+            public const string Inputs = BasePath + "/Inputs/";
         }
         
         public static class CreateMenuItemPath
