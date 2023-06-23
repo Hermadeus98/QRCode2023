@@ -11,8 +11,7 @@
                     "id": "81d2dc29-f5a6-47c1-a543-ad954fda9fa6",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
+                    "interactions": ""
                 },
                 {
                     "name": "Click",
@@ -20,8 +19,7 @@
                     "id": "e5db52ef-8fc1-40c9-9799-57f91a7d7ade",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
+                    "interactions": ""
                 },
                 {
                     "name": "Scroll",
@@ -29,8 +27,7 @@
                     "id": "48228e6f-8fda-4ba2-b461-fdae78c58090",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -40,18 +37,7 @@
                     "path": "<VirtualMouse>/position",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Point",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "48850bee-3924-4093-b890-9b23cf7d7e93",
-                    "path": "<Mouse>/position",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KeyboardAndMouse",
+                    "groups": "",
                     "action": "Point",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -62,18 +48,7 @@
                     "path": "<VirtualMouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Click",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "364c917c-169b-4c13-b3e3-4ef6e41fba8a",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KeyboardAndMouse",
+                    "groups": "",
                     "action": "Click",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -84,18 +59,7 @@
                     "path": "<VirtualMouse>/scroll",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Scroll",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "74e0bffc-1f64-449e-8541-3ee795f2c611",
-                    "path": "<Mouse>/scroll",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KeyboardAndMouse",
+                    "groups": "",
                     "action": "Scroll",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -103,27 +67,5 @@
             ]
         }
     ],
-    "controlSchemes": [
-        {
-            "name": "Gamepad",
-            "bindingGroup": "Gamepad",
-            "devices": [
-                {
-                    "devicePath": "<Gamepad>",
-                    "isOptional": false,
-                    "isOR": false
-                },
-                {
-                    "devicePath": "<VirtualMouse>",
-                    "isOptional": true,
-                    "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "KeyboardAndMouse",
-            "bindingGroup": "KeyboardAndMouse",
-            "devices": []
-        }
-    ]
+    "controlSchemes": []
 }
