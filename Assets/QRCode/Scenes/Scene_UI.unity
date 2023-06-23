@@ -4900,13 +4900,13 @@ PrefabInstance:
         type: 3}
       propertyPath: m_PointAction
       value: 
-      objectReference: {fileID: 1054132383583890850, guid: 9ddf774bcd3d31d49ab84ea91743bda2,
+      objectReference: {fileID: 7440953117278478716, guid: 754f07f1430c8584c8d94fc68e1f0ff3,
         type: 3}
     - target: {fileID: 579254317307475681, guid: df0caf79ae3235d47bd1de562ea9f557,
         type: 3}
       propertyPath: m_ActionsAsset
       value: 
-      objectReference: {fileID: -944628639613478452, guid: 9ddf774bcd3d31d49ab84ea91743bda2,
+      objectReference: {fileID: -944628639613478452, guid: 754f07f1430c8584c8d94fc68e1f0ff3,
         type: 3}
     - target: {fileID: 579254317307475681, guid: df0caf79ae3235d47bd1de562ea9f557,
         type: 3}
@@ -4924,7 +4924,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LeftClickAction
       value: 
-      objectReference: {fileID: 8056856818456041789, guid: 9ddf774bcd3d31d49ab84ea91743bda2,
+      objectReference: {fileID: -801532132316106170, guid: 754f07f1430c8584c8d94fc68e1f0ff3,
         type: 3}
     - target: {fileID: 579254317307475681, guid: df0caf79ae3235d47bd1de562ea9f557,
         type: 3}
@@ -4942,7 +4942,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ScrollWheelAction
       value: 
-      objectReference: {fileID: 4502412055082496612, guid: 9ddf774bcd3d31d49ab84ea91743bda2,
+      objectReference: {fileID: -3904495759969218529, guid: 754f07f1430c8584c8d94fc68e1f0ff3,
         type: 3}
     - target: {fileID: 579254317307475681, guid: df0caf79ae3235d47bd1de562ea9f557,
         type: 3}
@@ -4964,7 +4964,7 @@ PrefabInstance:
     - target: {fileID: 579254317307475687, guid: df0caf79ae3235d47bd1de562ea9f557,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df0caf79ae3235d47bd1de562ea9f557, type: 3}
