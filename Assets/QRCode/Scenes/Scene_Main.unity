@@ -367,6 +367,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_CameraBase
       objectReference: {fileID: 0}
+    - target: {fileID: 4295322510025202038, guid: 0f9f1db8a84c4164b903e034636300d4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4295322510025202042, guid: 0f9f1db8a84c4164b903e034636300d4,
         type: 3}
       propertyPath: m_Cameras.Array.size
