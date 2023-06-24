@@ -60,6 +60,7 @@ namespace QRCode.Framework
             //INTERFACE
             userSettings.InterfaceAreaCalibrationSize = m_defaultValues.InterfaceAreaCalibrationSize;
             userSettings.TextSizeSetting = m_defaultValues.TextSizeSetting;
+            userSettings.GamepadCursorSensibility = m_defaultValues.GamepadCursorSensibility;
 
             //SOUND
             userSettings.VoiceLanguage = m_defaultValues.VoiceLanguage;

@@ -176,7 +176,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_inputActionReference
       value: 
-      objectReference: {fileID: 2294988818262079066, guid: 9ddf774bcd3d31d49ab84ea91743bda2,
+      objectReference: {fileID: -42683977273951625, guid: 754f07f1430c8584c8d94fc68e1f0ff3,
         type: 3}
     - target: {fileID: 7904761239877165662, guid: 067c3fde56292e849be8a2c4400dfd00,
         type: 3}

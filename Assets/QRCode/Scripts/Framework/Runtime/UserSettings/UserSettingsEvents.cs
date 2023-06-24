@@ -39,6 +39,7 @@
             //INTERFACE
             InterfaceAreaCalibrationEvent.Trigger(UserSettingsService.InterfaceAreaCalibrationSize);
             TextSizeSettingEvent.Trigger(UserSettingsService.TextSizeSetting);
+            GamepadCursorSensibilityEvent.Trigger(UserSettingsService.GamepadCursorSensibility);
             
             //SOUND
             VoiceLanguageSettingEvent.Trigger(foundedLocale);

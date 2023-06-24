@@ -159,6 +159,9 @@
         private MenuNavigationSettings m_menuNavigationSettings;
         
         [TabGroup("Interface", TextColor = "#f1c40f")] 
+        [SerializeField][Range(1,10)] private int m_gamepadCursorSensibility = 5;
+        
+        [TabGroup("Interface", TextColor = "#f1c40f")] 
         [SerializeField]
         private HoldAlternativeSetting m_holdAlternativeSetting;
         
@@ -169,7 +172,7 @@
         [TabGroup("Interface", TextColor = "#f1c40f")] 
         [SerializeField] [Range(0,100)] [SuffixLabel("%")]
         private int m_HUDBackgroundOpacity;
-        
+
         [TabGroup("Interface", TextColor = "#f1c40f")] 
         [Title("HUD: Others")]
         [SerializeField]
@@ -246,6 +249,12 @@
         {
             get => m_textSizeSetting;
             set => m_textSizeSetting = value;
+        }
+
+        public int GamepadCursorSensibility
+        {
+            get => m_gamepadCursorSensibility;
+            set => m_gamepadCursorSensibility = value;
         }
         
         //SOUND
@@ -332,6 +341,7 @@
             m_iconSizeSetting = IconSizeSetting.Small;
             m_menuNavigationSettings = MenuNavigationSettings.Cursor;
             m_holdAlternativeSetting = HoldAlternativeSetting.Hold;
+            m_gamepadCursorSensibility = 5;
             m_showHUDBackground = false;
             m_HUDBackgroundOpacity = 100;
             m_showTipsAndMessages = true;

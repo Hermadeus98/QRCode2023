@@ -24,5 +24,6 @@ namespace QRCode.Framework
         LoadingScreenCanvas = 2,
         SubtitleCanvas = 3,
         Save = 4,
+        Cursor = 5,
     }
 }
