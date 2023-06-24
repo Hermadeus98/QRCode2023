@@ -9,5 +9,8 @@
         public void SetActionMapDisable(string actionMap);
         public void SetActionMapGroupEnable(DB_InputMapGroupEnum inputMapGroup);
         public void SetActionMapGroupDisable(DB_InputMapGroupEnum inputMapGroup);
+        
+        public string[] SchemeWhereMouseIsEnable { get; }
+        public string[] SchemeWhereGamepadCursorIsEnable { get; }
     }
 }

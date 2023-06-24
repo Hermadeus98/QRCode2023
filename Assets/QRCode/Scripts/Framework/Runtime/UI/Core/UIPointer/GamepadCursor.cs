@@ -1,5 +1,7 @@
 namespace QRCode.Framework
 {
+    using System.Collections;
+    using System.Threading.Tasks;
     using Events;
     using Game;
     using Sirenix.OdinInspector;
@@ -7,18 +9,38 @@ namespace QRCode.Framework
     using UnityEngine.InputSystem;
     using UnityEngine.InputSystem.LowLevel;
     using UnityEngine.InputSystem.UI;
+    using UnityEngine.InputSystem.Users;
 
     public class GamepadCursor : UIElement
     {
         [TitleGroup(K.InspectorGroups.Settings)]
         [SerializeField] private bool m_isMain = false;
-        
+
         [TitleGroup(K.InspectorGroups.References)] 
         [SerializeField] private VirtualMouseInput m_virtualMouse;
         
         private static GamepadCursor Main;
         private float m_initialSpeed;
         private IInputManagementService m_inputManagementService = null;
+
+        private bool m_isActive = true;
+
+        public bool IsActive
+        {
+            get => m_isActive;
+            set
+            {
+                if (value)
+                {
+                    Activate();
+                }
+                else
+                {
+                    Deactivate();
+                }
+                m_isActive = value;
+            }
+        }
         
         private UserSettingsData m_userSettingsData = null;
         private UserSettingsData UserSettingsData
@@ -36,6 +58,11 @@ namespace QRCode.Framework
 
         protected override void Start()
         {
+            if (m_isMain)
+            {
+                Main = this;
+            }
+            
             m_inputManagementService = ServiceLocator.Current.Get<IInputManagementService>();
 
             base.Start();
@@ -47,25 +74,30 @@ namespace QRCode.Framework
             ClampPosition();
         }
 
-        protected override void OnEnable()
+        protected override async void OnEnable()
         {
             base.OnEnable();
             
             GamepadCursorSensibilityEvent.Register(UpdateSensibilityFromSettings);
+            Init();
+        }
 
-            if (Bootstrap.IsInit())
+        private async void Init()
+        {
+            while (Bootstrap.IsInit() == false)
             {
-                UpdateSensibilityFromSettings(UserSettingsData.GamepadCursorSensibility);
+                await Task.Yield();
             }
             
-            //m_inputManagementService.GetPlayerInput().onControlsChanged += OnControlsChanged;
+            UpdateSensibilityFromSettings(UserSettingsData.GamepadCursorSensibility);
+            InputUser.onChange += OnControlsChanged;
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
             GamepadCursorSensibilityEvent.Unregister(UpdateSensibilityFromSettings);
-            //m_inputManagementService.GetPlayerInput().onControlsChanged -= OnControlsChanged;
+            InputUser.onChange -= OnControlsChanged;
         }
 
         public void Activate()
@@ -78,11 +110,26 @@ namespace QRCode.Framework
             CanvasGroup.alpha = 0f;
         }
         
-        private void OnControlsChanged(PlayerInput obj)
+        private void OnControlsChanged(InputUser inputUser, InputUserChange inputUserChange, InputDevice inputDevice)
         {
-            if (obj.currentControlScheme == "KeyboardAndMouse")
+            if (IsActive == false)
             {
                 Deactivate();
+                return;
+            }
+            
+            if (inputUserChange == InputUserChange.ControlsChanged)
+            {
+                var playerInput = m_inputManagementService.GetPlayerInput();
+
+                if (((IList)m_inputManagementService.SchemeWhereGamepadCursorIsEnable).Contains(playerInput.currentControlScheme))
+                {
+                    Activate();
+                }
+                else
+                {
+                    Deactivate();
+                }
             }
         }
 

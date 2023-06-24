@@ -47,7 +47,7 @@ namespace QRCode.Framework
             m_loadedLoadingScreen = new Database<DB_LoadingScreenEnum, ILoadingScreen>();
             m_UIViewDatabase = new Database<string, UIView>();
         }
-        
+
         public static async Task<ILoadingScreen> GetLoadingScreen(DB_LoadingScreenEnum loadingScreenEnum)
         {
             LoadingScreenDatabase.TryGetInDatabase(loadingScreenEnum.ToString(), out var loadingScreen);
