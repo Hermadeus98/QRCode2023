@@ -31,7 +31,7 @@ MonoBehaviour:
       m_fontSize: 36
     - m_textSizeSetting: 2
       m_fontSize: 45
-    m_textColor: {r: 0, g: 0, b: 0, a: 1}
+    m_textColor: {r: 1, g: 1, b: 1, a: 1}
   - m_name: SubtitlesText
     m_textSizeSettings:
     - m_textSizeSetting: 0

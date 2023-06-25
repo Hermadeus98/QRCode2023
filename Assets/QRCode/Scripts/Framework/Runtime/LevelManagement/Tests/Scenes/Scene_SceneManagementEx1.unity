@@ -20722,7 +20722,7 @@ MonoBehaviour:
       Data: UnityEngine.Localization.Tables.TableReference, Unity.Localization
     - Name: m_TableCollectionName
       Entry: 1
-      Data: GUID:f9e911ce893b9a045b528703c4c701a5
+      Data: GUID:da5fec79a00f649479ea16b4d114d1cd
     - Name: 
       Entry: 8
       Data: 
@@ -20731,7 +20731,7 @@ MonoBehaviour:
       Data: UnityEngine.Localization.Tables.TableEntryReference, Unity.Localization
     - Name: m_KeyId
       Entry: 3
-      Data: 245907206144
+      Data: 1021958303744
     - Name: m_Key
       Entry: 1
       Data: 
@@ -20799,7 +20799,7 @@ MonoBehaviour:
       Data: UnityEngine.Localization.Tables.TableReference, Unity.Localization
     - Name: m_TableCollectionName
       Entry: 1
-      Data: GUID:f9e911ce893b9a045b528703c4c701a5
+      Data: GUID:25cc2e8128ce56f46bb6e8c1714e6190
     - Name: 
       Entry: 8
       Data: 
@@ -20808,7 +20808,7 @@ MonoBehaviour:
       Data: UnityEngine.Localization.Tables.TableEntryReference, Unity.Localization
     - Name: m_KeyId
       Entry: 3
-      Data: 245907206144
+      Data: 119772519215104
     - Name: m_Key
       Entry: 1
       Data: 
@@ -20876,7 +20876,7 @@ MonoBehaviour:
       Data: UnityEngine.Localization.Tables.TableReference, Unity.Localization
     - Name: m_TableCollectionName
       Entry: 1
-      Data: GUID:f9e911ce893b9a045b528703c4c701a5
+      Data: GUID:25cc2e8128ce56f46bb6e8c1714e6190
     - Name: 
       Entry: 8
       Data: 
@@ -20885,7 +20885,7 @@ MonoBehaviour:
       Data: UnityEngine.Localization.Tables.TableEntryReference, Unity.Localization
     - Name: m_KeyId
       Entry: 3
-      Data: 245907206144
+      Data: 119772565352448
     - Name: m_Key
       Entry: 1
       Data: 
@@ -20953,7 +20953,7 @@ MonoBehaviour:
       Data: UnityEngine.Localization.Tables.TableReference, Unity.Localization
     - Name: m_TableCollectionName
       Entry: 1
-      Data: GUID:f9e911ce893b9a045b528703c4c701a5
+      Data: GUID:25cc2e8128ce56f46bb6e8c1714e6190
     - Name: 
       Entry: 8
       Data: 
@@ -20962,7 +20962,7 @@ MonoBehaviour:
       Data: UnityEngine.Localization.Tables.TableEntryReference, Unity.Localization
     - Name: m_KeyId
       Entry: 3
-      Data: 245907206144
+      Data: 119772565352448
     - Name: m_Key
       Entry: 1
       Data: 

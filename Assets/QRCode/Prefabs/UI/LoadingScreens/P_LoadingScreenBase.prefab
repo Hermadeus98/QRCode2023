@@ -64,6 +64,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   m_viewName: LoadingScreenBase
+  m_startHide: 0
   m_animationFade:
     m_showTweenParameters:
       Delay: 0
@@ -186,6 +187,17 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 18
       objectReference: {fileID: 0}
+    - target: {fileID: 2606142293416269026, guid: e5ac63eb77713754681b83eba63956c7,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee,
+        type: 2}
+    - target: {fileID: 2606142293416269026, guid: e5ac63eb77713754681b83eba63956c7,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 3208209923413347215, guid: e5ac63eb77713754681b83eba63956c7,
         type: 3}
       propertyPath: m_Pivot.x
@@ -492,8 +504,19 @@ PrefabInstance:
     - target: {fileID: 8823549595833410920, guid: 3ce20dc92abbc5a4aa180f979498d8df,
         type: 3}
       propertyPath: m_text
-      value: Tooltips...
+      value: Tooltips...*
       objectReference: {fileID: 0}
+    - target: {fileID: 8823549595833410920, guid: 3ce20dc92abbc5a4aa180f979498d8df,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee,
+        type: 2}
+    - target: {fileID: 8823549595833410920, guid: 3ce20dc92abbc5a4aa180f979498d8df,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 8823549595833410920, guid: 3ce20dc92abbc5a4aa180f979498d8df,
         type: 3}
       propertyPath: m_HorizontalAlignment
@@ -638,6 +661,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6476546227114483524, guid: e0cf6c2e8a8c1c64fb15216dc5fff1e0,
         type: 3}
+      propertyPath: m_text
+      value: Loading...*
+      objectReference: {fileID: 0}
+    - target: {fileID: 6476546227114483524, guid: e0cf6c2e8a8c1c64fb15216dc5fff1e0,
+        type: 3}
       propertyPath: m_fontSize
       value: 36
       objectReference: {fileID: 0}
@@ -646,6 +674,12 @@ PrefabInstance:
       propertyPath: m_fontSizeMax
       value: 36
       objectReference: {fileID: 0}
+    - target: {fileID: 6476546227114483524, guid: e0cf6c2e8a8c1c64fb15216dc5fff1e0,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -197705157671528995, guid: d1fe64fe54e4be242a42d2adfa8bbb17,
+        type: 2}
     - target: {fileID: 6476546227114483524, guid: e0cf6c2e8a8c1c64fb15216dc5fff1e0,
         type: 3}
       propertyPath: m_enableAutoSizing
