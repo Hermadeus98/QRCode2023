@@ -54,6 +54,10 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+  m_schemeWhereMouseIsEnable:
+  - Keyboard&Mouse
+  m_schemeWhereGamepadCursorIsEnable:
+  - Gamepad
   m_playerInput: {fileID: 6129682755961419798}
 --- !u!114 &6129682755961419798
 MonoBehaviour:

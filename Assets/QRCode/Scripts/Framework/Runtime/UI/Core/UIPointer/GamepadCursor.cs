@@ -91,6 +91,8 @@ namespace QRCode.Framework
             
             UpdateSensibilityFromSettings(UserSettingsData.GamepadCursorSensibility);
             InputUser.onChange += OnControlsChanged;
+            
+            SetActivationInFunctionOfScheme();
         }
 
         protected override void OnDisable()
@@ -120,16 +122,21 @@ namespace QRCode.Framework
             
             if (inputUserChange == InputUserChange.ControlsChanged)
             {
-                var playerInput = m_inputManagementService.GetPlayerInput();
+                SetActivationInFunctionOfScheme();
+            }
+        }
 
-                if (((IList)m_inputManagementService.SchemeWhereGamepadCursorIsEnable).Contains(playerInput.currentControlScheme))
-                {
-                    Activate();
-                }
-                else
-                {
-                    Deactivate();
-                }
+        private void SetActivationInFunctionOfScheme()
+        {
+            var playerInput = m_inputManagementService.GetPlayerInput();
+
+            if (((IList)m_inputManagementService.SchemeWhereGamepadCursorIsEnable).Contains(playerInput.currentControlScheme))
+            {
+                Activate();
+            }
+            else
+            {
+                Deactivate();
             }
         }
 
