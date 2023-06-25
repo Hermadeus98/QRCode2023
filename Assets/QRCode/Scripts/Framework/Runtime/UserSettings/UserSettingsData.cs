@@ -256,6 +256,12 @@
             get => m_gamepadCursorSensibility;
             set => m_gamepadCursorSensibility = value;
         }
+
+        public MenuNavigationSettings MenuNavigationSettings
+        {
+            get => m_menuNavigationSettings;
+            set => m_menuNavigationSettings = value;
+        }
         
         //SOUND
         public DB_AvailableVoiceLocalesEnum VoiceLanguage

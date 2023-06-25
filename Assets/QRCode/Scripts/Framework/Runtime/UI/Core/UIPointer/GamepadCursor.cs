@@ -4,6 +4,7 @@ namespace QRCode.Framework
     using System.Threading.Tasks;
     using Events;
     using Game;
+    using Settings.InterfaceSettings;
     using Sirenix.OdinInspector;
     using UnityEngine;
     using UnityEngine.InputSystem;
@@ -20,9 +21,10 @@ namespace QRCode.Framework
         [SerializeField] private VirtualMouseInput m_virtualMouse;
         
         private static GamepadCursor Main;
-        private float m_initialSpeed;
         private IInputManagementService m_inputManagementService = null;
 
+        private MenuNavigationSettings m_menuNavigationSettings;
+        private float m_initialSpeed;
         private bool m_isActive = true;
 
         public bool IsActive
@@ -74,11 +76,12 @@ namespace QRCode.Framework
             ClampPosition();
         }
 
-        protected override async void OnEnable()
+        protected override void OnEnable()
         {
             base.OnEnable();
             
             GamepadCursorSensibilityEvent.Register(UpdateSensibilityFromSettings);
+            MenuNavigationSettingEvent.Register(UpdateMenuNavigationModeFromSettings);
             Init();
         }
 
@@ -93,21 +96,28 @@ namespace QRCode.Framework
             InputUser.onChange += OnControlsChanged;
             
             SetActivationInFunctionOfScheme();
+            ShouldBeDeactivated();
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
             GamepadCursorSensibilityEvent.Unregister(UpdateSensibilityFromSettings);
+            MenuNavigationSettingEvent.Unregister(UpdateMenuNavigationModeFromSettings);
             InputUser.onChange -= OnControlsChanged;
         }
 
-        public void Activate()
+        private void Activate()
         {
+            if (ShouldBeDeactivated())
+            {
+                return;
+            }
+            
             CanvasGroup.alpha = 1f;
         }
 
-        public void Deactivate()
+        private void Deactivate()
         {
             CanvasGroup.alpha = 0f;
         }
@@ -145,7 +155,13 @@ namespace QRCode.Framework
             m_virtualMouse.cursorSpeed = m_initialSpeed * sensibility;
         }
 
-        public void SetPosition(Vector3 anchoredPosition)
+        private void UpdateMenuNavigationModeFromSettings(MenuNavigationSettings menuNavigationSettings)
+        {
+            m_menuNavigationSettings = menuNavigationSettings;
+            ShouldBeDeactivated();
+        }
+
+        private void SetPosition(Vector3 anchoredPosition)
         {
             InputState.Change(m_virtualMouse.virtualMouse.position, anchoredPosition);
             RectTransform.anchoredPosition = anchoredPosition;
@@ -158,6 +174,21 @@ namespace QRCode.Framework
             pos.y = Mathf.Clamp(pos.y, 0f, Screen.height);
 
             SetPosition(pos);
+        }
+
+        private bool ShouldBeDeactivated()
+        {
+            var playerInput = m_inputManagementService.GetPlayerInput();
+            var canBeActivatedByScheme = ((IList)m_inputManagementService.SchemeWhereGamepadCursorIsEnable).Contains(playerInput.currentControlScheme);
+            var navigationModeIsValid = m_menuNavigationSettings == MenuNavigationSettings.Cursor;
+
+            if (!canBeActivatedByScheme || !navigationModeIsValid)
+            {
+                Deactivate();
+                return true;
+            }
+
+            return false;
         }
     }
 }

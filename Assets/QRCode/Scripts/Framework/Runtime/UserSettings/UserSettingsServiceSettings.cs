@@ -1,6 +1,5 @@
 namespace QRCode.Framework
 {
-    using System;
     using System.Threading.Tasks;
     using Debugging;
     using Sirenix.OdinInspector;
@@ -61,6 +60,7 @@ namespace QRCode.Framework
             userSettings.InterfaceAreaCalibrationSize = m_defaultValues.InterfaceAreaCalibrationSize;
             userSettings.TextSizeSetting = m_defaultValues.TextSizeSetting;
             userSettings.GamepadCursorSensibility = m_defaultValues.GamepadCursorSensibility;
+            userSettings.MenuNavigationSettings = m_defaultValues.MenuNavigationSettings;
 
             //SOUND
             userSettings.VoiceLanguage = m_defaultValues.VoiceLanguage;
