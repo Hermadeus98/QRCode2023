@@ -42,7 +42,7 @@ namespace QRCode.Editor
                 return;
             }
 
-            if (Bootstrap.IsInit() == false)
+            if (BootstrapOld.IsInit() == false)
             {
                 return;
             }

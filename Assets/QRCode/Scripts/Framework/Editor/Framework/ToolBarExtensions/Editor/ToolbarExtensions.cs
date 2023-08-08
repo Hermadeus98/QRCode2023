@@ -118,7 +118,7 @@ namespace UnityToolbarExtender
         {
             m_sceneGenericMenu = new GenericMenu();
 
-            DB.Instance.TryGetDatabase<LevelDatabase>(DBEnum.DB_Levels, out var levelDatabase);
+            DB.Instance.TryGetDatabase<GameLevelDatabase>(DBEnum.DB_Levels, out var levelDatabase);
 
             foreach (var sceneReference in levelDatabase.GetDatabase)
             {
@@ -160,7 +160,7 @@ namespace UnityToolbarExtender
             }
         }
         
-        private static void TryLoadSceneGroup(LevelReferenceGroup levelReferenceGroup)
+        private static void TryLoadSceneGroup(GameLevelReferenceGroup gameLevelReferenceGroup)
         {
             var openedScenes = new List<Scene>();
                     
@@ -173,20 +173,20 @@ namespace UnityToolbarExtender
             {
                 if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
                 {
-                    LoadSceneGroup(levelReferenceGroup);
+                    LoadSceneGroup(gameLevelReferenceGroup);
                 }
             }
             else
             {
-                LoadSceneGroup(levelReferenceGroup);
+                LoadSceneGroup(gameLevelReferenceGroup);
             }
         }
 
-        private static void LoadSceneGroup(LevelReferenceGroup levelReferenceGroup)
+        private static void LoadSceneGroup(GameLevelReferenceGroup gameLevelReferenceGroup)
         {
-            EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(levelReferenceGroup.Levels[0].editorAsset), OpenSceneMode.Single);
+            EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(gameLevelReferenceGroup.GameLevel.GameLevelScenes[0].editorAsset), OpenSceneMode.Single);
 
-            var subScenes = levelReferenceGroup.Levels;
+            var subScenes = gameLevelReferenceGroup.GameLevel.GameLevelScenes;
             if (subScenes.IsNotNullOrEmpty())
             {
                 for (int i = 0; i < subScenes.Length; i++)

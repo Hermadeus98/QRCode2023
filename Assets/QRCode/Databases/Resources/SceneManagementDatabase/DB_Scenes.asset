@@ -24,7 +24,7 @@ MonoBehaviour:
     - Name: m_database
       Entry: 7
       Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[QRCode.Framework.SceneReference,
-        QRCode.Framework]], mscorlib
+        QRCode.Engine]], mscorlib
     - Name: comparer
       Entry: 7
       Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
@@ -43,7 +43,7 @@ MonoBehaviour:
       Data: Scene_UI
     - Name: $v
       Entry: 7
-      Data: QRCode.Framework.SceneReference, QRCode.Framework
+      Data: QRCode.Framework.SceneReference, QRCode.Engine
     - Name: m_scene
       Entry: 7
       Data: 2|UnityEngine.AddressableAssets.AssetReference, Unity.Addressables
@@ -76,7 +76,7 @@ MonoBehaviour:
       Data: Scene_Main
     - Name: $v
       Entry: 7
-      Data: QRCode.Framework.SceneReference, QRCode.Framework
+      Data: QRCode.Framework.SceneReference, QRCode.Engine
     - Name: m_scene
       Entry: 7
       Data: 3|UnityEngine.AddressableAssets.AssetReference, Unity.Addressables

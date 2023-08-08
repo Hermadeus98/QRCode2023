@@ -14,10 +14,10 @@ namespace QRCode.Editor.SceneSelector
 
     public class SceneWindowEditor : EditorWindow
     {
-        private static LevelDatabase m_levelDatabase = null;
+        private static GameLevelDatabase m_gameLevelDatabase = null;
         private static SceneDatabase m_sceneDatabase = null;
         
-        private static Dictionary<string, LevelReferenceGroup> LevelReferenceGroups = null;
+        private static Dictionary<string, GameLevelReferenceGroup> LevelReferenceGroups = null;
         private static Dictionary<string, SceneReference> SceneReferenceGroups = null;
 
         
@@ -28,12 +28,12 @@ namespace QRCode.Editor.SceneSelector
             window.titleContent = new GUIContent("Scene Selector");
             window.Show();
 
-            DB.Instance.TryGetDatabase<LevelDatabase>(DBEnum.DB_Levels, out m_levelDatabase);
+            DB.Instance.TryGetDatabase<GameLevelDatabase>(DBEnum.DB_Levels, out m_gameLevelDatabase);
             DB.Instance.TryGetDatabase<SceneDatabase>(DBEnum.DB_Scenes, out m_sceneDatabase);
 
-            if (m_levelDatabase == null)
+            if (m_gameLevelDatabase == null)
             {
-                QRDebug.DebugMessage(LogType.Error, "Editor", $"Impossible to load {nameof(m_levelDatabase)}.");
+                QRDebug.DebugMessage(LogType.Error, "Editor", $"Impossible to load {nameof(m_gameLevelDatabase)}.");
                 return;
             }
             
@@ -43,20 +43,20 @@ namespace QRCode.Editor.SceneSelector
                 return;
             }
             
-            LevelReferenceGroups = new Dictionary<string, LevelReferenceGroup>(m_levelDatabase.GetDatabase);
+            LevelReferenceGroups = new Dictionary<string, GameLevelReferenceGroup>(m_gameLevelDatabase.GetDatabase);
             SceneReferenceGroups = new Dictionary<string, SceneReference>(m_sceneDatabase.GetDatabase);
         }
         
         void OnGUI()
         {
-            if (m_levelDatabase == null)
+            if (m_gameLevelDatabase == null)
             {
                 return;
             }
 
             if (LevelReferenceGroups == null)
             {
-                LevelReferenceGroups = m_levelDatabase.GetDatabase;
+                LevelReferenceGroups = m_gameLevelDatabase.GetDatabase;
                 return;
             }
 
@@ -89,7 +89,7 @@ namespace QRCode.Editor.SceneSelector
                 }
                 if(GUILayout.Button($"SELECT", EditorStyles.miniButton))
                 {
-                    EditorGUIUtility.PingObject(LevelReferenceGroups[key].Levels[0].editorAsset);
+                    EditorGUIUtility.PingObject(LevelReferenceGroups[key].GameLevel.GameLevelScenes[0].editorAsset);
                 }
                 GUILayout.EndHorizontal();
             }
@@ -129,11 +129,11 @@ namespace QRCode.Editor.SceneSelector
             }
         }
 
-        private void LoadSceneGroup(LevelReferenceGroup levelReferenceGroup)
+        private void LoadSceneGroup(GameLevelReferenceGroup gameLevelReferenceGroup)
         {
-            EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(levelReferenceGroup.Levels[0].editorAsset), OpenSceneMode.Single);
+            EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(gameLevelReferenceGroup.GameLevel.GameLevelScenes[0].editorAsset), OpenSceneMode.Single);
 
-            var subScenes = levelReferenceGroup.Levels;
+            var subScenes = gameLevelReferenceGroup.GameLevel.GameLevelScenes;
             if (subScenes.IsNotNullOrEmpty())
             {
                 for (int i = 0; i < subScenes.Length; i++)
