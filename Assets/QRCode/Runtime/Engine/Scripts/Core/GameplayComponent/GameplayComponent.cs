@@ -1,18 +1,19 @@
 namespace QRCode.Framework
 {
-    using Game;
+    using Engine.Core;
     using Sirenix.OdinInspector;
+    using GameInstance = Engine.Core.GameInstance;
 
     public abstract class GameplayComponent : SerializedMonoBehaviour, ILoadableObject, ISavableObject
     {
         protected virtual void OnEnable()
         {
-            GameInstance.Instance.RegisterGameplayComponent(this);
+            GameInstance.Instance.GameInstanceEvents.RegisterGameplayComponent(this);
         }
 
         protected virtual void OnDisable()
         {
-            GameInstance.Instance.UnregisterGameplayComponent(this);
+            GameInstance.Instance.GameInstanceEvents.UnregisterGameplayComponent(this);
         }
 
         public virtual void OnLevelLoaded() { }

@@ -16,7 +16,7 @@ namespace QRCode.Framework
             {
                 if (m_saveService == null)
                 {
-                    m_saveService = ServiceLocator.Current.Get<ISaveService>();
+                    m_saveService = SaveManager.Instance;
                 }
 
                 return m_saveService;

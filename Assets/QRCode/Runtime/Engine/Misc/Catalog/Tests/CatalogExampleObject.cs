@@ -21,6 +21,6 @@
         public List<Sprite> Inventory;
 
         [TabGroup("Data Group 2")] 
-        public SceneLoadableProgressionInfos SceneLoadableProgressionInfos;
+        public GameLevelLoadProgressionInfos GameLevelLoadProgressionInfos;
     }
 }

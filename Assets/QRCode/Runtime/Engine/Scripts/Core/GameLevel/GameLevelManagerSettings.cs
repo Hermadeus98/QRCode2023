@@ -4,8 +4,8 @@ namespace QRCode.Framework
     using UnityEngine;
     using UnityEngine.Localization;
 
-    [CreateAssetMenu(menuName = K.SettingsPath.SceneManagerSettingsPath, fileName = "STG_SceneManagerSettings")]
-    public class LevelLoadingManagerSettings : Settings<LevelLoadingManagerSettings>
+    [CreateAssetMenu(menuName = K.SettingsPath.GameLevelManagerSettingsPath, fileName = "STG_GameLevelManagerSettings")]
+    public class GameLevelManagerSettings : Settings<GameLevelManagerSettings>
     {
         [TitleGroup(K.InspectorGroups.Settings)]
         [SerializeField] private float m_minimalLoadDurationBefore = .5f;

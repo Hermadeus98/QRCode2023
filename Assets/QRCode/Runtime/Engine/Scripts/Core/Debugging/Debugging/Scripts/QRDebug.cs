@@ -97,7 +97,7 @@ namespace QRCode.Framework.Debugging
                         if(debugChannel.activeLogTypes.HasFlag(LogType.Info))
                         {
                             UnityEngine.Debug.Log(
-                                $"{GetColoredMessage(color, $"[{channel.ToUpper()}] -> ")} {message}",
+                                $"{GetColoredMessage(color, $"[{channel.ToUpper()}] -> ")} <color=#7f8c8d>{message}</color>",
                                 context);
                         }
                         break;
@@ -105,7 +105,7 @@ namespace QRCode.Framework.Debugging
                         if(debugChannel.activeLogTypes.HasFlag(LogType.Warning))
                         {
                             UnityEngine.Debug.LogWarning(
-                                $"{GetColoredMessage(color, $"[{channel.ToUpper()}] -> ")} {message}",
+                                $"{GetColoredMessage(color, $"[{channel.ToUpper()}] -> ")} <color=#d35400>{message}</color>",
                                 context);
                         }
                         break;
@@ -113,7 +113,7 @@ namespace QRCode.Framework.Debugging
                         if(debugChannel.activeLogTypes.HasFlag(LogType.Error))
                         {
                             UnityEngine.Debug.LogError(
-                                $"{GetColoredMessage(color, $"[{channel.ToUpper()}] -> ")} {message}",
+                                $"{GetColoredMessage(color, $"[{channel.ToUpper()}] -> ")} <b><color=#c0392b>{message}</color></b>",
                                 context);
                         }
                         break;
@@ -121,7 +121,7 @@ namespace QRCode.Framework.Debugging
                         if(debugChannel.activeLogTypes.HasFlag(LogType.Fatal))
                         {
                             UnityEngine.Debug.LogError(
-                                $"{GetColoredMessage(color, $"[{channel.ToUpper()}] -> ")} {message}",
+                                $"{GetColoredMessage(color, $"[{channel.ToUpper()}] -> ")} <b><color=#c0392b>{message}</color></b>",
                                 context);
                         }
                         break;

@@ -76,7 +76,7 @@ namespace QRCode.Framework.Game
             
             for (var i = 0; i < m_gameplayComponents.Count; i++)
             {
-                m_gameplayComponents[i].OnGamePause(m_pauseInfo);
+                //_gameplayComponents[i].OnGamePause(m_pauseInfo);
             }
         }
 

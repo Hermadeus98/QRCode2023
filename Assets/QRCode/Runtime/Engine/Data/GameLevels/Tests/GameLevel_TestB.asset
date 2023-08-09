@@ -12,4 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cd51018aa28c5f4e9751b5a0f5a21a0, type: 3}
   m_Name: GameLevel_TestB
   m_EditorClassIdentifier: 
-  m_gameLevelScenes: []
+  m_gameLevelScenes:
+  - m_AssetGUID: 182ae6e09719398479789c26e007245c
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: d9fa935e7ed1b744dbebcabcb6da61a6
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 1382bf0c175d1d349867ba2689e0aad0
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0

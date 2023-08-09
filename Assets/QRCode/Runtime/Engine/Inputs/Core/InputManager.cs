@@ -2,12 +2,13 @@ namespace QRCode.Framework
 {
     using System.Linq;
     using Debugging;
+    using Singleton;
     using Sirenix.OdinInspector;
     using UnityEngine;
     using UnityEngine.InputSystem;
     using UnityEngine.InputSystem.Users;
 
-    public class InputManager : SerializedMonoBehaviour, IInputManagementService
+    public class InputManager : MonoBehaviourSingleton<InputManager>, IInputManagementService
     {
         [TitleGroup(K.InspectorGroups.Settings)] [SerializeField]
         private string[] m_schemeWhereMouseIsEnable = new[] { "KeyboardAndMouse" };

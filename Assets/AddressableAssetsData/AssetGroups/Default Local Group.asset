@@ -142,6 +142,18 @@ MonoBehaviour:
       Variant.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: ba68db8bebdb4ff4b92636394ab6840c
+    m_Address: Assets/QRCode/Runtime/Engine/LevelManagement/Tests/Scenes/Scene_SceneManagementEx1.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a1f0e337e6c9dae42960f63727b4a153
+    m_Address: Assets/QRCode/Runtime/Engine/LevelManagement/Tests/Scenes/Scene_SceneManagementEx2.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7431746a44738ef499106d721e0a520e
+    m_Address: Assets/QRCode/Runtime/Engine/LevelManagement/Tests/Scenes/Scene_SceneManagementEx3.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 383727ea88213544abed9fa8aa57676f, type: 2}
   m_SchemaSet:

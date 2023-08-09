@@ -84,8 +84,8 @@ namespace QRCode.Framework.Game
         {
             var instantiateSceneManagementServiceTask = ServiceSettings.LevelLoadingManagementService.InstantiateAsync();
             var sceneManagementServiceInstance = instantiateSceneManagementServiceTask.WaitForCompletion();
-            var sceneManagementService = sceneManagementServiceInstance.GetComponent<ILevelLoadingManagementService>();
-            ServiceLocator.Current.RegisterService<ILevelLoadingManagementService>(sceneManagementService);
+            var sceneManagementService = sceneManagementServiceInstance.GetComponent<IGameLevelManagementService>();
+            ServiceLocator.Current.RegisterService<IGameLevelManagementService>(sceneManagementService);
             Object.DontDestroyOnLoad((Object)sceneManagementService);
             sceneManagementServiceInstance.AddComponent<ReleaseAddressableInstanceEvent>();
         }

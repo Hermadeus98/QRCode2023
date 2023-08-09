@@ -1,11 +1,15 @@
 ﻿namespace QRCode.Engine.Core.GameState
 {
+    using Framework;
     using UnityEngine;
 
     public class GameStateExample : GameStateBase
     {
-        protected override void OnEnter(Animator animator)
+        [SerializeField] private GameLevelLoader gameLevelLoader = null;
+        
+        protected override async void OnEnter(Animator animator)
         {
+            await gameLevelLoader.ChangeLevel();
         }
 
         protected override void OnUpdate(Animator animator)

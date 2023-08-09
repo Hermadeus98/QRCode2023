@@ -35,7 +35,7 @@
                 }
                 catch (Exception e)
                 {
-                    QRDebug.DebugFatal(K.DebuggingChannels.SaveSystem, e);
+                    QRDebug.DebugFatal(K.DebuggingChannels.SaveManager, e);
                     throw;
                 }    
             }
@@ -69,12 +69,12 @@
                 }
                 else
                 {
-                    QRDebug.DebugFatal(K.DebuggingChannels.SaveSystem, $"{nameof(directoryName)} should not be null.");
+                    QRDebug.DebugFatal(K.DebuggingChannels.SaveManager, $"{nameof(directoryName)} should not be null.");
                 }
             }
             catch (Exception e)
             {
-                QRDebug.DebugFatal(K.DebuggingChannels.SaveSystem, e);
+                QRDebug.DebugFatal(K.DebuggingChannels.SaveManager, e);
                 throw;
             }
         }

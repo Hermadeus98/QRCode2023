@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_gameStateName: Game State 1
+  gameLevelLoader:
+    gameLevelToLoad: 2
+    m_loadingScreenEnum: 2
+    m_forceReload: 0
 --- !u!1102 &-7627076243748428813
 AnimatorState:
   serializedVersion: 6
@@ -338,6 +342,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_gameStateName: Game State 2
+  gameLevelLoader:
+    gameLevelToLoad: 0
+    m_loadingScreenEnum: 0
+    m_forceReload: 0
 --- !u!1101 &6375863742641643132
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

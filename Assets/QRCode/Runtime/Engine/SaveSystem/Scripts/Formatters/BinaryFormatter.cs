@@ -33,7 +33,7 @@
                 }
                 catch (Exception e)
                 {
-                    QRDebug.DebugFatal(K.DebuggingChannels.SaveSystem, e);
+                    QRDebug.DebugFatal(K.DebuggingChannels.SaveManager, e);
                     throw;
                 }    
             }

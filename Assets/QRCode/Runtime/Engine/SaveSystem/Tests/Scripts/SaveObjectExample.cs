@@ -32,7 +32,7 @@ namespace QRCode.Framework
 #if UNITY_EDITOR
             SaveManager.SaveInEditor();          
 #else
-            var saveService = ServiceLocator.Current.Get<ISaveService>();
+            var saveService = SaveManager.Instance;
             var gameData = saveService.GetGameData();
             
             SaveGameData(ref gameData);
@@ -50,7 +50,7 @@ namespace QRCode.Framework
 
                 if (gameDataInEditor == null)
                 {
-                    QRDebug.DebugError(K.DebuggingChannels.SaveSystem, $"There is no Save Data.");
+                    QRDebug.DebugError(K.DebuggingChannels.SaveManager, $"There is no Save Data.");
                     return;
                 }
 
@@ -58,7 +58,7 @@ namespace QRCode.Framework
                 return;
             }
 #endif
-            var saveService = ServiceLocator.Current.Get<ISaveService>();
+            var saveService = SaveManager.Instance;
             var gameData = saveService.GetGameData();
             LoadGameData(gameData);
         }
@@ -66,17 +66,12 @@ namespace QRCode.Framework
         [Button]
         private async void DeleteSave()
         {
-            var saveService = ServiceLocator.Current.Get<ISaveService>();
+            var saveService = SaveManager.Instance;
             await saveService.DeleteSave();
         }
         
-        public async void LoadGameData(GameData gameData)
+        public void LoadGameData(GameData gameData)
         {
-            while (BootstrapOld.IsInit() == false)
-            {
-                await Task.Yield();
-            }
-            
             m_savedInt = gameData.ValueTest;
             m_dictionary = new Dictionary<string, float>();
             foreach (var keyValuePair in gameData.DictionaryTest)

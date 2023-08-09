@@ -79,7 +79,7 @@
         public Task NewGame()
         {
             m_gameData = new GameData();
-            QRDebug.Debug(K.DebuggingChannels.SaveSystem, $"New game data was created...");
+            QRDebug.Debug(K.DebuggingChannels.SaveManager, $"New game data was created...");
             return Task.CompletedTask;
         }
 
@@ -88,7 +88,7 @@
         {
             if (m_isLoading)
             {
-                QRDebug.DebugError(K.DebuggingChannels.SaveSystem,$"Game is already loading...");
+                QRDebug.DebugError(K.DebuggingChannels.SaveManager,$"Game is already loading...");
                 return;
             }
             
@@ -99,7 +99,7 @@
 
             if (m_gameData == null)
             {
-                QRDebug.Debug(K.DebuggingChannels.SaveSystem, $"No {nameof(m_gameData)} was found. Initializing default values.");
+                QRDebug.Debug(K.DebuggingChannels.SaveManager, $"No {nameof(m_gameData)} was found. Initializing default values.");
                 await NewGame();
             }
             
@@ -112,7 +112,7 @@
             m_onEndLoad?.Invoke();
             m_isLoading = false;
 
-            QRDebug.Debug(K.DebuggingChannels.SaveSystem,$"Game is load.");
+            QRDebug.Debug(K.DebuggingChannels.SaveManager,$"Game is load.");
         }
 
         [Button]
@@ -120,7 +120,7 @@
         {
             if (m_isSaving)
             {
-                QRDebug.DebugError(K.DebuggingChannels.SaveSystem,$"Game is already saving...");
+                QRDebug.DebugError(K.DebuggingChannels.SaveManager,$"Game is already saving...");
                 return;
             }   
             
@@ -137,7 +137,7 @@
             m_onEndSave?.Invoke();
             m_isSaving = false;
             
-            QRDebug.Debug(K.DebuggingChannels.SaveSystem,$"Game is save.");
+            QRDebug.Debug(K.DebuggingChannels.SaveManager,$"Game is save.");
         }
 
         [Button]
@@ -148,7 +148,7 @@
 
             if (task.Result == true)
             {
-                QRDebug.Debug(K.DebuggingChannels.SaveSystem, $"Save is delete.");
+                QRDebug.Debug(K.DebuggingChannels.SaveManager, $"Save is delete.");
             }
         }
 

@@ -43,12 +43,12 @@
                 }
                 else
                 {
-                    QRDebug.DebugFatal(K.DebuggingChannels.SaveSystem, $"Cannot delete any file at path {m_fullPath}.");
+                    QRDebug.DebugFatal(K.DebuggingChannels.SaveManager, $"Cannot delete any file at path {m_fullPath}.");
                 }
             }
             catch (Exception e)
             {
-                QRDebug.DebugFatal(K.DebuggingChannels.SaveSystem, e);
+                QRDebug.DebugFatal(K.DebuggingChannels.SaveManager, e);
                 throw;
             }
 

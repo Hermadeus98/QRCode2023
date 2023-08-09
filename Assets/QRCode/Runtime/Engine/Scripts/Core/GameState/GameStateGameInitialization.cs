@@ -14,7 +14,7 @@ namespace QRCode.Framework
         {
             cancellationTokenSource = new CancellationTokenSource();
             
-            while (GameInstance.Get.ManagersAreInit == false)
+            while (GameInstance.Instance.ManagersAreInit == false)
             {
                 if (cancellationTokenSource.Token.IsCancellationRequested == true)
                 {

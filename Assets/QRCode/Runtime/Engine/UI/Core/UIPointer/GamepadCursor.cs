@@ -51,7 +51,7 @@ namespace QRCode.Framework
             {
                 if (m_userSettingsData == null)
                 {
-                    m_userSettingsData = ServiceLocator.Current.Get<IUserSettingsService>().GetUserSettingsData();
+                    m_userSettingsData = UserSettingsManager.Instance.GetUserSettingsData();
                 }
 
                 return m_userSettingsData;
@@ -64,8 +64,8 @@ namespace QRCode.Framework
             {
                 Main = this;
             }
-            
-            m_inputManagementService = ServiceLocator.Current.Get<IInputManagementService>();
+
+            m_inputManagementService = InputManager.Instance;
 
             base.Start();
             m_initialSpeed = m_virtualMouse.cursorSpeed;

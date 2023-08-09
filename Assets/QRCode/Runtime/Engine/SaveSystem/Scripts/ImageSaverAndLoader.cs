@@ -22,7 +22,7 @@
             }
             catch (Exception e)
             {
-                QRDebug.DebugError(K.DebuggingChannels.SaveSystem, e);
+                QRDebug.DebugError(K.DebuggingChannels.SaveManager, e);
                 throw;
             }
         }
@@ -41,7 +41,7 @@
             }
             catch (Exception e)
             {
-                QRDebug.DebugError(K.DebuggingChannels.SaveSystem, e);
+                QRDebug.DebugError(K.DebuggingChannels.SaveManager, e);
 
                 var saveSetting = SaveServiceSettings.Instance;
                 return saveSetting.NotLoadedTexture;

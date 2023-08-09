@@ -4,21 +4,15 @@ namespace QRCode.Framework
     using System.Threading.Tasks;
     using SceneManagement;
 
-    public interface ILevelLoadingManagementService : IService
+    public interface IGameLevelManagementService : IService
     {
         public Task<SceneLoadingInfo> ChangeLevel(DB_GameLevelsEnum gameLevelToLoad,
             DB_LoadingScreenEnum loadingScreenEnum, 
             bool forceReload = false, 
             bool activateOnLoad = true,
             int priority = 100);
-        
-        public Task<SceneLoadingInfo> LoadLevel(DB_GameLevelsEnum gameLevelToLoad,
-            DB_LoadingScreenEnum loadingScreenEnum, 
-            bool forceReload = false, 
-            bool activateOnLoad = true,
-            int priority = 100);
 
-        public Task UnloadLevel(DB_GameLevelsEnum gameLevelToUnload);
+        public Task UnloadCurrentLevel();
 
         public bool IsLoading();
 

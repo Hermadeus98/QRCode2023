@@ -18012,6 +18012,7 @@ GameObject:
   - component: {fileID: 1668989483}
   - component: {fileID: 1668989482}
   - component: {fileID: 1668989484}
+  - component: {fileID: 1668989485}
   m_Layer: 0
   m_Name: GameplayComponent
   m_TagString: Untagged
@@ -18080,6 +18081,38 @@ MonoBehaviour:
       Entry: 6
       Data: 
   m_savedInt: 0
+--- !u!114 &1668989485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668989481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 860e46bddbe738046a386648b4d97300, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  m_playOnStart: 0
+  gameLevelLoader:
+    gameLevelToLoad: 3
+    m_loadingScreenEnum: 2
+    m_forceReload: 0
+  m_onBeforeLoadLevel:
+    m_PersistentCalls:
+      m_Calls: []
+  m_onAfterLoadLevel:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1675465081
 GameObject:
   m_ObjectHideFlags: 0
@@ -20711,9 +20744,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: m_sceneLoadableProgressionInfos
+    - Name: m_gameLevelLoadProgressionInfos
       Entry: 7
-      Data: QRCode.Framework.SceneLoadableProgressionInfos, QRCode.Framework
+      Data: QRCode.Framework.GameLevelLoadProgressionInfos, QRCode.Engine
     - Name: m_loadingProgressionDescription
       Entry: 7
       Data: 0|UnityEngine.Localization.LocalizedString, Unity.Localization
@@ -20722,7 +20755,7 @@ MonoBehaviour:
       Data: UnityEngine.Localization.Tables.TableReference, Unity.Localization
     - Name: m_TableCollectionName
       Entry: 1
-      Data: GUID:da5fec79a00f649479ea16b4d114d1cd
+      Data: GUID:25cc2e8128ce56f46bb6e8c1714e6190
     - Name: 
       Entry: 8
       Data: 
@@ -20731,7 +20764,7 @@ MonoBehaviour:
       Data: UnityEngine.Localization.Tables.TableEntryReference, Unity.Localization
     - Name: m_KeyId
       Entry: 3
-      Data: 1021958303744
+      Data: 119772565352448
     - Name: m_Key
       Entry: 1
       Data: 
@@ -20788,9 +20821,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: m_sceneLoadableProgressionInfos
+    - Name: m_gameLevelLoadProgressionInfos
       Entry: 7
-      Data: QRCode.Framework.SceneLoadableProgressionInfos, QRCode.Framework
+      Data: QRCode.Framework.GameLevelLoadProgressionInfos, QRCode.Engine
     - Name: m_loadingProgressionDescription
       Entry: 7
       Data: 0|UnityEngine.Localization.LocalizedString, Unity.Localization
@@ -20808,7 +20841,7 @@ MonoBehaviour:
       Data: UnityEngine.Localization.Tables.TableEntryReference, Unity.Localization
     - Name: m_KeyId
       Entry: 3
-      Data: 119772519215104
+      Data: 119772565352448
     - Name: m_Key
       Entry: 1
       Data: 
@@ -20865,9 +20898,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: m_sceneLoadableProgressionInfos
+    - Name: m_gameLevelLoadProgressionInfos
       Entry: 7
-      Data: QRCode.Framework.SceneLoadableProgressionInfos, QRCode.Framework
+      Data: QRCode.Framework.GameLevelLoadProgressionInfos, QRCode.Engine
     - Name: m_loadingProgressionDescription
       Entry: 7
       Data: 0|UnityEngine.Localization.LocalizedString, Unity.Localization
@@ -20942,9 +20975,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: m_sceneLoadableProgressionInfos
+    - Name: m_gameLevelLoadProgressionInfos
       Entry: 7
-      Data: QRCode.Framework.SceneLoadableProgressionInfos, QRCode.Framework
+      Data: QRCode.Framework.GameLevelLoadProgressionInfos, QRCode.Engine
     - Name: m_loadingProgressionDescription
       Entry: 7
       Data: 0|UnityEngine.Localization.LocalizedString, Unity.Localization
@@ -21025,8 +21058,8 @@ MonoBehaviour:
     SerializationNodes:
     - Name: m_sceneLoadables
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[QRCode.Framework.ISceneLoadable,
-        QRCode.Framework]], mscorlib
+      Data: 0|System.Collections.Generic.List`1[[QRCode.Framework.IGameLevelLoadable,
+        QRCode.Engine]], mscorlib
     - Name: 
       Entry: 12
       Data: 4

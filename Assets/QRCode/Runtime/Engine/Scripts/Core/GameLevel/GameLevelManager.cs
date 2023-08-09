@@ -7,6 +7,7 @@ namespace QRCode.Framework.SceneManagement
     using Debugging;
     using Engine.Core.Managers;
     using Extensions;
+    using Singleton;
     using Sirenix.OdinInspector;
     using UnityEngine;
     using UnityEngine.AddressableAssets;
@@ -15,7 +16,7 @@ namespace QRCode.Framework.SceneManagement
     using UnityEngine.SceneManagement;
     using K = Framework.K;
 
-    public class GameLevelManager : SerializedMonoBehaviour, ILevelLoadingManagementService, IManager
+    public class GameLevelManager : MonoBehaviourSingleton<GameLevelManager>, IGameLevelManagementService, IManager
     {
         #region FIELDS
         #region Serialized
@@ -51,17 +52,17 @@ namespace QRCode.Framework.SceneManagement
             }
         }
 
-        private LevelLoadingManagerSettings m_levelLoadingManagerSettings = null;
-        private LevelLoadingManagerSettings LevelLoadingManagerSettings
+        private GameLevelManagerSettings m_gameLevelManagerSettings = null;
+        private GameLevelManagerSettings GameLevelManagerSettings
         {
             get
             {
-                if (m_levelLoadingManagerSettings == null)
+                if (m_gameLevelManagerSettings == null)
                 {
-                    m_levelLoadingManagerSettings = LevelLoadingManagerSettings.Instance;
+                    m_gameLevelManagerSettings = GameLevelManagerSettings.Instance;
                 }
 
-                return m_levelLoadingManagerSettings;
+                return m_gameLevelManagerSettings;
             }
         }
 
@@ -72,6 +73,7 @@ namespace QRCode.Framework.SceneManagement
 
         #region EVENTS 
         private event Func<Task> m_onStartToLoadAsync;
+
         public bool IsLoading()
         {
             return m_isLoading;
@@ -163,38 +165,51 @@ namespace QRCode.Framework.SceneManagement
                 return m_sceneLoadingInfo;
             }
 
+            m_sceneLoadingInfo = new SceneLoadingInfo()
+            {
+                GlobalProgress = 0f,
+                ProgressDescription = GameLevelManagerSettings.LoadingLocalizedString,
+            };
+            
+            m_isLoading = true;
+            
             if (GameLevelDatabase.TryGetInDatabase(gameLevelToLoad.ToString(), out var levelReferenceGroup))
             {
-                if (m_levelLoaded != null)
-                {
-                    await UnloadSceneGroup(m_levelLoaded.Value);
-                }
-
-                await LoadLevel(gameLevelToLoad, loadingScreenEnum, forceReload, activateOnLoad, priority);
-            }
-
-            return m_sceneLoadingInfo;
-        }
-
-        public async Task<SceneLoadingInfo> LoadLevel(DB_GameLevelsEnum gameLevelToLoad, DB_LoadingScreenEnum loadingScreenEnum, bool forceReload = false, bool activateOnLoad = true, int priority = 100)
-        {
-            if (m_isLoading)
-            {
-                QRDebug.DebugError(K.DebuggingChannels.LevelManager,"A scene is already in loading...");
-                return m_sceneLoadingInfo;
-            }
-
-            if (GameLevelDatabase.TryGetInDatabase(gameLevelToLoad.ToString(), out var levelReferenceGroup))
-            {
-                m_isLoading = true;
                 var loadingScreen = await UI.GetLoadingScreen(loadingScreenEnum);
                 await loadingScreen.Show();
-
+                
+                if (SaveServiceSettings.Instance.SaveAsyncBeforeSceneLoading)
+                {
+                    Save.Current.SaveObjects();
+                }
+                
                 if (SaveServiceSettings.Instance.SaveAsyncBeforeSceneLoading)
                 {
                     await m_saveService.SaveGameAsync();
                 }
                 
+                if (m_levelLoaded != null)
+                {
+                    await UnloadSceneGroup(m_levelLoaded.Value);
+                }
+
+                await LoadLevel(gameLevelToLoad, loadingScreen, forceReload, activateOnLoad, priority);
+                await loadingScreen.Hide();
+            }
+
+            m_isLoading = false;
+            return m_sceneLoadingInfo;
+        }
+
+        public Task UnloadCurrentLevel()
+        {
+            throw new NotImplementedException();
+        }
+        
+        private async Task<SceneLoadingInfo> LoadLevel(DB_GameLevelsEnum gameLevelToLoad, ILoadingScreen loadingScreen, bool forceReload = false, bool activateOnLoad = true, int priority = 100)
+        {
+            if (GameLevelDatabase.TryGetInDatabase(gameLevelToLoad.ToString(), out var levelReferenceGroup))
+            {
                 if (m_onStartToLoadAsync != null)
                 {
                     await m_onStartToLoadAsync.Invoke();
@@ -208,8 +223,6 @@ namespace QRCode.Framework.SceneManagement
                 OnLoadingLevel += (sceneLoadingInfo) => loadingScreen.Progress(sceneLoadingInfo);
                 var sceneLoadingInfo = await LoadSceneGroup(levelReferenceGroup, activateOnLoad, priority);
                 
-                await loadingScreen.Hide();
-                
                 return sceneLoadingInfo!.Value;
             }
             else
@@ -219,7 +232,7 @@ namespace QRCode.Framework.SceneManagement
             }
         }
         
-        public async Task UnloadLevel(DB_GameLevelsEnum gameLevelToUnload)
+        private async Task UnloadLevel(DB_GameLevelsEnum gameLevelToUnload)
         {
             if (GameLevelDatabase.TryGetInDatabase(gameLevelToUnload.ToString(), out var foundedObject))
             {
@@ -232,7 +245,7 @@ namespace QRCode.Framework.SceneManagement
         private void Start()
         {
             m_cancellationTokenSource = new CancellationTokenSource();
-            m_saveService = ServiceLocator.Current.Get<ISaveService>();
+            m_saveService = SaveManager.Instance;
         }
 
         private void OnDestroy()
@@ -249,25 +262,18 @@ namespace QRCode.Framework.SceneManagement
             m_gameLevelDatabase = null;
             m_levelLoaded = null;
             m_cancellationTokenSource = null;
-            m_levelLoadingManagerSettings = null;
+            m_gameLevelManagerSettings = null;
         }
         #endregion LifeCycle
         
         #region Privates
         private async Task<SceneLoadingInfo?> LoadSceneGroup(GameLevelReferenceGroup gameLevelReferenceGroupToLoad, bool activateOnLoad = true, int priority = 100)
         {
-            m_sceneLoadingInfo = new SceneLoadingInfo()
-            {
-                GlobalProgress = 0f,
-                ProgressDescription = LevelLoadingManagerSettings.LoadingLocalizedString,
-            };
-
             if (m_levelLoaded != null)
             {
                 if (m_levelLoaded.Value.GetHashCode() == gameLevelReferenceGroupToLoad.GetHashCode())
                 {
                     QRDebug.DebugError(K.DebuggingChannels.LevelManager, $"{nameof(m_levelLoaded)} already contain {gameLevelReferenceGroupToLoad.ToString()}.");
-                    m_isLoading = false;
                     return null;
                 }
             }
@@ -275,7 +281,7 @@ namespace QRCode.Framework.SceneManagement
             m_sceneLoadingInfo.SceneLoadingStatus = SceneLoadingStatus.SceneAreLoading;
 
             OnLoadingScenes();
-            await Task.Delay(TimeSpan.FromSeconds(LevelLoadingManagerSettings.MinimalLoadDurationBefore), m_cancellationTokenSource.Token);
+            await Task.Delay(TimeSpan.FromSeconds(GameLevelManagerSettings.MinimalLoadDurationBefore), m_cancellationTokenSource.Token);
             
             if (gameLevelReferenceGroupToLoad.GameLevel.GameLevelScenes.IsNotNullOrEmpty())
             {
@@ -298,7 +304,7 @@ namespace QRCode.Framework.SceneManagement
             }
 
             m_levelLoaded = gameLevelReferenceGroupToLoad;
-            QRDebug.DebugInfo(K.DebuggingChannels.LevelManager, $"{gameLevelReferenceGroupToLoad.ToString()} is loaded.");
+            QRDebug.DebugInfo(K.DebuggingChannels.LevelManager, $"{gameLevelReferenceGroupToLoad.GameLevel.name} is loaded.");
 
             if (SaveServiceSettings.Instance.LoadAsyncAfterSceneLoading)
             {
@@ -312,7 +318,7 @@ namespace QRCode.Framework.SceneManagement
                 Load.Current.LoadObjects();
             }
 
-            await Task.Delay(TimeSpan.FromSeconds(LevelLoadingManagerSettings.MinimalLoadDurationAfter), m_cancellationTokenSource.Token);
+            await Task.Delay(TimeSpan.FromSeconds(GameLevelManagerSettings.MinimalLoadDurationAfter), m_cancellationTokenSource.Token);
 
             m_onFinishToLoad?.Invoke();
             if (m_onFinishToLoadAsync != null)
@@ -321,7 +327,6 @@ namespace QRCode.Framework.SceneManagement
             }
             
             m_sceneLoadingInfo.SceneLoadingStatus = SceneLoadingStatus.SceneAreLoaded;
-            m_isLoading = false;
             
             return m_sceneLoadingInfo;
         }
@@ -339,7 +344,7 @@ namespace QRCode.Framework.SceneManagement
         {
             if (m_levelLoaded != null)
             {
-                var levelInitialization = LevelInitialization.Current;
+                var levelInitialization = GameLevelInitialization.Current;
                 if (levelInitialization != null)
                 {
                     levelInitialization.UnloadLevel();
@@ -356,11 +361,11 @@ namespace QRCode.Framework.SceneManagement
                 }
 
                 m_levelLoaded = null;
-                QRDebug.DebugInfo(K.DebuggingChannels.LevelManager, $"{gameLevelReferenceGroupToUnload.ToString()} is unloaded.");   
+                QRDebug.DebugInfo(K.DebuggingChannels.LevelManager, $"{gameLevelReferenceGroupToUnload.GameLevel.name} is unloaded.");   
             }
             else
             {
-                QRDebug.DebugInfo(K.DebuggingChannels.LevelManager, $"{gameLevelReferenceGroupToUnload.ToString()} is already unloaded.");
+                QRDebug.DebugInfo(K.DebuggingChannels.LevelManager, $"{gameLevelReferenceGroupToUnload.GameLevel.name} is already unloaded.");
             }
         }
 
@@ -385,7 +390,7 @@ namespace QRCode.Framework.SceneManagement
 
         private async Task InitializeLoadedLevel()
         {
-            var levelInitialization = LevelInitialization.Current;
+            var levelInitialization = GameLevelInitialization.Current;
 
             if (levelInitialization == null)
             {
@@ -395,13 +400,12 @@ namespace QRCode.Framework.SceneManagement
             {
                 m_sceneLoadingInfo.SceneLoadingStatus = SceneLoadingStatus.InitializationIsLoading;
 
-                var progression = new Progress<SceneLoadableProgressionInfos>(value =>
+                var progression = new Progress<GameLevelLoadProgressionInfos>(value =>
                 {
                     m_sceneLoadingInfo.GlobalProgress = .5f + (value.LoadingProgressPercent / 2f);
                     m_sceneLoadingInfo.ProgressDescription = value.ProgressionDescription.GetLocalizedString();
                 });
 
-                levelInitialization.ForceInitializationFromSceneManager();
                 var loading = levelInitialization.LoadLevel(m_cancellationTokenSource.Token, progression);
                 await loading;
 

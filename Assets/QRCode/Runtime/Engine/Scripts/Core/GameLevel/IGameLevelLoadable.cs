@@ -7,13 +7,13 @@ namespace QRCode.Framework
     using UnityEngine;
     using UnityEngine.Localization;
 
-    public interface ISceneLoadable
+    public interface IGameLevelLoadable
     {
-        public SceneLoadableProgressionInfos SceneLoadableProgressionInfos { get; set; }
+        public GameLevelLoadProgressionInfos GameLevelLoadProgressionInfos { get; set; }
         public Task Load(CancellationToken cancellationToken, Action onLoading, IProgress<float> progress);
     }
 
-    public struct SceneLoadableProgressionInfos
+    public struct GameLevelLoadProgressionInfos
     {
         [SerializeField] private LocalizedString m_loadingProgressionDescription;
         [SerializeField][ReadOnly] private float m_loadingProgressPercent;

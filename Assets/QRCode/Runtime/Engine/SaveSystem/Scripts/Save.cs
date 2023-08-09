@@ -13,7 +13,7 @@
             {
                 if (m_saveService == null)
                 {
-                    m_saveService = ServiceLocator.Current.Get<ISaveService>();
+                    m_saveService = SaveManager.Instance;
                 }
 
                 return m_saveService;
@@ -64,7 +64,7 @@
     {
         private List<ILoadableObject> m_loadableObjects = new List<ILoadableObject>();
 
-        private ISaveService m_saveManager = SaveManager.Instance;
+        private ISaveService m_saveManager => SaveManager.Instance;
 
         private static Load m_current = null;
         public static Load Current

@@ -1,8 +1,10 @@
 ﻿namespace QRCode.Engine.Core.GameState
 {
+    using Framework.Debugging;
     using Framework.Singleton;
     using Sirenix.OdinInspector;
     using UnityEngine;
+    using K = Framework.K;
 
     public class EasyGameStateSetup : MonoBehaviourSingleton<EasyGameStateSetup>
     {
@@ -12,6 +14,7 @@
         public void JumpToGameState()
         {
             GameStateManager.Instance.JumpToGameState(m_startAtGameStateName);
+            QRDebug.DebugInfo("EASY GAME STATE SETUP", $"Jump to state {m_startAtGameStateName}.");
         }
     }
 }
