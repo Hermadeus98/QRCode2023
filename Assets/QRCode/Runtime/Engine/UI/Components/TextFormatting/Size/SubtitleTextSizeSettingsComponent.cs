@@ -36,7 +36,7 @@
             {
                 if (m_userSettingsData == null)
                 {
-                    m_userSettingsData = ServiceLocator.Current.Get<IUserSettingsService>().GetUserSettingsData();
+                    m_userSettingsData = UserSettingsManager.Instance.GetUserSettingsData();
                 }
 
                 return m_userSettingsData;
@@ -47,7 +47,7 @@
         {
             SubtitlesTextSizeSettingEvent.Register(UpdateTextFromSettings);
 
-            if (BootstrapOld.IsInit())
+            if (UserSettingsManager.Instance.IsInit)
             {
                 UpdateTextFromSettings(UserSettingsData.SubtitlesTextSizeSetting);
             }

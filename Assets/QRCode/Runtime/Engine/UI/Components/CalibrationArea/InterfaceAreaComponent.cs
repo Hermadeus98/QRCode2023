@@ -19,7 +19,7 @@ namespace QRCode.Framework
             {
                 if (m_userSettingsData == null)
                 {
-                    m_userSettingsData = ServiceLocator.Current.Get<IUserSettingsService>().GetUserSettingsData();
+                    m_userSettingsData = UserSettingsManager.Instance.GetUserSettingsData();
                 }
 
                 return m_userSettingsData;
@@ -32,7 +32,7 @@ namespace QRCode.Framework
             
             InterfaceAreaCalibrationEvent.Register(AdjustInterfaceAreaCalibrationFromSettings);
 
-            if (BootstrapOld.IsInit())
+            if (UserSettingsManager.Instance.IsInit)
             {
                 AdjustInterfaceAreaCalibrationFromSettings(UserSettingsData.InterfaceAreaCalibrationSize);
             }

@@ -55,8 +55,8 @@ MonoBehaviour:
     m_swapStickSetting: 0
     m_quickTimeEventsInputTypeSetting: 0
     m_screenShakeSetting: 1
-    m_interfaceAreaCalibrationSize: 13
-    m_textSizeSetting: 0
+    m_interfaceAreaCalibrationSize: 5
+    m_textSizeSetting: 2
     m_iconSizeSetting: 0
     m_menuNavigationSettings: 0
     m_gamepadCursorSensibility: 9
@@ -66,14 +66,14 @@ MonoBehaviour:
     m_showTipsAndMessages: 1
     m_showContextualAction: 1
     m_showControlHints: 1
-    m_voiceLanguage: 2
+    m_voiceLanguage: 3
     m_masterVolume: 100
     m_musicVolume: 100
     m_soundFXVolume: 100
     m_dialogueBoost: 0
     m_showSubtitles: 1
     m_subtitlesTextSizeSetting: 0
-    m_showSubtitleBackground: 0
+    m_showSubtitleBackground: 1
     m_subtitleBackgroundOpacity: 100
     m_showSubtitleSpeakerName: 1
     m_audioDescriptionTrack: 0

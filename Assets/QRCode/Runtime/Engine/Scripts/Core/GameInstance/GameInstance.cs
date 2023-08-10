@@ -68,6 +68,7 @@ namespace QRCode.Engine.Core
 
         private async Task InitManagers()
         {
+            await Task.Delay(10);
             var managersForGameInstanceInitialization = m_gameInstanceInitializationDataComponent.AllManagersForGameInstanceInitialization;
             var managersLength = managersForGameInstanceInitialization.Length;
             for (var i = 0; i < managersLength; i++)

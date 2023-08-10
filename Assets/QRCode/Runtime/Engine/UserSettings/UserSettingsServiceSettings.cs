@@ -50,7 +50,7 @@ namespace QRCode.Framework
 
         private void ApplyChange()
         {
-            var userSettingService = ServiceLocator.Current.Get<IUserSettingsService>();
+            var userSettingService = UserSettingsManager.Instance;
             var userSettings = userSettingService.GetUserSettingsData();
 
             //CONTROLS

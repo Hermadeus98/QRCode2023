@@ -11,11 +11,20 @@
         private IFileDataHandler m_fileDataHandler = null;
 
         private bool m_IsInit = false;
+
+        public bool IsInit
+        {
+            get
+            {
+                return m_IsInit;
+            }
+        }
         
         public async Task InitAsync()
         {
             if (m_IsInit)
             {
+                m_IsInit = true;
                 return;
             }
             

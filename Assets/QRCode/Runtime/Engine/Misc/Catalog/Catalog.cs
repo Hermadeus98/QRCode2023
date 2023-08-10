@@ -15,7 +15,6 @@ namespace QRCode.Framework
         [TitleGroup(K.InspectorGroups.References)]
         [SerializeField][ReadOnly] private CatalogObject[] allCatalog;
 
-
         public T GetCatalogOfType<T>() where T : CatalogObject
         {
             return allCatalog.OfType<T>().FirstOrDefault();

@@ -22,7 +22,7 @@ namespace QRCode.Framework
             {
                 if (m_userSettingsData == null)
                 {
-                    m_userSettingsData = ServiceLocator.Current.Get<IUserSettingsService>().GetUserSettingsData();
+                    m_userSettingsData = UserSettingsManager.Instance.GetUserSettingsData();
                 }
 
                 return m_userSettingsData;
@@ -50,7 +50,7 @@ namespace QRCode.Framework
             
             var operation = LocalizationSettings.InitializationOperation;
             
-            if (BootstrapOld.IsInit() && !operation.IsDone)
+            if (UserSettingsManager.Instance.IsInit && !operation.IsDone)
             {
                 AvailableVoiceLocalizationDatabase.TryGetInDatabase(UserSettingsData.VoiceLanguage.ToString(), out var foundedLocale);
                 UpdateAudioLocaleFromSettings(foundedLocale);

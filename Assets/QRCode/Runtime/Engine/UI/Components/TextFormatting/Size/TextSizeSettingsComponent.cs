@@ -1,8 +1,6 @@
 namespace QRCode.Framework
 {
     using Events;
-    using Game;
-    using Settings.InterfaceSettings;
     using Sirenix.OdinInspector;
     using TMPro;
     using UnityEngine;
@@ -36,7 +34,7 @@ namespace QRCode.Framework
             {
                 if (m_userSettingsData == null)
                 {
-                    m_userSettingsData = ServiceLocator.Current.Get<IUserSettingsService>().GetUserSettingsData();
+                    m_userSettingsData = UserSettingsManager.Instance.GetUserSettingsData();
                 }
 
                 return m_userSettingsData;
@@ -47,7 +45,7 @@ namespace QRCode.Framework
         {
             TextSizeSettingEvent.Register(UpdateTextFromSettings);
 
-            if (BootstrapOld.IsInit())
+            if (UserSettingsManager.Instance.IsInit)
             {
                 UpdateTextFromSettings(UserSettingsData.TextSizeSetting);
             }
