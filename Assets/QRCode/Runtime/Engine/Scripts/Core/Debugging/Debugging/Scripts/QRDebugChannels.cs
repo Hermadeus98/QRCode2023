@@ -12,19 +12,19 @@ namespace QRCode.Framework.Debugging
     [CreateAssetMenu(menuName = K.DebuggingPath.ChannelDebugPath, fileName = "Channels Settings")]
     public class QRDebugChannels : SerializedScriptableObject
     {
-        private static QRDebugChannels m_instance;
+        private static QRDebugChannels _instance;
 
         public static QRDebugChannels Instance
         {
             get
             {
-                if (!m_instance)
+                if (!_instance)
                 {
-                    m_instance = Resources.LoadAll<QRDebugChannels>("").FirstOrDefault();
+                    _instance = Resources.LoadAll<QRDebugChannels>("").FirstOrDefault();
                 }
-                if (!m_instance) throw new Exception($"Cannot find instance of {typeof(QRDebugChannels)} in Resources.");
-                if(m_instance) m_instance.hideFlags = HideFlags.DontUnloadUnusedAsset;
-                return m_instance;
+                if (!_instance) throw new Exception($"Cannot find instance of {typeof(QRDebugChannels)} in Resources.");
+                if(_instance) _instance.hideFlags = HideFlags.DontUnloadUnusedAsset;
+                return _instance;
             }
         }
         

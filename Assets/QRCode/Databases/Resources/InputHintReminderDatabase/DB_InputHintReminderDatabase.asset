@@ -24,7 +24,7 @@ MonoBehaviour:
     - Name: m_database
       Entry: 7
       Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[QRCode.Framework.InputHintReminderBatch,
-        QRCode.Framework]], mscorlib
+        QRCode.Engine]], mscorlib
     - Name: comparer
       Entry: 7
       Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
@@ -43,7 +43,7 @@ MonoBehaviour:
       Data: MainMenu
     - Name: $v
       Entry: 7
-      Data: 2|QRCode.Framework.InputHintReminderBatch, QRCode.Framework
+      Data: 2|QRCode.Framework.InputHintReminderBatch, QRCode.Engine
     - Name: m_assetReferenceInputHintReminders
       Entry: 7
       Data: 3|UnityEngine.AddressableAssets.AssetReference[], Unity.Addressables

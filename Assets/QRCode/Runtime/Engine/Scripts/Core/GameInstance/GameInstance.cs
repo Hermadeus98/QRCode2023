@@ -10,24 +10,27 @@ namespace QRCode.Engine.Core
     /// </summary>
     public sealed class GameInstance
     {
-        private static GameInstance m_instance;
+        #region Fields
+        private static GameInstance _instance;
+        private GameInstanceInitializationDataComponent m_gameInstanceInitializationDataComponent = null;
+        private GameInstanceEvents m_gameInstanceEvents = null;
+        private bool m_isReady = false;
+        #endregion
+
+        #region Properties
         public static GameInstance Instance
         {
             get
             {
-                return m_instance;
+                return _instance;
             }
         }
 
-        private GameInstanceInitializationDataComponent m_gameInstanceInitializationDataComponent = null;
-        private GameInstanceEvents m_gameInstanceEvents = null;
-        private bool m_managersAreInit = false;
-
-        public bool ManagersAreInit
+        public bool IsReady
         {
             get
             {
-                return m_managersAreInit;
+                return m_isReady;
             }
         }
 
@@ -38,32 +41,46 @@ namespace QRCode.Engine.Core
                 return m_gameInstanceEvents;
             }
         }
+        #endregion
 
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-        private static void ResetGameInstance()
-        {
-            m_instance = null;
-        }
-        
+        #region Constructors
+
         public GameInstance(GameInstanceInitializationDataComponent gameInstanceInitializationData)
         {
-            if (m_instance != null)
+            if (_instance != null)
             {
                 QRDebug.DebugFatal(Constants.EngineConstants.EngineLogChannels.EngineChannel, $"A GameInstance is already existing in current context.");
                 return;
             }
 
-            m_instance = this;
+            _instance = this;
             
             m_gameInstanceInitializationDataComponent = gameInstanceInitializationData;
             m_gameInstanceEvents = new GameInstanceEvents();
             
             LoadGame();
         }
-        
+
+        #endregion
+
+        #region Methods
+
+        #region Lifecycle
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void ResetGameInstance()
+        {
+            _instance = null;
+        }
+
+        #endregion
+
+        #region Privates
+
         private async void LoadGame()
         {
             await InitManagers();
+            m_isReady = true;
         }
 
         private async Task InitManagers()
@@ -77,8 +94,11 @@ namespace QRCode.Engine.Core
             }
             
             QRDebug.DebugInfo(K.DebuggingChannels.Game, $"Managers has been initialize.");
-            m_managersAreInit = true;
         }
+
+        #endregion
+
+        #endregion
     }
     
     public struct GameInfo
