@@ -9,6 +9,7 @@ namespace QRCode.Editor
     using UnityEditor;
     using UnityEngine;
     using UnityEngine.InputSystem;
+    using GameInstance = Engine.Core.GameInstance;
 
     public class ActionMapDebuggerEditor : EditorWindow
     {
@@ -42,7 +43,7 @@ namespace QRCode.Editor
                 return;
             }
 
-            if (BootstrapOld.IsInit() == false)
+            if (GameInstance.Instance.IsReady == false)
             {
                 return;
             }

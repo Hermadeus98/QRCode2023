@@ -154,6 +154,22 @@ MonoBehaviour:
     m_Address: Assets/QRCode/Runtime/Engine/LevelManagement/Tests/Scenes/Scene_SceneManagementEx3.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: fd0b907be2b77204abb6373a5a641729
+    m_Address: Assets/QRCode/Prefabs/Managers/MANAGER - GameStates.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5e7f0f3747042d140bd36bc4bc3313ff
+    m_Address: Assets/QRCode/Prefabs/Managers/MANAGER - GameMode.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0de986939cffdf04086b580d5290c267
+    m_Address: Assets/QRCode/Prefabs/Managers/MANAGER - UserSettings.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 09ff180c81322ff47acee1b6e025cfb6
+    m_Address: Assets/QRCode/Prefabs/Managers/MANAGER - Players.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 383727ea88213544abed9fa8aa57676f, type: 2}
   m_SchemaSet:

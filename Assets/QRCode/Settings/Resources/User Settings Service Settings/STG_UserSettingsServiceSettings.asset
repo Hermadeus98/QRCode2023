@@ -72,8 +72,8 @@ MonoBehaviour:
     m_soundFXVolume: 100
     m_dialogueBoost: 0
     m_showSubtitles: 1
-    m_subtitlesTextSizeSetting: 0
-    m_showSubtitleBackground: 0
+    m_subtitlesTextSizeSetting: 2
+    m_showSubtitleBackground: 1
     m_subtitleBackgroundOpacity: 100
     m_showSubtitleSpeakerName: 1
     m_audioDescriptionTrack: 0

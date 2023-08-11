@@ -9,13 +9,13 @@ EditorBuildSettings:
     path: Assets/QRCode/Scenes/Scene_Bootstrap.unity
     guid: 2532db8eef6b24d4c958f99f22d13251
   - enabled: 0
-    path: Assets/QRCode/Runtime/Engine/Scenes/Tests/GameLevels/Scene_SceneManagementEx1.unity
+    path: Assets/QRCode/Engine/Scenes/Tests/GameLevels/Scene_SceneManagementEx1.unity
     guid: ba68db8bebdb4ff4b92636394ab6840c
   - enabled: 0
-    path: Assets/QRCode/Runtime/Engine/Scenes/Tests/GameLevels/Scene_SceneManagementEx2.unity
+    path: Assets/QRCode/Engine/Scenes/Tests/GameLevels/Scene_SceneManagementEx2.unity
     guid: a1f0e337e6c9dae42960f63727b4a153
   - enabled: 0
-    path: Assets/QRCode/Runtime/Engine/Scenes/Tests/GameLevels/Scene_SceneManagementEx3.unity
+    path: Assets/QRCode/Engine/Scenes/Tests/GameLevels/Scene_SceneManagementEx3.unity
     guid: 7431746a44738ef499106d721e0a520e
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 22f8a452a89e216439edacf21982b0b4,
