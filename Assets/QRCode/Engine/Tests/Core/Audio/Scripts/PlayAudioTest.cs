@@ -2,7 +2,7 @@ namespace QRCode.Framework
 {
     using Engine.Core.Audio;
     using Engine.Toolbox.Pattern.Service;
-    using Sirenix.OdinInspector;
+    using Sirenix.OdinInspector;    
     using UnityEngine;
 
     public class PlayAudioTest : SerializedMonoBehaviour

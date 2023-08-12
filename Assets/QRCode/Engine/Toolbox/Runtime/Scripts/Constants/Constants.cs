@@ -20,6 +20,7 @@ namespace QRCode.Engine.Toolbox
             public const string UserSettings = "User Settings";
             public const string Subtitles = "Subtitles";
             public const string Importer = "Importer";
+            public const string RemoteConfig = "Remote Config";
         }
         
         public static class InspectorGroups
@@ -53,6 +54,7 @@ namespace QRCode.Engine.Toolbox
             public const string AudioSettingsPath = BasePath + "Audio Settings";
             public const string LocalizationPath = BasePath + "Localization Settings";
             public const string InterfaceSettings = BasePath + "Interface Settings";
+            public const string RemoteConfigSettings = BasePath + "Remote Config Settings";
         }
 
         public static class Game

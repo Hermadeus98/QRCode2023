@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 32
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 278af885f8968eb4aa6d18076847008e, type: 3}
+  m_Name: STG_RemoteConfig
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  m_appVersion: {fileID: 11400000, guid: b87804447aedafb41bcf161431cd6d72, type: 2}
+  m_environmentId: 3cb3b140-bd6d-4781-8433-b34bf14e1c31
+  m_allRemoteConfigValues:
+  - {fileID: 11400000, guid: b87804447aedafb41bcf161431cd6d72, type: 2}

@@ -1,15 +1,18 @@
 namespace QRCode.Engine.Game.GameConfigs
 {
-    using System;
-    using Toolbox;
-    using Sirenix.OdinInspector;
-    using Toolbox.GameConfigs;
     using UnityEngine;
+
+    using System;
+    
+    using Sirenix.OdinInspector;
+
+    using Toolbox;
+    using Toolbox.GameConfigs;
 
     [CreateAssetMenu(menuName = Constants.GameConfigs.BasePath + "UI/Text Game Config", fileName = "New Text Game Config")]
     public class TextGameConfig : GameConfigBase<TextRuleSet>
     {
-        
+        protected override string GameConfigDescription { get => "This Game Config must contains all text formatting of the game."; }
     }
 
     [Serializable]

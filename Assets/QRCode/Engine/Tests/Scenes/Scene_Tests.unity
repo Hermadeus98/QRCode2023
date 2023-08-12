@@ -167,11 +167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3955a7797e2789547b7ae4623fa37f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_assetReference:
-    m_AssetGUID: a427eb513d1c4d54683a15b9c249f5ba
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
 --- !u!1 &299809564
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,7 +479,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1668989483}
-  - component: {fileID: 1668989482}
   - component: {fileID: 1668989484}
   m_Layer: 0
   m_Name: GameplayComponent
@@ -493,27 +487,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1668989482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1668989481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dc5be88ef38b274d8d421a01e3310de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes: []
 --- !u!4 &1668989483
 Transform:
   m_ObjectHideFlags: 0

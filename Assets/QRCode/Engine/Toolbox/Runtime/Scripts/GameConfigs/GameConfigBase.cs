@@ -16,11 +16,11 @@ namespace QRCode.Engine.Toolbox.GameConfigs
         [TitleGroup(Constants.InspectorGroups.Infos)]
         [SerializeField][OnValueChanged("SetGameConfigNameInEditor")] private string m_gameConfigName = "";
 
-        [TitleGroup("Game Configs")] [SerializeField]
+        [TitleGroup("Game Configs")] [SerializeField][InfoBox("@this.GameConfigDescription")]
         private List<T> m_catalogData = new List<T>();
-
-        public string GameConfigName => m_gameConfigName;
-
+        
+        protected abstract string GameConfigDescription { get; }
+        
         public T GetDataFromId(string entry)
         {
             for (int i = 0; i < m_catalogData.Count; i++)

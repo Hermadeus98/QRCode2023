@@ -48,10 +48,6 @@ MonoBehaviour:
       1.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 36ae7d97d48a9e346be064450d381611
-    m_Address: Assets/QRCode/Prefabs/Services/SERVICE - Scene Management.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: e7e479cb31b34ed4a9c54498dd9696bb
     m_Address: Assets/QRCode/Scenes/Scene_UI.unity
     m_ReadOnly: 0
@@ -164,6 +160,10 @@ MonoBehaviour:
     m_SerializedLabels: []
   - m_GUID: 09ff180c81322ff47acee1b6e025cfb6
     m_Address: Assets/QRCode/Prefabs/Managers/MANAGER - Players.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8ac1df006ac0fa044b355e75f43b3c23
+    m_Address: Assets/QRCode/Prefabs/Managers/MANAGER - RemoteConfig.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

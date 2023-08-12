@@ -1,24 +1,39 @@
 namespace QRCode.Engine.Toolbox.Database
 {
+    using UnityEngine;
+
     using System.Collections.Generic;
     using System.Linq;
-    using Engine.Debugging;
-    using Toolbox;
+    
     using Sirenix.OdinInspector;
-    using UnityEngine;
+
+    using Debugging;
+    using Toolbox;
 
     public abstract class ScriptableDatabaseBase : SerializedScriptableObject, IDatabase
     {
         
     }
     
+    /// <summary>
+    /// Inherit from this class to add a new database into the project.
+    /// Don't forget to reference it into the database scriptable object.
+    /// </summary>
     public abstract class ScriptableObjectDatabase<T> : ScriptableDatabaseBase
     {
-        [TitleGroup(Constants.InspectorGroups.References)]
+        [TitleGroup(Constants.InspectorGroups.References)][InfoBox("@this.m_databaseInformation")]
         [SerializeField] protected Dictionary<string, T> m_database = new Dictionary<string, T>();
         [TitleGroup(Constants.InspectorGroups.Settings)]
         [SerializeField] protected string m_generatedEnumPath;
 
+        protected abstract string m_databaseInformation
+        {
+            get;
+        }
+        
+        /// <summary>
+        /// Get the database dictionary.
+        /// </summary>
         public Dictionary<string, T> GetDatabase
         {
             get
@@ -27,6 +42,12 @@ namespace QRCode.Engine.Toolbox.Database
             }
         }
         
+        /// <summary>
+        /// Try to get an element from the database.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="foundedObject"></param>
+        /// <returns></returns>
         public bool TryGetInDatabase(string key, out T foundedObject)
         {
             if (key == "Null")
@@ -64,7 +85,7 @@ namespace QRCode.Engine.Toolbox.Database
                 fields.Add(m_database.Keys.ElementAt(i));
             }
             
-            Toolbox.TextGeneration.TextGenerator.GenerateCSEnum(m_generatedEnumPath, name + "Enum", "QRCode.Framework", fields);
+            TextGeneration.TextGenerator.GenerateCSEnum(m_generatedEnumPath, name + "Enum", "QRCode.Framework", fields);
         }
     }
 }
