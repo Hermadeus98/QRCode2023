@@ -1,0 +1,21 @@
+{
+    "name": "QRCode.Engine.Game.Subtitles",
+    "rootNamespace": "QRCode.Engine.Game.Subtitles",
+    "references": [
+        "GUID:eec0964c48f6f4e40bc3ec2257ccf8c5",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:f06555f75b070af458a003d92f9efb00",
+        "GUID:186862afe89a22947bc7398c01f6cbdf",
+        "GUID:360ae7e827994ba4580b03b3d959f134",
+        "GUID:8120569974497c4458bb161901017a12"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

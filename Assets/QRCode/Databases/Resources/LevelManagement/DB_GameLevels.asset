@@ -25,7 +25,7 @@ MonoBehaviour:
     SerializationNodes:
     - Name: m_database
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[QRCode.Framework.SceneManagement.GameLevelReferenceGroup,
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[QRCode.Engine.Core.GameLevel.GameLevelReferenceGroup,
         QRCode.Engine]], mscorlib
     - Name: comparer
       Entry: 7
@@ -45,7 +45,7 @@ MonoBehaviour:
       Data: GameLevel_TestA
     - Name: $v
       Entry: 7
-      Data: QRCode.Framework.SceneManagement.GameLevelReferenceGroup, QRCode.Engine
+      Data: QRCode.Engine.Core.GameLevel.GameLevelReferenceGroup, QRCode.Engine
     - Name: gameLevel
       Entry: 10
       Data: 0
@@ -63,7 +63,7 @@ MonoBehaviour:
       Data: GameLevel_TestB
     - Name: $v
       Entry: 7
-      Data: QRCode.Framework.SceneManagement.GameLevelReferenceGroup, QRCode.Engine
+      Data: QRCode.Engine.Core.GameLevel.GameLevelReferenceGroup, QRCode.Engine
     - Name: gameLevel
       Entry: 10
       Data: 1

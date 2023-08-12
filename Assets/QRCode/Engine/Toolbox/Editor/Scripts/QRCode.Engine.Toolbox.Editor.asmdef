@@ -1,0 +1,16 @@
+{
+    "name": "QRCode.Engine.Toolbox.Editor",
+    "rootNamespace": "QRCode.Engine.Toolbox.Editor",
+    "references": [
+        "GUID:8120569974497c4458bb161901017a12"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

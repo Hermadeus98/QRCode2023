@@ -17,8 +17,8 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: ea065454afb325743a13cb6aaac40ccb
   m_SerializeEntries:
-  - m_GUID: e7e479cb31b34ed4a9c54498dd9696bb
-    m_Address: Assets/QRCode/Gameplay/UI/Scenes/Scene_UI.unity
+  - m_GUID: c8cc1806d92cb3c44aef83f271cfa9f5
+    m_Address: Assets/QRCode/Scenes/Scene_Main.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: fe8601c57e2bc024f9f9fb6653ecd7b5
@@ -52,16 +52,12 @@ MonoBehaviour:
     m_Address: Assets/QRCode/Prefabs/Services/SERVICE - Scene Management.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: c8cc1806d92cb3c44aef83f271cfa9f5
-    m_Address: Assets/QRCode/Scenes/Scene_Main.unity
+  - m_GUID: e7e479cb31b34ed4a9c54498dd9696bb
+    m_Address: Assets/QRCode/Scenes/Scene_UI.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 3184743629e71f54882a6d6d665f34ae
     m_Address: Assets/QRCode/Prefabs/Services/SERVICE - Save.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: a427eb513d1c4d54683a15b9c249f5ba
-    m_Address: Assets/QRCode/Scripts/Framework/Runtime/Adressables/Tests/AddressableTest.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 067c3fde56292e849be8a2c4400dfd00

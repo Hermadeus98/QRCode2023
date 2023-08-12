@@ -1,0 +1,59 @@
+﻿namespace QRCode.Engine.Core.SaveSystem
+{
+    using System;
+    using System.IO;
+    using System.Threading.Tasks;
+    using Formatters;
+    using Toolbox;
+    using Engine.Debugging;
+
+    /// <summary>
+    /// Default File Data Handler, used for PC save and Editor Save.
+    /// </summary>
+    public class FileDataHandler : IFileDataHandler
+    {
+        private readonly string m_fullPath;
+        private readonly IFormatter m_formatter = null;
+        
+        public FileDataHandler(string dataDirectoryPath, string dataFileName)
+        {
+            m_fullPath = Path.Combine(dataDirectoryPath, dataFileName);
+            m_formatter = FormatterFactory.CreateFormatter(SaveServiceSettings.Instance.FormatterTypeDefault);
+        }
+
+        public async Task<T> Load<T>()
+        {
+            var loadedObject = await m_formatter.Load<T>(m_fullPath);
+
+            return loadedObject;
+        }
+        
+        public async Task Save(object saveData)
+        {
+            await m_formatter.Save(saveData, m_fullPath);
+        }
+
+        public Task<bool> TryDeleteSave()
+        {
+            try
+            {
+                if (File.Exists(m_fullPath))
+                {
+                    File.Delete(m_fullPath);
+                    return Task.FromResult(true);
+                }
+                else
+                {
+                    QRDebug.DebugFatal(Constants.DebuggingChannels.SaveManager, $"Cannot delete any file at path {m_fullPath}.");
+                }
+            }
+            catch (Exception e)
+            {
+                QRDebug.DebugFatal(Constants.DebuggingChannels.SaveManager, e);
+                throw;
+            }
+
+            return Task.FromResult(false);
+        }
+    }
+}

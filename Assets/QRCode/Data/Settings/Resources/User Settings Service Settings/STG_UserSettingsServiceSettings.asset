@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 32
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e776b0ffb90d526429b8542281026ae2, type: 3}
+  m_Name: STG_UserSettingsServiceSettings
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  m_fileName: userSettings
+  m_fileNameExtension: .save
+  m_defaultValues:
+    m_brightness: 5
+    m_contrast: 5
+    m_colorBlindModeSetting: 0
+    m_fieldOfView: 100
+    m_fpsLimit: 60
+    m_windowModeSetting: 0
+    m_activeMonitor: NotFoundedActiveMonitor
+    m_aspectRatio: 16:9
+    m_resolution: 1920 x 1080
+    m_VSync: 1
+    m_graphicsQualitySetting: 2
+    m_useAdaptativeQuality: 0
+    m_adaptativeQualitySetting: 60
+    m_antiAliasingSetting: 2
+    m_depthOfFieldSetting: 2
+    m_useMotionBlur: 1
+    m_inputModePC: 0
+    m_menuHoldFactor: 1000
+    m_mouseSensitivity: 5
+    m_mouseXAxisModeSetting: 0
+    m_mouseYAxisModeSetting: 0
+    m_leftHandedMouseSetting: 0
+    m_lockCursor: 0
+    m_controllerXAxisSensitivity: 5
+    m_controllerYAxisSensitivity: 5
+    m_controllerXAxisModeSetting: 0
+    m_controllerYAxisModeSetting: 0
+    m_controllerVibrationSetting: 0
+    m_swapStickSetting: 0
+    m_quickTimeEventsInputTypeSetting: 0
+    m_screenShakeSetting: 1
+    m_interfaceAreaCalibrationSize: 12
+    m_textSizeSetting: 0
+    m_iconSizeSetting: 0
+    m_menuNavigationSettings: 0
+    m_gamepadCursorSensibility: 5
+    m_holdAlternativeSetting: 0
+    m_showHUDBackground: 0
+    m_HUDBackgroundOpacity: 100
+    m_showTipsAndMessages: 1
+    m_showContextualAction: 1
+    m_showControlHints: 1
+    m_voiceLanguage: 3
+    m_masterVolume: 100
+    m_musicVolume: 100
+    m_soundFXVolume: 100
+    m_dialogueBoost: 0
+    m_showSubtitles: 1
+    m_subtitlesTextSizeSetting: 0
+    m_showSubtitleBackground: 0
+    m_subtitleBackgroundOpacity: 100
+    m_showSubtitleSpeakerName: 1
+    m_audioDescriptionTrack: 0

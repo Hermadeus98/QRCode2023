@@ -23,8 +23,8 @@ MonoBehaviour:
     SerializationNodes:
     - Name: m_database
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[QRCode.Framework.LoadingScreenReference,
-        QRCode.Framework]], mscorlib
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[QRCode.Engine.Core.UI.LoadingScreen.LoadingScreenReference,
+        QRCode.Engine]], mscorlib
     - Name: comparer
       Entry: 7
       Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
@@ -43,7 +43,7 @@ MonoBehaviour:
       Data: LoadingScreenBase
     - Name: $v
       Entry: 7
-      Data: QRCode.Framework.LoadingScreenReference, QRCode.Framework
+      Data: QRCode.Engine.Core.UI.LoadingScreen.LoadingScreenReference, QRCode.Engine
     - Name: LoadingScreenAssetReference
       Entry: 7
       Data: 2|UnityEngine.AddressableAssets.AssetReference, Unity.Addressables
