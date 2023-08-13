@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b26f7ef4d654ff985db93b28175493a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_allowJumpToState: 1
   m_startAtGameStateName: Game State 1
 --- !u!1001 &1226326929
 PrefabInstance:

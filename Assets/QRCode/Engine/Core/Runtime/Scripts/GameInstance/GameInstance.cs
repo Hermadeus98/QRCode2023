@@ -1,11 +1,11 @@
 namespace QRCode.Engine.Core.GameInstance
 {
-    using System.Threading;
     using UnityEngine;
     using UnityEngine.AddressableAssets;
     
     using System.Threading.Tasks;
-    
+    using System.Threading;
+
     using Toolbox;
     using Debugging;
     using Managers;
@@ -64,13 +64,18 @@ namespace QRCode.Engine.Core.GameInstance
                 QRDebug.DebugFatal(Engine.Constants.EngineConstants.EngineLogChannels.EngineChannel, $"A GameInstance is already existing in current context.");
                 return;
             }
-
+            else
+            {
+                QRDebug.DebugInfo(Engine.Constants.EngineConstants.EngineLogChannels.EngineChannel, $"GameInstanceCreation.");
+            }
+            
             _instance = this;
             
             m_gameInstanceInitializationConfig = gameInstanceInitializationConfig;
             m_gameInstanceEvents = new GameInstanceEvents();
 
             m_cancellationTokenSource = new CancellationTokenSource();
+
             Application.quitting -= Delete;
             Application.quitting += Delete;
         }
@@ -85,6 +90,8 @@ namespace QRCode.Engine.Core.GameInstance
                 m_cancellationTokenSource.Dispose();
                 m_cancellationTokenSource = null;
             }
+            
+            m_gameInstanceEvents.DeleteAll();
         }
         #endregion
 
@@ -100,8 +107,7 @@ namespace QRCode.Engine.Core.GameInstance
 
         #endregion
 
-        #region Privates
-
+        #region Publics
         public async Task LoadGame()
         {
             await InstantiateManagers();
@@ -110,7 +116,11 @@ namespace QRCode.Engine.Core.GameInstance
             await InstantiateScenes();
 
             m_isReady = true;
+            m_gameInstanceEvents.OnGameInstanceIsReady();
         }
+        #endregion
+        
+        #region Privates
 
         private async Task InstantiateScenes()
         {

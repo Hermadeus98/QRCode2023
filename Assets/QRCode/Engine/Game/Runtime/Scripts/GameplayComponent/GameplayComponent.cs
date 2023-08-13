@@ -1,10 +1,12 @@
 namespace QRCode.Engine.Core
 {
+    using System;
     using GameInstance;
     using SaveSystem;
     using Sirenix.OdinInspector;
+    using Toolbox.Optimization;
 
-    public abstract class GameplayComponent : SerializedMonoBehaviour, IGameplayComponent , ILoadableObject, ISavableObject
+    public abstract class GameplayComponent : SerializedMonoBehaviour, IGameplayComponent , ILoadableObject, ISavableObject, IDeletable
     {
         protected virtual void OnEnable()
         {
@@ -14,6 +16,11 @@ namespace QRCode.Engine.Core
         protected virtual void OnDisable()
         {
             GameInstance.GameInstance.Instance.GameInstanceEvents.UnregisterGameplayComponent(this);
+        }
+
+        public virtual void OnGameInstanceIsReady()
+        {
+            
         }
 
         public virtual void OnLevelLoaded() { }
@@ -33,5 +40,15 @@ namespace QRCode.Engine.Core
         public virtual void LoadGameData(GameData gameData) { }
 
         public virtual void SaveGameData(ref GameData gameData) { }
+
+        protected virtual void OnDestroy()
+        {
+            Delete();
+        }
+
+        public void Delete()
+        {
+            
+        }
     }
 }

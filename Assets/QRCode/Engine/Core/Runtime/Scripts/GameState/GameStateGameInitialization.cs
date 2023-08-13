@@ -1,9 +1,8 @@
-namespace QRCode.Framework
+namespace QRCode.Engine.Core.GameState
 {
     using System.Threading;
     using System.Threading.Tasks;
-    using Engine.Core.GameInstance;
-    using Engine.Core.GameState;
+    using GameInstance;
     using UnityEngine;
 
     public class GameStateGameInitialization : GameStateBase

@@ -23,6 +23,16 @@
                 m_gameplayComponents.Remove(gameplayComponent);
             }
         }
+
+        public void OnGameInstanceIsReady()
+        {
+            for (int i = 0; i < m_gameplayComponents.Count; i++)
+            {
+                m_gameplayComponents[i].OnGameInstanceIsReady(); 
+            }
+            
+            QRDebug.DebugTrace(Constants.DebuggingChannels.Game, $"On Level Loaded.");
+        }
         
         public void OnLevelLoaded()
         {
@@ -39,6 +49,16 @@
             for (var i = 0; i < m_gameplayComponents.Count; i++)
             {
                 m_gameplayComponents[i].OnLevelUnloaded();
+            }
+            
+            QRDebug.DebugTrace(Constants.DebuggingChannels.Game, $"On Level Unloaded.");
+        }
+
+        public void DeleteAll()
+        {
+            for (int i = 0; i < m_gameplayComponents.Count; i++)
+            {
+                m_gameplayComponents[i].Delete();
             }
             
             QRDebug.DebugTrace(Constants.DebuggingChannels.Game, $"On Level Unloaded.");

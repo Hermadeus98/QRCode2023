@@ -38,13 +38,17 @@ namespace QRCode.Engine.Core.GameLevel
         #endregion Serialized
 
         #region Privates
+        private GameLevelDatabase m_gameLevelDatabase = null;
+        private GameLevelManagerSettings m_gameLevelManagerSettings = null;
+
         private bool m_isLoading = false;
         private CancellationTokenSource m_cancellationTokenSource = null;
         private ISaveService m_saveService => SaveManager.Instance;
+        private GameLevelReferenceGroup? m_levelLoaded = null;
+        private List<AsyncOperationHandle<SceneInstance>> m_sceneInstanceHandles = new();
         #endregion Privates
         
-        #region Statics
-        private GameLevelDatabase m_gameLevelDatabase = null;
+        #region Properties
         private GameLevelDatabase GameLevelDatabase
         {
             get
@@ -65,7 +69,6 @@ namespace QRCode.Engine.Core.GameLevel
             }
         }
 
-        private GameLevelManagerSettings m_gameLevelManagerSettings = null;
         private GameLevelManagerSettings GameLevelManagerSettings
         {
             get
@@ -78,19 +81,11 @@ namespace QRCode.Engine.Core.GameLevel
                 return m_gameLevelManagerSettings;
             }
         }
-
-        private GameLevelReferenceGroup? m_levelLoaded = null;
-        private List<AsyncOperationHandle<SceneInstance>> m_sceneInstanceHandles = new();
         #endregion Statics
         #endregion FIELDS
 
         #region EVENTS 
         private event Func<Task> m_onStartToLoadAsync;
-
-        public bool IsLoading()
-        {
-            return m_isLoading;
-        }
 
         public event Func<Task> OnStartToLoadLevelAsync
         {
@@ -193,6 +188,18 @@ namespace QRCode.Engine.Core.GameLevel
             
             if (GameLevelDatabase.TryGetInDatabase(gameLevelToLoad.ToString(), out var levelReferenceGroup))
             {
+                // If a level is already loaded, it's managed differently.
+                if (forceReload == false && m_levelLoaded != null)
+                {
+                    if (levelReferenceGroup == m_levelLoaded)
+                    {
+                        QRDebug.DebugInfo(Constants.DebuggingChannels.LevelManager, $"{gameLevelToLoad.ToString()} is already loaded.", GameLevelDatabase);
+                        await AlreadyLoadedLevel(loadingScreenEnum);
+                        m_isLoading = false;
+                        return m_sceneLoadingInfo;
+                    }
+                }
+                
                 var loadingScreen = await UI.GetLoadingScreen(loadingScreenEnum);
                 await loadingScreen.Show();
                 
@@ -224,6 +231,16 @@ namespace QRCode.Engine.Core.GameLevel
             throw new NotImplementedException();
         }
         
+        public bool IsLoading()
+        {
+            return m_isLoading;
+        }
+
+        public void SetAsAlreadyLoadedLevel(GameLevelReferenceGroup? gameLevelReferenceGroup)
+        {
+            m_levelLoaded = gameLevelReferenceGroup;
+        }
+        
         private async Task<SceneLoadingInfo> LoadLevel(DB_GameLevelsEnum gameLevelToLoad, ILoadingScreen loadingScreen, bool forceReload = false, bool activateOnLoad = true, int priority = 100)
         {
             if (GameLevelDatabase.TryGetInDatabase(gameLevelToLoad.ToString(), out var levelReferenceGroup))
@@ -238,7 +255,7 @@ namespace QRCode.Engine.Core.GameLevel
 
                 await TryForceReload(forceReload, gameLevelToLoad);
                 
-                OnLoadingLevel += (sceneLoadingInfo) => loadingScreen.Progress(sceneLoadingInfo);
+                OnLoadingLevel += loadingScreen.Progress;
                 var sceneLoadingInfo = await LoadSceneGroup(levelReferenceGroup, activateOnLoad, priority);
                 
                 return sceneLoadingInfo!.Value;
@@ -283,6 +300,28 @@ namespace QRCode.Engine.Core.GameLevel
         #endregion LifeCycle
         
         #region Privates
+        private async Task AlreadyLoadedLevel(DB_LoadingScreenEnum loadingScreenEnum)
+        {
+            var loadingScreen = await UI.GetLoadingScreen(loadingScreenEnum);
+            await loadingScreen.Show();
+                
+            if (SaveServiceSettings.Instance.SaveAsyncBeforeSceneLoading)
+            {
+                Save.Current.SaveObjects();
+            }
+                
+            if (SaveServiceSettings.Instance.SaveAsyncBeforeSceneLoading)
+            {
+                await m_saveService.SaveGameAsync();
+            }
+
+            await InitializeLoadedLevel();
+            await loadingScreen.Hide();
+
+            m_sceneLoadingInfo.GlobalProgress = 1f;
+            m_sceneLoadingInfo.SceneLoadingStatus = SceneLoadingStatus.SceneAreLoaded;
+        }
+        
         private async Task<SceneLoadingInfo?> LoadSceneGroup(GameLevelReferenceGroup gameLevelReferenceGroupToLoad, bool activateOnLoad = true, int priority = 100)
         {
             if (m_levelLoaded != null)
@@ -368,11 +407,25 @@ namespace QRCode.Engine.Core.GameLevel
                 
                 foreach (var sceneReference in gameLevelReferenceGroupToUnload.GameLevel.GameLevelScenes)
                 {
-                    var unloadSceneOperation = sceneReference.UnLoadScene();
-
-                    while (!unloadSceneOperation.IsDone && !m_cancellationTokenSource.IsCancellationRequested)
+                    try
                     {
-                        await Task.Yield();
+                        // If the scene was loaded with addressable, it must be unloaded here.
+                        var unloadSceneOperation = sceneReference.UnLoadScene();
+
+                        while (!unloadSceneOperation.IsDone && !m_cancellationTokenSource.IsCancellationRequested)
+                        {
+                            await Task.Yield();
+                        }
+                    }
+                    catch (Exception e)
+                    {
+#if UNITY_EDITOR
+                        // Cannot unload an addressable scene already loaded, so the scene is unload with its editor name.
+                        SceneManager.UnloadSceneAsync(sceneReference.editorAsset.name);
+#else
+                        Console.WriteLine(e);
+                        throw;
+#endif
                     }
                 }
 

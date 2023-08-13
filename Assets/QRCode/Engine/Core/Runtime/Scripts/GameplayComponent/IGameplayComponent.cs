@@ -1,12 +1,15 @@
 namespace QRCode.Engine.Core
 {
     using GameInstance;
+    using Toolbox.Optimization;
 
-    public interface IGameplayComponent
+    public interface IGameplayComponent : IDeletable
     {
         public virtual void OnLevelLoaded() { }
 
         public virtual void OnLevelUnloaded() { }
+        
+        public virtual void OnGameInstanceIsReady() { }
 
         public virtual void OnGameStart() { }
 

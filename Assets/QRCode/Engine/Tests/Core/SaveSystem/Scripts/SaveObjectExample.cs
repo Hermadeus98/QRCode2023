@@ -1,9 +1,9 @@
 namespace QRCode.Engine.Core.SaveSystem.Tests
 {
     using System.Collections.Generic;
-    using Engine.Core.SaveSystem;
+    using SaveSystem;
     using Toolbox;
-    using Engine.Debugging;
+    using Debugging;
     using Sirenix.OdinInspector;
     using UnityEngine;
 

@@ -5,21 +5,8 @@
     public class Save
     {
         private List<ISavableObject> m_savableObjects = new List<ISavableObject>();
-
-        private ISaveService m_saveService = null;
-        private ISaveService SaveService
-        {
-            get
-            {
-                if (m_saveService == null)
-                {
-                    m_saveService = SaveManager.Instance;
-                }
-
-                return m_saveService;
-            }
-        }
-
+        private SaveManager m_saveManager => SaveManager.Instance;
+        
         private static Save m_current = null;
         public static Save Current
         {
@@ -52,9 +39,9 @@
 
         public void SaveObjects()
         {
+            var gameData = m_saveManager.GetGameData();
             foreach (var savableObject in m_savableObjects)
             {
-                var gameData = SaveService.GetGameData();
                 savableObject.SaveGameData(ref gameData);
             }
         }

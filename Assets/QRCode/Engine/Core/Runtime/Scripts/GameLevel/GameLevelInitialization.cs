@@ -12,18 +12,46 @@ namespace QRCode.Engine.Core.GameLevel
     public class GameLevelInitialization : SerializedMonoBehaviour
     {
         [TitleGroup(Constants.InspectorGroups.Settings)]
+        [SerializeField] private GameLevelReferenceGroup m_gameLevelReferenceGroup;
+        
+        [TitleGroup(Constants.InspectorGroups.Settings)]
         [SerializeField] private List<IGameLevelLoadable> m_sceneLoadables = new List<IGameLevelLoadable>();
 
         private bool m_levelIsLoaded = false;
         private CancellationTokenSource m_cancellationTokenSource = null;
         private ILoadingScreen m_loadingScreen = null;
         private SceneLoadingInfo m_sceneLoadingInfo;
+        private bool m_isAlreadyLoaded = false;
 
         public static GameLevelInitialization Current = null;
         
         private void Awake()
         {
+            if (GameInstance.GameInstance.Instance.IsReady == false)
+            {
+                m_isAlreadyLoaded = true;
+            }
+            
             Current = this;
+            m_cancellationTokenSource = new CancellationTokenSource();
+        }
+
+        private async void Start()
+        {
+            if (m_isAlreadyLoaded)
+            {
+                while (GameInstance.GameInstance.Instance.IsReady == false)
+                {
+                    await Task.Yield();
+                }
+                
+                GameLevelManager.Instance.SetAsAlreadyLoadedLevel(m_gameLevelReferenceGroup);
+            }
+        }
+
+        private void OnDestroy()
+        {
+            m_cancellationTokenSource.Cancel();
         }
 
         public void UnloadLevel()

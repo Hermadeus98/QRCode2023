@@ -21,5 +21,15 @@ namespace QRCode.Engine.Core.GameLevel
         [SerializeField] private GameLevel gameLevel;
 
         public GameLevel GameLevel => gameLevel;
+
+        public static bool operator ==(GameLevelReferenceGroup a, GameLevelReferenceGroup b)
+        {
+            return a.GameLevel.name == b.GameLevel.name;
+        }
+
+        public static bool operator !=(GameLevelReferenceGroup a, GameLevelReferenceGroup b)
+        {
+            return a.GameLevel.name != b.GameLevel.name;
+        }
     }
 }

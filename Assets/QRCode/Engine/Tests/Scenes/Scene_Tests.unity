@@ -480,6 +480,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1668989483}
   - component: {fileID: 1668989484}
+  - component: {fileID: 1668989485}
   m_Layer: 0
   m_Name: GameplayComponent
   m_TagString: Untagged
@@ -580,6 +581,27 @@ MonoBehaviour:
       Entry: 8
       Data: 
   m_savedInt: 908
+--- !u!114 &1668989485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668989481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c7da0f2d323cda458ebdc8a1c9152d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
 --- !u!1 &1704014812
 GameObject:
   m_ObjectHideFlags: 0
