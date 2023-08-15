@@ -22,7 +22,7 @@ namespace QRCode.Engine.Core.Boot
 
                 if (result == BootResult.Fail)
                 {
-                    QRDebug.DebugFatal(Constants.EngineConstants.EngineLogChannels.EngineChannel, $"BootStep {bootSteps.GetType()} result with Fail status.");
+                    QRDebug.DebugFatal(Engine.Constants.EngineConstants.EngineLogChannels.EngineChannel, $"BootStep {bootSteps.GetType()} result with Fail status.");
                     return BootResult.Fail;
                 }
             }

@@ -1,4 +1,4 @@
-namespace QRCode.Engine.Core.GameLevel.GeneratedEnums
+namespace QRCode.Engine.Core.GameLevels.GeneratedEnums
 {
 
 // MACHINE-GENERATED CODE - DO NOT MODIFY BY HAND!

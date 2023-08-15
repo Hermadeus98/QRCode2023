@@ -1,24 +1,26 @@
 namespace QRCode.Editor.SceneSelector
 {
+    using UnityEditor;
+    using UnityEditor.SceneManagement;
+    using UnityEngine;
+    using UnityEngine.SceneManagement;
+    
     using System.Collections.Generic;
     using System.Linq;
-    using Engine.Core.GameLevel;
+    
+    using Engine.Core.GameLevels;
     using Engine.Core.SceneManagement;
     using Engine.Debugging;
     using Engine.Toolbox.Database;
     using Engine.Toolbox.Database.GeneratedEnums;
     using Engine.Toolbox.Extensions;
-    using UnityEditor;
-    using UnityEditor.SceneManagement;
-    using UnityEngine;
-    using UnityEngine.SceneManagement;
 
     public class SceneWindowEditor : EditorWindow
     {
         private static GameLevelDatabase m_gameLevelDatabase = null;
         private static SceneDatabase m_sceneDatabase = null;
         
-        private static Dictionary<string, GameLevelReferenceGroup> LevelReferenceGroups = null;
+        private static Dictionary<string, GameLevelData> LevelReferenceGroups = null;
         private static Dictionary<string, SceneReference> SceneReferenceGroups = null;
 
         
@@ -44,7 +46,7 @@ namespace QRCode.Editor.SceneSelector
                 return;
             }
             
-            LevelReferenceGroups = new Dictionary<string, GameLevelReferenceGroup>(m_gameLevelDatabase.GetDatabase);
+            LevelReferenceGroups = new Dictionary<string, GameLevelData>(m_gameLevelDatabase.GetDatabase);
             SceneReferenceGroups = new Dictionary<string, SceneReference>(m_sceneDatabase.GetDatabase);
         }
         
@@ -90,7 +92,7 @@ namespace QRCode.Editor.SceneSelector
                 }
                 if(GUILayout.Button($"SELECT", EditorStyles.miniButton))
                 {
-                    EditorGUIUtility.PingObject(LevelReferenceGroups[key].GameLevel.GameLevelScenes[0].editorAsset);
+                    EditorGUIUtility.PingObject(LevelReferenceGroups[key].GameLevelScenes[0].editorAsset);
                 }
                 GUILayout.EndHorizontal();
             }
@@ -130,11 +132,11 @@ namespace QRCode.Editor.SceneSelector
             }
         }
 
-        private void LoadSceneGroup(GameLevelReferenceGroup gameLevelReferenceGroup)
+        private void LoadSceneGroup(GameLevelData gameLevelReferenceGroup)
         {
-            EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(gameLevelReferenceGroup.GameLevel.GameLevelScenes[0].editorAsset), OpenSceneMode.Single);
+            EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(gameLevelReferenceGroup.GameLevelScenes[0].editorAsset), OpenSceneMode.Single);
 
-            var subScenes = gameLevelReferenceGroup.GameLevel.GameLevelScenes;
+            var subScenes = gameLevelReferenceGroup.GameLevelScenes;
             if (subScenes.IsNotNullOrEmpty())
             {
                 for (int i = 0; i < subScenes.Length; i++)

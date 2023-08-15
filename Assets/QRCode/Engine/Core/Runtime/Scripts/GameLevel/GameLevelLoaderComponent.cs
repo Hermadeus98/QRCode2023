@@ -1,9 +1,11 @@
-namespace QRCode.Engine.Core.GameLevel
+namespace QRCode.Engine.Core.GameLevels
 {
-    using Toolbox;
-    using Sirenix.OdinInspector;
     using UnityEngine;
     using UnityEngine.Events;
+    
+    using Sirenix.OdinInspector;
+    
+    using Toolbox;
 
     public class GameLevelLoaderComponent : SerializedMonoBehaviour
     {

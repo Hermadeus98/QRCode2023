@@ -13,6 +13,7 @@ namespace QRCode.Engine.Core.SceneManagement
     using UnityEngine.ResourceManagement.AsyncOperations;
     using UnityEngine.ResourceManagement.ResourceProviders;
     using UnityEngine.SceneManagement;
+    using Constants = Toolbox.Constants;
 
     public static class SceneManagementService
     {

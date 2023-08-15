@@ -10,6 +10,7 @@ namespace QRCode.Engine.Core.Inputs
     using Toolbox;
     using Debugging;
     using Toolbox.Database;
+    using Constants = Toolbox.Constants;
 
     [CreateAssetMenu(menuName = Constants.DatabasePath.Inputs + "Input Maps Database", fileName = "DB_InputMaps")]
     public class InputMapDatabase : ScriptableObjectDatabase<InputMap>

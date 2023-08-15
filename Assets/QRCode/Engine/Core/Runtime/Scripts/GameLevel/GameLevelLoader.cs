@@ -1,8 +1,7 @@
-namespace QRCode.Engine.Core.GameLevel
+namespace QRCode.Engine.Core.GameLevels
 {
     using System;
     using System.Threading.Tasks;
-    using Framework;
     using GeneratedEnums;
     using UI.LoadingScreen.GeneratedEnums;
     using UnityEngine;

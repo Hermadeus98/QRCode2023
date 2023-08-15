@@ -1,14 +1,20 @@
 namespace QRCode.Engine.Toolbox.GameConfigs
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using Toolbox;
-    using Sirenix.OdinInspector;
-    using Toolbox.Pattern.Singleton;
 #if UNITY_EDITOR
     using UnityEditor;
 #endif
+    using System;
     using UnityEngine;
+    
+    using System.Collections.Generic;
+    using System.Linq;
+    
+    using Sirenix.OdinInspector;
+    
+    using Toolbox;
+    using Pattern.Singleton;
+    using Object = UnityEngine.Object;
+
 
     [CreateAssetMenu(menuName = Constants.GameConfigs.GameConfigsPath)]
     public class GameConfigs : SingletonScriptableObject<GameConfigs>
@@ -19,6 +25,11 @@ namespace QRCode.Engine.Toolbox.GameConfigs
         public T GetCatalogOfType<T>() where T : GameConfigBase
         {
             return allGameConfigs.OfType<T>().FirstOrDefault();
+        }
+
+        public GameConfigBase GetCatalogOfType(Type type)
+        {
+            return allGameConfigs.First(w => w.GetType() == type);
         }
         
         

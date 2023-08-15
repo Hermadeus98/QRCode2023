@@ -1,16 +1,18 @@
 namespace QRCode.Engine.Game.Inputs
 {
-    using System.Threading.Tasks;
-    using Core.Inputs;
-    using Toolbox;
-    using Debugging;
-    using Framework;
-    using Sirenix.OdinInspector;
-    using Toolbox.Database;
-    using Toolbox.Database.GeneratedEnums;
     using UnityEngine;
     using UnityEngine.InputSystem;
     using UnityEngine.InputSystem.Users;
+    
+    using System.Threading.Tasks;
+    
+    using Sirenix.OdinInspector;
+    
+    using Debugging;
+    using Core.Inputs;
+    using Toolbox.Database;
+    using Toolbox.Database.GeneratedEnums;
+    using Constants = Toolbox.Constants;
 
     public class InputHintBase : SerializedMonoBehaviour
     {

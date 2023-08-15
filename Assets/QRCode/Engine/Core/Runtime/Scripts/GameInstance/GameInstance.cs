@@ -12,6 +12,7 @@ namespace QRCode.Engine.Core.GameInstance
     using SceneManagement;
     using SceneManagement.GeneratedEnum;
     using Toolbox.Optimization;
+    using Constants = Toolbox.Constants;
 
     /// <summary>
     /// <see cref="GameInstance"/> represents the entry point of the game logic.

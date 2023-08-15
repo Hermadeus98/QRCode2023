@@ -1,15 +1,18 @@
 namespace QRCode.Engine.Game.UI.LoadingScreen
 {
+    using UnityEngine;
+    
     using System.Threading.Tasks;
-    using Core.GameLevel;
+    
+    using Sirenix.OdinInspector;
+    using TMPro;
+    
+    using Core.GameLevels;
     using Core.UI;
     using Core.UI.LoadingScreen;
     using Debugging;
     using ProgressBar;
-    using Sirenix.OdinInspector;
-    using TMPro;
-    using UnityEngine;
-    using Toolbox;
+    using Constants = Toolbox.Constants;
 
     public class LoadingScreen : UIView, ILoadingScreen
     {

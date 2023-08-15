@@ -14,6 +14,7 @@ namespace QRCode.Engine.Core.RemoteConfig
     using Managers;
     using Toolbox;
     using Toolbox.Pattern.Singleton;
+    using Constants = Toolbox.Constants;
 
     public class RemoteConfigManager : MonoBehaviourSingleton<RemoteConfigManager>, IManager
     {

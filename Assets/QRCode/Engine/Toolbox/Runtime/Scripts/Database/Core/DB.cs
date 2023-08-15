@@ -11,6 +11,7 @@ namespace QRCode.Engine.Toolbox.Database
     using Toolbox;
     using GeneratedEnums;
     using Pattern.Singleton;
+    using Constants = Toolbox.Constants;
 
     [CreateAssetMenu(menuName = Constants.DatabasePath.BasePath + "DB", fileName = "DB")]
     public class DB : SingletonScriptableObject<DB>, IDatabase

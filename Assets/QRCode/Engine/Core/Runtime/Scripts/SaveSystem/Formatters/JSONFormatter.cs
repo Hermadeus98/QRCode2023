@@ -1,12 +1,13 @@
 ﻿namespace QRCode.Engine.Core.SaveSystem.Formatters
 {
+    using UnityEngine;
+
     using System;
     using System.IO;
     using System.Threading.Tasks;
-    using Toolbox;
-    using Engine.Debugging;
-    using Framework;
-    using UnityEngine;
+    
+    using Debugging;
+    using Constants = Toolbox.Constants;
 
     public class JSONFormatter : IFormatter
     {

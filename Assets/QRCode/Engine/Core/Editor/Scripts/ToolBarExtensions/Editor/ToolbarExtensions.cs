@@ -4,11 +4,13 @@ namespace UnityToolbarExtender
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using QRCode.Engine.Core.GameLevel;
+    
+    using QRCode.Engine.Core.GameLevels;
     using QRCode.Engine.Core.SceneManagement;
     using QRCode.Engine.Toolbox.Database;
     using QRCode.Engine.Toolbox.Database.GeneratedEnums;
     using QRCode.Engine.Toolbox.Extensions;
+    
     using UnityEditor;
     using UnityEditor.Localization;
     using UnityEditor.Localization.Plugins.Google;
@@ -162,7 +164,7 @@ namespace UnityToolbarExtender
             }
         }
         
-        private static void TryLoadSceneGroup(GameLevelReferenceGroup gameLevelReferenceGroup)
+        private static void TryLoadSceneGroup(GameLevelData gameLevelReferenceGroup)
         {
             var openedScenes = new List<Scene>();
                     
@@ -184,11 +186,11 @@ namespace UnityToolbarExtender
             }
         }
 
-        private static void LoadSceneGroup(GameLevelReferenceGroup gameLevelReferenceGroup)
+        private static void LoadSceneGroup(GameLevelData gameLevelReferenceGroup)
         {
-            EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(gameLevelReferenceGroup.GameLevel.GameLevelScenes[0].editorAsset), OpenSceneMode.Single);
+            EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(gameLevelReferenceGroup.GameLevelScenes[0].editorAsset), OpenSceneMode.Single);
 
-            var subScenes = gameLevelReferenceGroup.GameLevel.GameLevelScenes;
+            var subScenes = gameLevelReferenceGroup.GameLevelScenes;
             if (subScenes.IsNotNullOrEmpty())
             {
                 for (int i = 0; i < subScenes.Length; i++)

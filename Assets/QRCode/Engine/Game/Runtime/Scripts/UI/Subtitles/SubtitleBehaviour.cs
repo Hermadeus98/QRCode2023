@@ -4,6 +4,7 @@ namespace QRCode.Engine.Game.Subtitles
     using UnityEngine;
     using UnityEngine.Playables;
     using Toolbox;
+    using Constants = Toolbox.Constants;
 
     public class SubtitleBehaviour : PlayableBehaviour
     {

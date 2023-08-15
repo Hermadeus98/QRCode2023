@@ -1,4 +1,4 @@
-namespace QRCode.Toolbox.Editor.Database
+namespace QRCode.Engine.Toolbox.Editor.Database
 {
     using System.Collections.Generic;
     using System.Linq;

@@ -14,6 +14,7 @@
     using Toolbox;
     using Toolbox.Optimization;
     using Toolbox.Pattern.Singleton;
+    using Constants = Toolbox.Constants;
 
     public class SaveManager : MonoBehaviourSingleton<SaveManager>, ISaveService, IManager, IDeletable
     {

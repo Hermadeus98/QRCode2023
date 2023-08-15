@@ -6,6 +6,7 @@
     using Formatters;
     using Toolbox;
     using Engine.Debugging;
+    using Constants = Toolbox.Constants;
 
     /// <summary>
     /// Default File Data Handler, used for PC save and Editor Save.

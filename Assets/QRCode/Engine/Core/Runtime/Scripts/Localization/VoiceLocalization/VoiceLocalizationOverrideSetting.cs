@@ -1,18 +1,21 @@
 namespace QRCode.Engine.Core.Localization
 {
     using UnityEngine.Localization.Settings;
-    using System.Threading.Tasks;
-    using Toolbox;
-    using Engine.Core.GameInstance;
-    using Engine.Core.UserSettings;
-    using Engine.Core.UserSettings.Events.SoundSettings;
-    using Framework;
-    using Sirenix.OdinInspector;
-    using Toolbox.Database;
-    using Toolbox.Database.GeneratedEnums;
     using UnityEngine;
     using UnityEngine.Localization;
     using UnityEngine.Localization.Components;
+    
+    using System.Threading.Tasks;
+    
+    using Sirenix.OdinInspector;
+    
+    using Toolbox;
+    using GameInstance;
+    using UserSettings;
+    using UserSettings.Events.SoundSettings;
+    using Toolbox.Database;
+    using Toolbox.Database.GeneratedEnums;
+    
 
     [RequireComponent(typeof(LocalizeAudioClipEvent))]
     public class VoiceLocalizationOverrideSetting : MonoBehaviour

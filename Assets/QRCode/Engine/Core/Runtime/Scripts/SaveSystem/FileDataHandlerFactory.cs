@@ -1,7 +1,5 @@
 namespace QRCode.Engine.Core.SaveSystem
 {
-    using Framework;
-
     public static class FileDataHandlerFactory
     {
         public static IFileDataHandler CreateFileDataHandler(string fullPath, string fullFileName)

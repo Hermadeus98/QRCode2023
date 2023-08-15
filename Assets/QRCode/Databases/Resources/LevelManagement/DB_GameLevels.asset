@@ -16,8 +16,8 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 11400000, guid: 0ac4ff0e348dc594ea282856cc28cf9c, type: 2}
-    - {fileID: 11400000, guid: 29efed76a1be16c4b824c3b38f458f78, type: 2}
+    - {fileID: 11400000, guid: 5bd02a7eafe71d94b867ff923eb43a20, type: 2}
+    - {fileID: 11400000, guid: c3c58268a4b9ec145802c58ee82764d1, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -25,7 +25,7 @@ MonoBehaviour:
     SerializationNodes:
     - Name: m_database
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[QRCode.Engine.Core.GameLevel.GameLevelReferenceGroup,
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[QRCode.Engine.Core.GameLevels.GameLevelData,
         QRCode.Engine]], mscorlib
     - Name: comparer
       Entry: 7
@@ -44,14 +44,8 @@ MonoBehaviour:
       Entry: 1
       Data: GameLevel_TestA
     - Name: $v
-      Entry: 7
-      Data: QRCode.Engine.Core.GameLevel.GameLevelReferenceGroup, QRCode.Engine
-    - Name: gameLevel
       Entry: 10
       Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -62,14 +56,8 @@ MonoBehaviour:
       Entry: 1
       Data: GameLevel_TestB
     - Name: $v
-      Entry: 7
-      Data: QRCode.Engine.Core.GameLevel.GameLevelReferenceGroup, QRCode.Engine
-    - Name: gameLevel
       Entry: 10
       Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
     - Name: 
       Entry: 8
       Data: 

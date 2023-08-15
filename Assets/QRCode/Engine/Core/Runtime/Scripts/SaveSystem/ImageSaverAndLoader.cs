@@ -6,6 +6,7 @@
     using Toolbox;
     using Engine.Debugging;
     using UnityEngine;
+    using Constants = Toolbox.Constants;
 
     public class ImageSaver
     {

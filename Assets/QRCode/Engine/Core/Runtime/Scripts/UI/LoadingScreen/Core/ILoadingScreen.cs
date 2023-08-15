@@ -1,7 +1,7 @@
 namespace QRCode.Engine.Core.UI.LoadingScreen
 {
     using System.Threading.Tasks;
-    using GameLevel;
+    using GameLevels;
 
     public interface ILoadingScreen
     {

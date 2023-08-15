@@ -8,6 +8,7 @@
     using Debugging;
     using Toolbox;
     using Toolbox.Pattern.Singleton;
+    using Constants = Toolbox.Constants;
 
     public class UserSettingsManager : MonoBehaviourSingleton<UserSettingsManager>, IUserSettingsService, IManager
     {

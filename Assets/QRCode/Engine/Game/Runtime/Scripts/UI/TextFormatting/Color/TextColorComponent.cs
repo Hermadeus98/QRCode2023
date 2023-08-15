@@ -12,9 +12,9 @@
         [TitleGroup(Constants.InspectorGroups.References)]
         [SerializeField] private TextMeshProUGUI m_textMeshProUGUI = null;
         
-        [TitleGroup(Constants.InspectorGroups.Settings)] 
+        [TitleGroup(Constants.InspectorGroups.Settings)] [GameConfigKey(typeof(TextGameConfig))]
         [SerializeField] private string m_textRuleSetName = "Default";
-
+        
         private void Start()
         {
             m_textMeshProUGUI.color = GetColor();

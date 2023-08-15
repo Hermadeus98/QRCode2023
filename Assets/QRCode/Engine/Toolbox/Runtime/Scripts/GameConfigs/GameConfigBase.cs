@@ -1,6 +1,7 @@
 namespace QRCode.Engine.Toolbox.GameConfigs
 {
     using System.Collections.Generic;
+    using System.Linq;
     using Toolbox;
     using Sirenix.OdinInspector;
     using UnityEditor;
@@ -8,7 +9,7 @@ namespace QRCode.Engine.Toolbox.GameConfigs
 
     public abstract class GameConfigBase : SerializedScriptableObject
     {
-        
+        public abstract List<GameConfigDataBase> GetGameConfigData();
     }
     
     public abstract class GameConfigBase<T> : GameConfigBase where T : GameConfigDataBase
@@ -18,9 +19,22 @@ namespace QRCode.Engine.Toolbox.GameConfigs
 
         [TitleGroup("Game Configs")] [SerializeField][InfoBox("@this.GameConfigDescription")]
         private List<T> m_catalogData = new List<T>();
-        
+
         protected abstract string GameConfigDescription { get; }
-        
+        public List<T> GameConfigData => m_catalogData;
+
+        public override List<GameConfigDataBase> GetGameConfigData()
+        {
+            var list = new List<GameConfigDataBase>();
+
+            for (int i = 0; i < m_catalogData.Count; i++)
+            {
+                list.Add(m_catalogData[i]);
+            }
+
+            return list;
+        }
+
         public T GetDataFromId(string entry)
         {
             for (int i = 0; i < m_catalogData.Count; i++)

@@ -2,7 +2,6 @@ namespace QRCode.Engine.Core.Boot
 {
     using GameInstance;
     using UnityEngine;
-    using GameInstance = QRCode.Engine.Core.GameInstance.GameInstance;
     
     /// <summary>
     /// <see cref="Bootstrap"/> represents the first entry point of the application.

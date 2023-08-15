@@ -1,4 +1,4 @@
-namespace QRCode.Engine.Core.GameLevel
+namespace QRCode.Engine.Core.GameLevels
 {
     using Toolbox;
     using Sirenix.OdinInspector;

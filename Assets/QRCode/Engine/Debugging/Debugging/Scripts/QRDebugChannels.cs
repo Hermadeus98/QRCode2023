@@ -4,13 +4,12 @@ namespace QRCode.Engine.Debugging
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Framework.Debugging;
     using Sirenix.OdinInspector;
 #if UNITY_EDITOR
     using UnityEditor;
 #endif
     
-    [CreateAssetMenu(menuName = K.DebuggingPath.ChannelDebugPath, fileName = "Channels Settings")]
+    [CreateAssetMenu(menuName = Constants.DebuggingPath.ChannelDebugPath, fileName = "Channels Settings")]
     public class QRDebugChannels : SerializedScriptableObject
     {
         private static QRDebugChannels _instance;

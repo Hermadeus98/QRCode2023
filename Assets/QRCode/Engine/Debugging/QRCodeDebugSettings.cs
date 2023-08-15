@@ -8,7 +8,7 @@ namespace QRCode.Engine.Debugging
     [CreateAssetMenu(fileName = "Channels Settings", menuName = "QRCode/Debugging/Channels Settings Handler")]
     public class QRCodeDebugSettings : Settings<QRCodeDebugSettings>
     {
-        [TitleGroup(Constants.InspectorGroups.Settings)]
+        [TitleGroup(Toolbox.Constants.InspectorGroups.Settings)]
         [SerializeField][InlineEditor(InlineEditorModes.FullEditor)] private QRDebugChannels m_debugChannels = null;
 
         public QRDebugChannels DebugChannels => m_debugChannels;

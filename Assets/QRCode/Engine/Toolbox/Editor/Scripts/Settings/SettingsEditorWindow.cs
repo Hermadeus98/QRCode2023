@@ -1,4 +1,4 @@
-namespace QRCode.Toolbox.Editor.Settings
+namespace QRCode.Engine.Toolbox.Editor.Settings
 {
     using System.Collections.Generic;
     using System.Linq;

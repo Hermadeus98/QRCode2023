@@ -4,6 +4,7 @@ namespace QRCode.Engine.Toolbox.Pattern.Service
     using System.Collections.Generic;
     using Engine.Debugging;
     using Toolbox;
+    using Constants = Toolbox.Constants;
 
     public abstract class ServiceLocatorBase{}
     

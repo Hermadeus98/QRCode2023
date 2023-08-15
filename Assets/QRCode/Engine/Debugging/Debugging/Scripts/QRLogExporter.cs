@@ -1,4 +1,4 @@
-﻿namespace QQRCode.Engine.Debugging
+﻿namespace QRCode.Engine.Debugging
 {
     using System;
     using System.Collections.Generic;

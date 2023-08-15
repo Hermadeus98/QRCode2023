@@ -13,14 +13,14 @@ namespace QRCode.Engine.Core.GameState
         
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            QRDebug.DebugInfo(Constants.EngineConstants.EngineLogChannels.GameStateStatusChannel, $"Enter in : {m_gameStateName}");
+            QRDebug.DebugInfo(Engine.Constants.EngineConstants.EngineLogChannels.GameStateStatusChannel, $"Enter in : {m_gameStateName}");
             base.OnStateEnter(animator, stateInfo, layerIndex);
             OnEnter(animator);
         }
 
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            QRDebug.DebugInfo(Constants.EngineConstants.EngineLogChannels.GameStateStatusChannel, $"Exit : {m_gameStateName}");
+            QRDebug.DebugInfo(Engine.Constants.EngineConstants.EngineLogChannels.GameStateStatusChannel, $"Exit : {m_gameStateName}");
 
             base.OnStateExit(animator, stateInfo, layerIndex);
             OnExit(animator);

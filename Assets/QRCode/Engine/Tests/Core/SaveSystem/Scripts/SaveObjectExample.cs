@@ -6,6 +6,7 @@ namespace QRCode.Engine.Core.SaveSystem.Tests
     using Debugging;
     using Sirenix.OdinInspector;
     using UnityEngine;
+    using Constants = Toolbox.Constants;
 
     public class SaveObjectExample : SerializedMonoBehaviour, ILoadableObject, ISavableObject
     {

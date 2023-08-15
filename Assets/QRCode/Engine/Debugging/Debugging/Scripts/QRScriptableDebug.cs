@@ -1,10 +1,9 @@
 namespace QRCode.Engine.Debugging
 {
-    using Framework.Debugging;
     using UnityEngine;
     using UnityEngine.Scripting;
 
-    [CreateAssetMenu(menuName = K.DebuggingPath.ScriptableDebugPath, fileName = "Scriptable Object Debugger")]
+    [CreateAssetMenu(menuName = Constants.DebuggingPath.ScriptableDebugPath, fileName = "Scriptable Object Debugger")]
     public class QRScriptableDebug : ScriptableObject
     {
         

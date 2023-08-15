@@ -3,7 +3,6 @@ namespace QRCode.Engine.Core.UI.Animations
     using System;
     using System.Threading;
     using System.Threading.Tasks;
-    using Framework;
 
     public class UIAnimation
     {

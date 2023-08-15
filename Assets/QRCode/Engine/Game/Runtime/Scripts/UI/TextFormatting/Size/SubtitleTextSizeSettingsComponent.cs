@@ -16,7 +16,7 @@
         [TitleGroup(Constants.InspectorGroups.References)]
         [SerializeField] private TextMeshProUGUI m_textMeshProUGUI = null;
 
-        [TitleGroup(Constants.InspectorGroups.Settings)] [SerializeField]
+        [TitleGroup(Constants.InspectorGroups.Settings)] [SerializeField][GameConfigKey(typeof(TextGameConfig))]
         private string m_textRuleSetName = "Default";
 
         private GameConfigs m_gameConfigs = null;

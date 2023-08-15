@@ -1,6 +1,6 @@
-﻿namespace QRCode.Framework.Debugging
+﻿namespace QRCode.Engine.Debugging
 {
-    public static partial class K
+    public static partial class Constants
     {
         public static class DebuggingPath
         {

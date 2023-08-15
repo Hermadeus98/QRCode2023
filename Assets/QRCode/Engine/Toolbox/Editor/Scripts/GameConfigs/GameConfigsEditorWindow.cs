@@ -1,4 +1,4 @@
-namespace QRCode.Toolbox.Editor.GameConfigs
+namespace QRCode.Engine.Toolbox.Editor.GameConfigs
 {
     using System.Collections.Generic;
     using Engine.Toolbox.GameConfigs;

@@ -1,6 +1,6 @@
 ﻿namespace QRCode.Engine.Core.GameState
 {
-    using GameLevel;
+    using GameLevels;
     using UnityEngine;
 
     public class GameStateExample : GameStateBase

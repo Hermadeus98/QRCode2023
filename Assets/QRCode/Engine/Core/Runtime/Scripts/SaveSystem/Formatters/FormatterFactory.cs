@@ -1,7 +1,6 @@
 ﻿namespace QRCode.Engine.Core.SaveSystem.Formatters
 {
     using System;
-    using Framework;
 
     public static class FormatterFactory
     {

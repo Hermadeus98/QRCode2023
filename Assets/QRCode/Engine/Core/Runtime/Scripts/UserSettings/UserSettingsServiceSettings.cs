@@ -8,6 +8,7 @@ namespace QRCode.Engine.Core.UserSettings
     using UnityEngine;
     using Toolbox;
     using Toolbox.Settings;
+    using Constants = Toolbox.Constants;
 
     [CreateAssetMenu(menuName = UserSettingsConstants.UserSettings.UserSettingsSettingsPath, fileName = "STG_UserSettingsSettings")]
     public class UserSettingsServiceSettings : Settings<UserSettingsServiceSettings>

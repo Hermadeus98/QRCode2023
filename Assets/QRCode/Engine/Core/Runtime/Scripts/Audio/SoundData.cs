@@ -6,6 +6,7 @@ namespace QRCode.Engine.Core.Audio
     using UnityEngine.Audio;
     using Toolbox.Extensions;
     using Toolbox;
+    using Constants = Toolbox.Constants;
 
     [CreateAssetMenu(menuName = AudioConstants.Audio.SoundDataCreateAssetMenuPath, fileName = "New Sound Data")]
     public class SoundData : SerializedScriptableObject

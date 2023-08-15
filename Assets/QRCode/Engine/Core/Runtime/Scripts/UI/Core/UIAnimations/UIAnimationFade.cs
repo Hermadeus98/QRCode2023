@@ -1,13 +1,16 @@
 namespace QRCode.Engine.Core.UI.Animations
 {
+    using UnityEngine;
+    
     using System;
     using System.Threading;
     using System.Threading.Tasks;
-    using DG.Tweening;
-    using Framework;
-    using Toolbox;
+    
     using Sirenix.OdinInspector;
-    using UnityEngine;
+    
+    using DG.Tweening;
+    
+    using Toolbox;
 
     [Serializable]
     public class UIAnimationFade : UIAnimation

@@ -1,17 +1,19 @@
 namespace QRCode.Engine.Core.Inputs
 {
-    using System.Linq;
-    using Toolbox;
-    using Debugging;
-    using Framework;
-    using GeneratedEnums;
-    using Sirenix.OdinInspector;
-    using Toolbox.Database;
-    using Toolbox.Database.GeneratedEnums;
-    using Toolbox.Pattern.Singleton;
     using UnityEngine;
     using UnityEngine.InputSystem;
     using UnityEngine.InputSystem.Users;
+    
+    using System.Linq;
+    
+    using Sirenix.OdinInspector;
+
+    using Debugging;
+    using GeneratedEnums;
+    using Toolbox.Database;
+    using Toolbox.Database.GeneratedEnums;
+    using Toolbox.Pattern.Singleton;
+    using Constants = Toolbox.Constants;
 
     public class InputManager : MonoBehaviourSingleton<InputManager>, IInputManagementService
     {

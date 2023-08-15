@@ -39,7 +39,7 @@ namespace QRCode.Engine.Core.GameMode
                 }
             }
             
-            QRDebug.DebugFatal(Constants.EngineConstants.EngineLogChannels.EngineChannel, $"Impossible to find {typeof(T)} in this game mode..");
+            QRDebug.DebugFatal(Engine.Constants.EngineConstants.EngineLogChannels.EngineChannel, $"Impossible to find {typeof(T)} in this game mode..");
             return default(T);
         }
     }

@@ -1,7 +1,6 @@
-namespace QRCode.Framework
+namespace QRCode.Engine.Core.Audio
 {
-    using Engine.Core.Audio;
-    using Engine.Toolbox.Pattern.Service;
+    using Toolbox.Pattern.Service;
     using Sirenix.OdinInspector;    
     using UnityEngine;
 

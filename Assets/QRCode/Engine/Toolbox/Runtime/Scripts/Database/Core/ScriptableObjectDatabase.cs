@@ -9,6 +9,7 @@ namespace QRCode.Engine.Toolbox.Database
 
     using Debugging;
     using Toolbox;
+    using Constants = Toolbox.Constants;
 
     public abstract class ScriptableDatabaseBase : SerializedScriptableObject, IDatabase
     {

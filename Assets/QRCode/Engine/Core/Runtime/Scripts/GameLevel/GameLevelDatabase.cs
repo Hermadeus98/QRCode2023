@@ -1,4 +1,4 @@
-namespace QRCode.Engine.Core.GameLevel
+namespace QRCode.Engine.Core.GameLevels
 {
     using UnityEngine;
 
@@ -10,26 +10,8 @@ namespace QRCode.Engine.Core.GameLevel
     using Toolbox.Database;
 
     [CreateAssetMenu(menuName = Constants.DatabasePath.BasePath + "Game Level Database", fileName = "DB_GameLevelDatabase")]
-    public class GameLevelDatabase : ScriptableObjectDatabase<GameLevelReferenceGroup>
+    public class GameLevelDatabase : ScriptableObjectDatabase<GameLevelData>
     {
         protected override string m_databaseInformation { get => "Game Level represents a physical level in the game. Only one level can be loaded."; }
-    }
-    
-    [Serializable][DrawWithUnity]
-    public struct GameLevelReferenceGroup
-    {
-        [SerializeField] private GameLevel gameLevel;
-
-        public GameLevel GameLevel => gameLevel;
-
-        public static bool operator ==(GameLevelReferenceGroup a, GameLevelReferenceGroup b)
-        {
-            return a.GameLevel.name == b.GameLevel.name;
-        }
-
-        public static bool operator !=(GameLevelReferenceGroup a, GameLevelReferenceGroup b)
-        {
-            return a.GameLevel.name != b.GameLevel.name;
-        }
     }
 }

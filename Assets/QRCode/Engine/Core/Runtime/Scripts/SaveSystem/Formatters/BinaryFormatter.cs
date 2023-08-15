@@ -8,6 +8,7 @@
     using Engine.Debugging;
     using Surrogates;
     using UnityEngine;
+    using Constants = Toolbox.Constants;
 
     public class BinaryFormatter : IFormatter
     {

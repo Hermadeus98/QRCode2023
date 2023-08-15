@@ -1,15 +1,17 @@
 ﻿namespace QRCode.Engine.Core.UserSettings
 {
+    using UnityEngine;
+    
     using System;
-    using Framework;
+    
+    using Sirenix.OdinInspector;
+    
     using Localization.GeneratedEnums;
     using Settings.ControlsSettings;
     using Settings.GameplaySettings;
     using Settings.GraphicsSettings;
     using Settings.InterfaceSettings;
     using Settings.ScreenSettings;
-    using Sirenix.OdinInspector;
-    using UnityEngine;
 
     [Serializable]
     public class UserSettingsData
