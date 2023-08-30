@@ -68,9 +68,9 @@ namespace QRCode.Engine.Core.GameLevels
             GameInstance.GameInstance.Instance.GameInstanceEvents.OnLevelUnloaded();    
         }
         
-        public async Task LoadLevel(CancellationToken cancellationToken, IProgress<GameLevelLoadProgressionInfos> progress)
+        public async Task LoadLevel(CancellationToken cancellationToken, IProgress<GameLevelLoadingInfo> progress)
         {
-            var sceneLoadableProgressionInfos = new GameLevelLoadProgressionInfos();
+            var sceneLoadableProgressionInfos = new GameLevelLoadingInfo();
             
             var currentSceneLoadableProgression = 0f;
             var progression = new Progress<float>(value =>
@@ -85,7 +85,7 @@ namespace QRCode.Engine.Core.GameLevels
                 var onLoading = new Action(() =>
                 {
                     sceneLoadableProgressionInfos.LoadingProgressPercent = (index + currentSceneLoadableProgression) / sceneLoadableCount;
-                    sceneLoadableProgressionInfos.ProgressionDescription = m_gameLevelModules[i].GameLevelLoadProgressionInfos.ProgressionDescription;
+                    sceneLoadableProgressionInfos.ProgressionDescription = m_gameLevelModules[i].GameLevelLoadingInfo.ProgressionDescription;
                     progress.Report(sceneLoadableProgressionInfos);
                 });
                 
@@ -142,7 +142,7 @@ namespace QRCode.Engine.Core.GameLevels
     }
     
     [Serializable]
-    public struct GameLevelLoadProgressionInfos
+    public struct GameLevelLoadingInfo
     {
         [SerializeField] private LocalizedString m_loadingProgressionDescription;
         [SerializeField][ReadOnly] private float m_loadingProgressPercent;

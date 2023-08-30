@@ -151,5 +151,10 @@ namespace QRCode.Engine.Core.RemoteConfig
         {
             m_remoteConfigEvents.RaiseOnValueChangedEvent(remoteConfigValue);
         }
+
+        public void Delete()
+        {
+            
+        }
     }
 }

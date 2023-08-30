@@ -166,6 +166,10 @@ MonoBehaviour:
     m_Address: Assets/QRCode/Prefabs/Managers/MANAGER - RemoteConfig.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 43efd7077a2b568499c320f23944f992
+    m_Address: Assets/QRCode/Prefabs/Managers/MANAGER - Scene.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 383727ea88213544abed9fa8aa57676f, type: 2}
   m_SchemaSet:

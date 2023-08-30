@@ -1,7 +1,7 @@
 namespace QRCode.Engine.Core.GameLevels
 {
-    using Toolbox.Initialization;
-    using Toolbox.Optimization;
+    using Engine.Toolbox.Initialization;
+    using Engine.Toolbox.Optimization;
 
     public interface IGameLevelModule : IDeletable, IInitialize, IGameLevelLoadable
     {

@@ -26,6 +26,16 @@ namespace QRCode.Engine.Core.GameState
         {
             return Task.CompletedTask;
         }
+
+        private void OnDestroy()
+        {
+            Delete();
+        }
+
+        public void Delete()
+        {
+            m_gameStateAnimator = null;
+        }
         #endregion
 
         #region Publics

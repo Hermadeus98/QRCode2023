@@ -16,8 +16,10 @@ namespace QRCode.Engine.Core.SceneManagement
     [Serializable] [DrawWithUnity]
     public struct SceneReference
     {
+        [SerializeField] private string m_sceneName;
         [SerializeField] private AssetReference m_scene;
 
+        public string SceneName => m_sceneName;
         public AssetReference Scene => m_scene;
     }
 }

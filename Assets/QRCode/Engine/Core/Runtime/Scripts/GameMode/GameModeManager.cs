@@ -3,8 +3,8 @@
     using System.Threading;
     using System.Threading.Tasks;
     
-    using Managers;
-    using Toolbox.Pattern.Singleton;
+    using Engine.Core.Managers;
+    using Engine.Toolbox.Pattern.Singleton;
 
     public class GameModeManager : MonoBehaviourSingleton<GameModeManager>, IManager
     {
@@ -27,6 +27,11 @@
                 gameMode = m_currentGameMode as T;
                 return true;
             }
+        }
+
+        public void Delete()
+        {
+            
         }
     }
 }

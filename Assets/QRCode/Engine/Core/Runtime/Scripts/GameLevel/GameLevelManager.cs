@@ -13,18 +13,18 @@ namespace QRCode.Engine.Core.GameLevels
     
     using Sirenix.OdinInspector;
 
-    using Debugging;
-    using Managers;
-    using GeneratedEnums;
-    using SaveSystem;
-    using Toolbox.Database;
-    using Toolbox.Database.GeneratedEnums;
-    using Toolbox.Extensions;
-    using Toolbox.Pattern.Singleton;
-    using UI;
-    using UI.LoadingScreen;
-    using UI.LoadingScreen.GeneratedEnums;
-    using Constants = Toolbox.Constants;
+    using Engine.Debugging;
+    using Engine.Core.Managers;
+    using Engine.Core.GameLevels.GeneratedEnums;
+    using Engine.Core.SaveSystem;
+    using Engine.Toolbox.Database;
+    using Engine.Toolbox.Database.GeneratedEnums;
+    using Engine.Toolbox.Extensions;
+    using Engine.Toolbox.Pattern.Singleton;
+    using Engine.Core.UI;
+    using Engine.Core.UI.LoadingScreen;
+    using Engine.Core.UI.LoadingScreen.GeneratedEnums;
+    using Constants = Engine.Toolbox.Constants;
 
     /// <summary>
     /// The <see cref="GameLevelManager"/> will manage the loading/unloading and initialization of game levels.
@@ -169,7 +169,6 @@ namespace QRCode.Engine.Core.GameLevels
         /// <summary>
         /// Call this function to change active level. Only one level can be loaded one at one, so, if a level is already loaded, it will be unloaded.
         /// </summary>
-        /// <returns></returns>
         public async Task<SceneLoadingInfo> ChangeLevel(DB_GameLevelsEnum gameLevelToLoad, DB_LoadingScreenEnum loadingScreenEnum, bool forceReload = false, bool activateOnLoad = true, int priority = 100)
         {
             if (m_isLoading)
@@ -457,7 +456,7 @@ namespace QRCode.Engine.Core.GameLevels
             {
                 m_sceneLoadingInfo.SceneLoadingStatus = SceneLoadingStatus.InitializationIsLoading;
 
-                var progression = new Progress<GameLevelLoadProgressionInfos>(value =>
+                var progression = new Progress<GameLevelLoadingInfo>(value =>
                 {
                     m_sceneLoadingInfo.GlobalProgress = .5f + (value.LoadingProgressPercent / 2f);
                     m_sceneLoadingInfo.ProgressDescription = value.ProgressionDescription.GetLocalizedString();
@@ -501,6 +500,11 @@ namespace QRCode.Engine.Core.GameLevels
         }
         #endregion Privates
         #endregion METHODS
+
+        public void Delete()
+        {
+            
+        }
     }
 
     [Serializable]

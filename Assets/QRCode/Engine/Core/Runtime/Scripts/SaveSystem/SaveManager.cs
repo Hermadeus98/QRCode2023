@@ -114,12 +114,7 @@
             {
                 QRDebug.Debug(Constants.DebuggingChannels.SaveManager, $"No {nameof(m_gameData)} was found. Initializing default values.");
                 await NewGame();
-            }
-            
-#if UNITY_EDITOR && DONT_USE_BOOTSTRAP_DEBUG
-            //This delay should not exist in build, the bootstrap must be finish before launch first game scene.
-            await Task.Delay(500);
-#endif
+            }   
             
             Load.Current.LoadObjects();
             m_onEndLoad?.Invoke();

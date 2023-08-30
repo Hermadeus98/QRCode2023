@@ -1,12 +1,12 @@
 namespace QRCode.Engine.Core.GameInstance
 {
+    using System;
     using UnityEngine;
     using UnityEngine.AddressableAssets;
     
     using System.Threading.Tasks;
     using System.Threading;
 
-    using Toolbox;
     using Debugging;
     using Managers;
     using SceneManagement;
@@ -125,7 +125,7 @@ namespace QRCode.Engine.Core.GameInstance
 
         private async Task InstantiateScenes()
         {
-            await SceneManagementService.LoadScene(DB_ScenesEnum.Scene_UI);
+            await SceneManager.Instance.LoadScene(DB_ScenesEnum.Scene_UI, new Progress<SceneLoadingInfo>());
         }
         
         private async Task InstantiateManagers()

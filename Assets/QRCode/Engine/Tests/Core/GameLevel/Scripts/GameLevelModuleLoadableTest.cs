@@ -1,10 +1,12 @@
 namespace QRCode.Engine.Core.GameLevel.Tests
 {
+    using UnityEngine;
+    
     using System;
     using System.Threading;
     using System.Threading.Tasks;
-    using GameLevels;
-    using UnityEngine;
+    
+    using Engine.Core.GameLevels;
 
     public class GameLevelModuleLoadableTest : GameLevelModuleBase<GameLevelModuleLoadableTestData>, IGameLevelModule
     {
@@ -28,7 +30,7 @@ namespace QRCode.Engine.Core.GameLevel.Tests
 
                 var progressionPercent = elapsedTime / m_moduleData.WaitDuration;
                 
-                var sceneLoadableProgressionInfos = GameLevelLoadProgressionInfos;
+                var sceneLoadableProgressionInfos = GameLevelLoadingInfo;
                 sceneLoadableProgressionInfos.LoadingProgressPercent = progressionPercent;
                 
                 progress.Report(progressionPercent);

@@ -4,8 +4,8 @@
     
     using Sirenix.OdinInspector;
     
-    using GameLevels;
-    using Toolbox;
+    using Engine.Core.GameLevels;
+    using Engine.Toolbox;
 
     [CreateAssetMenu]
     public class GameLevelModuleLoadableTestData : GameLevelModuleData

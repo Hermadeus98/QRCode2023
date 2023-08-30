@@ -15,5 +15,10 @@
         {
             return Task.CompletedTask;
         }
+
+        public void Delete()
+        {
+            
+        }
     }
 }

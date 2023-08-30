@@ -9,6 +9,6 @@
     {
         public void BuildGameLevelModules();
 
-        public Task LoadLevel(CancellationToken cancellationToken, IProgress<GameLevelLoadProgressionInfos> progress);
+        public Task LoadLevel(CancellationToken cancellationToken, IProgress<GameLevelLoadingInfo> progress);
     }
 }

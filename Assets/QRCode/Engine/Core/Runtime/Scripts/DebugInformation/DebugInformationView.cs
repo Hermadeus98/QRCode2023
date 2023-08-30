@@ -15,10 +15,13 @@ namespace QRCode.Engine
 
         private void Update()
         {
-            if (Gamepad.current.rightStickButton.wasPressedThisFrame || Keyboard.current.tabKey.wasPressedThisFrame)
+            if (Gamepad.current != null)
             {
-                m_isShow = !m_isShow;
-                m_canvasGroup.alpha = m_isShow ? 1f : 0f;
+                if (Gamepad.current.rightStickButton.wasPressedThisFrame || Keyboard.current.tabKey.wasPressedThisFrame)
+                {
+                    m_isShow = !m_isShow;
+                    m_canvasGroup.alpha = m_isShow ? 1f : 0f;
+                }
             }
         }
 

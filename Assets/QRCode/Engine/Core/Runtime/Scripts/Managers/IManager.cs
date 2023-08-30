@@ -2,10 +2,11 @@
 {
     using System.Threading;
     using System.Threading.Tasks;
-    using Toolbox.Initialization;
+    
+    using Engine.Toolbox.Optimization;
 
-    public interface IManager : IInitialize
+    public interface IManager : IDeletable
     {
-        public new Task InitAsync(CancellationToken cancellationToken);
+        public Task InitAsync(CancellationToken cancellationToken);
     }
 }

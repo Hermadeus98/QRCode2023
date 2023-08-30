@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e97ef634b4dd4fdca08b5213aeb8e311, type: 3}
-  m_Name: Game Level Module Loadable Test Data
+  m_Name: Game Level Module Loadable Test Data 1
   m_EditorClassIdentifier: 
   gameLevelLoadingInfo:
     m_loadingProgressionDescription:
       m_TableReference:
         m_TableCollectionName: GUID:25cc2e8128ce56f46bb6e8c1714e6190
       m_TableEntryReference:
-        m_KeyId: 119772565352448
+        m_KeyId: 119772519215104
         m_Key: 
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
     m_loadingProgressPercent: 0
-  m_waitDuration: 2
+  m_waitDuration: 5
   references:
     version: 2
     RefIds: []

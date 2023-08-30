@@ -11,10 +11,10 @@
     {
         protected T m_moduleData = null;
         
-        public GameLevelLoadProgressionInfos GameLevelLoadProgressionInfos
+        public GameLevelLoadingInfo GameLevelLoadingInfo
         {
-            get => m_moduleData.GameLevelLoadProgressionInfos; 
-            set => m_moduleData.GameLevelLoadProgressionInfos = value;
+            get => m_moduleData.GameLevelLoadingInfo; 
+            set => m_moduleData.GameLevelLoadingInfo = value;
         }
 
         public GameLevelModuleBase(T moduleData)

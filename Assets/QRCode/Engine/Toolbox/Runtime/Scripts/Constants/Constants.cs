@@ -21,6 +21,7 @@ namespace QRCode.Engine.Toolbox
             public const string Subtitles = "Subtitles";
             public const string Importer = "Importer";
             public const string RemoteConfig = "Remote Config";
+            public const string TrcCheck = "TRC Check";
         }
         
         public static class InspectorGroups

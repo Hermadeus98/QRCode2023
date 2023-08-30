@@ -1,18 +1,20 @@
 ﻿namespace QRCode.Engine.Core.GameLevels
 {
-    using Sirenix.OdinInspector;
-    using Toolbox;
     using UnityEngine;
+    
+    using Sirenix.OdinInspector;
+    
+    using Engine.Toolbox;
 
     public class GameLevelModuleData : ScriptableObject
     {
         [TitleGroup(Constants.InspectorGroups.Debugging)]
-        [SerializeField] protected GameLevelLoadProgressionInfos m_gameLevelLoadProgressionInfos;
+        [SerializeField] protected GameLevelLoadingInfo gameLevelLoadingInfo;
 
-        public GameLevelLoadProgressionInfos GameLevelLoadProgressionInfos
+        public GameLevelLoadingInfo GameLevelLoadingInfo
         {
-            get => m_gameLevelLoadProgressionInfos;
-            set => m_gameLevelLoadProgressionInfos = value;
+            get => gameLevelLoadingInfo;
+            set => gameLevelLoadingInfo = value;
         }
     }
 }

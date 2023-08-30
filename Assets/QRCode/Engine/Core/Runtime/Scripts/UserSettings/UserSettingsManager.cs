@@ -3,12 +3,11 @@
     using System.Threading;
     using System.Threading.Tasks;
     
-    using Managers;
-    using SaveSystem;
-    using Debugging;
-    using Toolbox;
-    using Toolbox.Pattern.Singleton;
-    using Constants = Toolbox.Constants;
+    using Engine.Core.Managers;
+    using Engine.Core.SaveSystem;
+    using Engine.Debugging;
+    using Engine.Toolbox.Pattern.Singleton;
+    using Constants = Engine.Toolbox.Constants;
 
     public class UserSettingsManager : MonoBehaviourSingleton<UserSettingsManager>, IUserSettingsService, IManager
     {
@@ -75,6 +74,11 @@
         public void ApplyChange(UserSettingsData newUserSettingsData = null)
         {
             UserSettingsEvents.RaiseUserSettingsEvents();
+        }
+
+        public void Delete()
+        {
+            
         }
     }
 }
