@@ -120,7 +120,7 @@
             m_onEndLoad?.Invoke();
             m_isLoading = false;
 
-            QRDebug.Debug(Constants.DebuggingChannels.SaveManager,$"Game is load.");
+            QRDebug.Debug(Constants.DebuggingChannels.SaveManager,$"Game data is load.");
         }
 
         [Button]
@@ -145,7 +145,7 @@
             m_onEndSave?.Invoke();
             m_isSaving = false;
             
-            QRDebug.Debug(Constants.DebuggingChannels.SaveManager,$"Game is save.");
+            QRDebug.Debug(Constants.DebuggingChannels.SaveManager,$"Game data is save.");
         }
 
         [Button]
@@ -156,7 +156,7 @@
 
             if (task.Result == true)
             {
-                QRDebug.Debug(Constants.DebuggingChannels.SaveManager, $"Save is delete.");
+                QRDebug.Debug(Constants.DebuggingChannels.SaveManager, $"Game data is delete.");
             }
         }
 

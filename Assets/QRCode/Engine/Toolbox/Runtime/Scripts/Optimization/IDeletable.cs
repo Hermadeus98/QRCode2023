@@ -6,6 +6,9 @@
     /// </summary>
     public interface IDeletable
     {
+        /// <summary>
+        /// Use this function to clear all reference and free memory.
+        /// </summary>
         public void Delete();
     }
 }

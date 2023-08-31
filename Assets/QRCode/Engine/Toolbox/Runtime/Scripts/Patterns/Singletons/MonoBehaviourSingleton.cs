@@ -40,5 +40,10 @@ namespace QRCode.Engine.Toolbox.Pattern.Singleton
                 return m_instance;
             }
         }
+
+        public static bool HasInstance()
+        {
+            return m_instance != null;
+        }
     }
 }

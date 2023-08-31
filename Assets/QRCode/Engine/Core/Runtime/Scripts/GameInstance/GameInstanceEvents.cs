@@ -32,7 +32,7 @@
                 m_gameplayComponents[i].OnGameInstanceIsReady(); 
             }
             
-            QRDebug.DebugTrace(Constants.DebuggingChannels.Game, $"On Level Loaded.");
+            QRDebug.DebugTrace(Constants.DebuggingChannels.Game, $"On Game Instance is ready.");
         }
         
         public void OnLevelLoaded()

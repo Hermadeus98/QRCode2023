@@ -13,23 +13,24 @@ namespace QRCode.Engine.Core.GameLevels
     
     using Sirenix.OdinInspector;
 
-    using Engine.Debugging;
-    using Engine.Core.Managers;
-    using Engine.Core.GameLevels.GeneratedEnums;
-    using Engine.Core.SaveSystem;
-    using Engine.Toolbox.Database;
-    using Engine.Toolbox.Database.GeneratedEnums;
-    using Engine.Toolbox.Extensions;
-    using Engine.Toolbox.Pattern.Singleton;
-    using Engine.Core.UI;
-    using Engine.Core.UI.LoadingScreen;
-    using Engine.Core.UI.LoadingScreen.GeneratedEnums;
-    using Constants = Engine.Toolbox.Constants;
+    using QRCode.Engine.Debugging;
+    using QRCode.Engine.Core.Managers;
+    using QRCode.Engine.Core.GameLevels.GeneratedEnums;
+    using QRCode.Engine.Core.SaveSystem;
+    using QRCode.Engine.Toolbox.Database;
+    using QRCode.Engine.Toolbox.Database.GeneratedEnums;
+    using QRCode.Engine.Toolbox.Extensions;
+    using QRCode.Engine.Toolbox.Pattern.Singleton;
+    using QRCode.Engine.Core.UI;
+    using QRCode.Engine.Core.UI.LoadingScreen;
+    using QRCode.Engine.Core.UI.LoadingScreen.GeneratedEnums;
+    using QRCode.Engine.Toolbox.Optimization;
+    using Constants = QRCode.Engine.Toolbox.Constants;
 
     /// <summary>
     /// The <see cref="GameLevelManager"/> will manage the loading/unloading and initialization of game levels.
     /// </summary>
-    public class GameLevelManager : MonoBehaviourSingleton<GameLevelManager>, IGameLevelManagementService, IManager
+    public class GameLevelManager : MonoBehaviourSingleton<GameLevelManager>, IGameLevelManagementService, IManager, IDeletable
     {
         #region FIELDS
         #region Serialized
@@ -43,116 +44,81 @@ namespace QRCode.Engine.Core.GameLevels
 
         private bool m_isLoading = false;
         private CancellationTokenSource m_cancellationTokenSource = null;
-        private ISaveService m_saveService => SaveManager.Instance;
+        private ISaveService m_saveService = null;
         private GameLevelData m_levelLoaded = null;
         private List<AsyncOperationHandle<SceneInstance>> m_sceneInstanceHandles = new();
         #endregion Privates
-        
-        #region Properties
-        private GameLevelDatabase GameLevelDatabase
-        {
-            get
-            {
-                if (m_gameLevelDatabase == null)
-                {
-                    if (DB.Instance.TryGetDatabase<GameLevelDatabase>(DBEnum.DB_Levels, out var sceneDatabase))
-                    {
-                        m_gameLevelDatabase = sceneDatabase;
-                    }
-                    else
-                    {
-                        QRDebug.DebugError(Constants.DebuggingChannels.LevelManager, $"Cannot load LevelDatabase, verify DB.", gameObject);
-                    }
-                }
-
-                return m_gameLevelDatabase;
-            }
-        }
-
-        private GameLevelManagerSettings GameLevelManagerSettings
-        {
-            get
-            {
-                if (m_gameLevelManagerSettings == null)
-                {
-                    m_gameLevelManagerSettings = GameLevelManagerSettings.Instance;
-                }
-
-                return m_gameLevelManagerSettings;
-            }
-        }
-        #endregion Statics
         #endregion FIELDS
 
         #region EVENTS 
-        private event Func<Task> m_onStartToLoadAsync;
+        private event Func<Task> m_startToLoadAsync;
 
-        public event Func<Task> OnStartToLoadLevelAsync
+        public event Func<Task> StartToLoadLevelAsync
         {
             add
             {
-                m_onStartToLoadAsync -= value;
-                m_onStartToLoadAsync += value;
+                m_startToLoadAsync -= value;
+                m_startToLoadAsync += value;
             }
             remove
             {
-                m_onStartToLoadAsync -= value;
+                m_startToLoadAsync -= value;
             }
         }
         
-        private event Action m_onStartToLoad;
-        public event Action OnStartToLoadLevel
+        private event Action m_startToLoad;
+        public event Action StartToLoadLevel
         {
             add
             {
-                m_onStartToLoad -= value;
-                m_onStartToLoad += value;
+                m_startToLoad -= value;
+                m_startToLoad += value;
             }
             remove
             {
-                m_onStartToLoad -= value;
+                m_startToLoad -= value;
             }
         }
         
-        private event Action<SceneLoadingInfo> m_onLoading;
-        public event Action<SceneLoadingInfo> OnLoadingLevel
+        private event Action<SceneLoadingInfo> m_loading;
+        public event Action<SceneLoadingInfo> LoadingLevel
         {
             add
             {
-                m_onLoading -= value;
-                m_onLoading += value;
+                m_loading -= value;
+                m_loading += value;
             }
             remove
             {
-                m_onLoading -= value;
+                m_loading -= value;
             }
         }
         
-        private event Action m_onFinishToLoad;
-        public event Action OnFinishToLoadLevel
+        private event Action m_finishToLoad;
+        public event Action FinishToLoadLevel
         {
             add
             {
-                m_onFinishToLoad -= value;
-                m_onFinishToLoad += value;
+                m_finishToLoad -= value;
+                m_finishToLoad += value;
             }
             remove
             {
-                m_onFinishToLoad -= value;
+                m_finishToLoad -= value;
             }
         }
         
-        private event Func<Task> m_onFinishToLoadAsync;
-        public event Func<Task> OnFinishToLoadLevelAsync
+        private event Func<Task> m_finishToLoadAsync;
+        public event Func<Task> FinishToLoadLevelAsync
         {
             add
             {
-                m_onFinishToLoadAsync -= value;
-                m_onFinishToLoadAsync += value;
+                m_finishToLoadAsync -= value;
+                m_finishToLoadAsync += value;
             }
             remove
             {
-                m_onFinishToLoadAsync -= value;
+                m_finishToLoadAsync -= value;
             }
         }
         #endregion
@@ -161,6 +127,18 @@ namespace QRCode.Engine.Core.GameLevels
         #region Initialization
         public Task InitAsync(CancellationToken cancellationToken)
         {
+            m_saveService = SaveManager.Instance;
+            m_gameLevelManagerSettings = GameLevelManagerSettings.Instance;
+            
+            if (DB.Instance.TryGetDatabase<GameLevelDatabase>(DBEnum.DB_Levels, out var sceneDatabase))
+            {
+                m_gameLevelDatabase = sceneDatabase;
+            }
+            else
+            {
+                QRDebug.DebugError(Constants.DebuggingChannels.LevelManager, $"Cannot load LevelDatabase, verify DB.", gameObject);
+            }
+            
             return Task.CompletedTask;
         }
         #endregion
@@ -169,33 +147,33 @@ namespace QRCode.Engine.Core.GameLevels
         /// <summary>
         /// Call this function to change active level. Only one level can be loaded one at one, so, if a level is already loaded, it will be unloaded.
         /// </summary>
-        public async Task<SceneLoadingInfo> ChangeLevel(DB_GameLevelsEnum gameLevelToLoad, DB_LoadingScreenEnum loadingScreenEnum, bool forceReload = false, bool activateOnLoad = true, int priority = 100)
+        public async Task ChangeLevel(DB_GameLevelsEnum gameLevelToLoad, DB_LoadingScreenEnum loadingScreenEnum, bool forceReload = false, bool activateOnLoad = true, int priority = 100)
         {
             if (m_isLoading)
             {
                 QRDebug.DebugError(Constants.DebuggingChannels.LevelManager,"A scene is already in loading...");
-                return m_sceneLoadingInfo;
+                return;
             }
 
             m_sceneLoadingInfo = new SceneLoadingInfo()
             {
                 GlobalProgress = 0f,
-                ProgressDescription = GameLevelManagerSettings.LoadingLocalizedString,
+                ProgressDescription = m_gameLevelManagerSettings.LoadingLocalizedString,
             };
             
             m_isLoading = true;
             
-            if (GameLevelDatabase.TryGetInDatabase(gameLevelToLoad.ToString(), out var levelReferenceGroup))
+            if (m_gameLevelDatabase.TryGetInDatabase(gameLevelToLoad.ToString(), out var levelReferenceGroup))
             {
                 // If a level is already loaded, it's managed differently.
                 if (forceReload == false && m_levelLoaded != null)
                 {
                     if (levelReferenceGroup.name == m_levelLoaded.name)
                     {
-                        QRDebug.DebugInfo(Constants.DebuggingChannels.LevelManager, $"{gameLevelToLoad.ToString()} is already loaded.", GameLevelDatabase);
+                        QRDebug.DebugInfo(Constants.DebuggingChannels.LevelManager, $"{gameLevelToLoad.ToString()} is already loaded.", m_gameLevelDatabase);
                         await AlreadyLoadedLevel(loadingScreenEnum);
                         m_isLoading = false;
-                        return m_sceneLoadingInfo;
+                        return;
                     }
                 }
                 
@@ -212,7 +190,6 @@ namespace QRCode.Engine.Core.GameLevels
             }
 
             m_isLoading = false;
-            return m_sceneLoadingInfo;
         }
 
         public Task UnloadCurrentLevel()
@@ -230,35 +207,34 @@ namespace QRCode.Engine.Core.GameLevels
             m_levelLoaded = gameLevelReferenceGroup;
         }
         
-        private async Task<SceneLoadingInfo> LoadLevel(DB_GameLevelsEnum gameLevelToLoad, ILoadingScreen loadingScreen, bool forceReload = false, bool activateOnLoad = true, int priority = 100)
+        private async Task LoadLevel(DB_GameLevelsEnum gameLevelToLoad, ILoadingScreen loadingScreen,
+            bool forceReload = false, bool activateOnLoad = true, int priority = 100)
         {
-            if (GameLevelDatabase.TryGetInDatabase(gameLevelToLoad.ToString(), out var levelReferenceGroup))
+            if (m_gameLevelDatabase.TryGetInDatabase(gameLevelToLoad.ToString(), out var levelReferenceGroup))
             {
-                if (m_onStartToLoadAsync != null)
+                if (m_startToLoadAsync != null)
                 {
-                    await m_onStartToLoadAsync.Invoke();
+                    await m_startToLoadAsync.Invoke();
                 }
 
-                m_onStartToLoad?.Invoke();
+                m_startToLoad?.Invoke();
                 m_sceneLoadingInfo.SceneLoadingStatus = SceneLoadingStatus.NotLoaded;
 
                 await TryForceReload(forceReload, gameLevelToLoad);
                 
-                OnLoadingLevel += loadingScreen.Progress;
-                var sceneLoadingInfo = await LoadSceneGroup(levelReferenceGroup, activateOnLoad, priority);
-                
-                return sceneLoadingInfo!.Value;
+                LoadingLevel += loadingScreen.Progress;
+                await LoadSceneGroup(levelReferenceGroup, activateOnLoad, priority);
+
             }
             else
             {
-                QRDebug.DebugError(Constants.DebuggingChannels.LevelManager, $"Cannot load {gameLevelToLoad.ToString()}, verify SceneDatabase.", GameLevelDatabase);
-                return m_sceneLoadingInfo;
+                QRDebug.DebugError(Constants.DebuggingChannels.LevelManager, $"Cannot load {gameLevelToLoad.ToString()}, verify SceneDatabase.", m_gameLevelDatabase);
             }
         }
         
         private async Task UnloadLevel(DB_GameLevelsEnum gameLevelToUnload)
         {
-            if (GameLevelDatabase.TryGetInDatabase(gameLevelToUnload.ToString(), out var foundedObject))
+            if (m_gameLevelDatabase.TryGetInDatabase(gameLevelToUnload.ToString(), out var foundedObject))
             {
                 await UnloadLevel(foundedObject);
             }
@@ -321,7 +297,7 @@ namespace QRCode.Engine.Core.GameLevels
             m_sceneLoadingInfo.SceneLoadingStatus = SceneLoadingStatus.SceneAreLoading;
 
             OnLoadingScenes();
-            await Task.Delay(TimeSpan.FromSeconds(GameLevelManagerSettings.MinimalLoadDurationBefore), m_cancellationTokenSource.Token);
+            await Task.Delay(TimeSpan.FromSeconds(m_gameLevelManagerSettings.MinimalLoadDurationBefore), m_cancellationTokenSource.Token);
             
             if (gameLevelReferenceGroupToLoad.GameLevelScenes.IsNotNullOrEmpty())
             {
@@ -354,12 +330,12 @@ namespace QRCode.Engine.Core.GameLevels
                 Load.Current.LoadObjects();
             }
 
-            await Task.Delay(TimeSpan.FromSeconds(GameLevelManagerSettings.MinimalLoadDurationAfter), m_cancellationTokenSource.Token);
+            await Task.Delay(TimeSpan.FromSeconds(m_gameLevelManagerSettings.MinimalLoadDurationAfter), m_cancellationTokenSource.Token);
 
-            m_onFinishToLoad?.Invoke();
-            if (m_onFinishToLoadAsync != null)
+            m_finishToLoad?.Invoke();
+            if (m_finishToLoadAsync != null)
             {
-                await m_onFinishToLoadAsync.Invoke();
+                await m_finishToLoadAsync.Invoke();
             }
             
             m_sceneLoadingInfo.SceneLoadingStatus = SceneLoadingStatus.SceneAreLoaded;
@@ -371,7 +347,7 @@ namespace QRCode.Engine.Core.GameLevels
         {
             while (m_isLoading)
             {
-                m_onLoading?.Invoke(m_sceneLoadingInfo);
+                m_loading?.Invoke(m_sceneLoadingInfo);
                 await Task.Yield();
             }
         }
@@ -408,7 +384,7 @@ namespace QRCode.Engine.Core.GameLevels
                     {
 #if UNITY_EDITOR
                         // Cannot unload an addressable scene already loaded, so the scene is unload with its editor name.
-                        SceneManager.UnloadSceneAsync(sceneReference.editorAsset.name);
+                        var op = SceneManager.UnloadSceneAsync(sceneReference.editorAsset.name);
 #else
                         Console.WriteLine(e);
                         throw;
@@ -459,7 +435,6 @@ namespace QRCode.Engine.Core.GameLevels
                 var progression = new Progress<GameLevelLoadingInfo>(value =>
                 {
                     m_sceneLoadingInfo.GlobalProgress = .5f + (value.LoadingProgressPercent / 2f);
-                    m_sceneLoadingInfo.ProgressDescription = value.ProgressionDescription.GetLocalizedString();
                 });
 
                 var loading = currentGameLevel.LoadLevel(m_cancellationTokenSource.Token, progression);

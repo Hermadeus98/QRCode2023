@@ -3,9 +3,7 @@
     using System.Threading;
     using System.Threading.Tasks;
     
-    using Engine.Toolbox.Optimization;
-
-    public interface IManager : IDeletable
+    public interface IManager
     {
         public Task InitAsync(CancellationToken cancellationToken);
     }

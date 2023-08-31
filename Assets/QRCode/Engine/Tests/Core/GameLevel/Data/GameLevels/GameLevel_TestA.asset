@@ -19,4 +19,3 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   m_gameLevelModuleData:
   - {fileID: 11400000, guid: 227a4876d54b25045b2e0418705f54fc, type: 2}
-  - {fileID: 11400000, guid: 3b6612ced56155447a6deb1f58b44eeb, type: 2}

@@ -1,19 +1,15 @@
 namespace QRCode.Engine.Toolbox.GameConfigs
 {
-#if UNITY_EDITOR
-    using UnityEditor;
-#endif
     using System;
     using UnityEngine;
     
-    using System.Collections.Generic;
     using System.Linq;
     
     using Sirenix.OdinInspector;
     
-    using Toolbox;
-    using Pattern.Singleton;
-    using Object = UnityEngine.Object;
+    using Engine.Toolbox;
+    using Engine.Toolbox.Pattern.Singleton;
+    using Engine.Toolbox.Helpers;
 
 
     [CreateAssetMenu(menuName = Constants.GameConfigs.GameConfigsPath)]
@@ -37,20 +33,9 @@ namespace QRCode.Engine.Toolbox.GameConfigs
         private void Fetch()
         {
 #if UNITY_EDITOR
-            var catalogs = FindAssetsByType<GameConfigBase>();
+            var catalogs = FindAssetsHelper.FindAssetsByType<GameConfigBase>();
             allGameConfigs = catalogs as GameConfigBase[] ?? catalogs.ToArray();
 #endif
-        }
-        
-        private static IEnumerable<T> FindAssetsByType<T>() where T : Object {
-            var guids = AssetDatabase.FindAssets($"t:{typeof(T)}");
-            foreach (var t in guids) {
-                var assetPath = AssetDatabase.GUIDToAssetPath(t);
-                var asset = AssetDatabase.LoadAssetAtPath<T>(assetPath);
-                if (asset != null) {
-                    yield return asset;
-                }
-            }
         }
     }
 }

@@ -8,7 +8,7 @@ namespace QRCode.Engine.Core.GameLevels
 
     public interface IGameLevelManagementService : IService
     {
-        public Task<SceneLoadingInfo> ChangeLevel(DB_GameLevelsEnum gameLevelToLoad,
+        public Task ChangeLevel(DB_GameLevelsEnum gameLevelToLoad,
             DB_LoadingScreenEnum loadingScreenEnum, 
             bool forceReload = false, 
             bool activateOnLoad = true,
@@ -18,10 +18,10 @@ namespace QRCode.Engine.Core.GameLevels
 
         public bool IsLoading();
 
-        public event Func<Task> OnStartToLoadLevelAsync;
-        public event Action OnStartToLoadLevel;
-        public event Action<SceneLoadingInfo> OnLoadingLevel;
-        public event Action OnFinishToLoadLevel;
-        public event Func<Task> OnFinishToLoadLevelAsync;
+        public event Func<Task> StartToLoadLevelAsync;
+        public event Action StartToLoadLevel;
+        public event Action<SceneLoadingInfo> LoadingLevel;
+        public event Action FinishToLoadLevel;
+        public event Func<Task> FinishToLoadLevelAsync;
     }
 }

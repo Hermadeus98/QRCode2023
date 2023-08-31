@@ -3,9 +3,8 @@
     using System;
     using System.Threading;
     using System.Threading.Tasks;
-    using Toolbox.Optimization;
 
-    public interface IGameLevel : IDeletable
+    public interface IGameLevel
     {
         public void BuildGameLevelModules();
 

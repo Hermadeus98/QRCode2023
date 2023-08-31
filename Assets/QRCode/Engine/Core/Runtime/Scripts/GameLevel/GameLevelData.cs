@@ -1,7 +1,15 @@
 namespace QRCode.Engine.Core.GameLevels
 {
-    using Sirenix.OdinInspector;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
     
+    using Sirenix.OdinInspector;
+
+#if UNITY_EDITOR
+    using QRCode.Engine.Toolbox.Helpers;
+    using UnityEditor;
+#endif
     using UnityEngine;
     using UnityEngine.AddressableAssets;
 
@@ -14,7 +22,8 @@ namespace QRCode.Engine.Core.GameLevels
     {
         [TitleGroup("Reference")]
         [SerializeField] private AssetReference[] m_gameLevelScenes = null;
-
+        
+        [ValueDropdown("EditorGetAllGameLevelModules", IsUniqueList = true, DropdownTitle = "Select Game Level Module Object", DrawDropdownForListElements = false, ExcludeExistingValuesInList = true)]
         [SerializeField] private GameLevelModuleData[] m_gameLevelModuleData = null;
         
         public AssetReference[] GameLevelScenes => m_gameLevelScenes;
@@ -33,5 +42,23 @@ namespace QRCode.Engine.Core.GameLevels
             gameLevelModuleData = null;
             return false;
         }
+
+#if UNITY_EDITOR
+        private IEnumerable EditorGetAllGameLevelModules()
+        {
+            return FindAssetsHelper.FindAssetsByType<GameLevelModuleData>();
+        }
+        
+        private static IEnumerable<T> FindAssetsByType<T>() where T : Object {
+            var guids = AssetDatabase.FindAssets($"t:{typeof(T)}");
+            foreach (var t in guids) {
+                var assetPath = AssetDatabase.GUIDToAssetPath(t);
+                var asset = AssetDatabase.LoadAssetAtPath<T>(assetPath);
+                if (asset != null) {
+                    yield return asset;
+                }
+            }
+        }
+#endif
     }
 }

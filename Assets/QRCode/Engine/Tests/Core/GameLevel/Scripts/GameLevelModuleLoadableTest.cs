@@ -45,10 +45,5 @@ namespace QRCode.Engine.Core.GameLevel.Tests
         {
             
         }
-
-        public override Task InitAsync(CancellationToken cancellationToken)
-        {
-            return Task.CompletedTask;
-        }
     }
 }

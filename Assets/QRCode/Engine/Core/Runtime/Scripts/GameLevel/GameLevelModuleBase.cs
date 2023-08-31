@@ -24,7 +24,6 @@
 
         public abstract Task Load(CancellationToken cancellationToken, Action onLoading, IProgress<float> progress);
 
-        public abstract Task InitAsync(CancellationToken cancellationToken);
         public abstract void Delete();
     }
 }
