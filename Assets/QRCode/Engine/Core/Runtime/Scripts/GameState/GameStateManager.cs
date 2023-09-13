@@ -1,42 +1,43 @@
 namespace QRCode.Engine.Core.GameState
 {
-    using UnityEngine;
-
     using System.Threading;
     using System.Threading.Tasks;
-    
+    using QRCode.Engine.Core.Manager;
+    using QRCode.Engine.Toolbox;
+    using QRCode.Engine.Toolbox.Optimization;
     using Sirenix.OdinInspector;
+    using UnityEngine;
 
-    using Managers;
-    using Toolbox;
-    using Toolbox.Pattern.Singleton;
-
-    public class GameStateManager : MonoBehaviourSingleton<GameStateManager>, IManager
+    /// <summary>
+    /// This class manage all the game states of the application.
+    /// </summary>
+    public class GameStateManager : GenericManagerBase<GameStateManager>, IDeletable
     {
         #region Fields
+        #region Serialized
         [TitleGroup(Constants.InspectorGroups.References)] 
+        [Tooltip("The reference of the animator that controls game states.")]
         [SerializeField] private Animator m_gameStateAnimator = null;
+        #endregion Serialized
 
+        #region Statics
         public static readonly int IsInitHash = Animator.StringToHash("IsInit");
-        #endregion
+        #endregion Statics
+        #endregion Fields
 
         #region Methods
-        #region Initialization
-        public Task InitAsync(CancellationToken cancellationToken)
+        #region Lifecycle
+        protected override Task InitAsync(CancellationToken cancellationToken)
         {
             return Task.CompletedTask;
         }
 
-        private void OnDestroy()
-        {
-            Delete();
-        }
-
-        public void Delete()
+        public override void Delete()
         {
             m_gameStateAnimator = null;
+            base.Delete();
         }
-        #endregion
+        #endregion Lifecycle
 
         #region Publics
         public void SetBool(int id, bool value)
@@ -63,7 +64,7 @@ namespace QRCode.Engine.Core.GameState
         {
             m_gameStateAnimator.Play(gameStateName);
         }
-        #endregion
-        #endregion
+        #endregion Publics
+        #endregion Methods
     }
 }

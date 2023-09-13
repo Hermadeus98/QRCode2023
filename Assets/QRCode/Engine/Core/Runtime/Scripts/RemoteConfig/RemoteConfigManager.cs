@@ -1,81 +1,118 @@
 namespace QRCode.Engine.Core.RemoteConfig
 {
-    using Unity.Services.Core;
-    using Unity.Services.Authentication;
-    using Unity.Services.RemoteConfig;
-
     using System;
     using System.Threading;
     using System.Threading.Tasks;
-    
+    using QRCode.Engine.Core.Manager;
+    using QRCode.Engine.Core.Tags;
+    using QRCode.Engine.Debugging;
+    using QRCode.Engine.Toolbox.Optimization;
     using Sirenix.OdinInspector;
-
-    using Debugging;
-    using Managers;
-    using Toolbox;
-    using Toolbox.Pattern.Singleton;
+    using Unity.Services.Authentication;
+    using Unity.Services.Core;
+    using Unity.Services.RemoteConfig;
+    using UnityEngine;
     using Constants = Toolbox.Constants;
 
-    public class RemoteConfigManager : MonoBehaviourSingleton<RemoteConfigManager>, IManager
+    /// <summary>
+    /// This class manage all the remote config values of the game.
+    /// </summary>
+    public class RemoteConfigManager : GenericManagerBase<RemoteConfigManager>, IDeletable
     {
+        #region Internals
         private struct UserAttributes
         {
-            
+            public static readonly UserAttributes Default = new UserAttributes();
         }
 
         private struct AppAttributes
         {
-            
+            public static readonly AppAttributes Default = new AppAttributes();
         }
+        #endregion Internals
 
-        private RemoteConfigSettings m_remoteConfigSettings;
-        private RemoteConfigEvents m_remoteConfigEvents;
+        #region Fields
+        private RemoteConfigSettings m_remoteConfigSettings = null;
+        private RemoteConfigEvents m_remoteConfigEvents = null;
         
-        private UserAttributes m_userAttributes;
-        private AppAttributes m_appAttributes;
+        private UserAttributes m_userAttributes = UserAttributes.Default;
+        private AppAttributes m_appAttributes = AppAttributes.Default;
 
         private bool m_hasBeenFetch = false;
+        #endregion Fields
 
-        public async Task InitAsync(CancellationToken cancellationToken)
+        #region Methods
+        #region LifeCycle
+        protected override async Task InitAsync(CancellationToken cancellationToken)
         {
             m_userAttributes = new UserAttributes();
             m_appAttributes = new AppAttributes();
 
             m_remoteConfigSettings = RemoteConfigSettings.Instance;
+            m_remoteConfigEvents = new RemoteConfigEvents(m_remoteConfigSettings.AllRemoteConfigValues);
             
-            CreateRemoteConfigEvents();
-
-            do
+            while (m_hasBeenFetch == false && cancellationToken.IsCancellationRequested == false)
             {
                 try
                 {
-                    await InitializeRemoteConfigServiceAsync();
-                    await FetchRemoteConfig();
+                    await InitializeRemoteConfigService();
+                    await FetchRemoteConfigInternal();
                     await Task.Yield();
                 }
                 catch (Exception e)
                 {
                     if (e is RequestFailedException requestFailedException)
                     {
+                        Console.WriteLine(e);
                         HandleRequestFailedException();
                     }
                     else
                     {
                         Console.WriteLine(e);
-                        throw;
                     }
                 }
-            } 
-            while (m_hasBeenFetch == false && cancellationToken.IsCancellationRequested == false);
+            }
         }
 
-        [Button]
-        public async void FetchRemoteConfigAsync()
+        public override void Delete()
         {
-            await FetchRemoteConfig();
+            if (RemoteConfigService.Instance != null)
+            {
+                RemoteConfigService.Instance.FetchCompleted -= OnFetchCompleted;
+            }
+
+            base.Delete();
+        }
+        #endregion LifeCycle
+
+        #region Public Methods
+        /// <summary>
+        /// Fetch all the remote config allows to reset all the remote config value to the last version of the remote config.
+        /// </summary>
+        public async void FetchRemoteConfig()
+        {
+            await FetchRemoteConfigInternal();
         } 
         
-        private async Task InitializeRemoteConfigServiceAsync()
+        /// <summary>
+        /// Register an event when the <see cref="remoteConfigValueBase"/> is update.
+        /// </summary>
+        public void RegisterOnValueFetched(RemoteConfigValueBase remoteConfigValueBase, RemoteConfigEvents.OnValueUpdated action)
+        {
+            m_remoteConfigEvents.RegisterDelegate(remoteConfigValueBase, action);
+        }
+        
+        /// <summary>
+        /// Unregister from <see cref="m_remoteConfigEvents"/>.
+        /// </summary>
+        public void UnregisterOnValueFetched(RemoteConfigValueBase remoteConfigValueBase, RemoteConfigEvents.OnValueUpdated action)
+        {
+            m_remoteConfigEvents.UnregisterDelegate(remoteConfigValueBase, action);
+        }
+        #endregion Public Methods
+
+        #region Private Methods
+        private async Task InitializeRemoteConfigService()
         {
             await UnityServices.InitializeAsync();
 
@@ -85,7 +122,7 @@ namespace QRCode.Engine.Core.RemoteConfig
             }
         }
 
-        private async Task FetchRemoteConfig()
+        private async Task FetchRemoteConfigInternal()
         {
             await RemoteConfigService.Instance.FetchConfigsAsync(m_userAttributes, m_appAttributes);
             RemoteConfigService.Instance.SetEnvironmentID(m_remoteConfigSettings.EnvironmentId);
@@ -102,29 +139,29 @@ namespace QRCode.Engine.Core.RemoteConfig
             switch (configResponse.requestOrigin)
             {
                 case ConfigOrigin.Default:
-                    QRDebug.DebugInfo(Constants.DebuggingChannels.RemoteConfig, $"No settings loaded this session, using default values.");
+                    QRLogger.DebugInfo<CoreTags.RemoteConfigs>($"No settings loaded this session, using default values.");
                     break;
                 case ConfigOrigin.Cached:
-                    QRDebug.DebugInfo(Constants.DebuggingChannels.RemoteConfig, $"No settings loaded this session, using cached values from a previous version.");
+                    QRLogger.DebugInfo<CoreTags.RemoteConfigs>($"No settings loaded this session, using cached values from a previous version.");
                     break;
                 case ConfigOrigin.Remote:
-                    QRDebug.DebugInfo(Constants.DebuggingChannels.RemoteConfig, $"New settings loaded this session, update values accordingly.");
+                    QRLogger.DebugInfo<CoreTags.RemoteConfigs>($"New settings loaded this session, update values accordingly.");
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
 
             FetchAllRemoteConfigValues();
-            QRDebug.DebugInfo(Constants.DebuggingChannels.RemoteConfig, $"Fetch completed : AppVersion = {m_remoteConfigSettings.AppVersion}.");
-        }
-
-        private void CreateRemoteConfigEvents()
-        {
-            m_remoteConfigEvents = new RemoteConfigEvents(m_remoteConfigSettings.AllRemoteConfigValues);
+            QRLogger.DebugInfo<CoreTags.RemoteConfigs>($"Fetch completed : AppVersion = {m_remoteConfigSettings.AppVersion}.");
         }
         
         private void FetchAllRemoteConfigValues()
         {
+            if (m_remoteConfigSettings == null)
+            {
+                m_remoteConfigSettings = RemoteConfigSettings.Instance;
+            }
+            
             var allRemoteConfigValues = m_remoteConfigSettings.AllRemoteConfigValues;
             var remoteConfigValuesCount = allRemoteConfigValues.Length;
             var runtimeConfig = RemoteConfigService.Instance.appConfig;
@@ -136,25 +173,20 @@ namespace QRCode.Engine.Core.RemoteConfig
             
             m_hasBeenFetch = true;
         }
-
-        public void RegisterOnValueFetched(RemoteConfigValueBase remoteConfigValueBase, RemoteConfigEvents.OnValueUpdated action)
-        {
-            m_remoteConfigEvents.RegisterDelegate(remoteConfigValueBase, action);
-        }
-        
-        public void UnregisterOnValueFetched(RemoteConfigValueBase remoteConfigValueBase, RemoteConfigEvents.OnValueUpdated action)
-        {
-            m_remoteConfigEvents.UnregisterDelegate(remoteConfigValueBase, action);
-        }
         
         private void RaiseOnValueChangeEvent(RemoteConfigValueBase remoteConfigValue)
         {
             m_remoteConfigEvents.RaiseOnValueChangedEvent(remoteConfigValue);
         }
+        #endregion Private Methods
 
-        public void Delete()
+        #region Editor
+        [Button("Fetch Remote Config")]
+        private async void EditorFetchRemoteConfig()
         {
-            
+            await FetchRemoteConfigInternal();
         }
+        #endregion Editor
+        #endregion Methods
     }
 }

@@ -6,7 +6,6 @@ namespace QRCode.Engine.Debugging
     [CreateAssetMenu(menuName = Constants.DebuggingPath.ScriptableDebugPath, fileName = "Scriptable Object Debugger")]
     public class QRScriptableDebug : ScriptableObject
     {
-        
         /// <summary>
         /// Allow a Debug Message from Unity Event for example...
         /// </summary>
@@ -14,7 +13,7 @@ namespace QRCode.Engine.Debugging
         [Preserve]
         public void Debug(string message)
         {
-            QRDebug.DebugTrace("Misc", message);
+            QRLogger.DebugTrace<LoggerTag.Debugger>(message);
         }
     }
 }

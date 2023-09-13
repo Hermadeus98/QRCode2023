@@ -2,28 +2,6 @@ namespace QRCode.Engine.Toolbox
 {
     public static partial class Constants
     {
-        public static class DebuggingChannels
-        {
-            public const string Editor = "Editor";
-            public const string LifeCycle = "Life Cycle";
-            public const string LevelManager = "Level Manager";
-            public const string SceneManager = "Scene Manager";
-            public const string Database = "Database";
-            public const string Misc = "Misc";
-            public const string Tests = "Tests";
-            public const string Game = "Game";
-            public const string Error = "Error";
-            public const string Warning = "Warning";
-            public const string Inputs = "Inputs";
-            public const string SaveManager = "Save Manager";
-            public const string Audio = "Audio";
-            public const string UserSettings = "User Settings";
-            public const string Subtitles = "Subtitles";
-            public const string Importer = "Importer";
-            public const string RemoteConfig = "Remote Config";
-            public const string TrcCheck = "TRC Check";
-        }
-        
         public static class InspectorGroups
         {
             public const string SingletonSettingsGroup = "Singleton Settings";

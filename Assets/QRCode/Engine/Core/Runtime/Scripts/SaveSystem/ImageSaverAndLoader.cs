@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using Toolbox;
     using Engine.Debugging;
+    using QRCode.Engine.Core.Tags;
     using UnityEngine;
     using Constants = Toolbox.Constants;
 
@@ -24,7 +25,7 @@
             }
             catch (Exception e)
             {
-                QRDebug.DebugError(Constants.DebuggingChannels.SaveManager, e);
+                QRLogger.DebugError<CoreTags.Save>(e);
                 throw;
             }
         }
@@ -43,7 +44,7 @@
             }
             catch (Exception e)
             {
-                QRDebug.DebugError(Constants.DebuggingChannels.SaveManager, e);
+                QRLogger.DebugError<CoreTags.Save>(e);
 
                 var saveSetting = SaveServiceSettings.Instance;
                 return saveSetting.NotLoadedTexture;

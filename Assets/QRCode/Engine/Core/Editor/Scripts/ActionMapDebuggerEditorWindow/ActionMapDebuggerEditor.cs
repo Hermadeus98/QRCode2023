@@ -2,18 +2,18 @@ namespace QRCode.Editor
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Engine.Core.Inputs;
-    using Engine.Toolbox.Pattern.Service;
+    using QRCode.Engine.Core.GameInstance;
+    using QRCode.Engine.Core.Inputs;
     using Sirenix.Utilities;
     using Sirenix.Utilities.Editor;
     using UnityEditor;
     using UnityEngine;
     using UnityEngine.InputSystem;
-    using GameInstance = Engine.Core.GameInstance;
+
 
     public class ActionMapDebuggerEditor : EditorWindow
     {
-        private IInputManagementService m_inputManagementService = null;
+        private InputManager m_inputManagementService = null;
         private int indent;
         
         private class ActionMapDebuggerInfo
@@ -43,7 +43,7 @@ namespace QRCode.Editor
                 return;
             }
 
-            if (GameInstance.GameInstance.Instance.IsReady == false)
+            if (GameInstance.Instance.IsReady == false)
             {
                 return;
             }
@@ -53,7 +53,7 @@ namespace QRCode.Editor
             if (isInit == false)
             {
                 m_allInfos = new Dictionary<InputActionMap, ActionMapDebuggerInfo>();
-                m_inputManagementService = ServiceLocator.Current.Get<IInputManagementService>();
+                m_inputManagementService = InputManager.Instance;
                 isInit = true;
                 
                 var actionsActionMaps = m_inputManagementService.GetPlayerInput().actions.actionMaps;

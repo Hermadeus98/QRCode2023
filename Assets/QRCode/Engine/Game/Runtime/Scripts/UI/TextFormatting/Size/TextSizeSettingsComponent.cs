@@ -40,7 +40,7 @@ namespace QRCode.Engine.Game.UI.Components
             {
                 if (m_userSettingsData == null)
                 {
-                    m_userSettingsData = UserSettingsManager.Instance.GetUserSettingsData();
+                    m_userSettingsData = UserSettingsManager.Instance.GetUserSettingsData;
                 }
 
                 return m_userSettingsData;
@@ -56,10 +56,7 @@ namespace QRCode.Engine.Game.UI.Components
                 await Task.Yield();
             }
             
-            if (UserSettingsManager.Instance.IsInit)
-            {
-                UpdateTextFromSettings(UserSettingsData.TextSizeSetting);
-            }
+            UpdateTextFromSettings(UserSettingsData.TextSizeSetting);
         }
 
         private void OnDisable()

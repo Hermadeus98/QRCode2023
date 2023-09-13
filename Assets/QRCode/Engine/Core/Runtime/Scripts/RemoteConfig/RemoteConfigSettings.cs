@@ -1,5 +1,6 @@
 namespace QRCode.Engine.Core.RemoteConfig
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     
@@ -12,6 +13,7 @@ namespace QRCode.Engine.Core.RemoteConfig
     
     using Toolbox;
     using Toolbox.Settings;
+    using Object = UnityEngine.Object;
 
     [CreateAssetMenu(menuName = Constants.SettingsPath.RemoteConfigSettings, fileName = "STG_RemoteConfig")]
     public class RemoteConfigSettings : Settings<RemoteConfigSettings>
@@ -20,7 +22,7 @@ namespace QRCode.Engine.Core.RemoteConfig
         [SerializeField] private RemoteConfigStringValue m_appVersion = null;
         
         [TitleGroup(Toolbox.Constants.InspectorGroups.Settings)]
-        [SerializeField] private string m_environmentId;
+        private string m_environmentId = string.Empty;
 
         [TitleGroup(Toolbox.Constants.InspectorGroups.Settings)]
         [SerializeField] private RemoteConfigValueBase[] m_allRemoteConfigValues = null;

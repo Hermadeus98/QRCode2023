@@ -1,6 +1,7 @@
 ﻿namespace QRCode.Engine.Core.GameState
 {
     using Debugging;
+    using QRCode.Engine.Core.Tags;
     using Sirenix.OdinInspector;
     using Toolbox.Pattern.Singleton;
     using UnityEngine;
@@ -16,7 +17,7 @@
             if (m_allowJumpToState)
             {
                 GameStateManager.Instance.JumpToGameState(m_startAtGameStateName);
-                QRDebug.DebugInfo("EASY GAME STATE SETUP", $"Jump to state {m_startAtGameStateName}.");
+                QRLogger.DebugInfo<CoreTags.GameStates>($"Jump to state {m_startAtGameStateName}.");
             }
         }
     }

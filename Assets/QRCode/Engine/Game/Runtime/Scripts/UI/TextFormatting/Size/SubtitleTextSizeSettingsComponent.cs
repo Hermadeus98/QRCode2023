@@ -40,7 +40,7 @@
             {
                 if (m_userSettingsData == null)
                 {
-                    m_userSettingsData = UserSettingsManager.Instance.GetUserSettingsData();
+                    m_userSettingsData = UserSettingsManager.Instance.GetUserSettingsData;
                 }
 
                 return m_userSettingsData;
@@ -56,10 +56,7 @@
                 await Task.Yield();
             }
             
-            if (UserSettingsManager.Instance.IsInit)
-            {
-                UpdateTextFromSettings(UserSettingsData.SubtitlesTextSizeSetting);
-            }
+            UpdateTextFromSettings(UserSettingsData.SubtitlesTextSizeSetting);
         }
 
         private void OnDisable()

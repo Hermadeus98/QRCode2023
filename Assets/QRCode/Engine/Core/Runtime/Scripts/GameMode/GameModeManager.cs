@@ -3,14 +3,14 @@
     using System.Threading;
     using System.Threading.Tasks;
     
-    using Engine.Core.Managers;
-    using Engine.Toolbox.Pattern.Singleton;
+    using QRCode.Engine.Core.Manager;
+    using QRCode.Engine.Toolbox.Optimization;
 
-    public class GameModeManager : MonoBehaviourSingleton<GameModeManager>, IManager
+    public class GameModeManager : GenericManagerBase<GameModeManager>, IDeletable
     {
         private GameModeBase m_currentGameMode = null;
-        
-        public Task InitAsync(CancellationToken cancellationToken)
+
+        protected override Task InitAsync(CancellationToken cancellationToken)
         {
             return Task.CompletedTask;
         }

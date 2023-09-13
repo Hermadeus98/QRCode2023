@@ -1,10 +1,9 @@
 namespace QRCode.Engine.Game.Subtitles
 {
-    using Toolbox;
-    using Debugging;
+    using QRCode.Engine.Debugging;
+    using QRCode.Engine.Game.Tags;
     using UnityEngine;
     using UnityEngine.Playables;
-    using Constants = Toolbox.Constants;
 
     public class SubtitleTrackMixer : PlayableBehaviour
     {
@@ -66,7 +65,7 @@ namespace QRCode.Engine.Game.Subtitles
             
             if (m_subtitleComponent == null)
             {
-                QRDebug.DebugError(Constants.DebuggingChannels.Error, "Text Component cannot be found.");
+                QRLogger.DebugError<GameTags.Subtitles>("Text Component cannot be found.");
                 return false;
             }
 

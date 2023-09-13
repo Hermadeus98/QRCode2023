@@ -1,50 +1,46 @@
 namespace QRCode.Engine.Game.UI
 {
-    using System.Threading.Tasks;
-    using Core.UserSettings;
-    using Core.UserSettings.Events.InterfaceSettings;
-    using Toolbox;
-    using Sirenix.OdinInspector;
-    using Toolbox.Extensions;
+    using QRCode.Engine.Core.UserSettings;
+    using QRCode.Engine.Core.UserSettings.Events.InterfaceSettings;
+    using QRCode.Engine.Toolbox.Extensions;
     using UnityEngine;
-    using GameInstance = Core.GameInstance.GameInstance;
 
+    /// <summary>
+    /// The component manage interface calibration from the user settings data.
+    /// </summary>
     public class InterfaceAreaComponent : MonoBehaviour
     {
-        [TitleGroup(Constants.InspectorGroups.References)] [SerializeField]
-        private RectTransform m_rectTransform = null;
-        
-        private int m_interfaceAreaCalibrationSize = 12;
+        #region Fields
+        private RectTransform _rectTransform = null;
+        private UserSettingsManager _userSettingsManager = null;
+        private UserSettingsData _userSettingsData = null;
+        #endregion Fields
 
-        private UserSettingsData m_userSettingsData = null;
-        private UserSettingsData UserSettingsData
+        #region Properties
+        private RectTransform RectTransform
         {
             get
             {
-                if (m_userSettingsData == null)
+                if (_rectTransform == null)
                 {
-                    m_userSettingsData = UserSettingsManager.Instance.GetUserSettingsData();
+                    _rectTransform = GetComponent<RectTransform>();
                 }
 
-                return m_userSettingsData;
+                return _rectTransform;
             }
         }
+        #endregion Properties
         
+        private void Start()
+        {
+            _userSettingsManager = UserSettingsManager.Instance;
+            _userSettingsData = _userSettingsManager.GetUserSettingsData;
+        }
+
         private async void OnEnable()
         {
-            m_rectTransform ??= GetComponent<RectTransform>();
-            
             InterfaceAreaCalibrationEvent.Register(AdjustInterfaceAreaCalibrationFromSettings);
-
-            while (GameInstance.Instance.IsReady == false)
-            {
-                await Task.Yield();
-            }
-            
-            if (UserSettingsManager.Instance.IsInit)
-            {
-                AdjustInterfaceAreaCalibrationFromSettings(UserSettingsData.InterfaceAreaCalibrationSize);
-            }
+            //AdjustInterfaceAreaCalibrationFromSettings(_userSettingsData.InterfaceAreaCalibrationSize);
         }
 
         private void OnDisable()
@@ -54,10 +50,10 @@ namespace QRCode.Engine.Game.UI
 
         private void AdjustInterfaceAreaCalibrationFromSettings(int interfaceAreaCalibrationSize)
         {
-            m_rectTransform.SetLeft(interfaceAreaCalibrationSize);
-            m_rectTransform.SetRight(interfaceAreaCalibrationSize);
-            m_rectTransform.SetBottom(interfaceAreaCalibrationSize);
-            m_rectTransform.SetTop(interfaceAreaCalibrationSize);
+            RectTransform.SetLeft(interfaceAreaCalibrationSize);
+            RectTransform.SetRight(interfaceAreaCalibrationSize);
+            RectTransform.SetBottom(interfaceAreaCalibrationSize);
+            RectTransform.SetTop(interfaceAreaCalibrationSize);
         }
     }
 }

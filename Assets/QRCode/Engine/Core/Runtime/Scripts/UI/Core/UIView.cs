@@ -32,7 +32,7 @@ namespace QRCode.Engine.Core.UI
         
         public override void Initialize()
         {
-            UI.UIViewDatabase.AddToDatabase(m_viewName, this);
+            //UI.UIViewDatabase.TryAddToDatabase(m_viewName, this);
             m_cancellationTokenSource = new CancellationTokenSource();
             
             base.Initialize();
@@ -60,7 +60,7 @@ namespace QRCode.Engine.Core.UI
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            UI.UIViewDatabase.RemoveOfDatabase(m_viewName);
+            //UI.UIViewDatabase.TryRemoveOfDatabase(m_viewName);
             m_cancellationTokenSource.Cancel();
         }
     }

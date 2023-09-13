@@ -5,7 +5,7 @@
     public class Save
     {
         private List<ISavableObject> m_savableObjects = new List<ISavableObject>();
-        private SaveManager m_saveManager => SaveManager.Instance;
+        private SaveManager SaveManager => SaveManager.Instance;
         
         private static Save m_current = null;
         public static Save Current
@@ -39,7 +39,7 @@
 
         public void SaveObjects()
         {
-            var gameData = m_saveManager.GetGameData();
+            var gameData = SaveManager.GetGameData();
             foreach (var savableObject in m_savableObjects)
             {
                 savableObject.SaveGameData(ref gameData);
@@ -51,7 +51,7 @@
     {
         private List<ILoadableObject> m_loadableObjects = new List<ILoadableObject>();
 
-        private ISaveService m_saveManager => SaveManager.Instance;
+        private SaveManager m_saveManager => SaveManager.Instance;
 
         private static Load m_current = null;
         public static Load Current

@@ -26,7 +26,7 @@ namespace QRCode.Engine.Game.Inputs
             {
                 if (m_inputHintReminderDatabase == null)
                 {
-                    DB.Instance.TryGetDatabase<InputHintReminderDatabase>(DBEnum.DB_InputHintReminderDatabase, out m_inputHintReminderDatabase);
+                    m_inputHintReminderDatabase = DB.Instance.GetDatabase<InputHintReminderDatabase>(DBEnum.DB_InputHintReminderDatabase);
                 }
 
                 return m_inputHintReminderDatabase;

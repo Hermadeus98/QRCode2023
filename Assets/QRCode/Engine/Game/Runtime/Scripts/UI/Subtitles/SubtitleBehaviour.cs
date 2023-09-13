@@ -1,10 +1,9 @@
 namespace QRCode.Engine.Game.Subtitles
 {
-    using Debugging;
+    using QRCode.Engine.Debugging;
+    using QRCode.Engine.Game.Tags;
     using UnityEngine;
     using UnityEngine.Playables;
-    using Toolbox;
-    using Constants = Toolbox.Constants;
 
     public class SubtitleBehaviour : PlayableBehaviour
     {
@@ -60,14 +59,14 @@ namespace QRCode.Engine.Game.Subtitles
 
         private string ReturnSpeakerNameError()
         {
-            QRDebug.DebugInfo(Constants.DebuggingChannels.Subtitles, "Missing Subtitle Data");
-            return Constants.Subtitles.SubtitleSpeakerNamePlaceHolder;
+            QRLogger.DebugInfo<GameTags.Subtitles>("Missing Subtitle Data");
+            return Toolbox.Constants.Subtitles.SubtitleSpeakerNamePlaceHolder;
         }
         
         private string ReturnTextError()
         {
-            QRDebug.DebugInfo(Constants.DebuggingChannels.Subtitles, "Missing Subtitle Data");
-            return Constants.Subtitles.SubtitleTextPlaceHolder;
+            QRLogger.DebugInfo<GameTags.Subtitles>("Missing Subtitle Data");
+            return Toolbox.Constants.Subtitles.SubtitleTextPlaceHolder;
         }
     }
 }

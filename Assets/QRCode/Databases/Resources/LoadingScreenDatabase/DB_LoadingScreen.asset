@@ -74,4 +74,5 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  m_generatedEnumPath: Assets/QRCode/Scripts/Runtime/UI/LoadingScreen/GeneratedEnum
+  _generatedEnumPath: Assets/QRCode/Engine/Core/Runtime/Scripts/UI/LoadingScreen/GeneratedEnum
+  _namespace: QRCode.Engine.Core.UI.LoadingScreen.GeneratedEnums

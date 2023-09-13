@@ -1,6 +1,7 @@
 namespace QRCode.Engine.Core.Audio
 {
     using Engine.Debugging;
+    using QRCode.Engine.Core.Tags;
     using Sirenix.OdinInspector;
     using UnityEngine;
     using UnityEngine.Audio;
@@ -56,8 +57,7 @@ namespace QRCode.Engine.Core.Audio
         {
             if (m_audioClips.IsNullOrEmpty())
             {
-                QRDebug.DebugError(Constants.DebuggingChannels.Audio, $"Audio Clips should not be null or empty on {name}",
-                    this);
+                QRLogger.DebugError<CoreTags.Audio>($"Audio Clips should not be null or empty on {name}", this);
                 return null;
             }
 

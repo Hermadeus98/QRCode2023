@@ -1,10 +1,11 @@
 ﻿namespace QRCode.Engine.Core.SaveSystem
 {
     using System;
+    using QRCode.Engine.Toolbox.Optimization;
     using SerializedTypes;
 
     [Serializable]
-    public class GameData
+    public class GameData : IDeletable
     {
         public int ValueTest;
         public SerializableDictionary<string, float> DictionaryTest;
@@ -15,6 +16,11 @@
         {
             ValueTest = default;
             DictionaryTest = new SerializableDictionary<string, float>();
+        }
+
+        public void Delete()
+        {
+            
         }
     }
 }

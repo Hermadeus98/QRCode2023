@@ -12,59 +12,35 @@ namespace QRCode.Engine.Core.SceneManagement
     using System.Threading;
     using System.Threading.Tasks;
     
+    using QRCode.Engine.Core.Manager;
     using QRCode.Engine.Debugging;
     using QRCode.Engine.Core.SceneManagement.GeneratedEnum;
-    using QRCode.Engine.Core.Managers;
+    using QRCode.Engine.Core.Tags;
     using QRCode.Engine.Toolbox.Database;
     using QRCode.Engine.Toolbox.Database.GeneratedEnums;
-    using QRCode.Engine.Toolbox.Pattern.Singleton;
-    using Constants = QRCode.Engine.Toolbox.Constants;
-    using Timer = System.Timers.Timer;
 
-    public class SceneManager : MonoBehaviourSingleton<SceneManager>, IManager
+    public class SceneManager : GenericManagerBase<SceneManager>
     {
+        #region Fields
         private Dictionary<string, AsyncOperationHandle<SceneInstance>> m_loadingOperationHandles = null;
         private List<Scene> m_loadedScenes = null;
-        private CancellationTokenSource m_cancellationTokenSource = null;
-        
         private SceneDatabase m_sceneDatabase = null;
-        private SceneDatabase SceneDatabase
-        {
-            get
-            {
-                if (m_sceneDatabase == null)
-                {
-                    if(DB.Instance.TryGetDatabase<SceneDatabase>(DBEnum.DB_Scenes, out var sceneDatabase))
-                    {
-                        m_sceneDatabase = sceneDatabase;
-                    }
-                    else
-                    {
-                        QRDebug.DebugError(Constants.DebuggingChannels.SceneManager, $"Cannot load SceneDatabase, verify DB.");
-                    }
-                }
+        #endregion Fields
 
-                return m_sceneDatabase;
-            }
-        }
-        
-        public Task InitAsync(CancellationToken cancellationToken)
+        #region Methods
+        #region LifeCycle
+        protected override Task InitAsync(CancellationToken cancellationToken)
         {
             m_loadingOperationHandles = new Dictionary<string, AsyncOperationHandle<SceneInstance>>();
-            m_cancellationTokenSource = new CancellationTokenSource();
             m_loadedScenes = new List<Scene>();
-            
+            m_sceneDatabase = DB.Instance.GetDatabase<SceneDatabase>(DBEnum.DB_Scenes);
+
             RegisterLoadedScenes();
 
             return Task.CompletedTask;
         }
-
-        private void OnDestroy()
-        {
-            Delete();
-        }
-
-        public void Delete()
+        
+        public override void Delete()
         {
             if (m_loadingOperationHandles != null)
             {
@@ -80,45 +56,58 @@ namespace QRCode.Engine.Core.SceneManagement
                 m_loadingOperationHandles = null;
             }
 
-            if (m_cancellationTokenSource != null)
+            if (m_loadedScenes != null)
             {
-                m_cancellationTokenSource.Cancel();
-                m_cancellationTokenSource.Dispose();
-                m_cancellationTokenSource = null;
+                m_loadedScenes.Clear();
+                m_loadedScenes = null;
             }
+
+            m_sceneDatabase = null;
+            
+            base.Delete();
         }
-        
+        #endregion LifeCycle
+
+        #region Public Methods
+        /// <summary>
+        /// This class allows to load a scene asynchronously.
+        /// </summary>
         public async Task LoadScene(DB_ScenesEnum sceneToLoad, IProgress<SceneLoadingInfo> sceneLoadingProgress, LoadSceneMode loadSceneMode = LoadSceneMode.Additive)
         {
             var sceneName = sceneToLoad.ToString();
-            if (SceneDatabase.TryGetInDatabase(sceneName, out var sceneReference))
+            if (m_sceneDatabase.TryGetInDatabase(sceneName, out var sceneReference))
             {
                 await LoadSceneInternal(sceneName, sceneReference,sceneLoadingProgress, loadSceneMode);
             }
             else
             {
-                throw new SceneManagementException($"Cannot find {sceneToLoad.ToString()} in {m_sceneDatabase.name}");
+                QRLogger.DebugError<CoreTags.SceneManagement>($"Cannot find {sceneToLoad.ToString()} in {m_sceneDatabase.name}", gameObject);
             }
         }
         
+        /// <summary>
+        /// This class allows to unload a scene asynchronously.
+        /// </summary>
         public async Task UnLoadScene(DB_ScenesEnum sceneToUnload)
         {
             var sceneName = sceneToUnload.ToString();
-            if (SceneDatabase.TryGetInDatabase(sceneName, out _))
+            if (m_sceneDatabase.TryGetInDatabase(sceneName, out _))
             {
                 await UnloadSceneInternal(sceneName);
             }
             else
             {
-                throw new SceneManagementException($"Cannot find {sceneToUnload.ToString()} in {m_sceneDatabase.name}");
+                QRLogger.DebugError<CoreTags.SceneManagement>($"Cannot find {sceneToUnload.ToString()} in {m_sceneDatabase.name}", gameObject);
             }
         }
+        #endregion Public Methods
 
+        #region Private Methods
         private async Task LoadSceneInternal(string sceneToLoad, SceneReference sceneReference, [NotNull] IProgress<SceneLoadingInfo> sceneLoadingProgress, LoadSceneMode loadSceneMode = LoadSceneMode.Additive)
         {
             if (SceneIsAlreadyLoaded(sceneToLoad))
             {
-                QRDebug.DebugError(Constants.DebuggingChannels.SceneManager, $"The scene {sceneToLoad} is already loaded.");
+                QRLogger.DebugError<CoreTags.SceneManagement>($"The scene {sceneToLoad} is already loaded.");
                 return;
             }
 
@@ -207,21 +196,15 @@ namespace QRCode.Engine.Core.SceneManagement
         {
             if (duration < 30)
             {
-                QRDebug.Debug(Constants.DebuggingChannels.TrcCheck, $"Scene Loading duration = {duration} < 30s.");
+                QRLogger.Debug<CoreTags.SceneManagement>($"Scene Loading duration = {duration} < 30s.");
             }
             else
             {
-                QRDebug.DebugError(Constants.DebuggingChannels.TrcCheck, $"Scene Loading duration = {duration} > 30s.");
+                QRLogger.DebugError<CoreTags.SceneManagement>($"Scene Loading duration = {duration} > 30s.");
             }
         }
 #endif
-    }
-
-    public class SceneManagementException : Exception
-    {
-        public SceneManagementException(string message) : base(message)
-        {
-            
-        }
+        #endregion Private Methods
+        #endregion Methods
     }
 }

@@ -27,7 +27,7 @@ namespace QRCode.Editor
 
         private void OnGUI()
         {
-            if (!Application.isPlaying)
+            /*if (!Application.isPlaying)
             {
                 GUILayout.Label("You must be in play mode to use debugger.");
                 isInit = false;
@@ -84,7 +84,7 @@ namespace QRCode.Editor
                 }
 
                 GUILayout.EndVertical();
-            }
+            }*/
         }
     }
 }

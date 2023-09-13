@@ -1,28 +1,27 @@
 namespace QRCode.Engine.Core.SaveSystem.Tests
 {
     using System.Collections.Generic;
-    using SaveSystem;
-    using Toolbox;
-    using Debugging;
+    using QRCode.Engine.Core.Tags;
+    using QRCode.Engine.Debugging;
     using Sirenix.OdinInspector;
     using UnityEngine;
-    using Constants = Toolbox.Constants;
+
 
     public class SaveObjectExample : SerializedMonoBehaviour, ILoadableObject, ISavableObject
     {
-        [SerializeField] private int m_savedInt;
-        [SerializeField] private Dictionary<string, float> m_dictionary;
+        [SerializeField] private int _savedInt;
+        [SerializeField] private Dictionary<string, float> _dictionary;
 
         private void OnEnable()
         {
-            Engine.Core.SaveSystem.Save.Current.Register(this);
-            Engine.Core.SaveSystem.Load.Current.Register(this);
+            SaveSystem.Save.Current.Register(this);
+            SaveSystem.Load.Current.Register(this);
         }
 
         private void OnDisable()
         {
-            Engine.Core.SaveSystem.Save.Current.Unregister(this);
-            Engine.Core.SaveSystem.Load.Current.Unregister(this);
+            SaveSystem.Save.Current.Unregister(this);
+            SaveSystem.Load.Current.Unregister(this);
         }
 
         [Button]
@@ -51,7 +50,7 @@ namespace QRCode.Engine.Core.SaveSystem.Tests
 
                 if (gameDataInEditor == null)
                 {
-                    QRDebug.DebugError(Constants.DebuggingChannels.SaveManager, $"There is no Save Data.");
+                    QRLogger.DebugError<CoreTags.Save>($"There is no Save Data.", gameObject);
                     return;
                 }
 
@@ -73,17 +72,17 @@ namespace QRCode.Engine.Core.SaveSystem.Tests
         
         public void LoadGameData(GameData gameData)
         {
-            m_savedInt = gameData.ValueTest;
-            m_dictionary = new Dictionary<string, float>();
+            _savedInt = gameData.ValueTest;
+            _dictionary = new Dictionary<string, float>();
             foreach (var keyValuePair in gameData.DictionaryTest)
             {
-                m_dictionary.Add(keyValuePair.Key, keyValuePair.Value);
+                _dictionary.Add(keyValuePair.Key, keyValuePair.Value);
             }
         }
 
         public void SaveGameData(ref GameData gameData)
         {
-            gameData.ValueTest = m_savedInt;
+            gameData.ValueTest = _savedInt;
             
             gameData.DictionaryTest.Clear();
             gameData.DictionaryTest.Add("key1", 11);

@@ -3,6 +3,7 @@ namespace QRCode.Engine.Core.GameMode
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Debugging;
+    using QRCode.Engine.Core.Tags;
 
     /// <summary>
     /// This class must contains game rules, player count, how players spawns.
@@ -39,7 +40,7 @@ namespace QRCode.Engine.Core.GameMode
                 }
             }
             
-            QRDebug.DebugFatal(Engine.Constants.EngineConstants.EngineLogChannels.EngineChannel, $"Impossible to find {typeof(T)} in this game mode..");
+            QRLogger.DebugFatal<CoreTags.GameModes>($"Impossible to find {typeof(T)} in this game mode..");
             return default(T);
         }
     }

@@ -1,43 +1,40 @@
 namespace QRCode.Engine.Game.Inputs
 {
+    using System.Threading.Tasks;
+    using QRCode.Engine.Core.Inputs;
+    using QRCode.Engine.Debugging;
+    using QRCode.Engine.Game.Tags;
+    using QRCode.Engine.Toolbox.Database;
+    using QRCode.Engine.Toolbox.Database.GeneratedEnums;
+    using Sirenix.OdinInspector;
     using UnityEngine;
     using UnityEngine.InputSystem;
     using UnityEngine.InputSystem.Users;
     
-    using System.Threading.Tasks;
-    
-    using Sirenix.OdinInspector;
-    
-    using Debugging;
-    using Core.Inputs;
-    using Toolbox.Database;
-    using Toolbox.Database.GeneratedEnums;
-    using Constants = Toolbox.Constants;
-
     public class InputHintBase : SerializedMonoBehaviour
     {
-        [TitleGroup(Constants.InspectorGroups.Settings)] 
+        [TitleGroup(Toolbox.Constants.InspectorGroups.Settings)] 
         [SerializeField] protected bool m_inputIconForAxis = false;
-        [TitleGroup(Constants.InspectorGroups.Settings)] [ShowIf("m_inputIconForAxis")]
+        [TitleGroup(Toolbox.Constants.InspectorGroups.Settings)] [ShowIf("m_inputIconForAxis")]
         [SerializeField] protected bool m_positiveAxis = false;
-        [TitleGroup(Constants.InspectorGroups.Settings)] [SerializeField]
+        [TitleGroup(Toolbox.Constants.InspectorGroups.Settings)] [SerializeField]
         protected int m_alternativeIconIndex = 0;
         
-        [TitleGroup(Constants.InspectorGroups.References)]
+        [TitleGroup(Toolbox.Constants.InspectorGroups.References)]
         [SerializeField] protected InputActionReference m_inputActionReference;
 
-        [TitleGroup(Constants.InspectorGroups.Debugging)]
+        [TitleGroup(Toolbox.Constants.InspectorGroups.Debugging)]
         [SerializeField] protected bool m_activateLogMessage = false;
-        [TitleGroup(Constants.InspectorGroups.Debugging)] 
+        [TitleGroup(Toolbox.Constants.InspectorGroups.Debugging)] 
         [SerializeField] protected bool m_feedbackOnPerformInput = true;
         
-        [TitleGroup(Constants.InspectorGroups.Debugging)]
+        [TitleGroup(Toolbox.Constants.InspectorGroups.Debugging)]
         [SerializeField][ReadOnly] private string m_currentControlScheme;
-        [TitleGroup(Constants.InspectorGroups.Debugging)]
+        [TitleGroup(Toolbox.Constants.InspectorGroups.Debugging)]
         [SerializeField][ReadOnly]protected string m_currentDisplayName;
 
         private InputMapDatabase m_inputMapDatabase;
-        private IInputManagementService m_inputManagementService;
+        private InputManager m_inputManagementService;
         protected PlayerInput m_playerInput;
         private string m_lastControlScheme;
 
@@ -53,7 +50,7 @@ namespace QRCode.Engine.Game.Inputs
             {
                 if (m_inputMapDatabase == null)
                 {
-                    DB.Instance.TryGetDatabase(DBEnum.DB_InputMaps, out m_inputMapDatabase);
+                    m_inputMapDatabase = DB.Instance.GetDatabase<InputMapDatabase>(DBEnum.DB_InputMaps);
                 }
 
                 return m_inputMapDatabase;
@@ -67,7 +64,7 @@ namespace QRCode.Engine.Game.Inputs
             
             if (m_playerInput == null)
             {
-                QRDebug.DebugError(Constants.DebuggingChannels.Error, $"{nameof(m_playerInput)} is null.");
+                QRLogger.DebugError<GameTags.InputHints>($"{nameof(m_playerInput)} is null.");
                 Destroy(this);
             }
         }
@@ -110,7 +107,7 @@ namespace QRCode.Engine.Game.Inputs
             {
                 if (m_inputIconForAxis == false)
                 {
-                    QRDebug.Debug(Constants.DebuggingChannels.Error, $"You should check {nameof(m_inputIconForAxis)} = true because action seems to be an axis.", gameObject);
+                    QRLogger.Debug<GameTags.InputHints>($"You should check {nameof(m_inputIconForAxis)} = true because action seems to be an axis.", gameObject);
                     m_inputIconForAxis = true;
                 }
                 LoadIconForAxis();
@@ -119,7 +116,7 @@ namespace QRCode.Engine.Game.Inputs
             {
                 if (m_inputIconForAxis == true)
                 {
-                    QRDebug.Debug(Constants.DebuggingChannels.Error, $"You should check {nameof(m_inputIconForAxis)} = false because action seems to be a button.", gameObject);
+                    QRLogger.Debug<GameTags.InputHints>($"You should check {nameof(m_inputIconForAxis)} = false because action seems to be a button.", gameObject);
                     m_inputIconForAxis = false;
                 }
 
@@ -151,7 +148,7 @@ namespace QRCode.Engine.Game.Inputs
         {
             if (m_activateLogMessage)
             {
-                QRDebug.Debug(Constants.DebuggingChannels.Inputs, $"SCHEME = {m_currentControlScheme} & INPUT = {m_currentDisplayName} for {m_inputActionReference.action.name}", InputMapDatabase);
+                QRLogger.Debug<GameTags.InputHints>($"SCHEME = {m_currentControlScheme} & INPUT = {m_currentDisplayName} for {m_inputActionReference.action.name}", InputMapDatabase);
             }
         }
         
@@ -167,7 +164,7 @@ namespace QRCode.Engine.Game.Inputs
         {
             if (m_activateLogMessage)
             {
-                QRDebug.Debug(Constants.DebuggingChannels.Inputs, $"SCHEME = {m_currentControlScheme} & INPUT = {m_currentDisplayName} for {m_inputActionReference.action.name}", InputMapDatabase);
+                QRLogger.Debug<GameTags.InputHints>($"SCHEME = {m_currentControlScheme} & INPUT = {m_currentDisplayName} for {m_inputActionReference.action.name}", InputMapDatabase);
             }
         }
 

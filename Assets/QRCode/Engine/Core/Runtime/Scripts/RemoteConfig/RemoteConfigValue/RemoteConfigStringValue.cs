@@ -4,6 +4,7 @@
     using UnityEngine;
     
     using Debugging;
+    using QRCode.Engine.Core.Tags;
 
     [CreateAssetMenu(menuName = "QRCode/Engine/Remote Config/Remote Config Value/String Remote Config Value", fileName = "RCV_NewStringRemoteConfigValue")]
     public class RemoteConfigStringValue : RemoteConfigValueBase<string>
@@ -17,7 +18,7 @@
             else
             {
                 m_value = m_defaultValue;
-                QRDebug.DebugError(Toolbox.Constants.DebuggingChannels.RemoteConfig, $"{nameof(runtimeConfig)} don't contain key for [{m_key}] in {name}. <b>Value</> will be fill with <n>default value</> : {m_defaultValue}.", this);
+                QRLogger.DebugError<CoreTags.RemoteConfigs>($"{nameof(runtimeConfig)} don't contain key for [{m_key}] in {name}. <b>Value</> will be fill with <n>default value</> : {m_defaultValue}.", this);
             }
         }
     }

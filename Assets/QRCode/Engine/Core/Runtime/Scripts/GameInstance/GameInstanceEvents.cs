@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using Toolbox;
     using Debugging;
+    using QRCode.Engine.Core.Tags;
     using Constants = Toolbox.Constants;
 
     public class GameInstanceEvents
@@ -32,7 +33,7 @@
                 m_gameplayComponents[i].OnGameInstanceIsReady(); 
             }
             
-            QRDebug.DebugTrace(Constants.DebuggingChannels.Game, $"On Game Instance is ready.");
+            QRLogger.DebugTrace<CoreTags.GameInstance>($"On Game Instance is ready.");
         }
         
         public void OnLevelLoaded()
@@ -42,7 +43,7 @@
                 m_gameplayComponents[i].OnLevelLoaded();
             }
             
-            QRDebug.DebugTrace(Constants.DebuggingChannels.Game, $"On Level Loaded.");
+            QRLogger.DebugTrace<CoreTags.GameInstance>($"On Level Loaded.");
         }
         
         public void OnLevelUnloaded()
@@ -52,7 +53,7 @@
                 m_gameplayComponents[i].OnLevelUnloaded();
             }
             
-            QRDebug.DebugTrace(Constants.DebuggingChannels.Game, $"On Level Unloaded.");
+            QRLogger.DebugTrace<CoreTags.GameInstance>( $"On Level Unloaded.");
         }
 
         public void DeleteAll()
@@ -62,7 +63,7 @@
                 m_gameplayComponents[i].Delete();
             }
             
-            QRDebug.DebugTrace(Constants.DebuggingChannels.Game, $"On Level Unloaded.");
+            QRLogger.DebugTrace<CoreTags.GameInstance>($"On Level Unloaded.");
         }
     }
 

@@ -44,6 +44,9 @@ MonoBehaviour:
     - Name: $v
       Entry: 7
       Data: QRCode.Engine.Core.SceneManagement.SceneReference, QRCode.Engine
+    - Name: m_sceneName
+      Entry: 1
+      Data: Scene_UI
     - Name: m_scene
       Entry: 7
       Data: 2|UnityEngine.AddressableAssets.AssetReference, Unity.Addressables
@@ -77,6 +80,9 @@ MonoBehaviour:
     - Name: $v
       Entry: 7
       Data: QRCode.Engine.Core.SceneManagement.SceneReference, QRCode.Engine
+    - Name: m_sceneName
+      Entry: 1
+      Data: Scene_Main
     - Name: m_scene
       Entry: 7
       Data: 3|UnityEngine.AddressableAssets.AssetReference, Unity.Addressables
@@ -107,4 +113,5 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  m_generatedEnumPath: Assets/QRCode/Framework/SceneManagement/GeneratedScripts
+  _generatedEnumPath: Assets/QRCode/Engine/Core/Runtime/Scripts/SceneManager/GeneratedScripts
+  _nameSpace: QRCode.Engine.Core.SceneManagement.GeneratedEnum

@@ -122,18 +122,19 @@ namespace UnityToolbarExtender
         {
             m_sceneGenericMenu = new GenericMenu();
 
-            DB.Instance.TryGetDatabase<GameLevelDatabase>(DBEnum.DB_Levels, out var levelDatabase);
-
-            foreach (var sceneReference in levelDatabase.GetDatabase)
+            GameLevelDatabase gameLevelDatabase = DB.Instance.GetDatabase<GameLevelDatabase>(DBEnum.DB_GameLevels);
+            foreach (var sceneReference in gameLevelDatabase.GetDatabase)
             {
-                m_sceneGenericMenu.AddItem(new GUIContent(sceneReference.Key), false, () => TryLoadSceneGroup(sceneReference.Value));
+                m_sceneGenericMenu.AddItem(new GUIContent(sceneReference.Key), false,
+                    () => TryLoadSceneGroup(sceneReference.Value));
             }
-            
-            DB.Instance.TryGetDatabase<SceneDatabase>(DBEnum.DB_Scenes, out var sceneDatabase);
+
+            var sceneDatabase = DB.Instance.GetDatabase<SceneDatabase>(DBEnum.DB_Scenes);
 
             foreach (var sceneReference in sceneDatabase.GetDatabase)
             {
-                m_sceneGenericMenu.AddItem(new GUIContent(sceneReference.Key), false, () => TryLoadScene(sceneReference.Value));
+                m_sceneGenericMenu.AddItem(new GUIContent(sceneReference.Key), false,
+                    () => TryLoadScene(sceneReference.Value));
             }
 
             if (GUILayout.Button(new GUIContent("Scene Selector")))

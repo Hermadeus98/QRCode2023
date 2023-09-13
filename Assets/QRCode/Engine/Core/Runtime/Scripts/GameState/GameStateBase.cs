@@ -1,6 +1,7 @@
 namespace QRCode.Engine.Core.GameState
 {
     using Debugging;
+    using QRCode.Engine.Core.Tags;
     using UnityEngine;
     
     /// <summary>
@@ -13,14 +14,14 @@ namespace QRCode.Engine.Core.GameState
         
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            QRDebug.DebugInfo(Engine.Constants.EngineConstants.EngineLogChannels.GameStateStatusChannel, $"Enter in : {m_gameStateName}");
+            QRLogger.DebugInfo<CoreTags.GameStates>($"Enter in : {m_gameStateName}");
             base.OnStateEnter(animator, stateInfo, layerIndex);
             OnEnter(animator);
         }
 
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            QRDebug.DebugInfo(Engine.Constants.EngineConstants.EngineLogChannels.GameStateStatusChannel, $"Exit : {m_gameStateName}");
+            QRLogger.DebugInfo<CoreTags.GameStates>($"Exit : {m_gameStateName}");
 
             base.OnStateExit(animator, stateInfo, layerIndex);
             OnExit(animator);

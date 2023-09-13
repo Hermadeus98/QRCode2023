@@ -1,41 +1,43 @@
 ﻿namespace QRCode.Engine.Core.SaveSystem
 {
-    using UnityEngine;
-
-    using System.Linq;
     using System;
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     
     using Sirenix.OdinInspector;
+    
+    using QRCode.Engine.Core.Manager;
+    using QRCode.Engine.Core.Tags;
+    using QRCode.Engine.Debugging;
+    using QRCode.Engine.Toolbox.Optimization;
+    using Constants = QRCode.Engine.Toolbox.Constants;
+    
+    using UnityEngine;
 
-    using Managers;
-    using Debugging;
-    using Toolbox;
-    using Toolbox.Optimization;
-    using Toolbox.Pattern.Singleton;
-    using Constants = Toolbox.Constants;
-
-    public class SaveManager : MonoBehaviourSingleton<SaveManager>, ISaveService, IManager, IDeletable
+    public class SaveManager : GenericManagerBase<SaveManager>, IDeletable
     {
         #region Fields
-        [TitleGroup(Constants.InspectorGroups.Debugging)]
+        #region Serialized
+        [TitleGroup(Constants.InspectorGroups.References)][ReadOnly]
+        [Tooltip("The current loaded game data.")]
         [ShowInInspector] private GameData m_gameData = null;
-        
+        #endregion Serialized
+
+        #region Internals
         private IFileDataHandler m_fileDataHandler = null;
         private SaveServiceSettings m_saveServiceSettings = null;
-        private CancellationTokenSource m_cancellationTokenSource = null;
 
         private bool m_isSaving = false;
         private bool m_isLoading = false;
-        private bool m_isInit = false;
+        #endregion Internals
         #endregion
 
         #region Events
-        private Action m_onStartSave;
-        private Action m_onEndSave;
-        private Action m_onStartLoad;
-        private Action m_onEndLoad;
+        private Action m_onStartSave = null;
+        private Action m_onEndSave = null;
+        private Action m_onStartLoad = null;
+        private Action m_onEndLoad = null;
         
         public event Action OnStartSave
         {
@@ -64,22 +66,17 @@
 
         #region Methods
         #region Initialization
-        public async Task InitAsync(CancellationToken cancellationToken)
+        protected override async Task InitAsync(CancellationToken cancellationToken)
         {
-            if(m_isInit)
-                return;
-            
             var saveSystemSettings = SaveServiceSettings.Instance;
             m_fileDataHandler = FileDataHandlerFactory.CreateFileDataHandler(saveSystemSettings.FullPath, saveSystemSettings.FullFileName);
             m_saveServiceSettings = SaveServiceSettings.Instance;
-            m_cancellationTokenSource = new CancellationTokenSource();
 
 #if UNITY_STANDALONE
             Application.wantsToQuit += OnStandaloneExit;
 #endif
 
             await LoadGameAsync();
-            m_isInit = true;
         }
         #endregion
 
@@ -92,7 +89,7 @@
         public Task NewGame()
         {
             m_gameData = new GameData();
-            QRDebug.Debug(Constants.DebuggingChannels.SaveManager, $"New game data was created...");
+            QRLogger.Debug<CoreTags.Save>($"New game data was created...");
             return Task.CompletedTask;
         }
 
@@ -101,7 +98,7 @@
         {
             if (m_isLoading)
             {
-                QRDebug.DebugError(Constants.DebuggingChannels.SaveManager,$"Game is already loading...");
+                QRLogger.DebugError<CoreTags.Save>($"Game is already loading...");
                 return;
             }
             
@@ -112,7 +109,7 @@
 
             if (m_gameData == null)
             {
-                QRDebug.Debug(Constants.DebuggingChannels.SaveManager, $"No {nameof(m_gameData)} was found. Initializing default values.");
+                QRLogger.Debug<CoreTags.Save>($"No {nameof(m_gameData)} was found. Initializing default values.");
                 await NewGame();
             }   
             
@@ -120,7 +117,7 @@
             m_onEndLoad?.Invoke();
             m_isLoading = false;
 
-            QRDebug.Debug(Constants.DebuggingChannels.SaveManager,$"Game data is load.");
+            QRLogger.Debug<CoreTags.Save>($"Game data is load.");
         }
 
         [Button]
@@ -128,7 +125,7 @@
         {
             if (m_isSaving)
             {
-                QRDebug.DebugError(Constants.DebuggingChannels.SaveManager,$"Game is already saving...");
+                QRLogger.DebugError<CoreTags.Save>($"Game is already saving...");
                 return;
             }   
             
@@ -137,7 +134,7 @@
             
             if (m_saveServiceSettings.UseFakeSave)
             {
-                await Task.Delay(TimeSpan.FromSeconds(m_saveServiceSettings.FakeSaveDuration), m_cancellationTokenSource.Token);
+                await Task.Delay(TimeSpan.FromSeconds(m_saveServiceSettings.FakeSaveDuration), CancellationTokenSource.Token);
             }
             
             Save.Current.SaveObjects();
@@ -145,7 +142,7 @@
             m_onEndSave?.Invoke();
             m_isSaving = false;
             
-            QRDebug.Debug(Constants.DebuggingChannels.SaveManager,$"Game data is save.");
+            QRLogger.Debug<CoreTags.Save>($"Game data is save.");
         }
 
         [Button]
@@ -156,7 +153,7 @@
 
             if (task.Result == true)
             {
-                QRDebug.Debug(Constants.DebuggingChannels.SaveManager, $"Game data is delete.");
+                QRLogger.Debug<CoreTags.Save>($"Game data is delete.");
             }
         }
 
@@ -169,32 +166,22 @@
         {
             return m_isLoading;
         }
-        
-        public bool IsInit()
+
+        public override void Delete()
         {
-            return m_isInit;
-        }
-        
-        public void Delete()
-        {
-            m_gameData = null;
-            if (m_cancellationTokenSource != null)
+            if (m_gameData != null)
             {
-                m_cancellationTokenSource.Cancel();
-                m_cancellationTokenSource.Dispose();
-                m_cancellationTokenSource = null;
+                m_gameData.Delete();
+                m_gameData = null;
             }
 
-            m_fileDataHandler = null;
+            if (m_fileDataHandler != null)
+            {
+                m_fileDataHandler.Dispose();
+                m_fileDataHandler = null;
+            }
         }
         
-        #endregion
-
-        #region Lifecycle
-        private void OnDestroy()
-        {
-            Delete();
-        }
         #endregion
 
         #region Privates
@@ -235,7 +222,7 @@
 
             if (gameData == null)
             {
-                QRDebug.DebugError(Constants.DebuggingChannels.Editor, $"There is no Game Data");
+                QRLogger.DebugError<CoreTags.Save>($"There is no Game Data");
                 return null;
             }
                 
@@ -246,7 +233,7 @@
                 loadableObjects[i].LoadGameData(gameData as GameData);
             }
                 
-            QRDebug.Debug(Constants.DebuggingChannels.Editor, $"Load in editor is successful.");
+            QRLogger.Debug<CoreTags.Save>($"Load in editor is successful.");
             return gameData as GameData;
         }
 
@@ -261,20 +248,18 @@
             }
             
             var saveSystemSettings = SaveServiceSettings.Instance;
-            var fileDataHandler = FileDataHandlerFactory.CreateFileDataHandler(saveSystemSettings.FullPath,
-                saveSystemSettings.FullFileName);
+            var fileDataHandler = FileDataHandlerFactory.CreateFileDataHandler(saveSystemSettings.FullPath, saveSystemSettings.FullFileName);
             await fileDataHandler.Save(gameData);
             
-            QRDebug.Debug(Constants.DebuggingChannels.Editor, $"Save in editor is successful.");
+            QRLogger.Debug<CoreTags.Save>($"Save in editor is successful.");
         }
         
         public static void DeleteSaveInEditor()
         {
             var saveSystemSettings = SaveServiceSettings.Instance;
-            var fileDataHandler = FileDataHandlerFactory.CreateFileDataHandler(saveSystemSettings.FullPath,
-                saveSystemSettings.FullFileName);
+            var fileDataHandler = FileDataHandlerFactory.CreateFileDataHandler(saveSystemSettings.FullPath, saveSystemSettings.FullFileName);
             fileDataHandler.TryDeleteSave();
-            QRDebug.Debug(Constants.DebuggingChannels.Editor, $"Save Data has been deleted successfully");
+            QRLogger.Debug<CoreTags.Save>($"Save Data has been deleted successfully");
         }
 #endif
         #endregion

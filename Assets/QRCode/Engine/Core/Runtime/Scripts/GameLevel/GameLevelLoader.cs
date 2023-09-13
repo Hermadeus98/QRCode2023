@@ -13,23 +13,23 @@ namespace QRCode.Engine.Core.GameLevels
         [SerializeField] private DB_LoadingScreenEnum m_loadingScreenEnum = DB_LoadingScreenEnum.Undefined;
         [SerializeField] private bool m_forceReload = false;
 
-        private IGameLevelManagementService m_gameLevelManagementService;
-        private IGameLevelManagementService GameLevelManagementService
+        private GameLevelManager m_gameLevelManager;
+        private GameLevelManager GameLevelManager
         {
             get
             {
-                if (m_gameLevelManagementService == null)
+                if (m_gameLevelManager == null)
                 {
-                    m_gameLevelManagementService = GameLevelManager.Instance;
+                    m_gameLevelManager = GameLevelManager.Instance;
                 }
 
-                return m_gameLevelManagementService;
+                return m_gameLevelManager;
             }
         }
 
         public async Task ChangeLevel()
         {
-            await GameLevelManagementService.ChangeLevel(gameLevelToLoad, m_loadingScreenEnum, m_forceReload);
+            await GameLevelManager.ChangeLevel(gameLevelToLoad, m_loadingScreenEnum, m_forceReload);
         }
     }
 }

@@ -1,34 +1,43 @@
 namespace QRCode.Engine.Core.UserSettings
 {
     using System.Threading.Tasks;
-    using Constants;
-    using SaveSystem;
-    using Debugging;
+    using QRCode.Engine.Constants;
+    using QRCode.Engine.Core.SaveSystem;
+    using QRCode.Engine.Core.Tags;
+    using QRCode.Engine.Debugging;
+    using QRCode.Engine.Toolbox.Settings;
     using Sirenix.OdinInspector;
     using UnityEngine;
-    using Toolbox;
-    using Toolbox.Settings;
-    using Constants = Toolbox.Constants;
 
     [CreateAssetMenu(menuName = UserSettingsConstants.UserSettings.UserSettingsSettingsPath, fileName = "STG_UserSettingsSettings")]
     public class UserSettingsServiceSettings : Settings<UserSettingsServiceSettings>
     {
+        #region Fields
         [TitleGroup("General Settings")] 
-        [SerializeField] [SuffixLabel("@this.m_fileNameExtension")] 
-        private string m_fileName = "userSettings";
-        [SerializeField] 
-        private string m_fileNameExtension = ".save";
+        [Tooltip("The file name where all the user settings will be saved.")]
+        [SuffixLabel("@this._fileNameExtension")] 
+        [SerializeField] private string _fileName = "userSettings";
+        
+        [TitleGroup("General Settings")] 
+        [Tooltip("The extension of the file where all the user settings will be saved.")]
+        [SerializeField] private string _fileNameExtension = ".save";
 
         [TitleGroup("Default Values")]
-        [SerializeField] 
-        private UserSettingsData m_defaultValues = new UserSettingsData();
-        
-        public string FullFileName => m_fileName + m_fileNameExtension;
+        [Tooltip("The default values used to create a new User Settings at the first initialization of the application.")]
+        [SerializeField] private UserSettingsData _defaultValues = new UserSettingsData();
+        #endregion Fields
+
+        #region Properties
+        /// <summary>
+        /// FullFileName correspond to the fileName + fileNameExtension.
+        /// </summary>
+        public string FullFileName => _fileName + _fileNameExtension;
+        #endregion Properties
 
         [Button]
         private void ResetDefaultValues()
         {
-            m_defaultValues = new UserSettingsData();
+            _defaultValues = new UserSettingsData();
         }
         
         [Button]
@@ -41,8 +50,8 @@ namespace QRCode.Engine.Core.UserSettings
         {
             var saveServiceSettings = SaveServiceSettings.Instance;
             var fileDataHandler = FileDataHandlerFactory.CreateFileDataHandler(saveServiceSettings.FullPath, FullFileName);
-            await fileDataHandler.Save(m_defaultValues);
-            QRDebug.Debug(Constants.DebuggingChannels.Editor,$"User Settings has been changed.");
+            await fileDataHandler.Save(_defaultValues);
+            QRLogger.Debug<CoreTags.UserSettings>($"User Settings has been changed.");
         }
 
         private void OnValidate()
@@ -56,26 +65,26 @@ namespace QRCode.Engine.Core.UserSettings
         private void ApplyChange()
         {
             var userSettingService = UserSettingsManager.Instance;
-            var userSettings = userSettingService.GetUserSettingsData();
+            var userSettings = userSettingService.GetUserSettingsData;
 
             //CONTROLS
-            userSettings.MenuHoldFactor = m_defaultValues.MenuHoldFactor;
+            userSettings.MenuHoldFactor = _defaultValues.MenuHoldFactor;
             
             //INTERFACE
-            userSettings.InterfaceAreaCalibrationSize = m_defaultValues.InterfaceAreaCalibrationSize;
-            userSettings.TextSizeSetting = m_defaultValues.TextSizeSetting;
-            userSettings.GamepadCursorSensibility = m_defaultValues.GamepadCursorSensibility;
-            userSettings.MenuNavigationSettings = m_defaultValues.MenuNavigationSettings;
+            userSettings.InterfaceAreaCalibrationSize = _defaultValues.InterfaceAreaCalibrationSize;
+            userSettings.TextSizeSetting = _defaultValues.TextSizeSetting;
+            userSettings.GamepadCursorSensibility = _defaultValues.GamepadCursorSensibility;
+            userSettings.MenuNavigationSettings = _defaultValues.MenuNavigationSettings;
 
             //SOUND
-            userSettings.VoiceLanguage = m_defaultValues.VoiceLanguage;
-            userSettings.ShowSubtitles = m_defaultValues.ShowSubtitles;
-            userSettings.ShowSubtitleBackground = m_defaultValues.ShowSubtitleBackground;
-            userSettings.SubtitleBackgroundOpacity = m_defaultValues.SubtitleBackgroundOpacity;
-            userSettings.ShowSubtitleSpeakerName = m_defaultValues.ShowSubtitleSpeakerName;
-            userSettings.SubtitlesTextSizeSetting = m_defaultValues.SubtitlesTextSizeSetting;
+            userSettings.VoiceLanguage = _defaultValues.VoiceLanguage;
+            userSettings.ShowSubtitles = _defaultValues.ShowSubtitles;
+            userSettings.ShowSubtitleBackground = _defaultValues.ShowSubtitleBackground;
+            userSettings.SubtitleBackgroundOpacity = _defaultValues.SubtitleBackgroundOpacity;
+            userSettings.ShowSubtitleSpeakerName = _defaultValues.ShowSubtitleSpeakerName;
+            userSettings.SubtitlesTextSizeSetting = _defaultValues.SubtitlesTextSizeSetting;
             
-            userSettingService.ApplyChange(m_defaultValues);
+            userSettingService.ApplyChange();
         }
     }
 }

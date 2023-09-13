@@ -2,83 +2,98 @@
 {
     using System.Threading;
     using System.Threading.Tasks;
-    
-    using Engine.Core.Managers;
-    using Engine.Core.SaveSystem;
-    using Engine.Debugging;
-    using Engine.Toolbox.Pattern.Singleton;
-    using Constants = Engine.Toolbox.Constants;
+    using QRCode.Engine.Core.Manager;
+    using QRCode.Engine.Core.SaveSystem;
+    using QRCode.Engine.Core.Tags;
+    using QRCode.Engine.Debugging;
+    using QRCode.Engine.Toolbox.Optimization;
 
-    public class UserSettingsManager : MonoBehaviourSingleton<UserSettingsManager>, IUserSettingsService, IManager
+    /// <summary>
+    /// This class manage all the user settings.
+    /// </summary>
+    public class UserSettingsManager : GenericManagerBase<UserSettingsManager>, IDeletable
     {
-        private UserSettingsData m_userSettingsData = null;
-        private IFileDataHandler m_fileDataHandler = null;
+        #region Fields
+        private UserSettingsData _userSettingsData = null;
+        private IFileDataHandler _fileDataHandler = null;
+        #endregion Fields
 
-        private bool m_IsInit = false;
-
-        public bool IsInit
-        {
-            get
-            {
-                return m_IsInit;
-            }
-        }
+        #region Properties
+        /// <summary>
+        /// Return the current <see cref="_userSettingsData"/>.
+        /// </summary>
+        public UserSettingsData GetUserSettingsData { get { return _userSettingsData; } }
+        #endregion Properties
         
-        public async Task InitAsync(CancellationToken cancellationToken)
+        #region Methods
+        #region LifeCycle
+        protected override async Task InitAsync(CancellationToken cancellationToken)
         {
-            if (m_IsInit)
-            {
-                m_IsInit = true;
-                return;
-            }
-            
             var saveServiceSettings = SaveServiceSettings.Instance;
             var userSettingsSettings = UserSettingsServiceSettings.Instance;
-            m_fileDataHandler = FileDataHandlerFactory.CreateFileDataHandler(saveServiceSettings.FullPath, userSettingsSettings.FullFileName);
+            _fileDataHandler = FileDataHandlerFactory.CreateFileDataHandler(saveServiceSettings.FullPath, userSettingsSettings.FullFileName);
             await LoadUserSettingsData();
             
             UserSettingsEvents.RaiseUserSettingsEvents();
         }
 
-        public UserSettingsData GetUserSettingsData()
+        public override void Delete()
         {
-            return m_userSettingsData;
-        }
-
-        public async Task CreateUserSettingsData()
-        {
-            m_userSettingsData = new UserSettingsData();
-            await SaveUserSettingsData();
-        }
-
-        public async Task LoadUserSettingsData()
-        {
-            m_userSettingsData = await m_fileDataHandler.Load<UserSettingsData>();
+            _userSettingsData = null;
             
-            if (m_userSettingsData == null)
+            if (_fileDataHandler != null)
             {
-                QRDebug.Debug(Constants.DebuggingChannels.UserSettings, $"No {nameof(m_userSettingsData)} was found. Initializing default values.");
-                await CreateUserSettingsData();
+                _fileDataHandler.Dispose();
+                _fileDataHandler = null;
             }
             
-            QRDebug.Debug(Constants.DebuggingChannels.UserSettings,$"User Settings are load.");
+            base.Delete();
         }
+        #endregion LifeCycle
 
+        #region Public Methods
+        /// <summary>
+        /// Create new <see cref="UserSettingsData"/> with default values.
+        /// </summary>
+        private async Task CreateNewUserSettingsData()
+        {
+            _userSettingsData = new UserSettingsData();
+            await SaveUserSettingsData();
+        }
+        
+        /// <summary>
+        /// Save <see cref="UserSettingsData"/>.
+        /// </summary>
         public async Task SaveUserSettingsData()
         {
-            await m_fileDataHandler.Save(m_userSettingsData);
+            await _fileDataHandler.Save(_userSettingsData);
             
-            QRDebug.Debug(Constants.DebuggingChannels.UserSettings,$"User Settings is save.");
+            QRLogger.Debug<CoreTags.UserSettings>($"User Settings is save.");
         }
 
-        public void ApplyChange(UserSettingsData newUserSettingsData = null)
+        /// <summary>
+        /// Will raise <see cref="UserSettingsEvents"/>.
+        /// </summary>
+        public void ApplyChange()
         {
             UserSettingsEvents.RaiseUserSettingsEvents();
         }
+        #endregion Public Methods
 
-        public void Delete()
+        #region Private Methods
+        private async Task LoadUserSettingsData()
         {
+            _userSettingsData = await _fileDataHandler.Load<UserSettingsData>();
             
+            if (_userSettingsData == null)
+            {
+                QRLogger.Debug<CoreTags.UserSettings>($"No {nameof(_userSettingsData)} was found. Initializing default values.");
+                await CreateNewUserSettingsData();
+            }
+            
+            QRLogger.Debug<CoreTags.UserSettings>($"User Settings are load.");
         }
+        #endregion Private Methods
+        #endregion Methods
     }
 }

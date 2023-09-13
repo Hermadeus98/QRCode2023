@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using Toolbox;
     using Engine.Debugging;
+    using QRCode.Engine.Core.Tags;
     using Surrogates;
     using UnityEngine;
     using Constants = Toolbox.Constants;
@@ -34,7 +35,7 @@
                 }
                 catch (Exception e)
                 {
-                    QRDebug.DebugFatal(Constants.DebuggingChannels.SaveManager, e);
+                    QRLogger.DebugFatal<CoreTags.Save>(e);
                     throw;
                 }    
             }
@@ -81,6 +82,10 @@
             }
 
             return modifiedData;
+        }
+
+        public void Dispose()
+        {
         }
     }
 }

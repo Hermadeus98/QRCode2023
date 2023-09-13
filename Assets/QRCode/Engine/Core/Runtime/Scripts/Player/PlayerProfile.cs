@@ -4,6 +4,6 @@
 
     public class PlayerProfile
     {
-        public UserSettingsData UserSettingsData => UserSettingsManager.Instance.GetUserSettingsData();
+        public UserSettingsData UserSettingsData => UserSettingsManager.Instance.GetUserSettingsData;
     }
 }

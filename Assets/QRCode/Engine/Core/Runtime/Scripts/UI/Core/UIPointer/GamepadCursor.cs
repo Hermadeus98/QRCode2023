@@ -24,7 +24,7 @@ namespace QRCode.Engine.Core.UI.Cursor
         [SerializeField] private VirtualMouseInput m_virtualMouse;
         
         private static GamepadCursor Main;
-        private IInputManagementService m_inputManagementService = null;
+        private InputManager m_inputManagementService = null;
 
         private MenuNavigationSettings m_menuNavigationSettings;
         private float m_initialSpeed;
@@ -54,7 +54,7 @@ namespace QRCode.Engine.Core.UI.Cursor
             {
                 if (m_userSettingsData == null)
                 {
-                    m_userSettingsData = UserSettingsManager.Instance.GetUserSettingsData();
+                    m_userSettingsData = UserSettingsManager.Instance.GetUserSettingsData;
                 }
 
                 return m_userSettingsData;

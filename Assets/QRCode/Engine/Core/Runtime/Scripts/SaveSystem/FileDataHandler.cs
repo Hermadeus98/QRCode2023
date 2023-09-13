@@ -6,6 +6,7 @@
     using Formatters;
     using Toolbox;
     using Engine.Debugging;
+    using QRCode.Engine.Core.Tags;
     using Constants = Toolbox.Constants;
 
     /// <summary>
@@ -13,7 +14,7 @@
     /// </summary>
     public class FileDataHandler : IFileDataHandler
     {
-        private readonly string m_fullPath;
+        private readonly string m_fullPath = String.Empty;
         private readonly IFormatter m_formatter = null;
         
         public FileDataHandler(string dataDirectoryPath, string dataFileName)
@@ -45,16 +46,24 @@
                 }
                 else
                 {
-                    QRDebug.DebugFatal(Constants.DebuggingChannels.SaveManager, $"Cannot delete any file at path {m_fullPath}.");
+                    QRLogger.DebugFatal<CoreTags.Save>($"Cannot delete any file at path {m_fullPath}.");
                 }
             }
             catch (Exception e)
             {
-                QRDebug.DebugFatal(Constants.DebuggingChannels.SaveManager, e);
+                QRLogger.DebugFatal<CoreTags.Save>(e);
                 throw;
             }
 
             return Task.FromResult(false);
+        }
+
+        public void Dispose()
+        {
+            if (m_formatter != null)
+            {
+                m_formatter.Dispose();
+            }
         }
     }
 }

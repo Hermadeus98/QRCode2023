@@ -14,6 +14,7 @@ namespace QRCode.Editor.SceneSelector
     using Engine.Toolbox.Database;
     using Engine.Toolbox.Database.GeneratedEnums;
     using Engine.Toolbox.Extensions;
+    using QRCode.Engine.Core.Tags;
 
     public class SceneWindowEditor : EditorWindow
     {
@@ -23,7 +24,6 @@ namespace QRCode.Editor.SceneSelector
         private static Dictionary<string, GameLevelData> LevelReferenceGroups = null;
         private static Dictionary<string, SceneReference> SceneReferenceGroups = null;
 
-        
         [MenuItem("QRCode/Scene Selector")]
         private static void Init()
         {
@@ -31,18 +31,18 @@ namespace QRCode.Editor.SceneSelector
             window.titleContent = new GUIContent("Scene Selector");
             window.Show();
 
-            DB.Instance.TryGetDatabase<GameLevelDatabase>(DBEnum.DB_Levels, out m_gameLevelDatabase);
-            DB.Instance.TryGetDatabase<SceneDatabase>(DBEnum.DB_Scenes, out m_sceneDatabase);
+            m_gameLevelDatabase = DB.Instance.GetDatabase<GameLevelDatabase>(DBEnum.DB_GameLevels);
+            m_sceneDatabase = DB.Instance.GetDatabase<SceneDatabase>(DBEnum.DB_Scenes);
 
             if (m_gameLevelDatabase == null)
             {
-                QRDebug.DebugMessage(QRCode.Engine.Debugging.LogType.Error, "Editor", $"Impossible to load {nameof(m_gameLevelDatabase)}.");
+                QRLogger.DebugError<CoreTags.SceneManagement>( $"Impossible to load {nameof(m_gameLevelDatabase)}.");
                 return;
             }
             
             if (m_sceneDatabase == null)
             {
-                QRDebug.DebugMessage(QRCode.Engine.Debugging.LogType.Error, "Editor", $"Impossible to load {nameof(m_sceneDatabase)}.");
+                QRLogger.DebugError<CoreTags.SceneManagement>($"Impossible to load {nameof(m_sceneDatabase)}.");
                 return;
             }
             

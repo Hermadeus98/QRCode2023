@@ -21,7 +21,7 @@ namespace QRCode.Editor
         protected override void Initialize()
         {
             base.Initialize();
-            DB.Instance.TryGetDatabase(DBEnum.DB_InputMaps, out m_inputMapDatabase);
+            m_inputMapDatabase = DB.Instance.GetDatabase<InputMapDatabase>(DBEnum.DB_InputMaps);
         }
     }
 }

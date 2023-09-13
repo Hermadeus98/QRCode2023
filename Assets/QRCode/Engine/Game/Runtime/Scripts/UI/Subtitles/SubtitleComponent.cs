@@ -30,7 +30,7 @@ namespace QRCode.Engine.Game.Subtitles
             {
                 if (m_userSettingsData == null)
                 {
-                    m_userSettingsData = UserSettingsManager.Instance.GetUserSettingsData();
+                    m_userSettingsData = UserSettingsManager.Instance.GetUserSettingsData;
                 }
 
                 return m_userSettingsData;

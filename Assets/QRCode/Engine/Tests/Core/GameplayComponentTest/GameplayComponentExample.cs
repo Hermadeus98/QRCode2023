@@ -1,42 +1,42 @@
 namespace QRCode.Engine.Core.Tests
 {
-    using Debugging;
-    using Constants = Toolbox.Constants;
+    using QRCode.Engine.Core.Tags;
+    using QRCode.Engine.Debugging;
 
     public class GameplayComponentExample : GameplayComponent
     {
         private void Awake()
         {
-            QRDebug.DebugInfo(Constants.DebuggingChannels.LifeCycle, "GAMEPLAY COMPONENT TEST -> AWAKE");
+            QRLogger.DebugInfo<CoreTags.LifeCycle>("GAMEPLAY COMPONENT TEST -> AWAKE");
         }
 
         private void Start()
         {
-            QRDebug.DebugInfo(Constants.DebuggingChannels.LifeCycle, "GAMEPLAY COMPONENT TEST -> START");
+            QRLogger.DebugInfo<CoreTags.LifeCycle>("GAMEPLAY COMPONENT TEST -> START");
         }
 
         protected override void OnEnable()
         {
             base.OnEnable();
-            QRDebug.DebugInfo(Constants.DebuggingChannels.LifeCycle, "GAMEPLAY COMPONENT TEST -> ON_ENABLE");
+            QRLogger.DebugInfo<CoreTags.LifeCycle>("GAMEPLAY COMPONENT TEST -> ON_ENABLE");
         }
 
         public override void OnGameInstanceIsReady()
         {
             base.OnGameInstanceIsReady();
-            QRDebug.DebugInfo(Constants.DebuggingChannels.LifeCycle, "GAMEPLAY COMPONENT TEST -> ON_GAME_INSTANCE_IS_READY");
+            QRLogger.DebugInfo<CoreTags.LifeCycle>("GAMEPLAY COMPONENT TEST -> ON_GAME_INSTANCE_IS_READY");
         }
 
         public override void OnLevelLoaded()
         {
             base.OnLevelLoaded();
-            QRDebug.DebugInfo(Constants.DebuggingChannels.LifeCycle, "GAMEPLAY COMPONENT TEST -> ON_LEVEL_LOADED");
+            QRLogger.DebugInfo<CoreTags.LifeCycle>("GAMEPLAY COMPONENT TEST -> ON_LEVEL_LOADED");
         }
         
         public override void OnLevelUnloaded()
         {
             base.OnLevelLoaded();
-            QRDebug.DebugInfo(Constants.DebuggingChannels.LifeCycle, "GAMEPLAY COMPONENT TEST -> ON_LEVEL_UNLOADED");
+            QRLogger.DebugInfo<CoreTags.LifeCycle>("GAMEPLAY COMPONENT TEST -> ON_LEVEL_UNLOADED");
         }
     }
 }

@@ -9,6 +9,7 @@ namespace QRCode.Engine.Core.Inputs
 
     using Toolbox;
     using Debugging;
+    using QRCode.Engine.Core.Tags;
     using Toolbox.Database;
     using Constants = Toolbox.Constants;
 
@@ -56,7 +57,7 @@ namespace QRCode.Engine.Core.Inputs
                 {
                     if (m_inputMapElements[i].InputIcons.Length - 1 > alternativeInputIconIndex)
                     {
-                        QRDebug.DebugError(Constants.DebuggingChannels.Inputs, $"There is no icon at index {alternativeInputIconIndex} in {inputName} in {m_mapScheme}");
+                        QRLogger.DebugError<CoreTags.Inputs>($"There is no icon at index {alternativeInputIconIndex} in {inputName} in {m_mapScheme}");
                         return m_inputMapElements[i].InputIcons[0];
                     }
                     
@@ -64,7 +65,7 @@ namespace QRCode.Engine.Core.Inputs
                 }
             }
 
-            QRDebug.DebugError(Constants.DebuggingChannels.Inputs, $"Cannot find InputMapElement with [{inputName}] in {m_mapScheme}.");
+            QRLogger.DebugError<CoreTags.Inputs>($"Cannot find InputMapElement with [{inputName}] in {m_mapScheme}.");
             return InputSettings.NotFoundedIconSprite;
         }
 
@@ -77,7 +78,7 @@ namespace QRCode.Engine.Core.Inputs
                     return m_inputMapElements[i].TextMeshProSpriteSheetIndex;
                 }
             }
-            QRDebug.DebugError(Constants.DebuggingChannels.Inputs, $"Cannot find InputMapElement with {inputName} in {m_mapScheme}.");
+            QRLogger.DebugError<CoreTags.Inputs>($"Cannot find InputMapElement with {inputName} in {m_mapScheme}.");
             return -1;
         }
     }

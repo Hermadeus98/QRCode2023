@@ -30,7 +30,7 @@ namespace QRCode.Engine.Core.Localization
             {
                 if (m_userSettingsData == null)
                 {
-                    m_userSettingsData = UserSettingsManager.Instance.GetUserSettingsData();
+                    m_userSettingsData = UserSettingsManager.Instance.GetUserSettingsData;
                 }
 
                 return m_userSettingsData;
@@ -43,11 +43,7 @@ namespace QRCode.Engine.Core.Localization
         {
             get
             {
-                if (m_availableVoiceLocalizationDatabase == null)
-                {
-                    DB.Instance.TryGetDatabase(DBEnum.DB_AvailableVoiceLocales, out m_availableVoiceLocalizationDatabase);
-                }
-
+                m_availableVoiceLocalizationDatabase = DB.Instance.GetDatabase<AvailableVoiceLocalizationDatabase>(DBEnum.DB_AvailableVoiceLocales);
                 return m_availableVoiceLocalizationDatabase;
             }
         }
@@ -63,11 +59,8 @@ namespace QRCode.Engine.Core.Localization
                 await Task.Yield();
             }
             
-            if (UserSettingsManager.Instance.IsInit && !operation.IsDone)
-            {
-                AvailableVoiceLocalizationDatabase.TryGetInDatabase(UserSettingsData.VoiceLanguage.ToString(), out var foundedLocale);
-                UpdateAudioLocaleFromSettings(foundedLocale);
-            }
+            AvailableVoiceLocalizationDatabase.TryGetInDatabase(UserSettingsData.VoiceLanguage.ToString(), out var foundedLocale);
+            UpdateAudioLocaleFromSettings(foundedLocale);
         }
 
         private void OnDisable()

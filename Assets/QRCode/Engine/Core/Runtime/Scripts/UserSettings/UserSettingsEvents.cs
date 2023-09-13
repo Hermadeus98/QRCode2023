@@ -34,9 +34,9 @@
         
         public static void RaiseUserSettingsEvents()
         {
-            var userSettingsData = UserSettingsService.GetUserSettingsData();
+            var userSettingsData = UserSettingsService.GetUserSettingsData;
             
-            DB.Instance.TryGetDatabase<AvailableVoiceLocalizationDatabase>(DBEnum.DB_AvailableVoiceLocales, out var availableVoiceLocalizationDatabase);
+            var availableVoiceLocalizationDatabase = DB.Instance.GetDatabase<AvailableVoiceLocalizationDatabase>(DBEnum.DB_AvailableVoiceLocales);
             availableVoiceLocalizationDatabase.TryGetInDatabase(userSettingsData.VoiceLanguage.ToString(), out var foundedLocale);
             
             //CONTROLS

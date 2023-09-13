@@ -1,6 +1,5 @@
 namespace QRCode.Engine.Core.Audio
 {
-    using Toolbox.Pattern.Service;
     using Sirenix.OdinInspector;    
     using UnityEngine;
 
@@ -12,7 +11,7 @@ namespace QRCode.Engine.Core.Audio
         
         private void Start()
         {
-            m_audioService = ServiceLocator.Current.Get<IAudioService>();
+            //m_audioService = ServiceLocator.Current.Get<IAudioService>();
         }
 
         [Button]

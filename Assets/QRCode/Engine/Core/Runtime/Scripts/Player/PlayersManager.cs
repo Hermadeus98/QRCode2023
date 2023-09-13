@@ -3,20 +3,19 @@
     using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
-    
-    using Managers;
-    using Toolbox.Pattern.Singleton;
+    using QRCode.Engine.Core.Manager;
+    using QRCode.Engine.Toolbox.Optimization;
 
-    public class PlayersManager : MonoBehaviourSingleton<PlayersManager>, IManager
+    public class PlayersManager : GenericManagerBase<PlayersManager>, IDeletable
     {
         private List<Player> m_players = null;
         
-        public Task InitAsync(CancellationToken cancellationToken)
+        protected override Task InitAsync(CancellationToken cancellationToken)
         {
             return Task.CompletedTask;
         }
 
-        public void Delete()
+        public override void Delete()
         {
             
         }

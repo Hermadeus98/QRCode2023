@@ -12,6 +12,7 @@ namespace QRCode.Engine.Game.UI.LoadingScreen
     using Core.UI.LoadingScreen;
     using Debugging;
     using ProgressBar;
+    using QRCode.Engine.Game.Tags;
     using Constants = Toolbox.Constants;
 
     public class LoadingScreen : UIView, ILoadingScreen
@@ -56,7 +57,7 @@ namespace QRCode.Engine.Game.UI.LoadingScreen
 
         public override async Task Show()
         {
-            QRDebug.Debug(Constants.DebuggingChannels.Game, $"Loading Screen show.");
+            QRLogger.Debug<GameTags.LoadingScreen>( $"Loading Screen show.");
             
             await base.Show();
             
@@ -69,7 +70,7 @@ namespace QRCode.Engine.Game.UI.LoadingScreen
         public override async Task Hide()
         {
             await base.Hide();
-            QRDebug.Debug(Constants.DebuggingChannels.Game, $"Loading Screen hide.");
+            QRLogger.Debug<GameTags.LoadingScreen>( $"Loading Screen hide.");
         }
 
         public virtual void Progress(SceneLoadingInfo loadingInfo)

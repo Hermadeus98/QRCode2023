@@ -7,6 +7,7 @@
     using System.Threading.Tasks;
     
     using Debugging;
+    using QRCode.Engine.Core.Tags;
     using Constants = Toolbox.Constants;
 
     public class JSONFormatter : IFormatter
@@ -37,7 +38,7 @@
                 }
                 catch (Exception e)
                 {
-                    QRDebug.DebugFatal(Constants.DebuggingChannels.SaveManager, e);
+                    QRLogger.DebugFatal<CoreTags.Save>(e);
                     throw;
                 }    
             }
@@ -71,12 +72,12 @@
                 }
                 else
                 {
-                    QRDebug.DebugFatal(Constants.DebuggingChannels.SaveManager, $"{nameof(directoryName)} should not be null.");
+                    QRLogger.DebugFatal<CoreTags.Save>($"{nameof(directoryName)} should not be null.");
                 }
             }
             catch (Exception e)
             {
-                QRDebug.DebugFatal(Constants.DebuggingChannels.SaveManager, e);
+                QRLogger.DebugFatal<CoreTags.Save>(e);
                 throw;
             }
         }
@@ -90,6 +91,10 @@
             }
 
             return modifiedData;
+        }
+
+        public void Dispose()
+        {
         }
     }
 }

@@ -3,6 +3,7 @@ namespace QRCode.Engine.Core.Boot
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Debugging;
+    using QRCode.Engine.Core.Tags;
 
     /// <summary>
     /// This class is used to play in sequence asynchronous task implemented by <see cref="IBootStep"/>.
@@ -22,7 +23,7 @@ namespace QRCode.Engine.Core.Boot
 
                 if (result == BootResult.Fail)
                 {
-                    QRDebug.DebugFatal(Engine.Constants.EngineConstants.EngineLogChannels.EngineChannel, $"BootStep {bootSteps.GetType()} result with Fail status.");
+                    QRLogger.DebugFatal<CoreTags.Boot>($"BootStep {bootSteps.GetType()} result with Fail status.");
                     return BootResult.Fail;
                 }
             }

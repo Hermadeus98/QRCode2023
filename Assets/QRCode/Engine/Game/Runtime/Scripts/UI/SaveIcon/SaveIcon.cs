@@ -1,56 +1,45 @@
 namespace QRCode.Engine.Game.UI.SaveIcon
 {
-    using System.Threading.Tasks;
-    using Core.UI;
     using DG.Tweening;
-    using Core.GameInstance;
-    using Core.SaveSystem;
-    using Toolbox;
+    using QRCode.Engine.Core.SaveSystem;
+    using QRCode.Engine.Core.UI;
+    using QRCode.Engine.Toolbox;
     using UnityEngine;
 
     public class SaveIcon : UIElement
     {
         [SerializeField] private TweenParameters m_fadeTweenParameters = new TweenParameters();
 
-        private ISaveService m_saveService = null;
+        private SaveManager m_saveService = null;
         private Tween m_fadeTween = null;
-        
-        private ISaveService SaveService
-        {
-            get
-            {
-                if (m_saveService == null)
-                {
-                    m_saveService = SaveManager.Instance;
-                }
 
-                return m_saveService;
-            }
-        }
-        
-        protected async override void OnEnable()
+        public override void Initialize()
         {
-            base.OnEnable();
-
-            while (GameInstance.Instance.IsReady == false)
-            {
-                await Task.Yield();
-            }
+            m_saveService = SaveManager.Instance;
             
-            SaveService.OnStartSave += Show;
-            SaveService.OnEndSave += Hide;
-            SaveService.OnStartLoad += Show;
-            SaveService.OnEndLoad += Hide;
+            base.Initialize();
+        }
+
+        protected override void OnEnable()
+        {
+            m_saveService = SaveManager.Instance;
+            
+            m_saveService.OnStartSave += Show;
+            m_saveService.OnEndSave += Hide;
+            m_saveService.OnStartLoad += Show;
+            m_saveService.OnEndLoad += Hide;
+            
+            base.OnEnable();
         }
 
         protected override void OnDisable()
         {
-            base.OnDisable();
+            m_saveService.OnStartSave -= Show;
+            m_saveService.OnEndSave -= Hide;
+            m_saveService.OnStartLoad -= Show;
+            m_saveService.OnEndLoad -= Hide;
             
-            SaveService.OnStartSave -= Show;
-            SaveService.OnEndSave -= Hide;
-            SaveService.OnStartLoad -= Show;
-            SaveService.OnEndLoad -= Hide;
+            base.OnDisable();
         }
 
         private void Show()

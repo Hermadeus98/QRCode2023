@@ -1,59 +1,64 @@
 namespace QRCode.Engine.Toolbox.Database
 {
-    using UnityEngine;
-
     using System.Collections.Generic;
     using System.Linq;
-    
+    using QRCode.Engine.Debugging;
+    using QRCode.Engine.Toolbox.Tags;
     using Sirenix.OdinInspector;
-
-    using Debugging;
-    using Toolbox;
-    using Constants = Toolbox.Constants;
-
-    public abstract class ScriptableDatabaseBase : SerializedScriptableObject, IDatabase
-    {
-        
-    }
+    using UnityEngine;
+    using Constants = QRCode.Engine.Toolbox.Constants;
+    
+    public abstract class ScriptableDatabaseBase : SerializedScriptableObject, IDatabase { }
     
     /// <summary>
     /// Inherit from this class to add a new database into the project.
-    /// Don't forget to reference it into the database scriptable object.
+    /// Don't forget to reference it into <see cref="DB"/> scriptable object.
     /// </summary>
-    public abstract class ScriptableObjectDatabase<T> : ScriptableDatabaseBase
+    public abstract class ScriptableObjectDatabase<t_parameter> : ScriptableDatabaseBase
     {
-        [TitleGroup(Constants.InspectorGroups.References)][InfoBox("@this.m_databaseInformation")]
-        [SerializeField] protected Dictionary<string, T> m_database = new Dictionary<string, T>();
+        #region Fields
+        #region Serialized
+        [TitleGroup(Constants.InspectorGroups.References)]
+        [InfoBox("@this.m_databaseInformation")]
+        [Tooltip("The database container.")]
+        [SerializeField] protected Dictionary<string, t_parameter> m_database = new Dictionary<string, t_parameter>();
+        
         [TitleGroup(Constants.InspectorGroups.Settings)]
-        [SerializeField] protected string m_generatedEnumPath;
+        [Tooltip("The path where the enum will be generated or replaced.")]
+        [FolderPath][ValidateInput("EditorCheckEnumPath", "Generated Enum Path should not be null.", InfoMessageType.Error)]
+        [SerializeField] private string _generatedEnumPath = string.Empty;
 
+        [TitleGroup(Constants.InspectorGroups.Settings)]
+        [Tooltip("The namespace of the generated enum.")]
+        [ValidateInput("EditorNamespace", "Namespace should not be null.", InfoMessageType.Error)]
+        [SerializeField] private string _namespace = string.Empty;
+        #endregion Serialized
+        #endregion Fields
+
+        #region Properties
+        /// <summary>
+        /// The database information panel shows in the inspector.
+        /// </summary>
         protected abstract string m_databaseInformation
         {
             get;
         }
-        
+
         /// <summary>
         /// Get the database dictionary.
         /// </summary>
-        public Dictionary<string, T> GetDatabase
-        {
-            get
-            {
-                return m_database;
-            }
-        }
+        public Dictionary<string, t_parameter> GetDatabase { get { return m_database; } }
+        #endregion Properties
         
+        #region Methods
         /// <summary>
         /// Try to get an element from the database.
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="foundedObject"></param>
-        /// <returns></returns>
-        public bool TryGetInDatabase(string key, out T foundedObject)
+        public bool TryGetInDatabase(string key, out t_parameter foundedObject)
         {
             if (key == "Null")
             {
-                foundedObject = default(T);
+                foundedObject = default(t_parameter);
                 return false;
             }
             
@@ -63,21 +68,23 @@ namespace QRCode.Engine.Toolbox.Database
             }
             else
             {
-                QRDebug.DebugError($"Scene Manager", $"Cannot find {key} in database.", this);
+                QRLogger.DebugError<ToolboxTags.Databases>($"Cannot find {key} in database.", this);
                 return false;
             }
         }
         
-        [Button]
-        private void GenerateDatabaseEnum()
+        #region Editor Methods
+#if UNITY_EDITOR
+        [Button("Generate Database Enum")]
+        private void EditorGenerateDatabaseEnum()
         {
-            if (string.IsNullOrEmpty(m_generatedEnumPath))
+            if (string.IsNullOrEmpty(_generatedEnumPath))
             {
-                QRDebug.DebugError("Editor", $"{nameof(m_generatedEnumPath)} shouldn't be empty.");
+                QRLogger.DebugError<ToolboxTags.Databases>($"{nameof(_generatedEnumPath)} shouldn't be empty.");
                 return;
             }
             
-            QRDebug.Debug(Constants.DebuggingChannels.Database, $"Start generate database {name}...");
+            QRLogger.Debug<ToolboxTags.Databases>($"Start generate database {name}...");
             
             var fields = new List<string> { "Null" };
 
@@ -86,7 +93,20 @@ namespace QRCode.Engine.Toolbox.Database
                 fields.Add(m_database.Keys.ElementAt(i));
             }
             
-            TextGeneration.TextGenerator.GenerateCSEnum(m_generatedEnumPath, name + "Enum", "QRCode.Framework", fields);
+            TextGeneration.TextGenerator.GenerateCSEnum(_generatedEnumPath, name + "Enum", _namespace, fields);
         }
+        
+        private bool EditorCheckEnumPath()
+        {
+            return !string.IsNullOrEmpty(_generatedEnumPath);
+        }
+        
+        private bool EditorNamespace()
+        {
+            return !string.IsNullOrEmpty(_namespace);
+        }
+#endif
+        #endregion Editor Methods
+        #endregion Methods
     }
 }
