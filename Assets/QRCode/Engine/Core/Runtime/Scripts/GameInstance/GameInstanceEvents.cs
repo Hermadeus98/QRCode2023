@@ -1,15 +1,19 @@
 ﻿namespace QRCode.Engine.Core.GameInstance
 {
     using System.Collections.Generic;
-    using Toolbox;
     using Debugging;
     using QRCode.Engine.Core.Tags;
-    using Constants = Toolbox.Constants;
+    using QRCode.Engine.Toolbox.Optimization;
 
-    public class GameInstanceEvents
+    public class GameInstanceEvents : IDeletable
     {
-        private List<IGameplayComponent> m_gameplayComponents = new List<IGameplayComponent>();
+        private List<IGameplayComponent> m_gameplayComponents = null;
 
+        public GameInstanceEvents()
+        {
+            m_gameplayComponents = new List<IGameplayComponent>();
+        }
+        
         public void RegisterGameplayComponent(IGameplayComponent gameplayComponent)
         {
             if (!m_gameplayComponents.Contains(gameplayComponent))
@@ -56,14 +60,15 @@
             QRLogger.DebugTrace<CoreTags.GameInstance>( $"On Level Unloaded.");
         }
 
-        public void DeleteAll()
+        public void Delete()
         {
-            for (int i = 0; i < m_gameplayComponents.Count; i++)
+            if (m_gameplayComponents != null)
             {
-                m_gameplayComponents[i].Delete();
+                for (int i = 0; i < m_gameplayComponents.Count; i++)
+                {
+                    m_gameplayComponents[i].Delete();
+                }
             }
-            
-            QRLogger.DebugTrace<CoreTags.GameInstance>($"On Level Unloaded.");
         }
     }
 

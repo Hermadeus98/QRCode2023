@@ -21,7 +21,7 @@ namespace QRCode.Editor.SceneSelector
         private static GameLevelDatabase m_gameLevelDatabase = null;
         private static SceneDatabase m_sceneDatabase = null;
         
-        private static Dictionary<string, GameLevelData> LevelReferenceGroups = null;
+        private static Dictionary<string, AGameLevelData> LevelReferenceGroups = null;
         private static Dictionary<string, SceneReference> SceneReferenceGroups = null;
 
         [MenuItem("QRCode/Scene Selector")]
@@ -46,7 +46,7 @@ namespace QRCode.Editor.SceneSelector
                 return;
             }
             
-            LevelReferenceGroups = new Dictionary<string, GameLevelData>(m_gameLevelDatabase.GetDatabase);
+            LevelReferenceGroups = new Dictionary<string, AGameLevelData>(m_gameLevelDatabase.GetDatabase);
             SceneReferenceGroups = new Dictionary<string, SceneReference>(m_sceneDatabase.GetDatabase);
         }
         
@@ -132,11 +132,11 @@ namespace QRCode.Editor.SceneSelector
             }
         }
 
-        private void LoadSceneGroup(GameLevelData gameLevelReferenceGroup)
+        private void LoadSceneGroup(AGameLevelData aGameLevelReferenceGroup)
         {
-            EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(gameLevelReferenceGroup.GameLevelScenes[0].editorAsset), OpenSceneMode.Single);
+            EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(aGameLevelReferenceGroup.GameLevelScenes[0].editorAsset), OpenSceneMode.Single);
 
-            var subScenes = gameLevelReferenceGroup.GameLevelScenes;
+            var subScenes = aGameLevelReferenceGroup.GameLevelScenes;
             if (subScenes.IsNotNullOrEmpty())
             {
                 for (int i = 0; i < subScenes.Length; i++)

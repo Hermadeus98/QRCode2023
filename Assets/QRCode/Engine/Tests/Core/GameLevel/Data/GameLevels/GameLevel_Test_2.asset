@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cd51018aa28c5f4e9751b5a0f5a21a0, type: 3}
-  m_Name: GameLevel_TestB
+  m_Script: {fileID: 11500000, guid: 27d055fef27c45eab7cf32f266e9a08b, type: 3}
+  m_Name: GameLevel_Test_2
   m_EditorClassIdentifier: 
   m_gameLevelScenes:
   - m_AssetGUID: 182ae6e09719398479789c26e007245c
@@ -26,4 +26,4 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   m_gameLevelModuleData:
-  - {fileID: 11400000, guid: 227a4876d54b25045b2e0418705f54fc, type: 2}
+  - {fileID: 11400000, guid: 3c0f845085c734a4e84fe24d14d86559, type: 2}

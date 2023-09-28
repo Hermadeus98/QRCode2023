@@ -9,7 +9,9 @@ namespace QRCode.Engine
     using QRCode.Engine.Core.UI.LoadingScreen.GeneratedEnums;
     using QRCode.Engine.Toolbox.Database;
     using QRCode.Engine.Toolbox.Database.GeneratedEnums;
+    using QRCode.Engine.Toolbox.Optimization;
     using UnityEngine;
+    using UnityEngine.AddressableAssets;
 
     public class LoadingScreenManager : GenericManagerBase<LoadingScreenManager>
     {
@@ -28,31 +30,44 @@ namespace QRCode.Engine
 
         public override void Delete()
         {
+            _loadingScreenDatabase = null;
+            _canvasManager = null;
+
+            if (_allLoadingScreenHandles != null)
+            {
+                _allLoadingScreenHandles.Clear();
+                _allLoadingScreenHandles = null;
+            }
+            
             base.Delete();
         }
 
-        public async Task<LoadingScreenHandle> ShowLoadingScreen(DB_LoadingScreenEnum loadingScreenEnum)
+        public async Task<LoadingScreenHandle> GetLoadingScreen(DB_LoadingScreenEnum loadingScreenEnum)
         {
-            var loadingScreenCanvas = _canvasManager.GetCanvas(CanvasEnum.GameCanvas);
-            var loadingScreen = await CreateLoadingScreen(loadingScreenEnum, loadingScreenCanvas);
-            await loadingScreen.Show();
+            UICanvas loadingScreenCanvas = _canvasManager.GetCanvas(CanvasEnum.LoadingScreenCanvas);
+            ILoadingScreen loadingScreen = await CreateLoadingScreen(loadingScreenEnum, loadingScreenCanvas);
 
-            var loadingScreenHandle = new LoadingScreenHandle(loadingScreen);
+            LoadingScreenHandle loadingScreenHandle = new LoadingScreenHandle(loadingScreen);
             _allLoadingScreenHandles.Add(loadingScreenHandle);
+            
             return loadingScreenHandle;
         }
 
         public async Task HideLoadingScreen(LoadingScreenHandle loadingScreenHandle)
         {
-            var loadingScreenHandlesCount = _allLoadingScreenHandles.Count;
+            int loadingScreenHandlesCount = _allLoadingScreenHandles.Count;
             for (int i = 0; i < loadingScreenHandlesCount; i++)
             {
                 if (_allLoadingScreenHandles[i] == loadingScreenHandle)
                 {
-                    var handle = _allLoadingScreenHandles[i];
-                    var loadingScreen = handle.LoadingScreen;
-                    var hide = loadingScreen.Hide();
-                    await hide;
+                    LoadingScreenHandle handle = _allLoadingScreenHandles[i];
+                    ILoadingScreen loadingScreen = handle.LoadingScreen;
+                    
+                    await loadingScreen.Hide();
+                    
+                    _allLoadingScreenHandles.Remove(handle);
+                    handle.Delete();
+                    
                     return;
                 }
             }
@@ -62,10 +77,13 @@ namespace QRCode.Engine
         {
             if (_loadingScreenDatabase.TryGetInDatabase(loadingScreenEnum.ToString(), out var loadingScreenReference))
             {
-                var assetReference = loadingScreenReference.LoadingScreenAssetReference;
-                var instantiateTask = assetReference.InstantiateAsync(transform.position, Quaternion.identity, canvasParent.transform).Task;
-                var instance = await instantiateTask;
-                var loadingScreenInstance = instance.GetComponent<ILoadingScreen>();
+                AssetReference assetReference = loadingScreenReference.LoadingScreenAssetReference;
+                Task<GameObject> instantiateTask = assetReference.InstantiateAsync(canvasParent.transform).Task;
+                GameObject loadingScreenGameObject = await instantiateTask;
+                loadingScreenGameObject.transform.localPosition = Vector3.zero;
+                loadingScreenGameObject.transform.localRotation = Quaternion.identity;
+
+                ILoadingScreen loadingScreenInstance = loadingScreenGameObject.GetComponent<ILoadingScreen>();
                 return loadingScreenInstance;
             }
 
@@ -73,7 +91,7 @@ namespace QRCode.Engine
         }
     }
 
-    public class LoadingScreenHandle
+    public class LoadingScreenHandle : IDeletable
     {
         private ILoadingScreen _loadingScreen = null;
 
@@ -82,6 +100,19 @@ namespace QRCode.Engine
         public LoadingScreenHandle(ILoadingScreen loadingScreen)
         {
             _loadingScreen = loadingScreen;
+        }
+
+        public void Delete()
+        {
+            if (_loadingScreen != null)
+            {
+                if (_loadingScreen is Component component)
+                {
+                    Object.Destroy(component.gameObject);
+                }
+
+                _loadingScreen = null;
+            }
         }
     }
 }

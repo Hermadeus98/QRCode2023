@@ -2,11 +2,14 @@ namespace QRCode.Engine.Core.GameLevel.Tests
 {
     using GameLevels;
 
-    public class GameLevelTest : GameLevel
+    /// <summary>
+    /// A <see cref="GameLevel"/> example.
+    /// </summary>
+    public class GameLevelTest : AGameLevel
     {
-        public override void BuildGameLevelModules()
+        protected override void BuildGameLevelModules()
         {
-            if (m_gameLevelData.TryGetGameLevelModuleOfType<GameLevelModuleLoadableTestData>(out var gameLevelModuleLoadableTestData))
+            if (aGameLevelData.TryGetGameLevelModuleOfType<GameLevelModuleLoadableTestData>(out var gameLevelModuleLoadableTestData))
             {
                 AddGameLevelModule(new GameLevelModuleLoadableTest(gameLevelModuleLoadableTestData));
             }

@@ -1,19 +1,19 @@
 namespace QRCode.Engine.Toolbox.Pattern.Singleton
 {
+    using Sirenix.OdinInspector;
     using UnityEngine;
 
     /// <summary>
-    /// An unique Instance callable every where
+    /// An unique Instance callable everywhere.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class MonoBehaviourSingleton<T> : MonoBehaviour where T : Component
+    public class MonoBehaviourSingleton<T> : SerializedMonoBehaviour where T : Component
     {
-        private static T m_instance;
+        private static T _instance;
         public static T Instance
         {
             get
             {
-                if (m_instance == null)
+                if (_instance == null)
                 {
 #if UNITY_EDITOR
                     if (Application.isPlaying == false)
@@ -23,27 +23,30 @@ namespace QRCode.Engine.Toolbox.Pattern.Singleton
                     var objs = FindObjectsOfType(typeof(T)) as T[];
                     if (objs.Length > 0)
                     {
-                        m_instance = objs[0];
+                        _instance = objs[0];
                     }
                     if (objs.Length > 1)
                     {
                         Debug.LogError("There is more than one " + typeof(T).Name + " in the scene.");
                     }
                     
-                    if (m_instance == null)
+                    if (_instance == null)
                     {
                         var obj = new GameObject();
                         obj.name =  "[SINGLETON] " + typeof(T).Name;
-                        m_instance = obj.AddComponent<T>();
+                        _instance = obj.AddComponent<T>();
                     }
                 }
-                return m_instance;
+                return _instance;
             }
         }
 
+        /// <summary>
+        /// Check if the singleton have already an instance.
+        /// </summary>
         public static bool HasInstance()
         {
-            return m_instance != null;
+            return _instance != null;
         }
     }
 }

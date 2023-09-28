@@ -10,18 +10,17 @@ namespace QRCode.Engine.Core.GameInstance
     using QRCode.Engine.Toolbox.Optimization;
     using UnityEngine;
 
-
     /// <summary>
     /// <see cref="GameInstance"/> represents the entry point of the game logic.
     /// </summary>
     public sealed class GameInstance : IDeletable
     {
         #region Fields
-        private static GameInstance _instance;
+        private static GameInstance _instance = null;
         private GameInstanceInitializationConfig _gameInstanceInitializationConfig = null;
         private GameInstanceEvents _gameInstanceEvents = null;
         private bool _isReady = false;
-        private CancellationTokenSource _cancellationTokenSource;
+        private CancellationTokenSource _cancellationTokenSource = null;
         #endregion
 
         #region Properties
@@ -41,10 +40,8 @@ namespace QRCode.Engine.Core.GameInstance
                 QRLogger.DebugFatal<CoreTags.GameInstance>($"A GameInstance is already existing in current context.");
                 return;
             }
-            else
-            {
-                QRLogger.DebugInfo<CoreTags.GameInstance>($"GameInstanceCreation.");
-            }
+            
+            QRLogger.DebugInfo<CoreTags.GameInstance>($"GameInstanceCreation.");
             
             _instance = this;
             
@@ -61,14 +58,21 @@ namespace QRCode.Engine.Core.GameInstance
         {
             Application.quitting -= Delete;
 
+            _instance = null;
+            _gameInstanceInitializationConfig = null;
+
             if (_cancellationTokenSource != null)
             {
                 _cancellationTokenSource.Cancel();
                 _cancellationTokenSource.Dispose();
                 _cancellationTokenSource = null;
             }
-            
-            _gameInstanceEvents.DeleteAll();
+
+            if (_gameInstanceEvents != null)
+            {
+                _gameInstanceEvents.Delete();
+                _gameInstanceEvents = null;
+            }
         }
         #endregion
 

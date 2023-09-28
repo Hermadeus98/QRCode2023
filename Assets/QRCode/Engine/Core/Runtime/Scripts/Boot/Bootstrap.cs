@@ -7,15 +7,24 @@ namespace QRCode.Engine.Core.Boot
     /// <see cref="Bootstrap"/> represents the first entry point of the application.
     /// This is the only one admitted entry point of all the application, it must be contained in the Scene_Main.
     /// </summary>
-    public static class Bootstrap
+    public class Bootstrap : MonoBehaviour
     {
+        private void Awake()
+        {
+            Initialize();
+        }
+
         /// <summary>
         /// Creation of the <see cref="GameInstance"/> and start the game.
         /// </summary>
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        private static async void Initialize()
+        private async void Initialize()
         {
             var gameInstance = new GameInstance(GameInstanceInitializationConfig.Instance);
+
+            Boot boot = new Boot();
+            await boot.Execute();
+            boot.Delete();
+            
             await gameInstance.LoadGame();
         }
     }

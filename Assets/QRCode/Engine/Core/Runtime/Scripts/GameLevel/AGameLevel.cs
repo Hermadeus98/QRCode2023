@@ -14,7 +14,7 @@ namespace QRCode.Engine.Core.GameLevels
     using QRCode.Engine.Core.GameInstance;
     using QRCode.Engine.Toolbox.Optimization;
 
-    public abstract class GameLevel : SerializedMonoBehaviour, IGameLevel, IDeletable
+    public abstract class AGameLevel : SerializedMonoBehaviour, IDeletable
     {
         #region Fields
         #region Serialized
@@ -23,36 +23,38 @@ namespace QRCode.Engine.Core.GameLevels
         /// </summary>
         [TitleGroup(Constants.InspectorGroups.Settings)]
         [Tooltip("The current GameLevelData of this GameLevel.")]
-        [SerializeField] protected GameLevelData m_gameLevelData = null;
+        [SerializeField] protected AGameLevelData aGameLevelData = null;
         #endregion Serialized
 
         #region Internals
         /// <summary>
         /// All the modules added when the game level is build.
         /// </summary>
-        private List<IGameLevelModule> m_gameLevelModules = null;
-        
-        /// <summary>
-        /// The scene loading info of the game level.
-        /// </summary>
-        private SceneLoadingInfo m_sceneLoadingInfo;
-        
-        /// <summary>
-        /// A flag if the game level is already loaded when the game is launch, useful in editor play mode.
-        /// </summary>
-        private bool m_isGameLevelAlreadyLoaded = false;
-        
+        private List<IGameLevelModule> _gameLevelModules = null;
+
         /// <summary>
         /// The cancellation token used to stop async methods when the object is destroy.
         /// </summary>
-        private CancellationTokenSource m_cancellationTokenSource = null;
+        private CancellationTokenSource _cancellationTokenSource = null;
+
+        /// <summary>
+        /// The current GameLevel instance.
+        /// </summary>
+        private static AGameLevel _current = null;
+        
+#if UNITY_EDITOR
+        /// <summary>
+        /// A flag if the game level is already loaded when the game is launch, useful in editor play mode.
+        /// </summary>
+        private bool _editor_isGameLevelAlreadyLoaded = false;
+#endif
         #endregion Internals
 
         #region Statics
         /// <summary>
-        /// The current GameLevel instance;
+        /// <inheritdoc cref="_current"/>
         /// </summary>
-        public static GameLevel Current = null;
+        public static AGameLevel Current => _current;
         #endregion Statics
         #endregion Fields
 
@@ -60,29 +62,33 @@ namespace QRCode.Engine.Core.GameLevels
         #region LifeCycle
         protected virtual void Awake()
         {
+#if UNITY_EDITOR
             if (GameInstance.Instance.IsReady == false)
             {
-                m_isGameLevelAlreadyLoaded = true;
+                _editor_isGameLevelAlreadyLoaded = true;
             }
+#endif
             
-            Current = this;
-            m_cancellationTokenSource = new CancellationTokenSource();
-            m_gameLevelModules = new List<IGameLevelModule>();
+            _current = this;
+            _cancellationTokenSource = new CancellationTokenSource();
+            _gameLevelModules = new List<IGameLevelModule>();
             
             BuildGameLevelModules();
         }
 
         protected virtual async void Start()
         {
-            if (m_isGameLevelAlreadyLoaded)
+#if UNITY_EDITOR
+            if (_editor_isGameLevelAlreadyLoaded)
             {
                 while (GameInstance.Instance.IsReady == false)
                 {
                     await Task.Yield();
                 }
                 
-                GameLevelManager.Instance.SetAsAlreadyLoadedLevel(m_gameLevelData);
+                GameLevelManager.Instance.EditorSetAsAlreadyLoadedLevel(aGameLevelData);
             }
+#endif
         }
 
         private void OnDestroy()
@@ -90,29 +96,29 @@ namespace QRCode.Engine.Core.GameLevels
             Delete();
         }
 
-        public void Delete()
+        public virtual void Delete()
         {
-            if (m_cancellationTokenSource != null)
+            if (_cancellationTokenSource != null)
             {
-                m_cancellationTokenSource.Cancel();
-                m_cancellationTokenSource.Dispose();
-                m_cancellationTokenSource = null;
+                _cancellationTokenSource.Cancel();
+                _cancellationTokenSource.Dispose();
+                _cancellationTokenSource = null;
             }
 
-            if (m_gameLevelModules.IsNullOrEmpty() == false)
+            if (_gameLevelModules.IsNullOrEmpty() == false)
             {
-                m_gameLevelModules.Clear();
-                m_gameLevelModules = null;
+                _gameLevelModules.Clear();
+                _gameLevelModules = null;
             }
 
-            if (m_gameLevelModules.IsNullOrEmpty() == false)
+            if (_gameLevelModules.IsNullOrEmpty() == false)
             {
-                foreach (var gameLevelModule in m_gameLevelModules)
+                foreach (var gameLevelModule in _gameLevelModules)
                 {
                     gameLevelModule.Delete();
                 }
-                m_gameLevelModules.Clear();
-                m_gameLevelModules = null;
+                _gameLevelModules.Clear();
+                _gameLevelModules = null;
             }
         }
         #endregion LifeCycle
@@ -139,7 +145,7 @@ namespace QRCode.Engine.Core.GameLevels
                 currentSceneLoadableProgression = value;
             });
             
-            var gameLevelModulesCount = m_gameLevelModules.Count;
+            var gameLevelModulesCount = _gameLevelModules.Count;
             for (var i = 0; i < gameLevelModulesCount; i++)
             {
                 var index = i;
@@ -149,7 +155,7 @@ namespace QRCode.Engine.Core.GameLevels
                     progress.Report(gameLevelLoadingInfo);
                 });
                 
-                var loading = m_gameLevelModules[i].Load(cancellationToken, onLoading, progression);
+                var loading = _gameLevelModules[i].Load(cancellationToken, onLoading, progression);
                 await loading;
 
                 gameLevelLoadingInfo.LoadingProgressPercent = (i + 1f) / gameLevelModulesCount;
@@ -161,20 +167,20 @@ namespace QRCode.Engine.Core.GameLevels
             
             GameInstance.Instance.GameInstanceEvents.OnLevelLoaded();
         }
-        
-        /// <summary>
-        /// All the module of the game level must be added here.
-        /// </summary>
-        public abstract void BuildGameLevelModules();
         #endregion Public Methods
 
         #region Internal Methods
+        /// <summary>
+        /// All the module of the game level must be added here.
+        /// </summary>
+        protected abstract void BuildGameLevelModules();
+        
         /// <summary>
         /// Add new game level module in the <see cref="BuildGameLevelModules"/> methods to describe the Game Level. After that, the 
         /// </summary>
         protected void AddGameLevelModule<T>(GameLevelModuleBase<T> gameLevelModuleBase) where T : GameLevelModuleData
         {
-            m_gameLevelModules.Add(gameLevelModuleBase);
+            _gameLevelModules.Add(gameLevelModuleBase);
         }
         #endregion Internal Methods
         #endregion Methods

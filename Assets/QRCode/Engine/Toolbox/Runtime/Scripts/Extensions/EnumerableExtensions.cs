@@ -5,7 +5,7 @@ namespace QRCode.Engine.Toolbox.Extensions
     using System.Linq;
     using UnityEngine;
 
-    public static class EnumerableExtension
+    public static class EnumerableExtensions
     {
         public static bool IsNotNullOrEmpty(this ICollection collection)
         {

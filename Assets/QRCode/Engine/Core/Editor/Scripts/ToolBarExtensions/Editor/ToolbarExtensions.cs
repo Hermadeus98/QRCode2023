@@ -165,7 +165,7 @@ namespace UnityToolbarExtender
             }
         }
         
-        private static void TryLoadSceneGroup(GameLevelData gameLevelReferenceGroup)
+        private static void TryLoadSceneGroup(AGameLevelData aGameLevelReferenceGroup)
         {
             var openedScenes = new List<Scene>();
                     
@@ -178,20 +178,20 @@ namespace UnityToolbarExtender
             {
                 if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
                 {
-                    LoadSceneGroup(gameLevelReferenceGroup);
+                    LoadSceneGroup(aGameLevelReferenceGroup);
                 }
             }
             else
             {
-                LoadSceneGroup(gameLevelReferenceGroup);
+                LoadSceneGroup(aGameLevelReferenceGroup);
             }
         }
 
-        private static void LoadSceneGroup(GameLevelData gameLevelReferenceGroup)
+        private static void LoadSceneGroup(AGameLevelData aGameLevelReferenceGroup)
         {
-            EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(gameLevelReferenceGroup.GameLevelScenes[0].editorAsset), OpenSceneMode.Single);
+            EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(aGameLevelReferenceGroup.GameLevelScenes[0].editorAsset), OpenSceneMode.Single);
 
-            var subScenes = gameLevelReferenceGroup.GameLevelScenes;
+            var subScenes = aGameLevelReferenceGroup.GameLevelScenes;
             if (subScenes.IsNotNullOrEmpty())
             {
                 for (int i = 0; i < subScenes.Length; i++)

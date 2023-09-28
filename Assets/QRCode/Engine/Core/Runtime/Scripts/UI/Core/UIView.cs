@@ -22,17 +22,10 @@ namespace QRCode.Engine.Core.UI
 
         private CancellationTokenSource m_cancellationTokenSource = new CancellationTokenSource();
 
-        public string ViewName
-        {
-            get
-            {
-                return m_viewName;
-            }
-        }
+        public string ViewName { get { return m_viewName; } }
         
         public override void Initialize()
         {
-            //UI.UIViewDatabase.TryAddToDatabase(m_viewName, this);
             m_cancellationTokenSource = new CancellationTokenSource();
             
             base.Initialize();
@@ -57,11 +50,16 @@ namespace QRCode.Engine.Core.UI
             gameObject.SetActive(false);
         }
 
-        protected override void OnDestroy()
+        public override void Delete()
         {
-            base.OnDestroy();
-            //UI.UIViewDatabase.TryRemoveOfDatabase(m_viewName);
-            m_cancellationTokenSource.Cancel();
+            if (m_cancellationTokenSource != null)
+            {
+                m_cancellationTokenSource.Cancel();
+                m_cancellationTokenSource.Dispose();
+                m_cancellationTokenSource = null;
+            }
+
+            base.Delete();
         }
     }
 }

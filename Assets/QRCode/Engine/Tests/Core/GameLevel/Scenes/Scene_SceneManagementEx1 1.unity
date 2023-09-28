@@ -198,10 +198,10 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: m_dictionary
+    - Name: _dictionary
       Entry: 6
       Data: 
-  m_savedInt: 0
+  _savedInt: 0
 --- !u!1 &2038166366
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,4 +255,4 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  m_gameLevelData: {fileID: 11400000, guid: c3c58268a4b9ec145802c58ee82764d1, type: 2}
+  aGameLevelData: {fileID: 11400000, guid: 5058e43a8cd8e6349ac468316b1b62b7, type: 2}

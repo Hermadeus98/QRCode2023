@@ -9,31 +9,27 @@ namespace QRCode.Engine.Core.GameLevels
     [CreateAssetMenu(menuName = Constants.SettingsPath.GameLevelManagerSettingsPath, fileName = "STG_GameLevelManagerSettings")]
     public class GameLevelManagerSettings : Settings<GameLevelManagerSettings>
     {
-        [TitleGroup(Constants.InspectorGroups.Settings)]
-        [SerializeField] private float m_minimalLoadDurationBefore = .5f;
-        
-        [TitleGroup(Constants.InspectorGroups.Settings)]
-        [SerializeField] private float m_minimalLoadDurationAfter = .5f;
-
+        #region Fields
+        #region Serialized
         [TitleGroup(Constants.InspectorGroups.Settings)] 
-        [SerializeField] private LocalizedString m_loadingLocalizedString = null;
+        [Tooltip("Default progress description display on the loading screen when a GameLevel is loading.")]
+        [SerializeField] private LocalizedString _loadingLocalizedString = null;
+        #endregion Serialized
+        #endregion Fields
 
-        public float MinimalLoadDurationBefore => m_minimalLoadDurationBefore;
-        public float MinimalLoadDurationAfter => m_minimalLoadDurationAfter;
-
+        #region Properties
         public string LoadingLocalizedString
         {
             get
             {
-                if (m_loadingLocalizedString == null)
+                if (_loadingLocalizedString == null)
                 {
                     return "NULL TXT";
                 }
-                else
-                {
-                    return m_loadingLocalizedString.GetLocalizedString();
-                }
+                
+                return _loadingLocalizedString.GetLocalizedString();
             }
         }
+        #endregion Properties
     }
 }

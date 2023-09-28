@@ -1,17 +1,19 @@
 namespace QRCode.Engine.Core.Boot
 {
+    using System.Threading;
     using System.Threading.Tasks;
+    using QRCode.Engine.Toolbox.Optimization;
 
     /// <summary>
     /// Implement this interface when the code need to be execute in a <see cref="BootSequence"/>.
     /// </summary>
-    public interface IBootStep
+    public interface IBootStep : IDeletable
     {
         /// <summary>
         /// The step executed in the <see cref="BootSequence"/>.
         /// </summary>
         /// <returns></returns>
-        public Task<BootResult> ExecuteBootStep();
+        public Task<BootResult> ExecuteBootStep(CancellationToken cancellationToken);
     }
 
     /// <summary>

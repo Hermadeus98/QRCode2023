@@ -3,7 +3,7 @@ namespace QRCode.Engine.Toolbox.Extensions
     using System.Collections.Generic;
     using System.Linq;
 
-    public static class MathExtension
+    public static class MathExtensions
     {
         public static float GetAverage(this ICollection<float> floats)
         {

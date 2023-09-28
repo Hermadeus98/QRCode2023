@@ -8,6 +8,6 @@ namespace QRCode.Engine.Core.UI.LoadingScreen
         public Task Show();
         public Task Hide();
 
-        public void Progress(SceneLoadingInfo loadingInfo);
+        public void Progress(float progress, string progressInfo);
     }
 }

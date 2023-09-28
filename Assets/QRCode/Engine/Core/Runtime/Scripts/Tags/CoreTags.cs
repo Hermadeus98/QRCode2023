@@ -66,5 +66,15 @@
 		/// The tag for the scene management logs.
 		/// </summary>
 		public class SceneManagement : ILoggerTag { }
+		
+		/// <summary>
+		/// The tag for the UI logs.
+		/// </summary>
+		public class UI : ILoggerTag { }
+		
+		/// <summary>
+		/// The tag for the actor logs.
+		/// </summary>
+		public class Actor : ILoggerTag { }
 	}
 }

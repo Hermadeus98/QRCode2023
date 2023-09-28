@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 549cea67ab282214680c24cb4ec656b7, type: 3}
-  m_Name: STG_LevelLoadingManagerSettings
+  m_Name: STG_GameLevelSettings
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,9 +21,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  m_minimalLoadDurationBefore: 0.5
-  m_minimalLoadDurationAfter: 0.5
-  m_loadingLocalizedString:
+  _minimalLoadDurationBefore: 0
+  _minimalLoadDurationAfter: 0
+  _loadingLocalizedString:
     m_TableReference:
       m_TableCollectionName: GUID:25cc2e8128ce56f46bb6e8c1714e6190
     m_TableEntryReference:

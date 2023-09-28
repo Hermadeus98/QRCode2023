@@ -1,24 +1,37 @@
 namespace QRCode.Engine.Core
 {
-    using GameInstance;
-    using Toolbox.Optimization;
+    using QRCode.Engine.Core.GameLevels;
+    using QRCode.Engine.Toolbox.Optimization;
+    using PauseInfo = QRCode.Engine.Core.GameInstance.PauseInfo;
 
+    /// <summary>
+    /// A gameplay component implements some useful function called during the game flow.
+    /// </summary>
     public interface IGameplayComponent : IDeletable
     {
-        public virtual void OnLevelLoaded() { }
+        /// <summary>
+        /// This function is call after a <see cref="AGameLevel"/> is loaded.
+        /// </summary>
+        public void OnLevelLoaded();
 
-        public virtual void OnLevelUnloaded() { }
-        
-        public virtual void OnGameInstanceIsReady() { }
+        /// <summary>
+        /// This function is call before a <see cref="AGameLevel"/> starts to be unloaded.
+        /// </summary>
+        public void OnLevelUnloaded();
 
-        public virtual void OnGameStart() { }
+        /// <summary>
+        /// This function is call when the <see cref="GameInstance"/> is setup correctly.
+        /// </summary>
+        public void OnGameInstanceIsReady();
 
-        public virtual void OnGameUpdate() { }
+        public void OnGameStart();
 
-        public virtual void OnGameEnd() { }
-        
-        public virtual void OnGameRestart() { }
+        public void OnGameUpdate();
 
-        public virtual void OnGamePause(PauseInfo pauseInfo) { }
+        public void OnGameEnd();
+
+        public void OnGameRestart();
+
+        public void OnGamePause(PauseInfo pauseInfo);
     }
 }

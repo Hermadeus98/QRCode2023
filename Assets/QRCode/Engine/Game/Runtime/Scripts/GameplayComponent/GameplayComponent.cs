@@ -1,6 +1,5 @@
 namespace QRCode.Engine.Core
 {
-    using System;
     using GameInstance;
     using SaveSystem;
     using Sirenix.OdinInspector;
@@ -15,7 +14,7 @@ namespace QRCode.Engine.Core
 
         protected virtual void OnDisable()
         {
-            GameInstance.GameInstance.Instance.GameInstanceEvents.UnregisterGameplayComponent(this);
+            GameInstance.GameInstance.Instance?.GameInstanceEvents?.UnregisterGameplayComponent(this);
         }
 
         public virtual void OnGameInstanceIsReady()

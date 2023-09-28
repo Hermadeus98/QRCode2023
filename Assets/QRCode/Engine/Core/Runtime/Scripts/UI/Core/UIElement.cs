@@ -1,14 +1,25 @@
 namespace QRCode.Engine.Core.UI
 {
+    using QRCode.Engine.Toolbox.Optimization;
     using Sirenix.OdinInspector;
     using UnityEngine;
     
     [RequireComponent(typeof(CanvasGroup))]
-    public class UIElement : SerializedMonoBehaviour
+    public class UIElement : SerializedMonoBehaviour, IDeletable
     {
-        public RectTransform RectTransform
+        private RectTransform _rectTransform = null;
+
+        protected RectTransform RectTransform
         {
-            get => transform as RectTransform;
+            get
+            {
+                if (_rectTransform == null)
+                {
+                    _rectTransform = transform as RectTransform;
+                }
+
+                return _rectTransform;
+            }
         }
 
         private CanvasGroup m_canvasGroup = null;
@@ -64,7 +75,12 @@ namespace QRCode.Engine.Core.UI
             
         }
 
-        protected virtual void OnDestroy()
+        protected void OnDestroy()
+        {
+            Delete();
+        }
+
+        public virtual void Delete()
         {
             
         }

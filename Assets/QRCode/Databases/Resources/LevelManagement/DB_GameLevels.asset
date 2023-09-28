@@ -16,8 +16,8 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 11400000, guid: 5bd02a7eafe71d94b867ff923eb43a20, type: 2}
-    - {fileID: 11400000, guid: c3c58268a4b9ec145802c58ee82764d1, type: 2}
+    - {fileID: 11400000, guid: 0516bc23548c5694f82cf4f1d40987e4, type: 2}
+    - {fileID: 11400000, guid: 5058e43a8cd8e6349ac468316b1b62b7, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -25,7 +25,7 @@ MonoBehaviour:
     SerializationNodes:
     - Name: m_database
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[QRCode.Engine.Core.GameLevels.GameLevelData,
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[QRCode.Engine.Core.GameLevels.AGameLevelData,
         QRCode.Engine]], mscorlib
     - Name: comparer
       Entry: 7
@@ -67,4 +67,5 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  m_generatedEnumPath: Assets/QRCode/Runtime/Engine/LevelManagement/GeneratedEnums
+  _generatedEnumPath: Assets/QRCode/Engine/Core/Runtime/Scripts/GameLevel/GeneratedEnums
+  _namespace: QRCode.Engine.Core.GameLevels.GeneratedEnums

@@ -6,10 +6,16 @@
     using QRCode.Engine.Toolbox.Pattern.Singleton;
     using UnityEngine;
 
+    public interface IManager
+    {
+        public bool IsInit { get; }
+        public Task WaitManagerInitialization(CancellationToken cancellationToken);
+    }
+    
     /// <summary>
     /// All manager should inherit from this class.
     /// </summary>
-    public abstract class GenericManagerBase<T> : MonoBehaviourSingleton<T>, IDeletable where T : Component
+    public abstract class GenericManagerBase<T> : MonoBehaviourSingleton<T>, IManager, IDeletable where T : Component
     {
         #region Fields
         #region Internals
@@ -23,6 +29,8 @@
         /// The cancellation token source used to kill all async tasks.
         /// </summary>
         protected CancellationTokenSource CancellationTokenSource { get { return _cancellationTokenSource; } }
+
+        public bool IsInit { get { return _isInit; } }
         #endregion Properties
 
         #region Methods

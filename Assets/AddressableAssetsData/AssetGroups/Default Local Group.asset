@@ -170,6 +170,10 @@ MonoBehaviour:
     m_Address: Assets/QRCode/Prefabs/Managers/MANAGER - Scene.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 76be30c3888485c478743bbf5d1c5d6b
+    m_Address: Assets/QRCode/Engine/Tests/Core/Actor/Prefabs/Actor Test.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 383727ea88213544abed9fa8aa57676f, type: 2}
   m_SchemaSet:

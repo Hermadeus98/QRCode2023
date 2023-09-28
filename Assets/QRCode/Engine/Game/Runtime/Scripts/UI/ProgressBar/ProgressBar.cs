@@ -69,6 +69,16 @@ namespace QRCode.Engine.Game.UI.ProgressBar
             UpdateCosmetics();
         }
 
+        public override void Delete()
+        {
+            if (m_fillTween != null)
+            {
+                m_fillTween.Kill();
+            }
+            
+            base.Delete();
+        }
+
         [Button]
         public void UpdateProgressBar(float currentValue, bool forceDontUseTween = false)
         {
