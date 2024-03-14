@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 443197236185286987}
   - component: {fileID: 443197236185286989}
-  - component: {fileID: 443197236185286986}
   m_Layer: 0
   m_Name: MANAGER - GameStates
   m_TagString: Untagged
@@ -45,25 +44,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f78f9d0ba3970c4a8ec5bd7b2df2c72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_gameStateAnimator: {fileID: 443197236185286986}
---- !u!95 &443197236185286986
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 443197236185286984}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f5edebae0a141b841be74d36bec536e6, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _gameLevelLoader:
+    gameLevelToLoad: 2
+    m_loadingScreenEnum: 2
+    m_forceReload: 0

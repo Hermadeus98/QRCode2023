@@ -27,7 +27,7 @@ namespace QRCode.Engine.Core.GameLevels
             }
         }
 
-        public async Task ChangeLevel()
+        public async Task ChangeLevelAsync()
         {
             await GameLevelManager.ChangeLevel(gameLevelToLoad, m_loadingScreenEnum, m_forceReload);
         }

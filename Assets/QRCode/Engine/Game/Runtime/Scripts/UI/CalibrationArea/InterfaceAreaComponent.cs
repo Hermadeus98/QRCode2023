@@ -1,6 +1,5 @@
 namespace QRCode.Engine.Game.UI
 {
-    using QRCode.Engine.Core.UserSettings;
     using QRCode.Engine.Core.UserSettings.Events.InterfaceSettings;
     using QRCode.Engine.Toolbox.Extensions;
     using UnityEngine;
@@ -12,8 +11,6 @@ namespace QRCode.Engine.Game.UI
     {
         #region Fields
         private RectTransform _rectTransform = null;
-        private UserSettingsManager _userSettingsManager = null;
-        private UserSettingsData _userSettingsData = null;
         #endregion Fields
 
         #region Properties
@@ -31,16 +28,9 @@ namespace QRCode.Engine.Game.UI
         }
         #endregion Properties
         
-        private void Start()
-        {
-            _userSettingsManager = UserSettingsManager.Instance;
-            _userSettingsData = _userSettingsManager.GetUserSettingsData;
-        }
-
-        private async void OnEnable()
+        private void OnEnable()
         {
             InterfaceAreaCalibrationEvent.Register(AdjustInterfaceAreaCalibrationFromSettings);
-            //AdjustInterfaceAreaCalibrationFromSettings(_userSettingsData.InterfaceAreaCalibrationSize);
         }
 
         private void OnDisable()

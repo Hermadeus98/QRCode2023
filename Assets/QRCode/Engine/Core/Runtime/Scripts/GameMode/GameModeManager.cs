@@ -2,36 +2,37 @@
 {
     using System.Threading;
     using System.Threading.Tasks;
-    
     using QRCode.Engine.Core.Manager;
     using QRCode.Engine.Toolbox.Optimization;
 
     public class GameModeManager : GenericManagerBase<GameModeManager>, IDeletable
     {
-        private GameModeBase m_currentGameMode = null;
+        private AGameMode _currentGameMode = null;
+        public AGameMode CurrentGameMode { get { return _currentGameMode; } }
 
         protected override Task InitAsync(CancellationToken cancellationToken)
         {
             return Task.CompletedTask;
         }
 
-        public bool TryGetCurrentGameMode<T>(out T gameMode) where T : GameModeBase
+        public void SwitchGameMode<t_gameModeType>() where t_gameModeType : AGameMode, new()
         {
-            if (m_currentGameMode == null)
+            if (_currentGameMode != null)
             {
-                gameMode = null;
-                return false;
+                _currentGameMode.Delete();
             }
-            else
-            {
-                gameMode = m_currentGameMode as T;
-                return true;
-            }
+
+            _currentGameMode = new t_gameModeType();
+            _currentGameMode.ConstructGameMode();
         }
 
-        public void Delete()
+        public override void Delete()
         {
-            
+            if (_currentGameMode != null)
+            {
+                _currentGameMode.Delete();
+                _currentGameMode = null;
+            }
         }
     }
 }

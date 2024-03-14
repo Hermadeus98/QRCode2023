@@ -111,7 +111,7 @@ namespace QRCode.Engine.Core.GameLevels
                 _gameLevelModules = null;
             }
 
-            if (_gameLevelModules.IsNullOrEmpty() == false)
+            if (_gameLevelModules != null)
             {
                 foreach (var gameLevelModule in _gameLevelModules)
                 {

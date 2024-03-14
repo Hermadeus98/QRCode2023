@@ -18,6 +18,7 @@ namespace QRCode.Engine.Core.Actor
     {
         #region Fields
         private List<AActor> _allActors = null;
+        private Dictionary<Type, List<AActor>> _allActorPerType = null;
         #endregion Fields
 
         #region Events
@@ -37,6 +38,7 @@ namespace QRCode.Engine.Core.Actor
         public ActorFactory()
         {
             _allActors = new List<AActor>();
+            _allActorPerType = new Dictionary<Type, List<AActor>>();
         }
         #endregion Constructor
 
@@ -60,20 +62,26 @@ namespace QRCode.Engine.Core.Actor
         /// <summary>
         /// Try to create a new <see cref="AActor"/> into the game world.
         /// </summary>
-        public async Task<t_actorType> TryCreateActor<t_actorType>(AActorModule[] actorModules, AssetReference actorGameObject, Vector3 position, Quaternion rotation) where t_actorType : AActor, new()
+        public async Task<t_actorType> CreateActor<t_actorType>(ActorCreationParameters actorCreationParameters) where t_actorType : AActor, new()
         {
             t_actorType actor = new t_actorType();
             GameInstance.Instance.GameInstanceEvents.RegisterGameplayComponent(actor);
+            RegisterActor(actor);
 
-            var actorGameObjectInstance = await Addressables.InstantiateAsync(actorGameObject).Task;
+            var actorGameObjectInstance = await Addressables.InstantiateAsync(actorCreationParameters.ActorGameObjectPrefab).Task;
             
             if (actorGameObjectInstance.TryGetComponent(out AActorSceneReference actorSceneReference) == false)
             {
                 QRLogger.DebugError<CoreTags.Actor>($"There no {nameof(AActorSceneReference)} component on {actor}.", actorGameObjectInstance);
                 return null;
             }
+
+            Transform actorTransform = actorSceneReference.transform;
+            actorTransform.SetParent(actorCreationParameters.ActorParent);
+            actorTransform.position = actorCreationParameters.SpawnPosition;
+            actorTransform.rotation = actorCreationParameters.SpawnRotation;
             
-            await actor.InitAsync(actorModules, actorSceneReference);
+            actor.Initialize(actorCreationParameters.ActorModules, actorSceneReference);
             actorSceneReference.Initialize(actor);
 
             _actorCreationCompleted?.Invoke(actor);
@@ -86,26 +94,23 @@ namespace QRCode.Engine.Core.Actor
         public void DeleteActor(AActor actor)
         {
             GameInstance.Instance.GameInstanceEvents.UnregisterGameplayComponent(actor);
+            UnregisterActor(actor);
             actor.Delete();
         }
 
         /// <summary>
         /// Get all <see cref="AActor"/> of a specific type.
         /// </summary>
-        public List<t_actorType> GetAllActorOfTypes<t_actorType>() where t_actorType : AActor
+        public List<AActor> GetAllActorOfTypes<t_actorType>() where t_actorType : AActor
         {
-            List<t_actorType> allActorOfType = new List<t_actorType>();
+            Type type = typeof(t_actorType);
 
-            int allActorsCount = _allActors.Count;
-            for (int i = 0; i < allActorsCount; i++)
+            if (_allActorPerType.ContainsKey(type) == false)
             {
-                if (_allActors[i].GetType() == typeof(t_actorType))
-                {
-                    allActorOfType.Add(_allActors[i] as t_actorType);
-                }
+                return null;
             }
-
-            return allActorOfType;
+            
+            return _allActorPerType[type];
         }
         
         /// <summary>
@@ -144,6 +149,30 @@ namespace QRCode.Engine.Core.Actor
             return allModules;
         }
         #endregion Public Methods
+
+        #region Private Methods
+        private void RegisterActor(AActor actor)
+        {
+            Type type = actor.GetType();
+            
+            if (_allActorPerType.ContainsKey(type) == false)
+            {
+                _allActorPerType.Add(type, new List<AActor>());
+            }
+            
+            _allActorPerType[type].Add(actor);
+        }
+
+        private void UnregisterActor(AActor actor)
+        {
+            Type type = actor.GetType();
+            
+            if (_allActorPerType.ContainsKey(type))
+            {
+                _allActorPerType[type].Remove(actor);
+            }
+        }
+        #endregion Private Methods
         #endregion Methods
     }
 }

@@ -40,13 +40,5 @@ namespace QRCode.Engine.Toolbox.Pattern.Singleton
                 return _instance;
             }
         }
-
-        /// <summary>
-        /// Check if the singleton have already an instance.
-        /// </summary>
-        public static bool HasInstance()
-        {
-            return _instance != null;
-        }
     }
 }

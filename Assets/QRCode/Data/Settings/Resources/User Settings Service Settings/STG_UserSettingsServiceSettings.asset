@@ -21,9 +21,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  m_fileName: userSettings
-  m_fileNameExtension: .save
-  m_defaultValues:
+  _fileName: userSettings
+  _fileNameExtension: .save
+  _defaultValues:
     m_brightness: 5
     m_contrast: 5
     m_colorBlindModeSetting: 0

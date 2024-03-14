@@ -94,7 +94,7 @@ namespace QRCode.Engine.Core.GameInstance
             await InstantiateScenes();
 
             _isReady = true;
-            _gameInstanceEvents.OnGameInstanceIsReady();
+            _gameInstanceEvents?.OnGameInstanceIsReady();
         }
         #endregion
         

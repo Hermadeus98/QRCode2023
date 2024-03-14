@@ -24,7 +24,7 @@ namespace QRCode.Engine.Core.Boot
             Boot boot = new Boot();
             await boot.Execute();
             boot.Delete();
-            
+         
             await gameInstance.LoadGame();
         }
     }

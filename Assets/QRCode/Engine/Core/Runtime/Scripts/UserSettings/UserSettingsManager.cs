@@ -6,12 +6,11 @@
     using QRCode.Engine.Core.SaveSystem;
     using QRCode.Engine.Core.Tags;
     using QRCode.Engine.Debugging;
-    using QRCode.Engine.Toolbox.Optimization;
 
     /// <summary>
     /// This class manage all the user settings.
     /// </summary>
-    public class UserSettingsManager : GenericManagerBase<UserSettingsManager>, IDeletable
+    public class UserSettingsManager : GenericManagerBase<UserSettingsManager>
     {
         #region Fields
         private UserSettingsData _userSettingsData = null;

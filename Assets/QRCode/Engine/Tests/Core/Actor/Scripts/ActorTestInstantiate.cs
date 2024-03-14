@@ -1,4 +1,4 @@
-﻿namespace QRCode.Engine.Tests.Core.Actor.Tests
+﻿namespace QRCode.Engine.Core.Actor.Tests
 {
 	using QRCode.Engine.Core.Actor;
 	using Sirenix.OdinInspector;
@@ -22,8 +22,10 @@
 				new ActorModuleTest(),
 				new ActorModuleTest(),
 			};
+
+			ActorCreationParameters actorCreationParameters = new ActorCreationParameters(actorModuleTests, actorAssetReference, position, rotation, transform);
 			
-			await ActorFactory.Instance.TryCreateActor<ActorTest>(actorModuleTests, actorAssetReference, position, rotation);
+			await ActorFactory.Instance.CreateActor<ActorTest>(actorCreationParameters);
 		}
 	}
 }

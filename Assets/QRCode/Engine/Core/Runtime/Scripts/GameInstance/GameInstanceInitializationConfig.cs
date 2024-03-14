@@ -1,6 +1,5 @@
 ﻿namespace QRCode.Engine.Core.GameInstance
 {
-    using QRCode.Engine.Core.Boot;
     using UnityEngine;
     
     using Toolbox.Pattern.Singleton;
@@ -11,6 +10,6 @@
     [CreateAssetMenu(menuName = "QRCode/Engine/New Game Instance Config", fileName = "New Game Instance Config")]
     public sealed class GameInstanceInitializationConfig : SingletonScriptableObject<GameInstanceInitializationConfig>
     {
-        [SerializeField] private Boot _boot = null;
+        
     }
 }

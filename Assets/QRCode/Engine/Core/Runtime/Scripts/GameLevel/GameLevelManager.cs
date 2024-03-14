@@ -77,6 +77,7 @@ namespace QRCode.Engine.Core.GameLevels
 
         private SaveManager _saveManager = null;
         private LoadingScreenManager _loadingScreenManager = null;
+        private ILoadingScreen _currentLoadingScreen = null;
         
         private GameLevelDatabase _gameLevelDatabase = null;
         private GameLevelManagerSettings _gameLevelManagerSettings = null;
@@ -267,8 +268,9 @@ namespace QRCode.Engine.Core.GameLevels
 
                 LoadingScreenHandle loadingScreenHandle = await _loadingScreenManager.GetLoadingScreen(loadingScreenEnum);
                 ILoadingScreen loadingScreen = loadingScreenHandle.LoadingScreen;
-                loadingScreen.Progress(_gameLevelLoadingInfo.GlobalProgress, _gameLevelLoadingInfo.ProgressDescription);
-                await loadingScreen.Show();
+                _currentLoadingScreen = loadingScreen;
+                _currentLoadingScreen.Progress(_gameLevelLoadingInfo.GlobalProgress, _gameLevelLoadingInfo.ProgressDescription);
+                await _currentLoadingScreen.Show();
 
                 if (_currentLevelLoaded != null)
                 {
@@ -314,11 +316,6 @@ namespace QRCode.Engine.Core.GameLevels
                 {
                     await UnloadGameLevelInternal(gameLevelToLoad);
                 }
-
-                LoadingLevel += delegate(GameLevelLoadingInfo info)
-                {
-                    loadingScreen.Progress(info.GlobalProgress, info.ProgressDescription);
-                };
                 
                 await LoadGameLevelInternal(levelReferenceGroup, activateOnLoad, priority);
             }
@@ -347,14 +344,8 @@ namespace QRCode.Engine.Core.GameLevels
             _isLoading = true;
 
             LoadingScreenHandle loadingScreenHandle = await _loadingScreenManager.GetLoadingScreen(loadingScreenEnum);
-
-            void UpdateLoadingScreen(GameLevelLoadingInfo info)
-            {
-                loadingScreenHandle.LoadingScreen.Progress(info.GlobalProgress, info.ProgressDescription);
-            }
             
-            UpdateLoadingScreen(_gameLevelLoadingInfo);
-            LoadingLevel += UpdateLoadingScreen;
+            UpdateCurrentLoadingScreen();
             
             await loadingScreenHandle.LoadingScreen.Show();
 
@@ -366,8 +357,6 @@ namespace QRCode.Engine.Core.GameLevels
             {
                 Load.Current.LoadObjects();
             }
-
-            LoadingLevel -= UpdateLoadingScreen;
             
             var hideTask = _loadingScreenManager.HideLoadingScreen(loadingScreenHandle);
             await hideTask;
@@ -449,7 +438,9 @@ namespace QRCode.Engine.Core.GameLevels
                     return;
                 }
                 
+                UpdateCurrentLoadingScreen();
                 _loading?.Invoke(_gameLevelLoadingInfo);
+
                 await Task.Yield();
             }
         }
@@ -485,7 +476,9 @@ namespace QRCode.Engine.Core.GameLevels
                             await Task.Yield();
                         }
                     }
+#pragma warning disable CS0168
                     catch (Exception e)
+#pragma warning restore CS0168
                     {
 #if UNITY_EDITOR
                         // Cannot unload an addressable scene already loaded, so the scene is unload with its editor name.
@@ -553,6 +546,11 @@ namespace QRCode.Engine.Core.GameLevels
             _gameLevelLoadingInfo.GlobalProgress = 1f;
 
             _gameLevelLoadingInfo.GameLevelLoadingStatus = GameLevelLoadingStatus.InitializationIsDone;
+        }
+
+        private void UpdateCurrentLoadingScreen()
+        {
+            _currentLoadingScreen.Progress(_gameLevelLoadingInfo.GlobalProgress, _gameLevelLoadingInfo.ProgressDescription);
         }
         #endregion Private Methods
 

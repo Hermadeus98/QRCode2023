@@ -16,5 +16,19 @@
 		/// The tag for the services logs.
 		/// </summary>
 		public class Services : ILoggerTag { }
+
+		/// <summary>
+		/// The tag for the patterns logs.
+		/// </summary>
+		public class Patterns : ILoggerTag
+		{
+			/// <summary>
+			/// The tag for the patterns FiniteStateMachine logs.
+			/// </summary>
+			public class FiniteStateMachine : ILoggerTag
+			{
+			
+			}
+		}
 	}
 }

@@ -1,10 +1,10 @@
 namespace QRCode.Engine.Core.Actor
 {
     using System.Collections.Generic;
-    using System.Threading.Tasks;
     using QRCode.Engine.Core.GameInstance;
     using QRCode.Engine.Core.Tags;
     using QRCode.Engine.Debugging;
+    using UnityEngine;
 
     /// <summary>
     /// An <see cref="AActor"/> is a tangible object in the game composed of <see cref="AActorModule"/>.
@@ -12,6 +12,7 @@ namespace QRCode.Engine.Core.Actor
     public abstract class AActor : IGameplayComponent
     {
         #region Fields
+        private Transform _transform = null;
         private List<AActorModule> _allActorModules = null;
         private AActorSceneReference _actorSceneReference = null;
         #endregion Fields
@@ -40,20 +41,24 @@ namespace QRCode.Engine.Core.Actor
         /// <summary>
         /// Initialization of the <see cref="AActor"/>.
         /// </summary>
-        public async Task InitAsync(AActorModule[] actorModules, AActorSceneReference actorSceneReference)
+        public void Initialize(AActorModule[] actorModules, AActorSceneReference actorSceneReference)
         {
             _actorSceneReference = actorSceneReference;
+            _transform = _actorSceneReference.transform;
             
             int modulesCount = actorModules.Length;
             for (int i = 0; i < modulesCount; i++)
             {
-                await AddModuleInternal(actorModules[i]);
+                AddModuleInternal(actorModules[i]);
             }
         }
         
         public virtual void Delete()
         {
-            GameInstance.Instance.GameInstanceEvents.UnregisterGameplayComponent(this);
+            if (GameInstance.Instance != null && GameInstance.Instance.GameInstanceEvents != null)
+            {
+                GameInstance.Instance.GameInstanceEvents.UnregisterGameplayComponent(this);
+            }
 
             int modulesCount = _allActorModules.Count;
             for (int i = 0; i < modulesCount; i++)
@@ -68,10 +73,10 @@ namespace QRCode.Engine.Core.Actor
         /// Add a <see cref="AActorModule"/> to the <see cref="AActor"/>.
         /// </summary>
         /// <typeparam name="t_module"></typeparam>
-        public async Task AddModule<t_module>() where t_module : AActorModule, new()
+        public void AddModule<t_module>() where t_module : AActorModule, new()
         {
             t_module actorModule = new AActorModule() as t_module;
-            await AddModuleInternal(actorModule);
+            AddModuleInternal(actorModule);
         }
 
         /// <summary>
@@ -148,10 +153,10 @@ namespace QRCode.Engine.Core.Actor
         #endregion Public Methods
 
         #region Private Methods
-        private async Task AddModuleInternal(AActorModule actorModule)
+        private void AddModuleInternal(AActorModule actorModule)
         {
             _allActorModules.Add(actorModule);
-            await actorModule.InitActorModuleAsync(this);
+            actorModule.InitActorModuleAsync(this);
         }
         #endregion Private Methods
 

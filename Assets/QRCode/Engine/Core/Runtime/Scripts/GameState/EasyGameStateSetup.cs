@@ -16,7 +16,7 @@
         {
             if (m_allowJumpToState)
             {
-                GameStateManager.Instance.JumpToGameState(m_startAtGameStateName);
+                //GameStateManager.Instance.JumpToGameState(m_startAtGameStateName);
                 QRLogger.DebugInfo<CoreTags.GameStates>($"Jump to state {m_startAtGameStateName}.");
             }
         }

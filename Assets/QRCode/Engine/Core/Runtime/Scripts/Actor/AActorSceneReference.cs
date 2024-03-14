@@ -22,7 +22,7 @@
 		#endregion Properties
 
 		#region Constructor
-		public void Initialize(AActor owner)
+		public virtual void Initialize(AActor owner)
 		{
 			_owner = owner;
 		}

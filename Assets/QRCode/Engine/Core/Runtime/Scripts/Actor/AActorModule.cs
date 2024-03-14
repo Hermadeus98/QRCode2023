@@ -1,7 +1,6 @@
 ﻿namespace QRCode.Engine.Core.Actor
 {
 	using System;
-	using System.Threading.Tasks;
 	using QRCode.Engine.Toolbox.Optimization;
 	using Sirenix.OdinInspector;
 
@@ -54,10 +53,10 @@
 		/// <summary>
 		/// This function is used to init the Actor.
 		/// </summary>
-		public async Task InitActorModuleAsync(AActor owner)
+		public void InitActorModuleAsync(AActor owner)
 		{
 			_owner = owner;
-			await InitAsync();
+			Initialize();
 		}
 		#endregion Public Methods
 
@@ -65,7 +64,7 @@
 		/// <summary>
 		/// This function must be override to initialize this actor.
 		/// </summary>
-		protected virtual async Task InitAsync()
+		protected virtual void Initialize()
 		{
 			
 		}

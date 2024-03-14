@@ -74,5 +74,9 @@ MonoBehaviour:
     isActive: 1
     channelColor: {r: 1, g: 1, b: 1, a: 1}
     activeLogTypes: 63
+  - channelName: FINITESTATEMACHINE
+    isActive: 1
+    channelColor: {r: 1, g: 1, b: 1, a: 1}
+    activeLogTypes: 63
   m_exportLog: 0
   m_path: QRCodeLog

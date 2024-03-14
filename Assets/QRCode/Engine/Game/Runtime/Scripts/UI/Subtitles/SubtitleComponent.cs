@@ -1,12 +1,10 @@
 namespace QRCode.Engine.Game.Subtitles
 {
-    using Core.UserSettings;
-    using Core.UserSettings.Events.SoundSettings;
-    using Toolbox;
+    using QRCode.Engine.Core.UserSettings.Events.SoundSettings;
+    using QRCode.Engine.Toolbox;
     using Sirenix.OdinInspector;
     using TMPro;
     using UnityEngine;
-    using GameInstance = Core.GameInstance;
 
     [ExecuteInEditMode]
     public class SubtitleComponent : MonoBehaviour
@@ -23,20 +21,6 @@ namespace QRCode.Engine.Game.Subtitles
         private bool m_showSubtitles = false;
         private bool m_showBackground = false;
 
-        private UserSettingsData m_userSettingsData = null;
-        private UserSettingsData UserSettingsData
-        {
-            get
-            {
-                if (m_userSettingsData == null)
-                {
-                    m_userSettingsData = UserSettingsManager.Instance.GetUserSettingsData;
-                }
-
-                return m_userSettingsData;
-            }
-        }
-
         private void Start()
         {
             if (m_isMainSubtitleComponent)
@@ -51,12 +35,6 @@ namespace QRCode.Engine.Game.Subtitles
             ShowSpeakerNameSettingEvents.Register(UpdateShowSpeakerNameFromSettings);
             ChangeSubtitleBackgroundOpacityEvent.Register(UpdateBackgroundOpacityFromSettings);
             ShowSubtitleBackgroundSettingEvent.Register(UpdateShowBackgroundFromSettings);
-
-            if (GameInstance.GameInstance.Instance.IsReady)
-            {
-                UpdateShowSubtitleFromSettings(UserSettingsData.ShowSubtitles);
-                UpdateShowSpeakerNameFromSettings(UserSettingsData.ShowSubtitleSpeakerName);
-            }
         }
 
         private void OnDisable()
